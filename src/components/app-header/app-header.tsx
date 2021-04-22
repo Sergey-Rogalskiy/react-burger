@@ -10,11 +10,19 @@ import appHeaderStyles from './app-header.module.css'
 function AppHeader() {
   return (
     <header className={appHeaderStyles.header}>
-      <BurgerIcon type="primary"/>
-      <ListIcon type="primary" />
+      <span>
+        <BurgerIcon type="primary"/>
+        Конструктор
+      </span>
+      <span>
+        <ListIcon type="primary" />
+        Лента заказов
+      </span>
       <Logo />
-      <ProfileIcon type="primary" />
-
+      <span>
+        <ProfileIcon type="primary" />
+        Личный кабинет
+      </span>
     </header>
   );
 }

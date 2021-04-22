@@ -1,0 +1,10 @@
+.card {
+  background-color: rgb(200, 220, 20);
+  margin-top: 20px;
+}
+
+.list_by_type {
+  display: flex;
+  flex-wrap: wrap;
+
+}
