@@ -1,9 +1,4 @@
-.container {
-    background-color:"blue"
-}
-
 .flex {
   display: flex;
   flex-wrap: wrap;
-
 }

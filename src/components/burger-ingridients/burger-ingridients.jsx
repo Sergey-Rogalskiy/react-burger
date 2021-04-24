@@ -10,11 +10,11 @@ import ListMains from './list-by-type/list-mains'
 import ListSauces from './list-by-type/list-sauces'
 
 
-function BurgerIngridients() {
+function BurgerIngridients(props) {
   const [current, setCurrent] = React.useState('one')
   
   return (
-    <div className={burgerIngridientsStyles.test_color}>
+    <div className={burgerIngridientsStyles.burgerTypesMenu}>
 
       <div style={{ display: 'flex' }}>
         <Tab value="one" active={current === 'one'} onClick={setCurrent}>
@@ -29,16 +29,24 @@ function BurgerIngridients() {
       </div>
       <div>
         <div>
-          Булки
-          <ListBuns/>
+          <p className="text text_type_main-default">
+            Булки
+          </p>
+          <ListBuns data={props.data}/>
         </div>
         <div>
-          Соусы
-          <ListSauces/>
+          <p className="text text_type_main-default">
+           Соусы
+          </p>
+          
+          <ListSauces data={props.data}/>
         </div>
         <div>
-          Начинки
-          <ListMains/>
+          <p className="text text_type_main-default">
+            Начинки
+          </p>
+          
+          <ListMains data={props.data}/>
         </div>
       </div>
       

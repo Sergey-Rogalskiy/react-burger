@@ -1,4 +1,3 @@
-import data from '../../utils/data'
 import {
   Counter, 
   CurrencyIcon, 
@@ -6,8 +5,8 @@ import {
 
 import listByTypeStyles from './list-by-type.module.css'
 
-const ListByType = () => {
-  let obj = data.filter(obj1 => obj1.type === "bun");
+const ListByType = (props) => {
+  let obj = props.data.filter(obj1 => obj1.type === "main");
   return (
     <ul className={listByTypeStyles.list_by_type}>
         {
