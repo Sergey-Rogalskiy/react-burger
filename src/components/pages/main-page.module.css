@@ -1,7 +1,7 @@
 .row {
   display: flex;
-  background-color: brown;
-  width: 960px;
+  /* background-color: brown; */
+  width: 1100px;
 }
 
 .column {
@@ -9,12 +9,12 @@
 }
 
 .column.left {
-  background-color: rgb(0, 0, 172);
-  width: 400px;
+  /* background-color: rgb(0, 0, 172); */
+  width: 430px;
 }
 
 .column.right {
-  background-color: rgb(140, 140, 255);
-  width: 550px;
+  /* background-color: rgb(140, 140, 255); */
+  width: 570px;
 }
 

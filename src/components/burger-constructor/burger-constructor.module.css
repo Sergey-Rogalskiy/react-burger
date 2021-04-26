@@ -2,3 +2,16 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.right {
+  margin-left: auto;
+}
+
+.overflow {
+  overflow: auto;
+  height: 500px;
+}
+
+.fixed_items {
+  margin-right: 20px;
+}

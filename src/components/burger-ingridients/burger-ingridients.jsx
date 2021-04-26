@@ -5,13 +5,14 @@ import {
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 
-import ListBuns from './list-by-type/list-buns'
-import ListMains from './list-by-type/list-mains'
-import ListSauces from './list-by-type/list-sauces'
+import ListByType from './list-by-type/list-by-type'
 
 
 function BurgerIngridients(props) {
   const [current, setCurrent] = React.useState('one')
+  let data_buns = props.data.filter(obj1 => obj1.type === "bun");
+  let data_sauces = props.data.filter(obj1 => obj1.type === "sauce");
+  let data_mains = props.data.filter(obj1 => obj1.type === "main");
   
   return (
     <div className={burgerIngridientsStyles.burgerTypesMenu}>
@@ -27,26 +28,26 @@ function BurgerIngridients(props) {
           Начинки
         </Tab>
       </div>
-      <div>
+      <div className={burgerIngridientsStyles.overflow}>
         <div>
-          <p className="text text_type_main-default">
+          <p className="text text_type_main-large">
             Булки
           </p>
-          <ListBuns data={props.data}/>
+          <ListByType data={data_buns}/>
         </div>
         <div>
-          <p className="text text_type_main-default">
+          <p className="text text_type_main-large">
            Соусы
           </p>
           
-          <ListSauces data={props.data}/>
+          <ListByType data={data_sauces}/>
         </div>
         <div>
-          <p className="text text_type_main-default">
+          <p className="text text_type_main-large">
             Начинки
           </p>
           
-          <ListMains data={props.data}/>
+          <ListByType data={data_mains}/>
         </div>
       </div>
       
