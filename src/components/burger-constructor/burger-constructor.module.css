@@ -1,15 +1,22 @@
 .flex {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.right {
+.center {
+  margin: auto;
+}
+
+.confirm_block {
   margin-left: auto;
+  margin-right: 70px;
+  margin-top: 20px;
 }
 
 .overflow {
   overflow: auto;
-  height: 500px;
+  height: 600px;
 }
 
 .fixed_items {

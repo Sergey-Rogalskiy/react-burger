@@ -3,7 +3,16 @@
   flex-direction:row;
   align-items: center;
   justify-content: center;
+  width: 1300px;
 }
+
+.button {
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .header span {
   float: left;
@@ -11,4 +20,5 @@
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  color: rgb(135, 113, 216)
 }

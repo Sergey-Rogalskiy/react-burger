@@ -12,16 +12,17 @@ function BurgerConstructor(props) {
   let obj = props.data;
   return (
     <div className={burgerConstructorStyles.flex}>
-      <div className={`${burgerConstructorStyles.right} mr-5`}>
+      <div className={`${burgerConstructorStyles.center} pb-2`}>
         <ConstructorElement
             text={props.data[0].name}
             thumbnail={props.data[0].image}
             price={100}/>
       </div>
-      <div className={`${burgerConstructorStyles.overflow}`}>
+
+      <div className={`${burgerConstructorStyles.overflow}  ${burgerConstructorStyles.center}`}>
         {
         obj.map((item) => (
-          <div className={` ${burgerConstructorStyles.right}`}>
+          <div className={` ${burgerConstructorStyles.center}  pb-2`}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={item.name}
@@ -31,13 +32,15 @@ function BurgerConstructor(props) {
         ))
         }
       </div>
-      <div className={`${burgerConstructorStyles.right} mr-5`}>
+
+      <div className={`${burgerConstructorStyles.center} `}>
         <ConstructorElement
             text={props.data[0].name}
             thumbnail={props.data[0].image}
             price={100}/>
       </div>
-      <div className={`${burgerConstructorStyles.flex} ${burgerConstructorStyles.right}`}>
+
+      <div className={`${burgerConstructorStyles.flex} ${burgerConstructorStyles.confirm_block}`}>
         <div className={burgerConstructorStyles.right}>
           Total: 3600 <CurrencyIcon type="primary" />
         </div>
@@ -45,6 +48,7 @@ function BurgerConstructor(props) {
           Офрмить заказ
         </Button>
       </div>
+
     </div>
   );
 }
