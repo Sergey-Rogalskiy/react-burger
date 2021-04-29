@@ -1,6 +1,8 @@
 .card {
   /* background-color: rgb(200, 220, 20); */
   margin-top: 10px;
+  width: 272px;
+  height: 200px;
 }
 
 .list_by_type {
@@ -11,20 +13,3 @@
   margin: 0;
 }
 
-.list_by_type li {
-  /* background-color: rgb(20, 220, 220); */
-  width: 190px;
-  margin: 5px;
-}
-
-.list_by_type li img {
-  /* background-color: rgb(20, 220, 47); */
-  width: 180px
-}
-
-.list_by_type li p {
-  /* background-color: rgb(220, 20, 20); */
-  padding: 0;
-  margin: 0;
-  overflow-wrap: normal;
-}

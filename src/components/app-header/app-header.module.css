@@ -2,15 +2,21 @@
   display: flex;
   flex-direction:row;
   align-items: center;
-  justify-content: center;
-  width: 1300px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 310px;
+  height: 80px;
+  background-color: rgb(27, 27, 31);
+  transition: ease all .5s;
 }
+
 
 .button {
   display: flex;
   flex-direction:row;
   align-items: center;
-  justify-content: center;
+  width: 400px;
+  /* background-color: aqua; */
 }
 
 
@@ -22,3 +28,5 @@
   text-decoration: none;
   color: rgb(135, 113, 216)
 }
+
+

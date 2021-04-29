@@ -4,6 +4,8 @@ import {
   CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+import ingridientCardStyles from './ingridient-card.module.css'
+
 function IngridientCard(props) {
   return(
     <div>
@@ -11,11 +13,14 @@ function IngridientCard(props) {
         <Counter count={10}/>
       </div>
       <img src={props.data.image} alt="burger" />
-      <p>
-        {props.data.price}
+      <div className={ingridientCardStyles.total}>
+        <span className="text text_type_digits-default">
+          {props.data.price}
+        </span> 
         <CurrencyIcon type="primary" />
-      </p>
-      <p>
+      </div>
+
+      <p className="text text_type_main-default">
         {props.data.name}
       </p>
     </div>

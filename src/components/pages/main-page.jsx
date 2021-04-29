@@ -6,13 +6,13 @@ import mainPageStyles from './main-page.module.css'
 function MainPage(props) {
   return (
     <>
-  <div className={mainPageStyles.row}>
-    <div className={mainPageStyles.column}>
-      <p className="text text_type_main-large">
-        Соберите бургер
-      </p>
+    <div className={mainPageStyles.row}>
+      <div className={mainPageStyles.column}>
+        <p className="text text_type_main-large">
+          Соберите бургер
+        </p>
+      </div>
     </div>
-  </div>
       <div className={`${mainPageStyles.row}`}>
         <div className={`${mainPageStyles.column} ${mainPageStyles.left}`}>
           <BurgerIngridients data={props.data}/>

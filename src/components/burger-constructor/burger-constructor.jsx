@@ -22,7 +22,7 @@ function BurgerConstructor(props) {
       <div className={`${burgerConstructorStyles.overflow}  ${burgerConstructorStyles.center}`}>
         {
         obj.map((item) => (
-          <div className={` ${burgerConstructorStyles.center}  pb-2`}>
+          <div key={item._id} className={` ${burgerConstructorStyles.center}  pb-2`}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={item.name}
@@ -41,8 +41,11 @@ function BurgerConstructor(props) {
       </div>
 
       <div className={`${burgerConstructorStyles.flex} ${burgerConstructorStyles.confirm_block}`}>
-        <div className={burgerConstructorStyles.right}>
-          Total: 3600 <CurrencyIcon type="primary" />
+        <div className={burgerConstructorStyles.total}>
+          <span className="text text_type_main-large">
+            3600
+          </span> 
+          <CurrencyIcon type="primary" />
         </div>
         <Button type="primary">
           Офрмить заказ

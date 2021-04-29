@@ -20,22 +20,22 @@ const BurgerIngridients = (props) => {
 
   const executeScrollBuns = () => {
     myRefScrollBuns.current.scrollIntoView()
-    setCurrent()
+    setCurrent("one")
   }    
 
   const executeScrollSauces = () => {
     myRefScrollSauces.current.scrollIntoView()
-    setCurrent()
+    setCurrent("two")
   }    
 
   const executeScrollMains = () => {
     myRefScrollMains.current.scrollIntoView()
-    setCurrent()
+    setCurrent('three')
+
   }    
 
   return (
-    <div className={burgerIngridientsStyles.burgerTypesMenu}>
-
+    <>
       <div style={{ display: 'flex' }}>
         <Tab value="one" active={current === 'one'} onClick={executeScrollBuns}>
           Булки
@@ -49,20 +49,20 @@ const BurgerIngridients = (props) => {
       </div>
       <div className={burgerIngridientsStyles.overflow}>
         <div  ref={myRefScrollBuns}>
-          <p className="text text_type_main-large">
+          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
             Булки
           </p>
           <ListByType data={data_buns}/>
         </div>
         <div ref={myRefScrollSauces}>
-          <p className="text text_type_main-large">
+          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
            Соусы
           </p>
           
           <ListByType data={data_sauces}/>
         </div>
         <div ref={myRefScrollMains}>
-          <p className="text text_type_main-large">
+          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
             Начинки
           </p>
           
@@ -70,7 +70,7 @@ const BurgerIngridients = (props) => {
         </div>
       </div>
       
-    </div>
+    </>
   );
 }
 
