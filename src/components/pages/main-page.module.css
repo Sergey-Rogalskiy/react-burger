@@ -1,0 +1,21 @@
+.row {
+  display: flex;
+  /* background-color: brown; */
+  width: 1300px;
+  padding-bottom: 10px;
+}
+
+.column {
+  margin: 5px;
+}
+
+.column.left {
+  /* background-color: rgb(0, 0, 172); */
+  width: 650px;
+}
+
+.column.right {
+  /* background-color: rgb(140, 140, 255); */
+  width: 650px;
+}
+

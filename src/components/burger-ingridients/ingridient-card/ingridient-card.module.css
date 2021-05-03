@@ -1,0 +1,29 @@
+li {
+    /* background-color: rgb(20, 220, 220); */
+    width: 190px;
+    margin: 5px;
+    display: flex;
+  }
+  
+li img {
+    /* background-color: rgb(20, 220, 47); */
+    width: 270px;
+  }
+  
+li p {
+    /* background-color: rgb(220, 20, 20); */
+    text-align: center;
+  }
+  
+
+.total {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    padding-right: 30px;
+    margin: auto;
+  }
+  .total span {
+      margin: 0 10px;
+  }

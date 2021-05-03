@@ -1,0 +1,15 @@
+.card {
+  /* background-color: rgb(200, 220, 20); */
+  margin-top: 10px;
+  width: 272px;
+  height: 200px;
+}
+
+.list_by_type {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
