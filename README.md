@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Yandex React Course
+It is my rep for a project in React-dev course
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 

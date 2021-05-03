@@ -1,0 +1,29 @@
+
+.overflow {
+  overflow: auto;
+  height: 700px;
+  display: block;
+}
+
+.headers {
+  padding: 30px 0;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px; 
+}
+
+::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+  
+::-webkit-scrollbar-thumb {
+	background: #8585AD;
+	border: 3px solid #2F2F37;
+	border-radius: 6px;
+}
+
+::scrollbar {
+	width: 12px;
+}
