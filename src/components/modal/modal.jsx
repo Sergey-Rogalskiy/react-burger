@@ -1,80 +1,26 @@
-import React from 'react';
-import {
-  Tab
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import ListByType from './list-by-type/list-by-type'
-
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 
-import burgerIngridientsStyles from './burger-ingridients.module.css'
+import modalStyles from './modal.module.css'
 
+const modalRoot = document.getElementById("react-modals");
 
-
-const BurgerIngridients = (props) => {
-  const [current, setCurrent] = React.useState('one')
-  let data_buns = props.data.filter(obj1 => obj1.type === "bun");
-  let data_sauces = props.data.filter(obj1 => obj1.type === "sauce");
-  let data_mains = props.data.filter(obj1 => obj1.type === "main");
-  
-  const myRefScrollBuns = React.useRef(null)
-  const myRefScrollSauces = React.useRef(null)
-  const myRefScrollMains = React.useRef(null)
-
-  const executeScrollBuns = () => {
-    myRefScrollBuns.current.scrollIntoView()
-    setCurrent("one")
-  }    
-
-  const executeScrollSauces = () => {
-    myRefScrollSauces.current.scrollIntoView()
-    setCurrent("two")
-  }    
-
-  const executeScrollMains = () => {
-    myRefScrollMains.current.scrollIntoView()
-    setCurrent('three')
-
-  }    
-
-  return (
-    <>
-      <div style={{ display: 'flex' }}>
-        <Tab value="one" active={current === 'one'} onClick={executeScrollBuns}>
-          Булки
-        </Tab>
-        <Tab value="two" active={current === 'two'} onClick={executeScrollSauces}>
-          Соусы
-        </Tab>
-        <Tab value="three" active={current === 'three'} onClick={executeScrollMains}>
-          Начинки
-        </Tab>
-      </div>
-      <div className={burgerIngridientsStyles.overflow}>
-        <div  ref={myRefScrollBuns}>
-          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
-            Булки
-          </p>
-          <ListByType data={data_buns}/>
-        </div>
-        <div ref={myRefScrollSauces}>
-          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
-           Соусы
-          </p>
-          
-          <ListByType data={data_sauces}/>
-        </div>
-        <div ref={myRefScrollMains}>
-          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
-            Начинки
-          </p>
-          
-          <ListByType data={data_mains}/>
-        </div>
-      </div>
-      
-    </>
+const Modal = (props) => {
+  const { children, header, onClose } = props;
+  return ReactDOM.createPortal(
+    (
+      <>
+        <div className={modalStyles.modal}>
+          <h1 onClick={onClose}>{header}</h1>
+              {children}
+          </div>
+        <div onClick={onClose} />
+      </>
+    ), 
+    modalRoot
   );
-}
+} 
+
 
 const ingridientPropTypes = PropTypes.shape({
   _id: PropTypes.number.isRequired,
@@ -91,8 +37,8 @@ const ingridientPropTypes = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 });
 
-BurgerIngridients.propTypes = {
+Modal.propTypes = {
   data: PropTypes.arrayOf(ingridientPropTypes.isRequired)
 }; 
 
-export default BurgerIngridients;
+export default Modal;
