@@ -4,6 +4,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
 import Modal from '../modal/modal'
+import IngridientDetails from '../ingridient-details/ingridient-details'
 
 import PropTypes from 'prop-types';
 
@@ -24,8 +25,7 @@ const BurgerIngridients = (props) => {
 
   const modal = (
     <Modal header="Внимание!" onClose={closeModal}> 
-        <p>Спасибо за внимание!</p>
-        <p>Открывай меня, если станет скучно :)</p>
+      <IngridientDetails data={props.data[0]}/>
     </Modal>
 );
 

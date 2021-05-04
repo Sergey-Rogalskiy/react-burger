@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ConstructorElement, 
   DragIcon, 
@@ -5,11 +6,30 @@ import {
   CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+import Modal from '../modal/modal'
 import PropTypes from 'prop-types';
+import OrderDetails from '../order-details/order-details'
+
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 function BurgerConstructor(props) {
+
+  const [visible, setVisible] = React.useState(false)
+  const openModal = () => {
+      setVisible(true)
+      console.log("TRUE")
+  }
+  const closeModal = () => {
+      setVisible(false)
+      console.log("FALSE")
+  }
+
+  const modal = (
+    <Modal header="Внимание!" onClose={closeModal}> 
+      <OrderDetails data={props.data[2]}/>
+    </Modal>
+);
   // let obj = props.data.filter(obj1 => obj1.type === "sauce");
   let obj = props.data;
   return (
@@ -18,7 +38,7 @@ function BurgerConstructor(props) {
         <ConstructorElement
             text={props.data[0].name}
             thumbnail={props.data[0].image}
-            price={100}
+            price={props.data[0].price}
             type="top"
             isLocked={true}
              />
@@ -32,7 +52,7 @@ function BurgerConstructor(props) {
             <ConstructorElement
               text={item.name}
               thumbnail={item.image}
-              price={100}/>
+              price={item.price}/>
           </div>
         ))
         }
@@ -42,7 +62,7 @@ function BurgerConstructor(props) {
         <ConstructorElement
             text={props.data[0].name}
             thumbnail={props.data[0].image}
-            price={100}
+            price={props.data[0].price}
             type="bottom"
             isLocked={true}/>
       </div>
@@ -54,10 +74,12 @@ function BurgerConstructor(props) {
           </span> 
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary">
+        <Button type="primary"
+        onClick={(()=>{openModal()})}>
           Офрмить заказ
         </Button>
       </div>
+      {visible && modal}
 
     </div>
   );
