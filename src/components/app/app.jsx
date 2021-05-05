@@ -1,11 +1,12 @@
 import React from 'react'
 import AppHeader from '../app-header/app-header'
 import MainPage from '../pages/main-page'
-import Loader from '../loader'
+import Loader from '../utils/loader'
 
 
 import appStyles from './app.module.css';
 import RealService from "../../services/real-service"
+import ErrorIndicator from '../utils/error-indicator';
 
 
 function App() {
@@ -37,6 +38,11 @@ function App() {
   if (state.loading) {
     return (
       <Loader />
+    )
+  }
+  if (state.error) {
+    return (
+      <ErrorIndicator />
     )
   }
   return (

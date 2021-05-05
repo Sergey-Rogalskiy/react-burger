@@ -1,28 +1,31 @@
-import React from 'react';
-import {
-  Tab
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import ListByType from './list-by-type/list-by-type'
-
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import {
+  CloseIcon
+} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import burgerIngridientsStyles from './burger-ingridients.module.css'
+import modalStyles from './modal-overlay.module.css'
 
+const modalRoot = document.getElementById("react-modals");
 
-
-const ModalOverlay = () => {
-  return (
-    <>
-      <div style={{ display: 'flex' }}>
-        
-      </div>
-      
-    </>
+const ModalOverlay = (props) => {
+  const { children, header, onClose } = props;
+  return ReactDOM.createPortal(
+    (
+      <>
+        <div className={modalStyles.modal}  onClick={onClose}>
+        </div>
+      </>
+    ), 
+    modalRoot
   );
-}
+} 
+
 
 ModalOverlay.propTypes = {
-  data: PropTypes.any
+  children: PropTypes.node,
+  header: PropTypes.string,
+  onClose: PropTypes.func,
 }; 
 
 export default ModalOverlay;

@@ -13,23 +13,42 @@ import OrderDetails from '../order-details/order-details'
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
-function BurgerConstructor(props) {
+const BurgerConstructor = (props) => {
 
   const [visible, setVisible] = React.useState(false)
   const openModal = () => {
       setVisible(true)
-      console.log("TRUE")
   }
   const closeModal = () => {
       setVisible(false)
-      console.log("FALSE")
   }
 
   const modal = (
-    <Modal header="Внимание!" onClose={closeModal}> 
-      <OrderDetails data={props.data[2]}/>
+    <Modal header="&nbsp;" onClose={closeModal}> 
+      <OrderDetails data={{order_id: "030654"}}/>
     </Modal>
-);
+  );
+
+  React.useEffect(() => {
+    document.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      document.removeEventListener("keyup", handleKeyUp);
+    }
+  }, []);
+    
+  const handleKeyUp = (e) => {
+    const keys = {
+      27: () => {
+        e.preventDefault();
+        closeModal();
+        window.removeEventListener('keyup', handleKeyUp, false);
+      },
+    };
+  
+    if (keys[e.keyCode]) { keys[e.keyCode](); }
+  }
+  
   // let obj = props.data.filter(obj1 => obj1.type === "sauce");
   let obj = props.data;
   return (
@@ -76,7 +95,7 @@ function BurgerConstructor(props) {
         </div>
         <Button type="primary"
         onClick={(()=>{openModal()})}>
-          Офрмить заказ
+          Оформить заказ
         </Button>
       </div>
       {visible && modal}

@@ -1,15 +1,19 @@
 .modal {
-  width: 320px;
-  border-radius: 20px;
-  padding: 30px 30px 70px;
-  margin: auto;
-  padding: auto;
-  display: block; /* Hidden by default */
+  border: 1px solid darkslateblue;
+  border-radius: 50px;
+  padding: 30px 50px 50px;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 20%;
   top: 20%;
   width: 60%; /* Full width */
-  height: 60%; /* Full height */
-  background-color: rgba(0, 0, 0); /* Black w/ opacity */
+  max-width: 800px;
+  background-color: rgb(27, 27, 27); /* Black w/ opacity */
+  box-sizing: border-box;
+}
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  
 }

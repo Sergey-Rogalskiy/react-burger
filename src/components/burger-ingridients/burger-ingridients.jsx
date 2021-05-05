@@ -14,20 +14,40 @@ import burgerIngridientsStyles from './burger-ingridients.module.css'
 const BurgerIngridients = (props) => {
 
   const [visible, setVisible] = React.useState(false)
-  const openModal = () => {
+  const [ingridient, setIngridient] = React.useState(false)
+  const openModal = (item) => {
+      setIngridient(item)
       setVisible(true)
-      console.log("TRUE")
   }
   const closeModal = () => {
       setVisible(false)
-      console.log("FALSE")
   }
 
   const modal = (
-    <Modal header="Внимание!" onClose={closeModal}> 
-      <IngridientDetails data={props.data[0]}/>
+    <Modal header="Детали ингридента" onClose={closeModal}> 
+      <IngridientDetails data={ingridient}/>
     </Modal>
 );
+
+React.useEffect(() => {
+  document.addEventListener("keyup", handleKeyUp);
+
+  return () => {
+    document.removeEventListener("keyup", handleKeyUp);
+  }
+}, []);
+  
+const handleKeyUp = (e) => {
+  const keys = {
+    27: () => {
+      e.preventDefault();
+      closeModal();
+      window.removeEventListener('keyup', handleKeyUp, false);
+    },
+  };
+
+  if (keys[e.keyCode]) { keys[e.keyCode](); }
+}
 
   const [current, setCurrent] = React.useState('one')
   let data_buns = props.data.filter(obj1 => obj1.type === "bun");

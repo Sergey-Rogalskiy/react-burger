@@ -1,20 +1,17 @@
 
-.grid {
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: 10% 10%;
-  gap: 10px 15px;
-  grid-template-areas:
-    ". . . .";
-}
-.grid p {
-  margin: 10px
+.main p {
+  text-align: center;
+  /* background-color: rgb(16, 105, 28); */
 }
 
 .image {
-  display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
-  background-color: rgb(16, 105, 28);
+  width:20%;
+  padding: 10% 0;
+  /* background-color: rgb(16, 105, 28); */
+}
+
+.wrapped {
+  word-wrap: break-word;
 }
