@@ -35,7 +35,7 @@ const BurgerConstructor = (props) => {
     return () => {
       document.removeEventListener("keyup", handleKeyUp);
     }
-  }, []);
+  });
     
   const handleKeyUp = (e) => {
     const keys = {

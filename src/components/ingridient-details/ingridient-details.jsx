@@ -1,8 +1,3 @@
-import React from 'react';
-import {
-  Tab
-} from '@ya.praktikum/react-developer-burger-ui-components'
-
 import PropTypes from 'prop-types';
 
 import styles from './ingridient-details.module.css'
@@ -13,7 +8,7 @@ const IngridientDetails = (props) => {
   return (
     <>
     <div className={styles.modal}>
-      <img src={props.data.image} className={styles.image}/>
+      <img src={props.data.image} className={styles.image} alt="Ingridient"/>
       <p className={`${styles.name} text text_type_main-medium`}>{props.data.name}</p>
       <p className={`${styles.name} text text_type_main-default`}>{props.data.type.repeat(40)} </p>
       <div className={`${styles.grid}  text_color_inactive pt-5`}>

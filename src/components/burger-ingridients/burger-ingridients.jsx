@@ -14,7 +14,7 @@ import burgerIngridientsStyles from './burger-ingridients.module.css'
 const BurgerIngridients = (props) => {
 
   const [visible, setVisible] = React.useState(false)
-  const [ingridient, setIngridient] = React.useState(false)
+  const [ingridient, setIngridient] = React.useState(null)
   const openModal = (item) => {
       setIngridient(item)
       setVisible(true)
@@ -35,7 +35,7 @@ React.useEffect(() => {
   return () => {
     document.removeEventListener("keyup", handleKeyUp);
   }
-}, []);
+});
   
 const handleKeyUp = (e) => {
   const keys = {
