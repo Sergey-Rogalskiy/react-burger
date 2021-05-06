@@ -28,26 +28,6 @@ const BurgerConstructor = (props) => {
       <OrderDetails data={{order_id: "030654"}}/>
     </Modal>
   );
-
-  React.useEffect(() => {
-    document.addEventListener("keyup", handleKeyUp);
-
-    return () => {
-      document.removeEventListener("keyup", handleKeyUp);
-    }
-  });
-    
-  const handleKeyUp = (e) => {
-    const keys = {
-      27: () => {
-        e.preventDefault();
-        closeModal();
-        window.removeEventListener('keyup', handleKeyUp, false);
-      },
-    };
-  
-    if (keys[e.keyCode]) { keys[e.keyCode](); }
-  }
   
   // let obj = props.data.filter(obj1 => obj1.type === "sauce");
   let obj = props.data;

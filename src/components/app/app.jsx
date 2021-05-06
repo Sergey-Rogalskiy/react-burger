@@ -20,7 +20,6 @@ function App() {
   })
 
   React.useEffect(() => {
-      const getProductData = async () => {
         setState({...state, loading: true});
 
         Service.getIngridients('token')
@@ -30,9 +29,8 @@ function App() {
             }
           })
           .catch(error => 
-            setState({...state, loading: false, error}))
-      }
-      getProductData();
+            setState({...state, loading: false, error})
+          )
   }, [])
 
   if (state.loading) {

@@ -15,13 +15,13 @@ const Modal = (props) => {
   return ReactDOM.createPortal(
     (
       <>
+        <ModalOverlay onClose={onClose}/>
         <div className={modalStyles.modal}>
           <h1 className={modalStyles.header}>
             {header}
             <CloseIcon type="primary" onClick={onClose}/>
           </h1>
               {children}
-              <ModalOverlay onClose={onClose}/>
         </div>
       </>
     ), 

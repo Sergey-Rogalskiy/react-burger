@@ -29,25 +29,6 @@ const BurgerIngridients = (props) => {
     </Modal>
 );
 
-React.useEffect(() => {
-  document.addEventListener("keyup", handleKeyUp);
-
-  return () => {
-    document.removeEventListener("keyup", handleKeyUp);
-  }
-});
-  
-const handleKeyUp = (e) => {
-  const keys = {
-    27: () => {
-      e.preventDefault();
-      closeModal();
-      window.removeEventListener('keyup', handleKeyUp, false);
-    },
-  };
-
-  if (keys[e.keyCode]) { keys[e.keyCode](); }
-}
 
   const [current, setCurrent] = React.useState('one')
   let data_buns = props.data.filter(obj1 => obj1.type === "bun");
