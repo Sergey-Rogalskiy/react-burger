@@ -6,26 +6,6 @@ import BurgerIngridients from '../burger-ingridients/burger-ingridients'
 import mainPageStyles from './main-page.module.css'
 
 function MainPage(props) {
-
-  React.useEffect(() => {
-    document.addEventListener("keyup", handleKeyUp);
-
-    return () => {
-      document.removeEventListener("keyup", handleKeyUp);
-    }
-  });
-    
-  const handleKeyUp = (e) => {
-    const keys = {
-      27: () => {
-        e.preventDefault();
-        // closeModal();
-        window.removeEventListener('keyup', handleKeyUp, false);
-      },
-    };
-  
-    if (keys[e.keyCode]) { keys[e.keyCode](); }
-  }
   
   return (
     <>
@@ -38,10 +18,14 @@ function MainPage(props) {
     </div>
       <div className={`${mainPageStyles.row}`}>
         <div className={`${mainPageStyles.column} ${mainPageStyles.left}`}>
-          <BurgerIngridients data={props.data}/>
+          <BurgerIngridients
+            data={props.data}
+            modal={props.modal}/>
         </div>
         <div className={`${mainPageStyles.column} ${mainPageStyles.right}`}>
-          <BurgerConstructor data={props.data}/>
+          <BurgerConstructor 
+            data={props.data}
+            modal={props.modal}/>
         </div>
       </div>
     </>

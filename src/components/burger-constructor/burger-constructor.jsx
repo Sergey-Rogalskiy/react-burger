@@ -6,29 +6,13 @@ import {
   CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import Modal from '../modal/modal'
 import PropTypes from 'prop-types';
-import OrderDetails from '../order-details/order-details'
 
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 const BurgerConstructor = (props) => {
 
-  const [visible, setVisible] = React.useState(false)
-  const openModal = () => {
-      setVisible(true)
-  }
-  const closeModal = () => {
-      setVisible(false)
-  }
-
-  const modal = (
-    <Modal header="&nbsp;" onClose={closeModal}> 
-      <OrderDetails data={{order_id: "030654"}}/>
-    </Modal>
-  );
-  
   // let obj = props.data.filter(obj1 => obj1.type === "sauce");
   let obj = props.data;
   return (
@@ -74,11 +58,10 @@ const BurgerConstructor = (props) => {
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary"
-        onClick={(()=>{openModal()})}>
+          onClick={props.modal.openModal}>
           Оформить заказ
         </Button>
       </div>
-      {visible && modal}
 
     </div>
   );

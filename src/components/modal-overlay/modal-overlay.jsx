@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 
 import modalStyles from './modal-overlay.module.css'
 

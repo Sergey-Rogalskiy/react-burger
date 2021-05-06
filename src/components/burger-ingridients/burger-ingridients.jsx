@@ -3,9 +3,6 @@ import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
-import Modal from '../modal/modal'
-import IngridientDetails from '../ingridient-details/ingridient-details'
-
 import PropTypes from 'prop-types';
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
@@ -13,21 +10,6 @@ import burgerIngridientsStyles from './burger-ingridients.module.css'
 
 const BurgerIngridients = (props) => {
 
-  const [visible, setVisible] = React.useState(false)
-  const [ingridient, setIngridient] = React.useState(null)
-  const openModal = (item) => {
-      setIngridient(item)
-      setVisible(true)
-  }
-  const closeModal = () => {
-      setVisible(false)
-  }
-
-  const modal = (
-    <Modal header="Детали ингридента" onClose={closeModal}> 
-      <IngridientDetails data={ingridient}/>
-    </Modal>
-);
 
 
   const [current, setCurrent] = React.useState('one')
@@ -74,7 +56,7 @@ const BurgerIngridients = (props) => {
             Булки
           </p>
           <ListByType data={data_buns}
-            onClick={openModal}/>
+            onClick={props.modal.openModal}/>
         </div>
         <div ref={myRefScrollSauces}>
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
@@ -82,7 +64,7 @@ const BurgerIngridients = (props) => {
           </p>
           
           <ListByType data={data_sauces}
-            onClick={openModal}/>
+            onClick={props.modal.openModal}/>
         </div>
         <div ref={myRefScrollMains}>
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
@@ -90,10 +72,9 @@ const BurgerIngridients = (props) => {
           </p>
           
           <ListByType data={data_mains}
-            onClick={openModal}/>
+            onClick={props.modal.openModal}/>
         </div>
       </div>
-      {visible && modal}
     </>
   );
 }
