@@ -3,14 +3,15 @@ import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
-
 import PropTypes from 'prop-types';
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 
 
-
 const BurgerIngridients = (props) => {
+
+
+
   const [current, setCurrent] = React.useState('one')
   let data_buns = props.data.filter(obj1 => obj1.type === "bun");
   let data_sauces = props.data.filter(obj1 => obj1.type === "sauce");
@@ -54,30 +55,32 @@ const BurgerIngridients = (props) => {
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
             Булки
           </p>
-          <ListByType data={data_buns}/>
+          <ListByType data={data_buns}
+            onClick={props.modal.openModal}/>
         </div>
         <div ref={myRefScrollSauces}>
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
            Соусы
           </p>
           
-          <ListByType data={data_sauces}/>
+          <ListByType data={data_sauces}
+            onClick={props.modal.openModal}/>
         </div>
         <div ref={myRefScrollMains}>
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
             Начинки
           </p>
           
-          <ListByType data={data_mains}/>
+          <ListByType data={data_mains}
+            onClick={props.modal.openModal}/>
         </div>
       </div>
-      
     </>
   );
 }
 
 const ingridientPropTypes = PropTypes.shape({
-  _id: PropTypes.number.isRequired,
+  _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   proteins: PropTypes.number.isRequired,

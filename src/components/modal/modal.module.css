@@ -1,0 +1,19 @@
+.modal {
+  border: 1px solid darkslateblue;
+  border-radius: 50px;
+  padding: 30px 50px 50px;
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  left: 20%;
+  top: 20%;
+  width: 60%; /* Full width */
+  max-width: 800px;
+  background-color: rgb(27, 27, 27); /* Black w/ opacity */
+  box-sizing: border-box;
+}
+
+.header {
+  display:flex;
+  justify-content: space-between;
+  
+}

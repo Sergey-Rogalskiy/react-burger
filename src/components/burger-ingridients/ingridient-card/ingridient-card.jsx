@@ -4,9 +4,11 @@ import {
   CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
+
 import ingridientCardStyles from './ingridient-card.module.css'
 
-function IngridientCard(props) {
+
+const IngridientCard = (props) => {
   return(
     <div>
       <div style={{position: 'relative'}}>
@@ -23,6 +25,7 @@ function IngridientCard(props) {
       <p className="text text_type_main-default">
         {props.data.name}
       </p>
+
     </div>
 
   )

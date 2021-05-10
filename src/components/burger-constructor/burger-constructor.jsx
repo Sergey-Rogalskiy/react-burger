@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ConstructorElement, 
   DragIcon, 
@@ -7,9 +8,11 @@ import {
 
 import PropTypes from 'prop-types';
 
+
 import burgerConstructorStyles from './burger-constructor.module.css'
 
-function BurgerConstructor(props) {
+const BurgerConstructor = (props) => {
+
   // let obj = props.data.filter(obj1 => obj1.type === "sauce");
   let obj = props.data;
   return (
@@ -18,7 +21,7 @@ function BurgerConstructor(props) {
         <ConstructorElement
             text={props.data[0].name}
             thumbnail={props.data[0].image}
-            price={100}
+            price={props.data[0].price}
             type="top"
             isLocked={true}
              />
@@ -32,7 +35,7 @@ function BurgerConstructor(props) {
             <ConstructorElement
               text={item.name}
               thumbnail={item.image}
-              price={100}/>
+              price={item.price}/>
           </div>
         ))
         }
@@ -42,7 +45,7 @@ function BurgerConstructor(props) {
         <ConstructorElement
             text={props.data[0].name}
             thumbnail={props.data[0].image}
-            price={100}
+            price={props.data[0].price}
             type="bottom"
             isLocked={true}/>
       </div>
@@ -54,8 +57,9 @@ function BurgerConstructor(props) {
           </span> 
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary">
-          Офрмить заказ
+        <Button type="primary"
+          onClick={props.modal.openModal}>
+          Оформить заказ
         </Button>
       </div>
 
@@ -64,7 +68,7 @@ function BurgerConstructor(props) {
 }
 
 const ingridientPropTypes = PropTypes.shape({
-  _id: PropTypes.number.isRequired,
+  _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   proteins: PropTypes.number.isRequired,
