@@ -12,13 +12,14 @@ import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
 
-
+import {
+  IngridientDataContext, 
+  CurrentIngridientsContext
+} from '../../context/app-context'
 
 function App() {
   const [ingridient, setIngridient] = React.useState(null)
-
   const [visible, setVisible] = React.useState(false)
-
   const openModal = (item) => {
       item.type !== 'click' ? setIngridient(item) : setIngridient(null)
       setVisible(true)
@@ -26,7 +27,6 @@ function App() {
   const closeModal = () => {
       setVisible(false)
   }
-
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
     return () => {
@@ -46,23 +46,23 @@ function App() {
 
   const Service = new RealService()
   
-  const [state, setState] = React.useState({ 
+  const [ingridientData, setIngridientData] = React.useState({ 
       ingridientData: null,
       loading: true,
       error: null,
   })
 
   React.useEffect(() => {
-        setState({...state, loading: true});
+    setIngridientData({...ingridientData, loading: true});
 
         Service.getIngridients('token')
           .then(data => {
             if (data.success) {
-              setState({...state, loading: false, ingridientData: data.data});
+              setIngridientData({...ingridientData, loading: false, ingridientData: data.data});
             }
           })
           .catch(error => 
-            setState({...state, loading: false, error})
+            setIngridientData({...ingridientData, loading: false, error})
           )
   }, [])
 
@@ -78,28 +78,29 @@ function App() {
     </Modal>
   );
 
-  const modal2 = (
-    <Modal header="Детали ингридента" onClose={closeModal}> 
-    </Modal>
-  );
-  
 
-  if (state.loading) {
+  const [currentIngridients, setCurrentIngridients] = React.useState([])
+
+  if (ingridientData.loading) {
     return (
       <Loader />
     )
   }
-  if (state.error) {
+  if (ingridientData.error) {
     return (
       <ErrorIndicator />
     )
   }
   return (
     <main className={appStyles.app}>
+      <IngridientDataContext.Provider value={ingridientData.ingridientData}>
+        <CurrentIngridientsContext.Provider value={{currentIngridients, setCurrentIngridients}}>
+          <MainPage 
+          data={ingridientData.ingridientData}
+          modal = {{visible, openModal, closeModal}}/>
+        </CurrentIngridientsContext.Provider>
+      </IngridientDataContext.Provider>
       <AppHeader/>
-      <MainPage 
-      data={state.ingridientData}
-      modal = {{visible, openModal, closeModal}}/>
       
   {visible && modal}
   
