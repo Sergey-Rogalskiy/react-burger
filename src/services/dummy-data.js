@@ -26,7 +26,7 @@ export default class DummySwapiService {
            //reject(new Error('Some error'))
          }
          
-       }, 700);
+       }, 800);
      });
    }
 
