@@ -2,10 +2,15 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  width: 100%;
+  flex-basis: 100%;
 }
 
 .center {
-  margin: auto;
+  /* margin: auto; */
+}
+.constructor-element {
+  width: 100%;
 }
 
 .confirm_block {

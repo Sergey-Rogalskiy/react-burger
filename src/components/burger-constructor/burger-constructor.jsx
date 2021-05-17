@@ -35,11 +35,12 @@ const BurgerConstructor = (props) => {
         data.items.map((item) => (
           <div key={item._id+Math.random()} className={` ${burgerConstructorStyles.center}  pb-2`}>
             <DragIcon type="primary" />
+
             <ConstructorElement
               text={item.name}
               thumbnail={item.image}
               price={item.price}/>
-          </div>
+            </div>
         ))
         }
       </div>
