@@ -24,7 +24,6 @@ function MainPage(props) {
         </div>
         <div className={`${mainPageStyles.column} ${mainPageStyles.right}`}>
           <BurgerConstructor 
-            data={props.data}
             modal={props.modal}/>
         </div>
       </div>

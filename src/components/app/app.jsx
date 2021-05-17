@@ -25,7 +25,9 @@ function App() {
   const constructorInitialState = { 
     items: null, 
     buns: null,
-    totalPrice: null};
+    totalPrice: null,
+    orderNumber: null,
+  };
 
   const [constructorState , constructorDispatcher] = 
   React.useReducer(reducer, constructorInitialState);
@@ -38,7 +40,9 @@ function App() {
           action.payload[Math.floor(Math.random() * 12)+2],
           action.payload[Math.floor(Math.random() * 12)+2],
         ]
-        const buns = action.payload[Math.floor(Math.random() * 2)]
+        
+        let data_buns = action.payload.filter(obj1 => obj1.type === "bun");
+        const buns = data_buns[Math.floor(Math.random() * 2)]
         let totalPrice = buns.price * 2;
         items.map(item => (totalPrice += item.price));
         return {
@@ -46,15 +50,38 @@ function App() {
           items,
           buns,
           totalPrice};
-      case "reset":
-        return { constructorInitialState };
+        case "setOrderNumber":
+          return { 
+            ...state,
+            orderNumber: action.payload,
+          };
+        case "reset":
+          return { constructorInitialState };
       default:
         throw new Error(`Wrong type of action: ${action.type}`);
     }
   }
 
+  const Service = new RealService()
+
   const openModal = (item) => {
       item.type !== 'click' ? setIngridient(item) : setIngridient(null)
+      const dataIds = constructorState.items.map(item => item._id)
+      let data = {
+        ingredients: dataIds
+      }
+      
+      Service.postOrder('token', data)
+      .then(data => {
+        if (data.success) {
+          constructorDispatcher({type: 'setOrderNumber', payload: data.order.number});
+            
+        }
+      })
+      .catch(error => 
+        console.log(data)
+      )
+
       setVisible(true)
   }
   const closeModal = () => {
@@ -77,7 +104,6 @@ function App() {
     if (keys[e.keyCode]) { keys[e.keyCode](); }
   }
 
-  const Service = new RealService()
   
   const [ingridientData, setIngridientData] = React.useState({ 
       ingridientData: null,
@@ -92,9 +118,7 @@ function App() {
           .then(data => {
             if (data.success) {
               setIngridientData({...ingridientData, loading: false, ingridientData: data.data});
-
-
-              
+ 
               constructorDispatcher({type: 'set', payload: data.data});
             }
           })
@@ -104,11 +128,11 @@ function App() {
   }, [])
 
   const modal = (
-    <Modal header={!ingridient?"&nbsp;": "Детали ингридента"} onClose={closeModal}> 
+    <Modal header={!ingridient?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
     {
       !ingridient
       ?
-      <OrderDetails data={{order_id: "030654"}}/>
+      <OrderDetails data={{order_id: constructorState.orderNumber}}/>
       :
       <IngridientDetails data={ingridient}/>
     }
@@ -123,12 +147,14 @@ function App() {
   }
   if (ingridientData.error) {
     return (
-      <ErrorIndicator />
+      <>
+        {console.log(ingridientData.error)}
+        <ErrorIndicator />
+      </>
     )
   }
   return (
     <main className={appStyles.app}>
-      {console.log(constructorState)}
     <AppHeader/>
       <IngridientDataContext.Provider value={ingridientData.ingridientData}>
         <CurrentIngridientsContext.Provider value={{constructorState}}>

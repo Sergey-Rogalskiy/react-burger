@@ -7,6 +7,11 @@ export default class SwapiService {
     const res = await this.getResource(`/ingredients`, token);
     return res;
   };
+  postOrder = async (token, data) => {
+    const res = await this.postResource(`/orders`, token, data);
+    console.log(res)
+    return res;
+  };
 
   getResource = async (url, token) => {
     const res = await fetch(`${this._apiBase}${url}`, {
@@ -22,14 +27,18 @@ export default class SwapiService {
   };
 
 
-  postResource = async (url, data={}, token) => {
-    const res = await fetch(`${this._apiBase}${url}`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      body: JSON.stringify(data),
+  postResource = async (url, token, data={}) => {
+    const addData = {
+      method:'POST',
       headers: {
-        'X-Access-Token': token
+        'Content-Type': 'application/json'
       },
-    })
+      body:JSON.stringify(data)
+    }
+    const res = await fetch(
+      `${this._apiBase}${url}`, 
+      addData
+    )
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}` +
         `, received ${res.status}`)

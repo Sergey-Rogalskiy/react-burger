@@ -24,7 +24,7 @@ const OrderDetails = (props) => {
 
 OrderDetails.propTypes = {
   data: PropTypes.shape({
-    order_id: PropTypes.string,
+    order_id: PropTypes.number,
   })
 }; 
 

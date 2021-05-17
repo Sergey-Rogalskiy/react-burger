@@ -33,7 +33,7 @@ const BurgerConstructor = (props) => {
       <div className={`${burgerConstructorStyles.overflow}  ${burgerConstructorStyles.center}`}>
         {
         data.items.map((item) => (
-          <div key={item._id} className={` ${burgerConstructorStyles.center}  pb-2`}>
+          <div key={item._id+Math.random()} className={` ${burgerConstructorStyles.center}  pb-2`}>
             <DragIcon type="primary" />
             <ConstructorElement
               text={item.name}
@@ -71,23 +71,14 @@ const BurgerConstructor = (props) => {
   );
 }
 
-const ingridientPropTypes = PropTypes.shape({
-  _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  proteins: PropTypes.number.isRequired,
-  fat: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.number.isRequired,
-  calories: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  image_mobile: PropTypes.string.isRequired,
-  image_large: PropTypes.string.isRequired,
-  __v: PropTypes.number.isRequired,
+const modalType = PropTypes.shape({
+  visible: PropTypes.boolean,
+  openModal: PropTypes.function,
+  closeModal: PropTypes.function,
 });
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingridientPropTypes.isRequired)
+  modal: modalType
 }; 
 
 export default BurgerConstructor;
