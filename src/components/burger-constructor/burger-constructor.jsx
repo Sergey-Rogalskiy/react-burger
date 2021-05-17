@@ -7,21 +7,24 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import PropTypes from 'prop-types';
+import {CurrentIngridientsContext} from '../../context/app-context'
 
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 const BurgerConstructor = (props) => {
 
-  // let obj = props.data.filter(obj1 => obj1.type === "sauce");
-  let obj = props.data;
+  const {constructorState} = React.useContext(CurrentIngridientsContext);
+ const data =constructorState
+  
   return (
+    (data.items &&
     <div className={burgerConstructorStyles.flex}>
       <div className={`${burgerConstructorStyles.center} pb-2`}>
         <ConstructorElement
-            text={props.data[0].name}
-            thumbnail={props.data[0].image}
-            price={props.data[0].price}
+            text={data.buns.name}
+            thumbnail={data.buns.image}
+            price={data.buns.price}
             type="top"
             isLocked={true}
              />
@@ -29,7 +32,7 @@ const BurgerConstructor = (props) => {
 
       <div className={`${burgerConstructorStyles.overflow}  ${burgerConstructorStyles.center}`}>
         {
-        obj.map((item) => (
+        data.items.map((item) => (
           <div key={item._id} className={` ${burgerConstructorStyles.center}  pb-2`}>
             <DragIcon type="primary" />
             <ConstructorElement
@@ -43,9 +46,9 @@ const BurgerConstructor = (props) => {
 
       <div className={`${burgerConstructorStyles.center} `}>
         <ConstructorElement
-            text={props.data[0].name}
-            thumbnail={props.data[0].image}
-            price={props.data[0].price}
+            text={data.buns.name}
+            thumbnail={data.buns.image}
+            price={data.buns.price}
             type="bottom"
             isLocked={true}/>
       </div>
@@ -53,7 +56,7 @@ const BurgerConstructor = (props) => {
       <div className={`${burgerConstructorStyles.flex} ${burgerConstructorStyles.confirm_block}`}>
         <div className={burgerConstructorStyles.total}>
           <span className="text text_type_main-large">
-            3600
+            {data.totalPrice}
           </span> 
           <CurrencyIcon type="primary" />
         </div>
@@ -64,6 +67,7 @@ const BurgerConstructor = (props) => {
       </div>
 
     </div>
+      )
   );
 }
 

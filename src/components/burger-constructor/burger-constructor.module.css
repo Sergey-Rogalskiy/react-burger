@@ -21,7 +21,7 @@
 
 .overflow {
   overflow: auto;
-  height: 495px;
+  max-height: 495px;
 }
 
 .fixed_items {

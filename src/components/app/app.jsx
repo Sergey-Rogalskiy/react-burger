@@ -20,6 +20,39 @@ import {
 function App() {
   const [ingridient, setIngridient] = React.useState(null)
   const [visible, setVisible] = React.useState(false)
+
+
+  const constructorInitialState = { 
+    items: null, 
+    buns: null,
+    totalPrice: null};
+
+  const [constructorState , constructorDispatcher] = 
+  React.useReducer(reducer, constructorInitialState);
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case "set":
+        const items = [
+          action.payload[Math.floor(Math.random() * 12)+2],
+          action.payload[Math.floor(Math.random() * 12)+2],
+          action.payload[Math.floor(Math.random() * 12)+2],
+        ]
+        const buns = action.payload[Math.floor(Math.random() * 2)]
+        let totalPrice = buns.price * 2;
+        items.map(item => (totalPrice += item.price));
+        return {
+          ...state, 
+          items,
+          buns,
+          totalPrice};
+      case "reset":
+        return { constructorInitialState };
+      default:
+        throw new Error(`Wrong type of action: ${action.type}`);
+    }
+  }
+
   const openModal = (item) => {
       item.type !== 'click' ? setIngridient(item) : setIngridient(null)
       setVisible(true)
@@ -59,6 +92,10 @@ function App() {
           .then(data => {
             if (data.success) {
               setIngridientData({...ingridientData, loading: false, ingridientData: data.data});
+
+
+              
+              constructorDispatcher({type: 'set', payload: data.data});
             }
           })
           .catch(error => 
@@ -79,8 +116,6 @@ function App() {
   );
 
 
-  const [currentIngridients, setCurrentIngridients] = React.useState([])
-
   if (ingridientData.loading) {
     return (
       <Loader />
@@ -93,14 +128,15 @@ function App() {
   }
   return (
     <main className={appStyles.app}>
+      {console.log(constructorState)}
+    <AppHeader/>
       <IngridientDataContext.Provider value={ingridientData.ingridientData}>
-        <CurrentIngridientsContext.Provider value={{currentIngridients, setCurrentIngridients}}>
+        <CurrentIngridientsContext.Provider value={{constructorState}}>
           <MainPage 
           data={ingridientData.ingridientData}
           modal = {{visible, openModal, closeModal}}/>
         </CurrentIngridientsContext.Provider>
       </IngridientDataContext.Provider>
-      <AppHeader/>
       
   {visible && modal}
   
