@@ -9,14 +9,19 @@ import {
 import PropTypes from 'prop-types';
 import {CurrentIngridientsContext} from '../../context/app-context'
 
+import { useSelector } from 'react-redux'
+
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 const BurgerConstructor = (props) => {
 
-  const {constructorState} = React.useContext(CurrentIngridientsContext);
- const data =constructorState
+//   const {constructorState} = React.useContext(CurrentIngridientsContext);
+//  const data =constructorState
   
+const items = useSelector(state => state.app.items)
+const data = {"items": items, "buns":items[0]}
+
   return (
     (data.items &&
     <div className={burgerConstructorStyles.flex}>

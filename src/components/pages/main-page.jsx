@@ -19,7 +19,6 @@ function MainPage(props) {
       <div className={`${mainPageStyles.row}`}>
         <div className={`${mainPageStyles.column} ${mainPageStyles.left}`}>
           <BurgerIngridients
-            data={props.data}
             modal={props.modal}/>
         </div>
         <div className={`${mainPageStyles.column} ${mainPageStyles.right}`}>

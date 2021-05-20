@@ -139,31 +139,30 @@ function App() {
   );
 
 
-  if (ingridientData.loading) {
-    return (
-      <Loader />
-    )
-  }
-  if (ingridientData.error) {
-    return (
-      <>
-        {console.log(ingridientData.error)}
-        <ErrorIndicator />
-      </>
-    )
-  }
+  // if (ingridientData.loading) {
+  //   return (
+  //     <Loader />
+  //   )
+  // }
+  // if (ingridientData.error) {
+  //   return (
+  //     <>
+  //       {console.log(ingridientData.error)}
+  //       <ErrorIndicator />
+  //     </>
+  //   )
+  // }
   return (
     <main className={appStyles.app}>
-    <AppHeader/>
+      <AppHeader/>
       <IngridientDataContext.Provider value={ingridientData.ingridientData}>
         <CurrentIngridientsContext.Provider value={{constructorState}}>
           <MainPage 
-          data={ingridientData.ingridientData}
-          modal = {{visible, openModal, closeModal}}/>
+            modal = {{visible, openModal, closeModal}}/>
         </CurrentIngridientsContext.Provider>
       </IngridientDataContext.Provider>
       
-  {visible && modal}
+      {visible && modal}
   
     </main>
   );

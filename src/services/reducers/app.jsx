@@ -11,7 +11,7 @@ import {
   } from '../actions/app';
   
   const initialState = {
-    items: [],
+    items: [{id: 11, type: "bun", name:"HMMMM", price: 200000}],
     itemsRequest: false,
     itemsFailed: false,
 

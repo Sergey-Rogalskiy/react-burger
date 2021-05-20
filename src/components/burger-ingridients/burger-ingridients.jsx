@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
 import PropTypes from 'prop-types';
 
+import { useSelector, useDispatch  } from 'react-redux'
+import {getItems} from "../../services/actions/app"
+
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 
 
 const BurgerIngridients = (props) => {
 
+  const data = useSelector(state => state.app.items)
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(getItems())
+  }, [])
 
   const [current, setCurrent] = React.useState('one')
-  let data_buns = props.data.filter(obj1 => obj1.type === "bun");
-  let data_sauces = props.data.filter(obj1 => obj1.type === "sauce");
-  let data_mains = props.data.filter(obj1 => obj1.type === "main");
+  let data_buns = data.filter(obj1 => obj1.type === "bun");
+  let data_sauces = data.filter(obj1 => obj1.type === "sauce");
+  let data_mains = data.filter(obj1 => obj1.type === "main");
   
   const myRefScrollBuns = React.useRef(null)
   const myRefScrollSauces = React.useRef(null)
