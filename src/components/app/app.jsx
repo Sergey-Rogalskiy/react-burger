@@ -5,7 +5,7 @@ import Loader from '../utils/loader'
 
 
 import appStyles from './app.module.css';
-import RealService from "../../services/real-service"
+// import RealService from "../../services/real-service"
 import ErrorIndicator from '../utils/error-indicator';
 
 import Modal from '../modal/modal'
@@ -62,7 +62,7 @@ function App() {
     }
   }
 
-  const Service = new RealService()
+  //!!!const Service = new RealService()
 
   const openModal = (item) => {
       item.type !== 'click' ? setIngridient(item) : setIngridient(null)
@@ -71,16 +71,15 @@ function App() {
         ingredients: dataIds
       }
       
-      Service.postOrder('token', data)
-      .then(data => {
-        if (data.success) {
-          constructorDispatcher({type: 'setOrderNumber', payload: data.order.number});
-            
-        }
-      })
-      .catch(error => 
-        console.log(data)
-      )
+      // //!!! Service.postOrder('token', data)
+      // .then(data => {
+      //   if (data.success) {
+      //     constructorDispatcher({type: 'setOrderNumber', payload: data.order.number}); 
+      //   }
+      // })
+      // .catch(error => 
+      //   console.log(data)
+      // )
 
       setVisible(true)
   }
@@ -114,17 +113,17 @@ function App() {
   React.useEffect(() => {
     setIngridientData({...ingridientData, loading: true});
 
-        Service.getIngridients('token')
-          .then(data => {
-            if (data.success) {
-              setIngridientData({...ingridientData, loading: false, ingridientData: data.data});
+        // ///!!!Service.getIngridients('token')
+        //   .then(data => {
+        //     if (data.success) {
+        //       setIngridientData({...ingridientData, loading: false, ingridientData: data.data});
  
-              constructorDispatcher({type: 'set', payload: data.data});
-            }
-          })
-          .catch(error => 
-            setIngridientData({...ingridientData, loading: false, error})
-          )
+        //       constructorDispatcher({type: 'set', payload: data.data});
+        //     }
+        //   })
+        //   .catch(error => 
+        //     setIngridientData({...ingridientData, loading: false, error})
+        //   )
   }, [])
 
   const modal = (
