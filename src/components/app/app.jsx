@@ -17,10 +17,14 @@ import {
   CurrentIngridientsContext
 } from '../../context/app-context'
 
+import { useSelector, useDispatch  } from 'react-redux'
+import {getOrder} from "../../services/actions/app"
+
 function App() {
   const [ingridient, setIngridient] = React.useState(null)
   const [visible, setVisible] = React.useState(false)
 
+  const dispatch = useDispatch()
 
   const constructorInitialState = { 
     items: null, 
@@ -64,14 +68,15 @@ function App() {
 
   //!!!const Service = new RealService()
 
+  const data = useSelector(state => state.app.items)
   const openModal = (item) => {
       item.type !== 'click' ? setIngridient(item) : setIngridient(null)
-      const dataIds = constructorState.items.map(item => item._id)
-      let data = {
+      const dataIds = data.map(item => item._id)
+      let data11 = {
         ingredients: dataIds
       }
-      
-      // //!!! Service.postOrder('token', data)
+      dispatch(getOrder())
+      // //!!! Service.postOrder('token', data11)
       // .then(data => {
       //   if (data.success) {
       //     constructorDispatcher({type: 'setOrderNumber', payload: data.order.number}); 
@@ -104,27 +109,27 @@ function App() {
   }
 
   
-  const [ingridientData, setIngridientData] = React.useState({ 
-      ingridientData: null,
-      loading: true,
-      error: null,
-  })
+  // const [ingridientData, setIngridientData] = React.useState({ 
+  //     ingridientData: null,
+  //     loading: true,
+  //     error: null,
+  // })
 
-  React.useEffect(() => {
-    setIngridientData({...ingridientData, loading: true});
+  // React.useEffect(() => {
+  //   setIngridientData({...ingridientData, loading: true});
 
-        // ///!!!Service.getIngridients('token')
-        //   .then(data => {
-        //     if (data.success) {
-        //       setIngridientData({...ingridientData, loading: false, ingridientData: data.data});
+  //       // ///!!!Service.getIngridients('token')
+  //       //   .then(data => {
+  //       //     if (data.success) {
+  //       //       setIngridientData({...ingridientData, loading: false, ingridientData: data.data});
  
-        //       constructorDispatcher({type: 'set', payload: data.data});
-        //     }
-        //   })
-        //   .catch(error => 
-        //     setIngridientData({...ingridientData, loading: false, error})
-        //   )
-  }, [])
+  //       //       constructorDispatcher({type: 'set', payload: data.data});
+  //       //     }
+  //       //   })
+  //       //   .catch(error => 
+  //       //     setIngridientData({...ingridientData, loading: false, error})
+  //       //   )
+  // }, [])
 
   const modal = (
     <Modal header={!ingridient?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
@@ -155,12 +160,12 @@ function App() {
   return (
     <main className={appStyles.app}>
       <AppHeader/>
-      <IngridientDataContext.Provider value={ingridientData.ingridientData}>
-        <CurrentIngridientsContext.Provider value={{constructorState}}>
+      {/* <IngridientDataContext.Provider value={ingridientData.ingridientData}>
+        <CurrentIngridientsContext.Provider value={{constructorState}}> */}
           <MainPage 
             modal = {{visible, openModal, closeModal}}/>
-        </CurrentIngridientsContext.Provider>
-      </IngridientDataContext.Provider>
+        {/* </CurrentIngridientsContext.Provider>
+      </IngridientDataContext.Provider> */}
       
       {visible && modal}
   
