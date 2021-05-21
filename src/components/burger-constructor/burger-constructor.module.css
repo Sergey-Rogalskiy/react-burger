@@ -25,6 +25,8 @@
 .overflow {
   overflow: auto;
   max-height: 495px;
+  min-height: 100px;
+  background-color: aqua;
 }
 
 .fixed_items {

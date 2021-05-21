@@ -9,21 +9,36 @@ import {
 import PropTypes from 'prop-types';
 import {CurrentIngridientsContext} from '../../context/app-context'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch  } from 'react-redux'
 import FixedBun from './fixed-bun'
 import Ingridient from './ingridients'
 import TotalPrice from './total-price'
 
-
-import burgerConstructorStyles from './burger-constructor.module.css'
+import { useDrop } from "react-dnd";
+import {ADD_ITEM_TO_CONSTRUCTOR} from "../../services/actions/app"
 
 const BurgerConstructor = (props) => {
 
 //   const {constructorState} = React.useContext(CurrentIngridientsContext);
 //  const data =constructorState
   
-const items = useSelector(state => state.app.items)
-const data = {"items": [{}], "buns": {}, "totalPrice": 200}
+const items = useSelector(state => state.app.chosenItems)
+const data = {"items": items, "buns": {}, "totalPrice": 200}
+
+const dispatch = useDispatch();
+
+const [{ isHover } , drop] = useDrop({
+  accept: "ingridient",
+  collect: monitor => ({
+      isHover: monitor.isOver(),
+  }),
+  drop(item) {
+    dispatch({
+          type: ADD_ITEM_TO_CONSTRUCTOR,
+          ...item,
+      });
+  },
+});
 
   return (
     <>

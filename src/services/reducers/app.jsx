@@ -78,12 +78,13 @@ import {
       }
       case ADD_ITEM_TO_CONSTRUCTOR: {
         return { ...state, 
-          chosenItems: [...state.chosenItems] };
+          chosenItems: [...state.chosenItems, action.item]
+        };
       }
       
       case DELETE_ITEM_FROM_CONSTRUCTOR: {
         return { ...state, 
-          chosenItems: [...state.chosenItems].filter(item => item.id !== action.id) };
+          chosenItems: [...state.chosenItems].filter(el => el._id !== action.item._id) };
       }
       default: {
         return state;

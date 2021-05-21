@@ -2,6 +2,7 @@ import React from 'react';
 import IngridientCard from '../ingridient-card/ingridient-card'
 
 import listByTypeStyles from './list-by-type.module.css'
+import Element from './element'
 
 const ListByType = (props) => {
 
@@ -11,12 +12,7 @@ const ListByType = (props) => {
       <ul className={listByTypeStyles.list_by_type}>
           {
           props.data.map((item) => (
-            
-            <li key={item._id} 
-            className={listByTypeStyles.card}
-            onClick={props.onClick.bind(null, item)}>
-              <IngridientCard data={item} />
-            </li>
+            <Element item={item} onClick={props.onClick}/>
           ))
           }
       </ul>
