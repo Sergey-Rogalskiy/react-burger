@@ -28,7 +28,7 @@ const Ingridient = (props) => {
 
   const ref = useRef(null);
 
-  const [{ handlerId }, dropRef] = useDrop({
+  const [{ handlerId }, drop] = useDrop({
     accept: "choosen",
     collect(monitor) {
         return {
@@ -70,7 +70,7 @@ const Ingridient = (props) => {
         // Generally it's better to avoid mutations,
         // but it's good here for the sake of performance
         // to avoid expensive index searches.
-        item.index = hoverIndex;
+        item._id = hoverIndex;
     },
     // drop(item) {
     //   dispatch({
@@ -80,7 +80,7 @@ const Ingridient = (props) => {
     // },
 });
   
-  const [{ isDragging }, dragRef] = useDrag({
+  const [{ isDragging }, drag] = useDrag({
       type: "choosen",
       item: () => {
           return { item, index };
@@ -90,11 +90,22 @@ const Ingridient = (props) => {
       }),
   });
 
-  dragRef(dropRef(ref));
+  drag(drop(ref));
+  const opacity = isDragging ? 0 : 1;
 
+  const style = {
+    // cursor: 'move',
+};
   return (
     <>
-      <div ref={ref} key={item._id+Math.random()} className={` ${burgerConstructorStyles.center}  pb-2`}>
+      <div 
+        ref={ref} 
+        key={item.index} 
+        className={` ${burgerConstructorStyles.center}  pb-2`}
+        data-handler-id={handlerId}
+        style={{ ...style, opacity }}
+        
+      >
         <DragIcon type="primary" />
         <ConstructorElement
           text={item.name}
