@@ -1,12 +1,8 @@
-import React from 'react';
+
 import {
   ConstructorElement, 
-  DragIcon, 
-  Button,
-  CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import PropTypes from 'prop-types';
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
@@ -16,7 +12,7 @@ const FixedBun = (props) => {
   return (
     <>
       {
-      (data.buns) 
+      (data.buns.name) 
       ?
       <div className={burgerConstructorStyles.flex}>
         <div className={`${burgerConstructorStyles.center} pb-2`}>
@@ -30,7 +26,7 @@ const FixedBun = (props) => {
         </div>
       </div>
       : 
-      <div>Choose your bun</div>
+      <div></div>
       }
   </>
   );

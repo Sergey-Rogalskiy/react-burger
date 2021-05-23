@@ -1,69 +1,49 @@
-import React from 'react';
+
+import {  useDispatch  } from 'react-redux'
+
 import {
-  ConstructorElement, 
-  DragIcon, 
-  Button,
-  CurrencyIcon, 
-} from '@ya.praktikum/react-developer-burger-ui-components'
-
-import PropTypes from 'prop-types';
-
-import { useSelector, useDispatch  } from 'react-redux'
-
-import { useDrop } from "react-dnd";
-import {
-  ADD_ITEM_TO_CONSTRUCTOR,
-  DELETE_ITEM_FROM_CONSTRUCTOR
+  CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
 } from "../../services/actions/app"
+
+import Ingridient from './ingridient' 
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
-const Ingridient = (props) => {
+const Ingridients = (props) => {
   const data = props
   const dispatch = useDispatch();
   
-  const [{ isHover } , drop] = useDrop({
-    accept: "ingridients",
-    collect: monitor => ({
-        isHover: monitor.isOver(),
-    }),
-    drop(item) {
+  const moveCard = (dragIndex, hoverIndex) => {
       dispatch({
-            type: ADD_ITEM_TO_CONSTRUCTOR,
-            item,
-        });
-    },
-  });
+        type: CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
+        dragIndex,
+        hoverIndex
+      });
+    }
 
   return (
     <>
       <div 
-      ref={drop}
         className={`${burgerConstructorStyles.overflow}  
         ${burgerConstructorStyles.center}`}
       >
         {
-        data.items.map((item) => (
-          <div key={item._id+Math.random()} className={` ${burgerConstructorStyles.center}  pb-2`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text={item.name}
-              thumbnail={item.image}
-              price={item.price}
-              handleClose={
-                () => {
-                  dispatch({
-                    type: DELETE_ITEM_FROM_CONSTRUCTOR,
-                    item,
-                  })
-                }
-              }/>
-            </div>
-        ))
+          data.items[0]
+          ?
+          data.items.map((item, index) => 
+            <Ingridient 
+            item={item} 
+            key={index}
+            index={index}
+            moveCard={moveCard}
+          />
+          )
+          :
+          <div>Ну хорош ломаться, дрэгни сюда свои булочки</div>
         }
       </div>
   </>
   );
 }
 
-export default Ingridient;
+export default Ingridients;

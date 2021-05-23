@@ -14,6 +14,7 @@ export const TAB_SWITCH = 'TAB_SWITCH';
 
 export const ADD_ITEM_TO_CONSTRUCTOR = 'ADD_ITEM_TO_CONSTRUCTOR';
 export const DELETE_ITEM_FROM_CONSTRUCTOR = 'DELETE_ITEM_FROM_CONSTRUCTOR';
+export const CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR = 'CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR';
 
 export function getItems() {
   return function(dispatch) {

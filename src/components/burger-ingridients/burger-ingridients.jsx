@@ -18,7 +18,7 @@ const BurgerIngridients = (props) => {
 
   useEffect(() => {
     dispatch(getItems())
-  }, [])
+  }, [dispatch])
 
   const [current, setCurrent] = React.useState('one')
   let data_buns = data.filter(obj1 => obj1.type === "bun");

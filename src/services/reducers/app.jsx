@@ -7,11 +7,12 @@ import {
     GET_ORDER_SUCCESS,
     TAB_SWITCH,
     ADD_ITEM_TO_CONSTRUCTOR,
-    DELETE_ITEM_FROM_CONSTRUCTOR
+    DELETE_ITEM_FROM_CONSTRUCTOR,
+    CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
   } from '../actions/app';
   
   const initialState = {
-    items: [{id: 11, type: "bun", name:"HMMMM", price: 200000}],
+    items: [],
     itemsRequest: false,
     itemsFailed: false,
 
@@ -20,10 +21,13 @@ import {
     orderFailed: false,
   
     chosenItems: [],
+    chosenBuns: {},
 
     currentItemToView: null,
   
-    currentTab: 'buns'
+    currentTab: 'buns',
+    totalPrice: 0,
+    totalPriceBuns: 0
   };
   
   export const appReducer = (state = initialState, action) => {
@@ -77,14 +81,48 @@ import {
         };
       }
       case ADD_ITEM_TO_CONSTRUCTOR: {
-        return { ...state, 
-          chosenItems: [...state.chosenItems, action.item]
+        const priceItems =  state.chosenItems.reduce((a, b) => a + b.price, 0)
+        const priceBuns =  state.chosenBuns.price
+        let totalPrice = priceBuns+priceItems
+        if (!priceItems) {
+          totalPrice = priceBuns
+        }
+        if (!priceBuns) {
+          totalPrice = priceItems
+        }
+        if (action.item.type === "bun") {
+          return { 
+            ...state, 
+            chosenBuns: action.item,
+            totalPrice
+          };
+        }
+        return { 
+          ...state, 
+          chosenItems: [...state.chosenItems, action.item],
+          totalPrice
         };
       }
-      
       case DELETE_ITEM_FROM_CONSTRUCTOR: {
         return { ...state, 
           chosenItems: [...state.chosenItems].filter(el => el._id !== action.item._id) };
+      }
+      case CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR: {
+        const dragCard = state.chosenItems[action.dragIndex];
+        const hoverCard = state.chosenItems[action.hoverIndex];
+
+        if (dragCard){
+          const newArray = [
+            ...state.chosenItems,
+          ]
+          newArray[action.hoverIndex] = dragCard
+          newArray[action.dragIndex] = hoverCard
+
+          return { 
+            ...state, 
+            chosenItems: newArray
+          };
+        }
       }
       default: {
         return state;
@@ -92,3 +130,7 @@ import {
     }
   };
   
+  // let data_buns = action.payload.filter(obj1 => obj1.type === "bun");
+  // const buns = data_buns[Math.floor(Math.random() * 2)]
+  // let totalPrice = buns.price * 2;
+  // items.map(item => (totalPrice += item.price));
