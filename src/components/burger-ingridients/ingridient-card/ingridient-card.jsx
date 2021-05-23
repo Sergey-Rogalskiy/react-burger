@@ -4,7 +4,7 @@ import {
   CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { useSelector, useDispatch  } from 'react-redux'
+import { useSelector  } from 'react-redux'
 
 import ingridientCardStyles from './ingridient-card.module.css'
 
@@ -15,7 +15,7 @@ const IngridientCard = (props) => {
   const chosenBuns = useSelector(state => state.app.chosenBuns)
   var counter = 0
 
-  if ( props.data.type == 'bun'){
+  if ( props.data.type === 'bun'){
     if (chosenBuns) {
     counter = chosenBuns._id === props.data._id ? 1 : 0
     }
@@ -28,7 +28,11 @@ const IngridientCard = (props) => {
   return(
     <div>
       <div style={{position: 'relative'}}>
-        <Counter count={counter}/>
+        {
+          counter !== 0 
+          ? <Counter count={counter}/> 
+          : ""
+        }
       </div>
       <img src={props.data.image} alt="burger" />
       <div className={ingridientCardStyles.total}>

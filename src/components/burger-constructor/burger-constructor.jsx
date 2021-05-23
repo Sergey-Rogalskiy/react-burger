@@ -1,10 +1,3 @@
-import React from 'react';
-import {
-  ConstructorElement, 
-  DragIcon, 
-  Button,
-  CurrencyIcon, 
-} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch  } from 'react-redux'
@@ -15,8 +8,6 @@ import TotalPrice from './total-price'
 import { useDrop } from "react-dnd";
 import {
   ADD_ITEM_TO_CONSTRUCTOR,
-  DELETE_ITEM_FROM_CONSTRUCTOR,
-  CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
 } from "../../services/actions/app"
 
 const BurgerConstructor = (props) => {
@@ -29,11 +20,8 @@ const BurgerConstructor = (props) => {
  
   const dispatch = useDispatch();
   
-  const [{ isHover } , drop] = useDrop({
+  const [ ,drop] = useDrop({
     accept: "ingridients",
-    collect: monitor => ({
-        isHover: monitor.isOver(),
-    }),
     drop(item) {
       dispatch({
             type: ADD_ITEM_TO_CONSTRUCTOR,
@@ -41,12 +29,10 @@ const BurgerConstructor = (props) => {
         });
     },
   });
-
   return (
-    <div ref={drop}>
+    <div ref={drop} >
       <FixedBun buns={buns} type="top"/>
       <Ingridients items={items}/>
-        
       <FixedBun buns={buns} type="bottom"/>
       <TotalPrice modal={props.modal}/>
     </div>

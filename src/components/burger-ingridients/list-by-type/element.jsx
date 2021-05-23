@@ -1,4 +1,4 @@
-import React from 'react';
+
 import IngridientCard from '../ingridient-card/ingridient-card'
 
 import listByTypeStyles from './list-by-type.module.css'
@@ -16,7 +16,7 @@ const [, dragRef] = useDrag({
 });
 
   return (
-    <li key={item._id} 
+    <li key={props.index} 
     className={listByTypeStyles.card}
     onClick={(item) => props.onClick(item)}
     ref={dragRef}>

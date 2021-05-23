@@ -108,16 +108,21 @@ import {
           chosenItems: [...state.chosenItems].filter(el => el._id !== action.item._id) };
       }
       case CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR: {
-        console.log('aaaaaa')
-        
-      const dragCard = state.chosenItems[action.dragIndex];
-        return { 
-          ...state, 
-          chosenItems: [...state.chosenItems,
-                        [action.dragIndex, 1],
-                        [action.hoverIndex, 0, dragCard]
-            ]
-        };
+        const dragCard = state.chosenItems[action.dragIndex];
+        const hoverCard = state.chosenItems[action.hoverIndex];
+
+        if (dragCard){
+          const newArray = [
+            ...state.chosenItems,
+          ]
+          newArray[action.hoverIndex] = dragCard
+          newArray[action.dragIndex] = hoverCard
+
+          return { 
+            ...state, 
+            chosenItems: newArray
+          };
+        }
       }
       default: {
         return state;
@@ -125,3 +130,7 @@ import {
     }
   };
   
+  // let data_buns = action.payload.filter(obj1 => obj1.type === "bun");
+  // const buns = data_buns[Math.floor(Math.random() * 2)]
+  // let totalPrice = buns.price * 2;
+  // items.map(item => (totalPrice += item.price));

@@ -1,19 +1,7 @@
-import React, {useCallback} from 'react';
+
+import {  useDispatch  } from 'react-redux'
+
 import {
-  ConstructorElement, 
-  DragIcon, 
-  Button,
-  CurrencyIcon, 
-} from '@ya.praktikum/react-developer-burger-ui-components'
-
-import PropTypes from 'prop-types';
-
-import { useSelector, useDispatch  } from 'react-redux'
-
-import { useDrop, useDrag } from "react-dnd";
-import {
-  ADD_ITEM_TO_CONSTRUCTOR,
-  DELETE_ITEM_FROM_CONSTRUCTOR,
   CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
 } from "../../services/actions/app"
 
@@ -26,7 +14,6 @@ const Ingridients = (props) => {
   const dispatch = useDispatch();
   
   const moveCard = (dragIndex, hoverIndex) => {
-    console.log('aaaaa')
       dispatch({
         type: CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
         dragIndex,
@@ -46,6 +33,7 @@ const Ingridients = (props) => {
           data.items.map((item, index) => 
             <Ingridient 
             item={item} 
+            key={index}
             index={index}
             moveCard={moveCard}
           />

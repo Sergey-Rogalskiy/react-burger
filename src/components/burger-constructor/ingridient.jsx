@@ -1,20 +1,15 @@
-import React, {useRef} from 'react';
+import {useRef} from 'react';
 import {
   ConstructorElement, 
   DragIcon, 
-  Button,
-  CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import PropTypes from 'prop-types';
 
-import { useSelector, useDispatch  } from 'react-redux'
+import { useDispatch  } from 'react-redux'
 
 import { useDrop, useDrag } from "react-dnd";
 import {
-  ADD_ITEM_TO_CONSTRUCTOR,
   DELETE_ITEM_FROM_CONSTRUCTOR,
-  CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
 } from "../../services/actions/app"
 
 import burgerConstructorStyles from './burger-constructor.module.css'
@@ -28,7 +23,7 @@ const Ingridient = (props) => {
 
   const ref = useRef(null);
 
-  const [{ handlerId }, drop] = useDrop({
+  const [{ handlerId }, dropRef] = useDrop({
     accept: "choosen",
     collect(monitor) {
         return {
@@ -90,17 +85,17 @@ const Ingridient = (props) => {
       }),
   });
 
-  drag(drop(ref));
+  drag(dropRef(ref));
   const opacity = isDragging ? 0 : 1;
 
   const style = {
-    // cursor: 'move',
+    cursor: 'move',
 };
   return (
     <>
       <div 
         ref={ref} 
-        key={item.index} 
+        key={index} 
         className={` ${burgerConstructorStyles.center}  pb-2`}
         data-handler-id={handlerId}
         style={{ ...style, opacity }}
