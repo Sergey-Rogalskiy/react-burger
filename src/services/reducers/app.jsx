@@ -8,7 +8,8 @@ import {
     TAB_SWITCH,
     ADD_ITEM_TO_CONSTRUCTOR,
     DELETE_ITEM_FROM_CONSTRUCTOR,
-    CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
+    CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
+    SET_CURRENT_ITEM_TO_VIEW
   } from '../actions/app';
   
   const initialState = {
@@ -81,33 +82,50 @@ import {
         };
       }
       case ADD_ITEM_TO_CONSTRUCTOR: {
-        const priceItems =  state.chosenItems.reduce((a, b) => a + b.price, 0)
-        const priceBuns =  state.chosenBuns.price
-        let totalPrice = priceBuns+priceItems
-        if (!priceItems) {
-          totalPrice = priceBuns
-        }
-        if (!priceBuns) {
-          totalPrice = priceItems
-        }
+        // if (!priceItems) {
+        //   totalPrice = priceBuns
+        // }
+        // if (!priceBuns) {
+        //   totalPrice = priceItems
+        // }
         if (action.item.type === "bun") {
+          let priceItems = 0
+          if (state.chosenItems[0]) {
+            priceItems = state.chosenItems.reduce((a, b) => a + b.price, 0)
+          }
+          const totalPrice = action.item.price * 2 +priceItems
           return { 
             ...state, 
             chosenBuns: action.item,
             totalPrice
           };
         }
+
+        let priceBuns = 0
+        if (state.chosenBuns) {
+          priceBuns = state.chosenBuns.price *2
+        }
+        const newItems = [...state.chosenItems, action.item]
+        const priceItems = newItems.reduce((a, b) => a + b.price, 0)
+        const totalPrice = priceBuns+priceItems
         return { 
           ...state, 
-          chosenItems: [...state.chosenItems, action.item],
+          chosenItems: newItems,
           totalPrice
-        };
+        }
       }
       case DELETE_ITEM_FROM_CONSTRUCTOR: {
         var chosenItems = [...state.chosenItems]
         chosenItems.splice(action.index, 1)
+        
+        const priceForNewItems = chosenItems.reduce((a, b) => a + b.price, 0)
+        const priceBuns =  state.chosenBuns.price * 2
+        let totalPrice = priceBuns+priceForNewItems
+
         return { ...state, 
-          chosenItems: chosenItems };
+          chosenItems: chosenItems,
+          totalPrice
+         };
       }
       case CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR: {
         const dragCard = state.chosenItems[action.dragIndex];
@@ -126,6 +144,10 @@ import {
           };
         }
       }
+      case SET_CURRENT_ITEM_TO_VIEW: {
+        return { ...state, 
+          currentItemToView: action.currentItemToView };
+      }
       default: {
         return state;
       }
@@ -136,3 +158,4 @@ import {
   // const buns = data_buns[Math.floor(Math.random() * 2)]
   // let totalPrice = buns.price * 2;
   // items.map(item => (totalPrice += item.price));
+  

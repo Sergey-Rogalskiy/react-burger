@@ -16,6 +16,17 @@ export const ADD_ITEM_TO_CONSTRUCTOR = 'ADD_ITEM_TO_CONSTRUCTOR';
 export const DELETE_ITEM_FROM_CONSTRUCTOR = 'DELETE_ITEM_FROM_CONSTRUCTOR';
 export const CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR = 'CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR';
 
+export const SET_CURRENT_ITEM_TO_VIEW = 'SET_CURRENT_ITEM_TO_VIEW';
+
+export function setCurrentItemToView(currentItemToView) {
+  return function(dispatch) {
+    dispatch({
+      type: SET_CURRENT_ITEM_TO_VIEW,
+      currentItemToView: currentItemToView
+    })
+  }
+}
+
 export function getItems() {
   return function(dispatch) {
     dispatch({
@@ -42,17 +53,19 @@ export function getItems() {
   };
 }
 
-export function getOrder() {
+export function getOrder(data) {
+
+  const token = 'lala'
     return function(dispatch) {
       dispatch({
         type: GET_ORDER_REQUEST
       });
-      getOrderRequest()
+      getOrderRequest(token, data)
       .then(res => {
         if (res && res.success) {
           dispatch({
             type: GET_ORDER_SUCCESS,
-            items: res.data
+            order: res
           });
         } else {
           dispatch({

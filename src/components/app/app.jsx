@@ -10,34 +10,38 @@ import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
 
 import { useSelector, useDispatch  } from 'react-redux'
-import {getOrder} from "../../services/actions/app"
-
+import {
+  setCurrentItemToView,
+  getOrder
+} from '../../services/actions/app'
 
 
 function App() {
-  const [ingridient, setIngridient] = React.useState(null)
   const [visible, setVisible] = React.useState(false)
 
   const dispatch = useDispatch()
 
 
-  const order = useSelector(state => state.app.order)
 
 
 
-  const items = useSelector(state => state.app.items)
+  const chosenItems = useSelector(state => state.app.chosenItems)
 
-  const openModal = (item) => {
-      item.type !== 'click' ? setIngridient(item) : setIngridient(null)
-      const dataIds = items.map(item => item._id)
-      let data11 = {
-        ingredients: dataIds
+  const openModal = (event, item) => {
+      if (item !== undefined) {
+        dispatch(setCurrentItemToView(item))
+      } else {
+        const dataIds = chosenItems.map(item => item._id)
+        let data11 = {
+          ingredients: dataIds
+        }
+        dispatch(getOrder(data11))
       }
-      dispatch(getOrder(data11))
-
+      
       setVisible(true)
   }
   const closeModal = () => {
+      dispatch(setCurrentItemToView(null))
       setVisible(false)
   }
   React.useEffect(() => {
@@ -58,15 +62,18 @@ function App() {
   }
 
   
+  const currentItemToView = useSelector(state => state.app.currentItemToView)
+  const order = useSelector(state => state.app.order)
 
-  const modal = (
-    <Modal header={!ingridient?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
+  const modal = (  
+    <Modal header={!currentItemToView?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
     {
-      !ingridient && order
+      !currentItemToView 
       ?
-      <OrderDetails data={{order_id: order.orderNumber}}/>
+      <OrderDetails/>
       :
-      <IngridientDetails data={ingridient}/>
+      <IngridientDetails/>
+
     }
     </Modal>
   );
@@ -88,13 +95,8 @@ function App() {
   return (
     <main className={appStyles.app}>
       <AppHeader/>
-      {/* <IngridientDataContext.Provider value={ingridientData.ingridientData}>
-        <CurrentIngridientsContext.Provider value={{constructorState}}> */}
-          <MainPage 
-            modal = {{visible, openModal, closeModal}}/>
-        {/* </CurrentIngridientsContext.Provider>
-      </IngridientDataContext.Provider> */}
-      
+      <MainPage 
+        modal = {{visible, openModal, closeModal}}/>
       {visible && modal}
   
     </main>

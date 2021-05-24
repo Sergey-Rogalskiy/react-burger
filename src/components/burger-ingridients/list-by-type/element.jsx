@@ -18,7 +18,7 @@ const [, dragRef] = useDrag({
   return (
     <li key={props.index} 
     className={listByTypeStyles.card}
-    onClick={(item) => props.onClick(item)}
+    onClick={(e) => props.onClick(e, item)}
     ref={dragRef}>
         <IngridientCard data={item} />
     </li>

@@ -8,9 +8,10 @@ export const getIngridientsRequest = async (token) => {
   return res;
 };
 
-export const getOrderRequest = async (token, data) => {
+export const getOrderRequest = async (token='alla', data) => {
+
   const res = await postResource(`/orders`, token, data);
-  console.log(res)
+
   return res;
 };
 
