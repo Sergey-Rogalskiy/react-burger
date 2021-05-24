@@ -9,7 +9,7 @@ import { useSelector, useDispatch  } from 'react-redux'
 import {getItems} from "../../services/actions/app"
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
-
+import { useInView } from 'react-intersection-observer';
 
 const BurgerIngridients = (props) => {
 
@@ -30,24 +30,34 @@ const BurgerIngridients = (props) => {
   const myRefScrollMains = React.useRef(null)
 
   const executeScrollBuns = () => {
-    myRefScrollBuns.current.scrollIntoView()
+    // myRefScrollBuns.current.scrollIntoView()
     setCurrent("one")
   }    
 
   const executeScrollSauces = () => {
-    myRefScrollSauces.current.scrollIntoView()
+    // myRefScrollSauces.current.scrollIntoView()
     setCurrent("two")
   }    
 
   const executeScrollMains = () => {
-    myRefScrollMains.current.scrollIntoView()
+    // myRefScrollMains.current.scrollIntoView()
     setCurrent('three')
-
   }    
+
+
+  const [buns, inViewBuns] = useInView({threshold:0.3})
+  const [sauces, inViewSauces] = useInView({threshold:1})
+  const [mains, inViewMain] = useInView({threshold:0.4})
+
+  const handleScrollIngredients = () => {
+    inViewBuns && executeScrollBuns()
+    inViewSauces && executeScrollSauces()
+    inViewMain && executeScrollMains()
+  }
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex' }} >
         <Tab value="one" active={current === 'one'} onClick={executeScrollBuns}>
           Булки
         </Tab>
@@ -58,15 +68,15 @@ const BurgerIngridients = (props) => {
           Начинки
         </Tab>
       </div>
-      <div className={burgerIngridientsStyles.overflow}>
-        <div  ref={myRefScrollBuns}>
+      <div className={burgerIngridientsStyles.overflow} onScroll = {handleScrollIngredients}>
+        <div  ref={buns}>
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
             Булки
           </p>
           <ListByType data={data_buns}
             onClick={props.modal.openModal}/>
         </div>
-        <div ref={myRefScrollSauces}>
+        <div ref={sauces}>
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
            Соусы
           </p>
@@ -74,7 +84,7 @@ const BurgerIngridients = (props) => {
           <ListByType data={data_sauces}
             onClick={props.modal.openModal}/>
         </div>
-        <div ref={myRefScrollMains}>
+        <div ref={mains}>
           <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
             Начинки
           </p>
