@@ -104,8 +104,10 @@ import {
         };
       }
       case DELETE_ITEM_FROM_CONSTRUCTOR: {
+        var chosenItems = [...state.chosenItems]
+        chosenItems.splice(action.index, 1)
         return { ...state, 
-          chosenItems: [...state.chosenItems].filter(el => el._id !== action.item._id) };
+          chosenItems: chosenItems };
       }
       case CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR: {
         const dragCard = state.chosenItems[action.dragIndex];

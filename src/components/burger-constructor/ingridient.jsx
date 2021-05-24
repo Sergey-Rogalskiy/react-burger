@@ -67,12 +67,6 @@ const Ingridient = (props) => {
         // to avoid expensive index searches.
         item._id = hoverIndex;
     },
-    // drop(item) {
-    //   dispatch({
-    //         type: CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
-    //         item,
-    //     });
-    // },
 });
   
   const [{ isDragging }, drag] = useDrag({
@@ -86,7 +80,7 @@ const Ingridient = (props) => {
   });
 
   drag(dropRef(ref));
-  const opacity = isDragging ? 0 : 1;
+  const opacity = isDragging ? 0.5 : 1;
 
   const style = {
     cursor: 'move',
@@ -99,7 +93,6 @@ const Ingridient = (props) => {
         className={` ${burgerConstructorStyles.center}  pb-2`}
         data-handler-id={handlerId}
         style={{ ...style, opacity }}
-        
       >
         <DragIcon type="primary" />
         <ConstructorElement
@@ -110,7 +103,7 @@ const Ingridient = (props) => {
             () => {
               dispatch({
                 type: DELETE_ITEM_FROM_CONSTRUCTOR,
-                item,
+                index,
               })
             }
           }/>
