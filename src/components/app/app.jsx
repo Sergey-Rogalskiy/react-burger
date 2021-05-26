@@ -11,9 +11,12 @@ import IngridientDetails from '../ingridient-details/ingridient-details'
 
 import { useSelector, useDispatch  } from 'react-redux'
 import {
-  setCurrentItemToView,
   getOrder
-} from '../../services/actions/app'
+} from '../../services/actions/constructor'
+import {
+  setCurrentItemToView,
+  
+} from '../../services/actions/ingridients'
 
 
 function App() {
@@ -25,7 +28,7 @@ function App() {
 
 
 
-  const chosenItems = useSelector(state => state.app.chosenItems)
+  const chosenItems = useSelector(state => state.constructor.chosenItems)
 
   const openModal = (event, item) => {
       if (item !== undefined) {
@@ -62,8 +65,8 @@ function App() {
   }
 
   
-  const currentItemToView = useSelector(state => state.app.currentItemToView)
-  const order = useSelector(state => state.app.order)
+  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
+  const order = useSelector(state => state.constructor.order)
 
   const modal = (  
     <Modal header={!currentItemToView?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 

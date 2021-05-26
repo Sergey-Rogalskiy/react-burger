@@ -11,8 +11,8 @@ import ingridientCardStyles from './ingridient-card.module.css'
 
 const IngridientCard = (props) => {
 
-  const chosenItems = useSelector(state => state.app.chosenItems)
-  const chosenBuns = useSelector(state => state.app.chosenBuns)
+  const chosenItems = useSelector(state => state.ingridients.chosenItems)
+  const chosenBuns = useSelector(state => state.ingridients.chosenBuns)
   var counter = 0
 
   if ( props.data.type === 'bun'){

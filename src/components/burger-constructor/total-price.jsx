@@ -9,9 +9,10 @@ import { useSelector  } from 'react-redux'
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 const TotalPrice = (props) => {
-  const totalPrice = useSelector(state => state.app.totalPrice)
-  const chosenBuns = useSelector(state => state.app.chosenBuns)
-  const chosenItems = useSelector(state => state.app.chosenItems)
+  const totalPrice = useSelector(state => state.burgerConstructor.totalPrice)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+  // const test = useSelector(state => state)
   return (
     <>
       {

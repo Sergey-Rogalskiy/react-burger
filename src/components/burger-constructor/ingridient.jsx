@@ -10,7 +10,7 @@ import { useDispatch  } from 'react-redux'
 import { useDrop, useDrag } from "react-dnd";
 import {
   DELETE_ITEM_FROM_CONSTRUCTOR,
-} from "../../services/actions/app"
+} from "../../services/actions/constructor"
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 

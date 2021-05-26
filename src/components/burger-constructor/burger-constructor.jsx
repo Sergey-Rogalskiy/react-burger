@@ -8,15 +8,15 @@ import TotalPrice from './total-price'
 import { useDrop } from "react-dnd";
 import {
   ADD_ITEM_TO_CONSTRUCTOR,
-} from "../../services/actions/app"
+} from "../../services/actions/constructor"
 
 const BurgerConstructor = (props) => {
 
 //   const {constructorState} = React.useContext(CurrentIngridientsContext);
 //  const data =constructorState
   
-  const items = useSelector(state => state.app.chosenItems)
-  const buns = useSelector(state => state.app.chosenBuns)
+  const items = useSelector(state => state.burgerConstructor.chosenItems)
+  const buns = useSelector(state => state.burgerConstructor.chosenBuns)
  
   const dispatch = useDispatch();
   

@@ -3,7 +3,7 @@ import {  useDispatch  } from 'react-redux'
 
 import {
   CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
-} from "../../services/actions/app"
+} from "../../services/actions/constructor"
 
 import Ingridient from './ingridient' 
 

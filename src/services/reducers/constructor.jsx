@@ -1,21 +1,14 @@
 import {
-    GET_ITEMS_FAILED,
-    GET_ITEMS_REQUEST,
-    GET_ITEMS_SUCCESS,
     GET_ORDER_FAILED,
     GET_ORDER_REQUEST,
     GET_ORDER_SUCCESS,
-    TAB_SWITCH,
     ADD_ITEM_TO_CONSTRUCTOR,
     DELETE_ITEM_FROM_CONSTRUCTOR,
     CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
-    SET_CURRENT_ITEM_TO_VIEW
-  } from '../actions/app';
+  } from '../actions/constructor';
   
+
   const initialState = {
-    items: [],
-    itemsRequest: false,
-    itemsFailed: false,
 
     order: null,
     orderRequest: false,
@@ -24,36 +17,13 @@ import {
     chosenItems: [],
     chosenBuns: {},
 
-    currentItemToView: null,
-  
-    currentTab: 'buns',
     totalPrice: 0,
     totalPriceBuns: 0
   };
   
-  export const appReducer = (state = initialState, action) => {
+  export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
-      case GET_ITEMS_REQUEST: {
-        return {
-          ...state,
-          itemsRequest: true
-        };
-      }
-      case GET_ITEMS_SUCCESS: {
-        return { 
-          ...state, 
-          itemsFailed: false, 
-          items: action.items, 
-          itemsRequest: false 
-        };
-      }
-      case GET_ITEMS_FAILED: {
-        return { 
-          ...state, 
-          itemsFailed: true, 
-          itemsRequest: false 
-        };
-      }
+
       case GET_ORDER_REQUEST: {
         return {
           ...state,
@@ -75,12 +45,7 @@ import {
           orderRequest: false 
         };
       }
-      case TAB_SWITCH: {
-        return {
-          ...state,
-          currentTab: action.payload
-        };
-      }
+
       case ADD_ITEM_TO_CONSTRUCTOR: {
         // if (!priceItems) {
         //   totalPrice = priceBuns
@@ -144,18 +109,9 @@ import {
           };
         }
       }
-      case SET_CURRENT_ITEM_TO_VIEW: {
-        return { ...state, 
-          currentItemToView: action.currentItemToView };
-      }
       default: {
         return state;
       }
     }
   };
-  
-  // let data_buns = action.payload.filter(obj1 => obj1.type === "bun");
-  // const buns = data_buns[Math.floor(Math.random() * 2)]
-  // let totalPrice = buns.price * 2;
-  // items.map(item => (totalPrice += item.price));
   

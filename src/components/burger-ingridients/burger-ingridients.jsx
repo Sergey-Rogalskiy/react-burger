@@ -6,14 +6,14 @@ import ListByType from './list-by-type/list-by-type'
 import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch  } from 'react-redux'
-import {getItems} from "../../services/actions/app"
+import {getItems} from "../../services/actions/ingridients"
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 import { useInView } from 'react-intersection-observer';
 
 const BurgerIngridients = (props) => {
 
-  const data = useSelector(state => state.app.items)
+  const data = useSelector(state => state.ingridients.items)
   const dispatch = useDispatch()
 
   useEffect(() => {
