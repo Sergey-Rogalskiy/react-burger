@@ -22,10 +22,9 @@ const Ingridients = (props) => {
     }
 
   return (
-    <>
       <div 
         className={`${burgerConstructorStyles.overflow}  
-        ${burgerConstructorStyles.center}`}
+        ${burgerConstructorStyles.test}`}
       >
         {
           data.items[0]
@@ -39,10 +38,12 @@ const Ingridients = (props) => {
           />
           )
           :
-          <div>Ну хорош ломаться, дрэгни сюда свои булочки</div>
+          
+          <div className={burgerConstructorStyles.template} >
+            Сюда кидай ингридиенты
+            </div>
         }
       </div>
-  </>
   );
 }
 

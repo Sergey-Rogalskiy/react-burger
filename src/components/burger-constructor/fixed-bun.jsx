@@ -26,7 +26,10 @@ const FixedBun = (props) => {
         </div>
       </div>
       : 
-      <div></div>
+      
+      <div className={burgerConstructorStyles.template} >
+        Кидай сюда булочки
+        </div>
       }
   </>
   );

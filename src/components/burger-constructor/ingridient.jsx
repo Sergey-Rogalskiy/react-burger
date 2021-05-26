@@ -86,7 +86,6 @@ const Ingridient = (props) => {
     cursor: 'move',
 };
   return (
-    <>
       <div 
         ref={ref} 
         key={index} 
@@ -108,7 +107,6 @@ const Ingridient = (props) => {
             }
           }/>
         </div>
-  </>
   );
 }
 

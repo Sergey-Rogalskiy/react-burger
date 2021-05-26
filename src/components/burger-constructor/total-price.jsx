@@ -8,7 +8,7 @@ import { useSelector  } from 'react-redux'
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
-const FixedBun = (props) => {
+const TotalPrice = (props) => {
   const totalPrice = useSelector(state => state.app.totalPrice)
   const chosenBuns = useSelector(state => state.app.chosenBuns)
   const chosenItems = useSelector(state => state.app.chosenItems)
@@ -35,4 +35,4 @@ const FixedBun = (props) => {
   );
 }
 
-export default FixedBun;
+export default TotalPrice;

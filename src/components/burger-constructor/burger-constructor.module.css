@@ -7,6 +7,12 @@
 .center {
   margin: auto;
 }
+
+.test {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
 .center div {
   width: 100%;
 }
@@ -39,4 +45,13 @@
 }
 .total span {
   margin: 0 10px
+}
+
+.template {
+  min-width: 100px;
+  height: 100px;
+  border: solid #fff 2px;
+  border-radius: 30%;
+  text-align: center;
+  line-height: 100px; 
 }
