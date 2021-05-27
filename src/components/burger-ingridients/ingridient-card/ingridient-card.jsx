@@ -11,8 +11,8 @@ import ingridientCardStyles from './ingridient-card.module.css'
 
 const IngridientCard = (props) => {
 
-  const chosenItems = useSelector(state => state.ingridients.chosenItems)
-  const chosenBuns = useSelector(state => state.ingridients.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   var counter = 0
 
   if ( props.data.type === 'bun'){
@@ -30,7 +30,8 @@ const IngridientCard = (props) => {
       <div style={{position: 'relative'}}>
         {
           counter !== 0 
-          ? <Counter count={counter}/> 
+          ? 
+          <Counter count={counter}/> 
           : ""
         }
       </div>
