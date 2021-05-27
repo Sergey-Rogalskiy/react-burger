@@ -11,12 +11,11 @@ import burgerConstructorStyles from './burger-constructor.module.css'
 const TotalPrice = (props) => {
   const totalPrice = useSelector(state => state.burgerConstructor.totalPrice)
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
-  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
-  // const test = useSelector(state => state)
+  
   return (
     <>
       {
-        (chosenBuns.name && chosenItems.length !== 0)
+        (chosenBuns.name )
         ?<div className={`${burgerConstructorStyles.flex} ${burgerConstructorStyles.confirm_block}`}>
         <div className={burgerConstructorStyles.total}>
           <span className="text text_type_main-large">
