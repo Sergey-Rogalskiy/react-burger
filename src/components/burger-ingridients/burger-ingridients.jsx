@@ -9,7 +9,6 @@ import { useSelector, useDispatch  } from 'react-redux'
 import {getItems} from "../../services/actions/ingridients"
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
-import { useInView } from 'react-intersection-observer';
 
 const BurgerIngridients = (props) => {
 
@@ -28,31 +27,37 @@ const BurgerIngridients = (props) => {
   const myRefScrollBuns = React.useRef(null)
   const myRefScrollSauces = React.useRef(null)
   const myRefScrollMains = React.useRef(null)
-
+  const myRefScrollContainer = React.useRef(null)
+  
   const executeScrollBuns = () => {
-    // myRefScrollBuns.current.scrollIntoView()
+    myRefScrollBuns.current.scrollIntoView()
     setCurrent("one")
   }    
 
   const executeScrollSauces = () => {
-    // myRefScrollSauces.current.scrollIntoView()
+    myRefScrollSauces.current.scrollIntoView()
     setCurrent("two")
   }    
 
   const executeScrollMains = () => {
-    // myRefScrollMains.current.scrollIntoView()
+    myRefScrollMains.current.scrollIntoView()
     setCurrent('three')
   }    
 
 
-  const [buns, inViewBuns] = useInView({threshold:0.3})
-  const [sauces, inViewSauces] = useInView({threshold:1})
-  const [mains, inViewMain] = useInView({threshold:0.4})
-
   const handleScrollIngredients = () => {
-    inViewBuns && executeScrollBuns()
-    inViewSauces && executeScrollSauces()
-    inViewMain && executeScrollMains()
+    const bunsDis = myRefScrollBuns.current.getBoundingClientRect().top - myRefScrollContainer.current.getBoundingClientRect().top
+    const saucesDis = myRefScrollSauces.current.getBoundingClientRect().top - myRefScrollContainer.current.getBoundingClientRect().top
+
+    if (bunsDis>=-210) {
+      setCurrent("one")
+      return
+    }
+    if (saucesDis>=-485) {
+      setCurrent("two")
+    } else {
+      setCurrent('three')
+    }
   }
 
   return (
@@ -68,24 +73,31 @@ const BurgerIngridients = (props) => {
           Начинки
         </Tab>
       </div>
-      <div className={burgerIngridientsStyles.overflow} onScroll = {handleScrollIngredients}>
-        <div  ref={buns}>
-          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
+      <div  ref={myRefScrollContainer}
+        className={burgerIngridientsStyles.overflow} 
+        onScroll={handleScrollIngredients}
+      >
+        <div >
+          <p ref={myRefScrollBuns}
+            className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}
+          >
             Булки
           </p>
           <ListByType data={data_buns}
             onClick={props.modal.openModal}/>
         </div>
-        <div ref={sauces}>
-          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
+        <div >
+          <p ref={myRefScrollSauces}
+            className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
            Соусы
           </p>
           
           <ListByType data={data_sauces}
             onClick={props.modal.openModal}/>
         </div>
-        <div ref={mains}>
-          <p className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
+        <div >
+          <p ref={myRefScrollMains}
+            className={`${burgerIngridientsStyles.headers} text text_type_main-medium`}>
             Начинки
           </p>
           
