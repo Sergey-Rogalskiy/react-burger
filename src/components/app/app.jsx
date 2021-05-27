@@ -28,16 +28,20 @@ function App() {
 
 
 
-  const chosenItems = useSelector(state => state.constructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
   const openModal = (event, item) => {
       if (item !== undefined) {
         dispatch(setCurrentItemToView(item))
       } else {
         const dataIds = chosenItems.map(item => item._id)
+        dataIds.push(chosenBuns._id)
+        dataIds.splice(1, 0, chosenBuns._id)
         let data11 = {
           ingredients: dataIds
         }
+        console.log()
         dispatch(getOrder(data11))
       }
       
@@ -66,7 +70,7 @@ function App() {
 
   
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
-
+  const order = useSelector(state => state.burgerConstructor.order)
 
   const modal = (  
     <Modal header={!currentItemToView?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
