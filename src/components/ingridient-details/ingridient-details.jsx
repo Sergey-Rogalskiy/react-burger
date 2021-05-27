@@ -8,7 +8,7 @@ import { useSelector  } from 'react-redux'
 
 const IngridientDetails = () => {
   const currentItemToView = useSelector(state => state.app.currentItemToView)
-  const order = useSelector(state => state.app.order)
+
   return (
     <>
       {

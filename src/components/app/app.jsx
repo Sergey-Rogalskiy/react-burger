@@ -70,8 +70,7 @@ function App() {
 
   
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
-  const order = useSelector(state => state.burgerConstructor.order)
-
+ 
   const modal = (  
     <Modal header={!currentItemToView?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
     {

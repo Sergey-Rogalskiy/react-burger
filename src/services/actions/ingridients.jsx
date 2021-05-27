@@ -1,6 +1,6 @@
 import { 
     getIngridientsRequest, 
-    getOrderRequest, } from '../real-service';
+} from '../real-service';
 
 export const GET_ITEMS_REQUEST = 'GET_ITEMS_REQUEST';
 export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';

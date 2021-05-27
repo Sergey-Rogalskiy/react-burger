@@ -47,12 +47,6 @@ import {
       }
 
       case ADD_ITEM_TO_CONSTRUCTOR: {
-        // if (!priceItems) {
-        //   totalPrice = priceBuns
-        // }
-        // if (!priceBuns) {
-        //   totalPrice = priceItems
-        // }
         if (action.item.type === "bun") {
           let priceItems = 0
           if (state.chosenItems[0]) {
