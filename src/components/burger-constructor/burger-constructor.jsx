@@ -1,89 +1,52 @@
-import React from 'react';
-import {
-  ConstructorElement, 
-  DragIcon, 
-  Button,
-  CurrencyIcon, 
-} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch  } from 'react-redux'
+import FixedBun from './fixed-bun'
+import Ingridients from './ingridients'
+import TotalPrice from './total-price'
 
-
-import burgerConstructorStyles from './burger-constructor.module.css'
+import { useDrop } from "react-dnd";
+import {
+  ADD_ITEM_TO_CONSTRUCTOR,
+} from "../../services/actions/constructor"
 
 const BurgerConstructor = (props) => {
 
-  // let obj = props.data.filter(obj1 => obj1.type === "sauce");
-  let obj = props.data;
+//   const {constructorState} = React.useContext(CurrentIngridientsContext);
+//  const data =constructorState
+  
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+ 
+  const dispatch = useDispatch();
+  
+  const [ ,drop] = useDrop({
+    accept: "ingridients",
+    drop(item) {
+      dispatch({
+            type: ADD_ITEM_TO_CONSTRUCTOR,
+            item,
+        });
+    },
+  });
   return (
-    <div className={burgerConstructorStyles.flex}>
-      <div className={`${burgerConstructorStyles.center} pb-2`}>
-        <ConstructorElement
-            text={props.data[0].name}
-            thumbnail={props.data[0].image}
-            price={props.data[0].price}
-            type="top"
-            isLocked={true}
-             />
-      </div>
-
-      <div className={`${burgerConstructorStyles.overflow}  ${burgerConstructorStyles.center}`}>
-        {
-        obj.map((item) => (
-          <div key={item._id} className={` ${burgerConstructorStyles.center}  pb-2`}>
-            <DragIcon type="primary" />
-            <ConstructorElement
-              text={item.name}
-              thumbnail={item.image}
-              price={item.price}/>
-          </div>
-        ))
-        }
-      </div>
-
-      <div className={`${burgerConstructorStyles.center} `}>
-        <ConstructorElement
-            text={props.data[0].name}
-            thumbnail={props.data[0].image}
-            price={props.data[0].price}
-            type="bottom"
-            isLocked={true}/>
-      </div>
-
-      <div className={`${burgerConstructorStyles.flex} ${burgerConstructorStyles.confirm_block}`}>
-        <div className={burgerConstructorStyles.total}>
-          <span className="text text_type_main-large">
-            3600
-          </span> 
-          <CurrencyIcon type="primary" />
-        </div>
-        <Button type="primary"
-          onClick={props.modal.openModal}>
-          Оформить заказ
-        </Button>
-      </div>
-
+    <div ref={drop} >
+      <FixedBun buns={chosenBuns} type="top"/>
+      <Ingridients items={chosenItems}/>
+      <FixedBun buns={chosenBuns} type="bottom"/>
+      <TotalPrice modal={props.modal}/>
     </div>
   );
 }
 
-const ingridientPropTypes = PropTypes.shape({
-  _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  proteins: PropTypes.number.isRequired,
-  fat: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.number.isRequired,
-  calories: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  image_mobile: PropTypes.string.isRequired,
-  image_large: PropTypes.string.isRequired,
-  __v: PropTypes.number.isRequired,
+const modalType = PropTypes.shape({
+  visible: PropTypes.boolean,
+  openModal: PropTypes.function,
+  closeModal: PropTypes.function,
 });
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingridientPropTypes.isRequired)
+  modal: modalType
 }; 
 
 export default BurgerConstructor;

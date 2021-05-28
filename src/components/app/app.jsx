@@ -1,32 +1,56 @@
 import React from 'react'
 import AppHeader from '../app-header/app-header'
 import MainPage from '../pages/main-page'
-import Loader from '../utils/loader'
 
 
 import appStyles from './app.module.css';
-import RealService from "../../services/real-service"
-import ErrorIndicator from '../utils/error-indicator';
 
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
 
+import { useSelector, useDispatch  } from 'react-redux'
+import {
+  getOrder
+} from '../../services/actions/constructor'
+import {
+  setCurrentItemToView,
+  
+} from '../../services/actions/ingridients'
 
 
 function App() {
-  const [ingridient, setIngridient] = React.useState(null)
-
   const [visible, setVisible] = React.useState(false)
 
-  const openModal = (item) => {
-      item.type !== 'click' ? setIngridient(item) : setIngridient(null)
+  const dispatch = useDispatch()
+
+
+
+
+
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+
+  const openModal = (event, item) => {
+      if (item !== undefined) {
+        dispatch(setCurrentItemToView(item))
+      } else {
+        const dataIds = chosenItems.map(item => item._id)
+        dataIds.push(chosenBuns._id)
+        dataIds.splice(1, 0, chosenBuns._id)
+        let data11 = {
+          ingredients: dataIds
+        }
+        console.log()
+        dispatch(getOrder(data11))
+      }
+      
       setVisible(true)
   }
   const closeModal = () => {
+      dispatch(setCurrentItemToView(null))
       setVisible(false)
   }
-
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
     return () => {
@@ -44,64 +68,42 @@ function App() {
     if (keys[e.keyCode]) { keys[e.keyCode](); }
   }
 
-  const Service = new RealService()
   
-  const [state, setState] = React.useState({ 
-      ingridientData: null,
-      loading: true,
-      error: null,
-  })
-
-  React.useEffect(() => {
-        setState({...state, loading: true});
-
-        Service.getIngridients('token')
-          .then(data => {
-            if (data.success) {
-              setState({...state, loading: false, ingridientData: data.data});
-            }
-          })
-          .catch(error => 
-            setState({...state, loading: false, error})
-          )
-  }, [])
-
-  const modal = (
-    <Modal header={!ingridient?"&nbsp;": "Детали ингридента"} onClose={closeModal}> 
+  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
+ 
+  const modal = (  
+    <Modal header={!currentItemToView?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
     {
-      !ingridient
+      !currentItemToView 
       ?
-      <OrderDetails data={{order_id: "030654"}}/>
+      <OrderDetails/>
       :
-      <IngridientDetails data={ingridient}/>
+      <IngridientDetails/>
+
     }
     </Modal>
   );
 
-  const modal2 = (
-    <Modal header="Детали ингридента" onClose={closeModal}> 
-    </Modal>
-  );
-  
 
-  if (state.loading) {
-    return (
-      <Loader />
-    )
-  }
-  if (state.error) {
-    return (
-      <ErrorIndicator />
-    )
-  }
+  // if (ingridientData.loading) {
+  //   return (
+  //     <Loader />
+  //   )
+  // }
+  // if (ingridientData.error) {
+  //   return (
+  //     <>
+  //       {console.log(ingridientData.error)}
+  //       <ErrorIndicator />
+  //     </>
+  //   )
+  // }
   return (
     <main className={appStyles.app}>
       <AppHeader/>
       <MainPage 
-      data={state.ingridientData}
-      modal = {{visible, openModal, closeModal}}/>
-      
-  {visible && modal}
+        modal = {{visible, openModal, closeModal}}/>
+      {visible && modal}
   
     </main>
   );
