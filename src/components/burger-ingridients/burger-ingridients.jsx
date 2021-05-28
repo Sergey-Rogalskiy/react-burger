@@ -12,7 +12,7 @@ import burgerIngridientsStyles from './burger-ingridients.module.css'
 
 const BurgerIngridients = (props) => {
 
-  const data = useSelector(state => state.ingridients.items)
+  const items = useSelector(state => state.ingridients.items)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,9 +20,9 @@ const BurgerIngridients = (props) => {
   }, [dispatch])
 
   const [current, setCurrent] = React.useState('one')
-  let data_buns = data.filter(obj1 => obj1.type === "bun");
-  let data_sauces = data.filter(obj1 => obj1.type === "sauce");
-  let data_mains = data.filter(obj1 => obj1.type === "main");
+  let data_buns = items.filter(obj1 => obj1.type === "bun");
+  let data_sauces = items.filter(obj1 => obj1.type === "sauce");
+  let data_mains = items.filter(obj1 => obj1.type === "main");
   
   const myRefScrollBuns = React.useRef(null)
   const myRefScrollSauces = React.useRef(null)

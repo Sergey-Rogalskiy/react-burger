@@ -15,8 +15,8 @@ const BurgerConstructor = (props) => {
 //   const {constructorState} = React.useContext(CurrentIngridientsContext);
 //  const data =constructorState
   
-  const items = useSelector(state => state.burgerConstructor.chosenItems)
-  const buns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
  
   const dispatch = useDispatch();
   
@@ -31,9 +31,9 @@ const BurgerConstructor = (props) => {
   });
   return (
     <div ref={drop} >
-      <FixedBun buns={buns} type="top"/>
-      <Ingridients items={items}/>
-      <FixedBun buns={buns} type="bottom"/>
+      <FixedBun buns={chosenBuns} type="top"/>
+      <Ingridients items={chosenItems}/>
+      <FixedBun buns={chosenBuns} type="bottom"/>
       <TotalPrice modal={props.modal}/>
     </div>
   );

@@ -7,7 +7,7 @@ import { useSelector  } from 'react-redux'
 
 
 const IngridientDetails = () => {
-  const currentItemToView = useSelector(state => state.app.currentItemToView)
+  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
 
   return (
     <>
