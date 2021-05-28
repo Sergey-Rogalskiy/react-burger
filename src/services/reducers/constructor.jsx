@@ -88,17 +88,12 @@ import {
       }
       case CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR: {
         const dragCard = state.chosenItems[action.dragIndex];
-        const hoverCard = state.chosenItems[action.hoverIndex];
-        console.log(action.dragIndex)
-        console.log(dragCard)
-        console.log(hoverCard)
-
         if (dragCard){
           const newArray = [
             ...state.chosenItems,
           ]
-          newArray[action.hoverIndex] = dragCard
-          newArray[action.dragIndex] = hoverCard
+          newArray.splice(action.dragIndex, 1)
+          newArray.splice(action.hoverIndex, 0, dragCard)
 
           return { 
             ...state, 
