@@ -17,7 +17,20 @@ import {
 } from '../../services/actions/ingridients'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import MainPage from '../pages/main-page'
+import {
+  Error404,
+  LoginPage,
+  RegisterPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+  FeedPage,
+  FeedIdPage,
+  ProfilePage,
+  ProfileOrdersPage,
+  ProfileOrdersIdPage,
+  IngridientsIdPage,
+  MainPage,
+} from '../pages'
 
 function App() {
   const [visible, setVisible] = React.useState(false)
@@ -103,9 +116,42 @@ function App() {
       <AppHeader/>
       <Router>
         <Switch>
-          <Route path="/">
+          <Route path="/" exact>
             <MainPage 
               modal = {{visible, openModal, closeModal}}/>
+          </Route>
+          <Route path="/login" exact>
+            <LoginPage />
+          </Route>
+          <Route path="/register" exact>
+            <RegisterPage />
+          </Route>
+          <Route path="/forgot-password" exact>
+            <ForgotPasswordPage />
+          </Route>
+          <Route path="/reset-password" exact>
+            <ResetPasswordPage />
+          </Route>
+          <Route path="/feed" exact>
+            <FeedPage />
+          </Route>
+          <Route path="/feed/:id" exact>
+            <FeedIdPage />
+          </Route>
+          <Route path="/profile" exact>
+            <ProfilePage />
+          </Route>
+          <Route path="/profile/orders" exact>
+            <ProfileOrdersPage />
+          </Route>
+          <Route path="/profile/orders/:id" exact>
+            <ProfileOrdersIdPage />
+          </Route>
+          <Route path="/ingredients/:id" exact>
+            <IngridientsIdPage />
+          </Route>
+          <Route>
+            <Error404 />
           </Route>
         </Switch>
       </Router>
