@@ -1,6 +1,5 @@
 import React from 'react'
 import AppHeader from '../app-header/app-header'
-import MainPage from '../pages/main-page'
 
 
 import appStyles from './app.module.css';
@@ -15,9 +14,10 @@ import {
 } from '../../services/actions/constructor'
 import {
   setCurrentItemToView,
-  
 } from '../../services/actions/ingridients'
 
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import MainPage from '../pages/main-page'
 
 function App() {
   const [visible, setVisible] = React.useState(false)
@@ -101,8 +101,14 @@ function App() {
   return (
     <main className={appStyles.app}>
       <AppHeader/>
-      <MainPage 
-        modal = {{visible, openModal, closeModal}}/>
+      <Router>
+        <Switch>
+          <Route path="/">
+            <MainPage 
+              modal = {{visible, openModal, closeModal}}/>
+          </Route>
+        </Switch>
+      </Router>
       {visible && modal}
   
     </main>
