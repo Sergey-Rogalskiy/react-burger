@@ -1,8 +1,14 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 70px auto 0;
+}
+
 .row {
   display: flex;
-  /* background-color: brown; */
-  width: 1300px;
-  padding-bottom: 10px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto 0;
 }
 
 .column {

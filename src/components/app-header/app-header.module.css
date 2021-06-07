@@ -1,32 +1,64 @@
-.header {
-  display: flex;
-  flex-direction:row;
-  align-items: center;
-  justify-content: space-between;
+
+
+.container {
   width: 100%;
-  padding: 0 310px;
-  height: 80px;
-  background-color: rgb(27, 27, 31);
-  transition: ease all .5s;
+  max-width: 1200px;
+  margin: 0 auto 0;
+  /* background-color: aqua; */
+  border-bottom: 2px solid white; 
 }
 
-
-.button {
-  display: flex;
-  flex-direction:row;
-  align-items: center;
-  width: 400px;
+/* Header */
+.header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   /* background-color: aqua; */
 }
 
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: chocolate; */
+}
 
-.header span {
-  float: left;
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  color: rgb(135, 113, 216)
+.header__logo {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  /* background-color:blue; */
 }
 
 
+
+/* Nav */
+.nav {
+  font-size: 14px;
+  text-transform: uppercase;
+  align-items: center;
+}
+
+.nav__link {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 15px;
+  position: relative;
+
+  color: #fff;
+  text-decoration: none;
+
+  transition: color .1s linear;
+}
+
+
+.nav__link:hover {
+  color: rgb(135, 113, 216)
+}
+
+.nav__link.active {
+  color: rgb(135, 113, 216)
+}

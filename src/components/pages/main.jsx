@@ -10,7 +10,7 @@ function MainPage(props) {
   
   return (
     <>
-      <div className={s.row}>
+      <div className={s.container}>
         <div className={s.column}>
           <p className="text text_type_main-large">
             Соберите бургер

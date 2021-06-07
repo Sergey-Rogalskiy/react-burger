@@ -2,7 +2,7 @@ import React from 'react'
 import AppHeader from '../app-header/app-header'
 
 
-import appStyles from './app.module.css';
+import s from './app.module.css';
 
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
@@ -112,7 +112,7 @@ function App() {
   //   )
   // }
   return (
-    <main className={appStyles.app}>
+    <>
       <AppHeader/>
       <Router>
         <Switch>
@@ -157,7 +157,7 @@ function App() {
       </Router>
       {visible && modal}
   
-    </main>
+    </>
   );
 }
 

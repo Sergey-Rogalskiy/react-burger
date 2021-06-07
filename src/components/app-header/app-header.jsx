@@ -5,42 +5,50 @@ import {
   ProfileIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import appHeaderStyles from './app-header.module.css'
+import s from './app-header.module.css'
 
 function AppHeader() {
   return (
-    <header className={appHeaderStyles.header}>
-      <div className={`${appHeaderStyles.button}`} >
-        <BurgerIcon type="primary"/>
-        <span>
-          Конструктор
-        </span>
-      </div>
+<>
+    <header className={s.header}>
+      <div className={s.container}>
+        <div className={s.header__inner}>
+            <div className={s.header__logo}>
+              <Logo />
+            </div>
 
-      <div className={appHeaderStyles.button}>
-        <ListIcon type="primary" />
-        <span>
-          Лента заказов
-        </span>
+            <nav className={s.nav}>
+                <a className={s.nav__link} href="#">
+                  <BurgerIcon type="primary"/>
+                  <span>
+                    Конструктор
+                  </span>
+                </a>
+                <a className={s.nav__link} href="#">
+                  <ListIcon type="primary" />
+                  <span>
+                    Лента заказов
+                  </span>
+                </a>
+                <a className={s.nav__link} href="#">
+                    <ProfileIcon type="primary" />
+                    <span>
+                      Личный кабинет
+                    </span>
+                </a>
+            </nav>
+        </div>
       </div>
+    </header>
 
-    <div className={appHeaderStyles.button}>
-      <Logo />
-    </div>
     
-    <div className={appHeaderStyles.button}>
+    <div>
       <span>
       </span>
     </div>
     
-      <div className={appHeaderStyles.button}>
-          <ProfileIcon type="primary" />
-        <span>
-          Личный кабинет
-        </span>
-      </div>
 
-    </header>
+    </>
   );
 }
 
