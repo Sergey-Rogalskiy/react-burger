@@ -9,8 +9,7 @@ import {
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-
-
+import { Link } from "react-router-dom"
 
 import s from './pages.module.css'
 
@@ -26,6 +25,7 @@ function LoginPage() {
     setTimeout(() => inputRef.current.focus(), 0)
     alert('Icon Click Callback')
   }
+  
   return (
     <>
       <div className={s.container}>
@@ -51,8 +51,15 @@ function LoginPage() {
             Войти
         </Button>
 
-        Вы — новый пользователь? Зарегистрироваться
-        Забыли пароль? Восстановить пароль
+        Вы — новый пользователь? 
+        <Link to='/register'>
+          Зарегистрироваться
+        </Link>
+
+        Забыли пароль?
+        <Link to='/forgot-password'>
+          Восстановить пароль
+        </Link> 
       </div>
     </>
   );
