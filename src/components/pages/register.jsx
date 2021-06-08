@@ -1,18 +1,22 @@
 import React from 'react'
 import {
-  Logo, 
-  BurgerIcon, 
-  ListIcon,
-  ProfileIcon,
-  EmailInput,
   Input,
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from "react-router-dom"
+
+import {useDispatch, useSelector} from 'react-redux'
+import {getRegister} from '../../services/actions/registration'
+
 import s from './pages.module.css'
 
 function LoginPage(props) {
+  const dispatch = useDispatch()
+  const registerdData = useSelector(state => state.registration.registerdData)
+  const registerRequest = useSelector(state => state.registration.registerRequest)
+  const registerError = useSelector(state => state.registration.registerError)
+
   
   const [value, setValue] = React.useState({name: '', email: '', password: '', })
   const onChange = e => {
@@ -20,18 +24,21 @@ function LoginPage(props) {
   }
   
   const inputRef = React.useRef(null)
-  const onIconClick = () => {
+  const onRegisterClick = () => {
     setTimeout(() => inputRef.current.focus(), 0)
-    alert('Icon Click Callback')
+    dispatch(getRegister(value))
   }
   
+  if (registerRequest) {
+    return <p>LOADING</p>
+  }
   
   return (
     <>
     <div className={s.container}>
       <div className = {`${s.registration}`}>
 
-    Регистрация
+        Регистрация
 
       <Input
         type={'text'}
@@ -41,7 +48,6 @@ function LoginPage(props) {
         name={'name'}
         error={false}
         ref={inputRef}
-        onIconClick={onIconClick}
         errorText={'Ошибка'}
         size={'default'}
       />
@@ -53,8 +59,6 @@ function LoginPage(props) {
         value={value.email}
         name={'email'}
         error={false}
-        ref={inputRef}
-        onIconClick={onIconClick}
         errorText={'Ошибка'}
         size={'default'}
       />
@@ -64,7 +68,7 @@ function LoginPage(props) {
         value={value.password} 
         name={'password'} />
       
-      <Button type="primary" size="large">
+      <Button type="primary" size="large" onClick={onRegisterClick}>
         Зарегистрироваться
       </Button>
     <p>

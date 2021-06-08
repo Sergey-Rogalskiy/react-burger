@@ -1,37 +1,74 @@
 import React from 'react'
 import {
-  Logo, 
-  BurgerIcon, 
-  ListIcon,
-  ProfileIcon,
-  EmailInput,
   Input,
-  PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
+import { Link, Redirect  } from "react-router-dom"
+
+import {useDispatch, useSelector} from 'react-redux'
+import {getForgotPassword} from '../../services/actions/registration'
+
 import s from './pages.module.css'
 
-function LoginPage(props) {
+const LoginPage = () => {
+  const dispatch = useDispatch()
+  const forgotPasswordData = useSelector(state => state.registration.forgotPasswordData)
+  const forgotPasswordRequest = useSelector(state => state.registration.forgotPasswordRequest)
+  const forgotPasswordError = useSelector(state => state.registration.forgotPasswordError)
   
+
   const [value, setValue] = React.useState({email: '', password: '', })
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
   const inputRef = React.useRef(null)
-  const onIconClick = () => {
+  const onRestoreClick = () => {
     setTimeout(() => inputRef.current.focus(), 0)
-    alert('Icon Click Callback')
+    dispatch(getForgotPassword(
+      {
+        "email": value.email
+      }
+    ))
   }
   
+  if (forgotPasswordRequest) {
+    return (
+    <div className={s.container}>
+    <div className = {`${s.registration}`}>
+      <p>Loading</p>
+    </div>
+  </div>
+    )
+  }
+
+  if (forgotPasswordData) {
+    return (
+      
+    <div className={s.container}>
+      <div className = {`${s.registration}`}>
+      <Redirect to='/reset-password' />
+      </div>
+    </div>
+    )
+  }
+
+  if (forgotPasswordError) {
+    return (
+      <div className={s.container}>
+        <div className = {`${s.registration}`}>
+          <p>alert error {forgotPasswordError}</p>
+        </div>
+      </div>
+      )
+    }
   
   return (
     <>
     <div className={s.container}>
       <div className = {`${s.registration}`}>
 
-    Восстановление пароля
+        Восстановление пароля
 
       <Input
         type={'email'}
@@ -41,15 +78,18 @@ function LoginPage(props) {
         name={'email'}
         error={false}
         ref={inputRef}
-        onIconClick={onIconClick}
         errorText={'Ошибка'}
         size={'default'}
       />
 
-      <Button type="primary" size="large">
-        <Link to='/reset-password'>
+      {(forgotPasswordData?.response?.message)
+          ? <p>
+              {forgotPasswordData.response.message}
+            </p>
+          : ''
+          }
+      <Button type="primary" size="large" onClick={onRestoreClick}>
           Восстановить
-        </Link>
       </Button>
 
       <p>

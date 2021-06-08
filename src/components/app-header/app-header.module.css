@@ -4,8 +4,8 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 0;
-  /* background-color: aqua; */
-  border-bottom: 2px solid white; 
+  background-color: rgb(51, 51, 51);
+  /* border-bottom: 2px solid white;  */
 }
 
 /* Header */

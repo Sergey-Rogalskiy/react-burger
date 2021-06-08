@@ -35,7 +35,7 @@ const IngridientCard = (props) => {
           : ""
         }
       </div>
-      <img src={props.data.image} alt="burger" />
+      <img className={ingridientCardStyles.img} src={props.data.image} alt="burger" />
       <div className={ingridientCardStyles.total}>
         <span className="text text_type_digits-default">
           {props.data.price}

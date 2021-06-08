@@ -15,16 +15,18 @@ import s from './pages.module.css'
 
 function LoginPage() {
   
-  const [value, setValue] = React.useState('bob@example.com')
+  const [value, setValue] = React.useState({email: '', password: '', })
   const onChange = e => {
-    setValue(e.target.value)
+    setValue({...value, [e.target.name]: e.target.value})
   }
   
   const inputRef = React.useRef(null)
-  const onIconClick = () => {
+  const onEnterClick = () => {
+    console.log('fafaf')
     setTimeout(() => inputRef.current.focus(), 0)
     alert('Icon Click Callback')
   }
+  
   
   return (
     <>
@@ -35,20 +37,25 @@ function LoginPage() {
 
         <Input
           type={'text'}
-          placeholder={'placeholder'}
+          placeholder={'E-mail'}
           onChange={e => setValue(e.target.value)}
-          value={value}
-          name={'name'}
+          value={value.name}
+          name={'email'}
           error={false}
           ref={inputRef}
-          onIconClick={onIconClick}
           errorText={'Ошибка'}
           size={'default'}
         />
 
-        <PasswordInput onChange={onChange} value={value} name={'password'} />
+        <PasswordInput 
+          onChange={onChange} 
+          value={value.value} 
+          name={'password'} />
         
-        <Button type="primary" size="large">
+        <Button 
+          type="primary" 
+          size="large" 
+          onCLick={onEnterClick}>
             Войти
         </Button>
 

@@ -23,7 +23,7 @@ function AppHeader() {
                     Конструктор
                   </span>
                 </Link>
-                <Link className={s.nav__link} to="/order">
+                <Link className={s.nav__link} to="/feed">
                   <ListIcon type="primary" />
                   <span>
                     Лента заказов

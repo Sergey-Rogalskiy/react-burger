@@ -36,11 +36,6 @@ function App() {
   const [visible, setVisible] = React.useState(false)
 
   const dispatch = useDispatch()
-
-
-
-
-
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
