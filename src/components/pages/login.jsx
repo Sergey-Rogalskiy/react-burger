@@ -28,7 +28,8 @@ function LoginPage() {
   
   return (
     <>
-      <div className={s.container}>
+    <div className = {`${s.container} `}>
+      <div className = {`${s.registration}`}>
 
         Вход
 
@@ -51,15 +52,20 @@ function LoginPage() {
             Войти
         </Button>
 
-        Вы — новый пользователь? 
-        <Link to='/register'>
+        <p>
+          Вы — новый пользователь? 
+          <Link to='/register'>
           Зарегистрироваться
-        </Link>
-
-        Забыли пароль?
-        <Link to='/forgot-password'>
-          Восстановить пароль
-        </Link> 
+          </Link>
+        </p>
+        
+        <p>
+          Забыли пароль?
+          <Link to='/forgot-password'>
+            Восстановить пароль
+          </Link> 
+        </p>
+      </div>
       </div>
     </>
   );

@@ -28,8 +28,8 @@ function LoginPage(props) {
   
   return (
     <>
-    console.log(value)
     <div className={s.container}>
+      <div className = {`${s.registration}`}>
 
     Регистрация
 
@@ -65,18 +65,15 @@ function LoginPage(props) {
         name={'password'} />
       
       <Button type="primary" size="large">
-          Войти
-      </Button>
-
-      Вы — новый пользователь? 
-      <Link to='/register'>
         Зарегистрироваться
+      </Button>
+    <p>
+      Уже зарегистрированы? 
+      <Link to='/login'>
+         Войти
       </Link>
-
-      Забыли пароль?
-      <Link to='/forgot-password'>
-        Восстановить пароль
-      </Link> 
+    </p>
+    </div>
     </div>
     
     </>

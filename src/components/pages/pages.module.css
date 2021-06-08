@@ -1,7 +1,31 @@
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 70px auto 0;
+}
+
+.registration div {
+  margin: 10px;
+}
+
+.registration {
+  width: 480px;
+  margin: auto;
+  text-align: center;
+}
+.registration div{
+  width: 100%;
+}
+.registration div div *{
+  width: 100%;
+}
+.registration div div div{
+  width: 10%;
 }
 
 .row {

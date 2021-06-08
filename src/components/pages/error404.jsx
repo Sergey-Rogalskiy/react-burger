@@ -5,7 +5,7 @@ function LoginPage(props) {
   return (
     <>
     <div className={s.container}>
-      Login
+      404
       </div>
     </>
   );

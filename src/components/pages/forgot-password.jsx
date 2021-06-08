@@ -14,9 +14,9 @@ import s from './pages.module.css'
 
 function LoginPage(props) {
   
-  const [value, setValue] = React.useState('bob@example.com')
+  const [value, setValue] = React.useState({email: '', password: '', })
   const onChange = e => {
-    setValue(e.target.value)
+    setValue({...value, [e.target.name]: e.target.value})
   }
   
   const inputRef = React.useRef(null)
@@ -29,15 +29,16 @@ function LoginPage(props) {
   return (
     <>
     <div className={s.container}>
+      <div className = {`${s.registration}`}>
 
-      забыли пароль
+    Восстановление пароля
 
       <Input
-        type={'text'}
-        placeholder={'placeholder'}
-        onChange={e => setValue(e.target.value)}
-        value={value}
-        name={'name'}
+        type={'email'}
+        placeholder={'Укажите e-mail'}
+        onChange={onChange}
+        value={value.email}
+        name={'email'}
         error={false}
         ref={inputRef}
         onIconClick={onIconClick}
@@ -45,22 +46,22 @@ function LoginPage(props) {
         size={'default'}
       />
 
-      <PasswordInput onChange={onChange} value={value} name={'password'} />
-      
       <Button type="primary" size="large">
-          Войти
+        <Link to='/reset-password'>
+          Восстановить
+        </Link>
       </Button>
 
-      Вы — новый пользователь? 
-      <Link to='/register'>
-        Зарегистрироваться
-      </Link>
+      <p>
+        Вспомнили пароль?
+        <Link to='/login'>
+          Войти
+        </Link>
 
-      Забыли пароль?
-      <Link to='/forgot-password'>
-        Восстановить пароль
-      </Link> 
+      </p>
     </div>
+    </div>
+    
     </>
   );
 }
