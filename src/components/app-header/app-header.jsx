@@ -4,6 +4,7 @@ import {
   ListIcon,
   ProfileIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Link } from "react-router-dom"
 
 import s from './app-header.module.css'
 
@@ -13,30 +14,39 @@ function AppHeader() {
     <header className={s.header}>
       <div className={s.container}>
         <div className={s.header__inner}>
-            <div className={s.header__logo}>
-              <Logo />
-            </div>
 
+          <div>
             <nav className={s.nav}>
-                <a className={s.nav__link} href="#">
+            <Link className={s.nav__link} to=".">
                   <BurgerIcon type="primary"/>
                   <span>
                     Конструктор
                   </span>
-                </a>
-                <a className={s.nav__link} href="#">
+                </Link>
+                <Link className={s.nav__link} to="/order">
                   <ListIcon type="primary" />
                   <span>
                     Лента заказов
                   </span>
-                </a>
-                <a className={s.nav__link} href="#">
+                </Link>
+            </nav>
+          </div>
+
+          <div className={s.header__logo}>
+            <Logo />
+          </div>
+
+          <div>
+            <nav className={s.nav}>
+                <Link className={s.nav__link} to="/login">
                     <ProfileIcon type="primary" />
                     <span>
                       Личный кабинет
                     </span>
-                </a>
+                </Link>
             </nav>
+          </div>
+
         </div>
       </div>
     </header>
