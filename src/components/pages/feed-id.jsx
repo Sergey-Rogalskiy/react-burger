@@ -30,25 +30,29 @@ export default function FeedIdPage() {
   return (
     <>
       <div className={s.container}>
-          <div className={s.flex_row}>
-            <p>#{data._id}</p>
-            <p>{data.time}</p>
-          </div>
+        <p>#{data._id}</p>
         <p>{data.name}</p>
+        <p>{data.idDone ? 'Выполнен' : 'Готовится'}</p>
         
-        <div className={s.flex_row}>
-          <div className={s.flex_row}>
+        <ul>
             
             {
               data.ingridients.map((item, index) => (
-                <>
-                  <img className={s.img} src={item.image} alt="-" />
-                </>
+                <div className={s.flex_row}>
+                  <div>
+                    <img className={s.img} src={item.image} alt="-" />
+                    <span>{item.name}</span>
+                  </div>
+                  <p>{item.type ==='bun'? '2' : '1'} x {item.price} SB</p>
+                </div>
               ))
             }
+        </ul>
+        
+        <div className={s.flex_row}>
+            <p>{data.time}</p>
+            <p>{data.price} SB</p>
           </div>
-          <p>{data.price} SB</p>
-        </div>
       </div>
     </>
   );
