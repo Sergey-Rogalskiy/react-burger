@@ -38,7 +38,7 @@ function AppHeader() {
 
           <div>
             <nav className={s.nav}>
-                <Link className={s.nav__link} to="/login">
+                <Link className={s.nav__link} to="/profile">
                     <ProfileIcon type="primary" />
                     <span>
                       Личный кабинет

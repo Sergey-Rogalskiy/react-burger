@@ -69,3 +69,11 @@ a {
   margin: 70px auto 0;
 }
 
+.flex_column {
+  /* background-color: burlywood; */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+}

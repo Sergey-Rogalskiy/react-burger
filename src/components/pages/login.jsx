@@ -22,7 +22,6 @@ function LoginPage() {
   
   const inputRef = React.useRef(null)
   const onEnterClick = () => {
-    console.log('fafaf')
     setTimeout(() => inputRef.current.focus(), 0)
     alert('Icon Click Callback')
   }

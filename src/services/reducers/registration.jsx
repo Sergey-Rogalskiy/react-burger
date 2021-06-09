@@ -22,6 +22,8 @@ import {
     registerData: null,
     registerRequest: false,
     registerFailed: false,
+
+    user: {name: 'Mario', password: 'venice', email: 'ilovepeach@redflag.dendi' },
   };
   
   export const registrationReducer = (state = initialState, action) => {
