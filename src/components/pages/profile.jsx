@@ -16,6 +16,11 @@ import {
   CookingDoneBoard
 } from '../order-feed/index'
 
+import {ProdileEdit} from '../profile'
+
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import s from './pages.module.css'
 
 export default function ProfilePage() {
@@ -51,42 +56,18 @@ export default function ProfilePage() {
         </div>
 
         <div className={`${s.column} ${s.right}`}>
-        <Input
-          type={'text'}
-          placeholder={'Имя'}
-          onChange={e => onChange(e)}
-          icon={'EditIcon'}
-          value={value.name}
-          name={'name'}
-          error={false}
-          onIconClick={e=>{console.log(e)} }
-          errorText={'Ошибка'}
-          size={'default'} />
-
-        <Input
-          type={'text'}
-          placeholder={'E-mail'}
-          onChange={e => onChange(e)}
-          icon={'EditIcon'}
-          value={value.email}
-          name={'email'}
-          error={false}
-          onIconClick={e=>{console.log(e)} }
-          errorText={'Ошибка'}
-          size={'default'} />
-
-        <Input
-          type={'text'}
-          placeholder={'Пароль'}
-          onChange={e => onChange(e)}
-          icon={'EditIcon'}
-          value={value.password}
-          name={'password'}
-          error={false}
-          onIconClick={e=>{console.log(e)} }
-          errorText={'Ошибка'}
-          size={'default'} />
-
+          
+            <Switch>
+              <Route path="/profile" exact>
+                <ProdileEdit />
+              </Route>
+              <Route path="/profile/orders" exact>
+               <OrderFeed listType='profile'/>  
+              </Route>
+              <Route>
+                Watt?
+              </Route>
+            </Switch>
         </div>
       </div>
     </>

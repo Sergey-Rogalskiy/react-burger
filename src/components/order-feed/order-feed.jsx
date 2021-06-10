@@ -8,13 +8,14 @@ import { useSelector, useDispatch  } from 'react-redux'
 import {getItems} from "../../services/actions/ingridients"
 
 import {Element} from "./element/element"
-import {useHistory} from 'react-router-dom'
+import {useHistory, useLocation, useRouteMatch } from 'react-router-dom'
 
 import s from './order-feed.module.css'
 
-export const OrderFeed = () => {
+export const OrderFeed = (props) => {
+  const {path} = useRouteMatch();
   const history = useHistory();
-  console.log(history)
+  const location = useLocation();
   const dispatch = useDispatch()
   const feedData = useSelector(state => state.feed.feedData)
   const feedRequest = useSelector(state => state.feed.feedRequest)
@@ -37,7 +38,7 @@ export const OrderFeed = () => {
             {
             feedData.map((item, index) => (
               <div onClick={(index) => {
-                history.push(`/feed/${item._id}`)
+                history.push(`${path}/${item._id}`)
                 }}>
                 <Element 
                 key={index} 

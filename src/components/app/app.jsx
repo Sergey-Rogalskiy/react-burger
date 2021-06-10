@@ -133,14 +133,11 @@ function App() {
           <Route path="/feed/:id" exact>
             <FeedIdPage />
           </Route>
-          <Route path="/profile" exact>
-            <ProfilePage />
-          </Route>
-          <Route path="/profile/orders" exact>
-            <ProfileOrdersPage />
-          </Route>
           <Route path="/profile/orders/:id" exact>
-            <ProfileOrdersIdPage />
+            <FeedIdPage />
+          </Route>
+          <Route path="/profile" >
+            <ProfilePage />
           </Route>
           <Route path="/ingredients/:id" exact>
             <IngridientsIdPage />

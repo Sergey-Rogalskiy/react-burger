@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 import {useDispatch, useSelector} from 'react-redux'
 import {getRegister} from '../../services/actions/registration'
 
-import {useHistory, useLocation} from 'react-router-dom'
+import {useHistory, useLocation, useParams } from 'react-router-dom'
 
 import {
   OrderFeed,
@@ -21,11 +21,12 @@ import s from './pages.module.css'
 export default function FeedIdPage() {
   const history = useHistory();
   // console.log(history)
-  const lcoation = useLocation();
-  console.log(lcoation)
+  const location = useLocation();
+  // console.log(location)
+  const param = useParams();
 
   const dispatch = useDispatch()
-  const data = useSelector(state => state.feed.feedData)[0]
+  const data = useSelector(state => state.feed.feedData)[param.id-1]
   
   return (
     <>
