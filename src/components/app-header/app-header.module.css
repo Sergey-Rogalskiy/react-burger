@@ -1,10 +1,13 @@
 
 
-.container {
+.header__inner {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto 0;
   background-color: rgb(51, 51, 51);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   /* border-bottom: 2px solid white;  */
 }
 
@@ -17,13 +20,6 @@
   right: 0;
   z-index: 1000;
   /* background-color: aqua; */
-}
-
-.header__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* background-color: chocolate; */
 }
 
 .header__logo {
@@ -39,14 +35,15 @@
 .nav {
   font-size: 14px;
   text-transform: uppercase;
-  align-items: center;
+  display: flex;
 }
 
 .nav__link {
   display: inline-block;
   vertical-align: top;
   margin: 0 15px;
-  position: relative;
+  display: flex;
+  align-items: center;
 
   color: #fff;
   text-decoration: none;
