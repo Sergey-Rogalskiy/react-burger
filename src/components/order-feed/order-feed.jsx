@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  Tab
+  Tab,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
 

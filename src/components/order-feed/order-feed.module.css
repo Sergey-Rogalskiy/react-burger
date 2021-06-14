@@ -1,8 +1,10 @@
 
 .overflow {
-  overflow: auto;
-  height: 100%;
+  overflow-y: scroll;
+  height: 80%;
+  max-height: 80vh;
 }
+
 
 
 ::-webkit-scrollbar {
@@ -11,7 +13,7 @@
 }
 
 ::-webkit-scrollbar-track {
-	background: #2F2F37;
+	/* background: #1b1bb8; */
 }
   
 ::-webkit-scrollbar-thumb {
@@ -25,11 +27,15 @@
 }
 
 .card {
-  background-color: rgb(51, 51, 51);
+  background-color: #1C1C21;
   border-radius: 10%;
   padding: 10px;
   display: block;
   width: auto;
+}
+.card:hover {
+  box-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);;
+  
 }
 
 .card p {
@@ -44,6 +50,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  flex-direction:row;
 }
 
 .img {
@@ -57,6 +64,58 @@
   width: 50%;
 }
 
-.container {
-  
+
+
+.images{
+    display: flex;
+}
+.round {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #4C4CFF;
+    width: 64px;
+    height: 64px;
+    background: #131316;
+    border-radius: 100%;
+}
+.round:first-child{
+    z-index: 5;
+}
+.round:nth-child(2){
+    left: -25px;
+    z-index:4;
+}
+.round:nth-child(3){
+    left: -50px;
+    z-index:3;
+}
+.round:nth-child(4){
+    left: -75px;
+    z-index:2;
+}
+.round:nth-child(5){
+    left: -100px;
+    z-index:1;
+}
+.round img{
+    width: 100%;
+    height: auto;
+}
+
+.flex_center {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.done_clr {
+  color:#00CCCC;
+}
+
+.shinny_clr {
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
 }

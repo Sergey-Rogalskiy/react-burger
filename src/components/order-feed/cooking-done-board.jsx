@@ -16,43 +16,38 @@ export const CookingDoneBoard = (props) => {
   // }, [dispatch])
 
   return (
-    <>
-			<div className={s.overflow} >
-				<div className={s.flex_row}>
-					<div className={s.done}>
-							<h3>Готовы:</h3>
-							<ul>
-								{
-										doneOrders.map((item)=>(
-												<li>{item}</li>
-
-										))
-								}
-							</ul>
-					</div>
-					<div className={s.done}>
-							<h3>В работе:</h3>
-							<ul>
-								{
-										cookingOrders.map((item)=>(
-												<li>{item}</li>
-
-										))
-								}
-							</ul>
-							
-              </div>
-          </div>
-          <div>
-            <h3>Выполнено за все время:</h3>
-            <p>{totalOrders}</p>
-          </div>
-          <div>
-            <h3>Выполнено за сегодня:</h3>
-            <p>{todayOrders}</p>
-          </div>
-      </div>
-    </>
+<div className={`${s.overflow} p-3`} >
+	<div className={`${s.flex_row}`}>
+		<div className={`${s.done}`}>
+			<h3 className="text text_type_main-medium mb-6">Готовы:</h3>
+			<ul>
+				{
+					doneOrders.map((item)=>(
+						<li className={`${s.done_clr} text text_type_digits-default mb-2`}>{item}</li>
+					))
+				}
+			</ul>
+		</div>
+		<div className={s.done}>
+			<h3 className="text text_type_main-medium mb-6">В работе:</h3>
+			<ul>
+				{
+					cookingOrders.map((item)=>(
+						<li className="text text_type_digits-default mb-2">{item}</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+	<div>
+		<h3 className="text text_type_main-medium">Выполнено за все время:</h3>
+		<p className={`${s.shinny_clr} text text_type_digits-large`}>{totalOrders}</p>
+	</div>
+	<div>
+		<h3 className="text text_type_main-medium">Выполнено за сегодня:</h3>
+		<p className={`${s.shinny_clr} text text_type_digits-large`}>{todayOrders}</p>
+	</div>
+</div>
   );
 }
 

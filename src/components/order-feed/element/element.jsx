@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import {
-  Tab
+  Tab,
+  CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types';
 
@@ -21,26 +22,30 @@ export const Element = (props) => {
     <>
       <li key={props.key} 
         className={s.card}>
-          <div className={s.flex_row}>
-            <p>#{props.data._id}</p>
-            <p>{props.data.time}</p>
-          </div>
-        <p>{props.data.name}</p>
+        <div className={s.flex_row}>
+          <p className="text text_type_digits-default pt-3">#{props.data._id}</p>
+          <p className="text text_type_main-default text_color_inactive pt-3">{props.data.time}</p>
+        </div>
+        <p className="text text_type_main-medium pt-3">{props.data.name}</p>
         
         <div className={s.flex_row}>
-          <div className={s.flex_row}>
-            
-            {
-              props.data.ingridients.map((item, index) => (
-                <>
-                  <img className={s.img} src={item.image} alt="-" />
-                </>
-              ))
-            }
-          </div>
-          <p>{props.data.price} SB</p>
+            <div className={s.images}>
+              {
+                props.data.ingridients.map((item, index) => (
+                  <>
+                  <div className={s.round}>
+                    <img className={s.img} src={item.image} alt="-" />
+                  </div></>
+                ))
+              }
+            </div>
+            <div className={s.flex_center}>
+              <span className="text text_type_main-medium p-2">
+                {props.data.price}
+              </span> 
+              <CurrencyIcon type="primary" />
+            </div>
         </div>
-      
       </li>
     </>
   );
