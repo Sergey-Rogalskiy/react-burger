@@ -32,7 +32,9 @@ function LoginPage() {
     <div className = {`${s.container} `}>
       <div className = {`${s.registration}`}>
 
+       <p className="text text_type_main-medium m-3 mt-15">
         Вход
+       </p>
 
         <Input
           type={'text'}
@@ -58,16 +60,16 @@ function LoginPage() {
             Войти
         </Button>
 
-        <p>
+        <p className="text text_type_main-default text_color_inactive m-3 mt-15">
           Вы — новый пользователь? 
-          <Link to='/register'>
-          Зарегистрироваться
+          <Link to='/register' className={s.link}>
+            Зарегистрироваться
           </Link>
         </p>
         
-        <p>
-          Забыли пароль?
-          <Link to='/forgot-password'>
+        <p className="text text_type_main-default text_color_inactive m-3">
+          Забыли пароль? 
+          <Link to='/forgot-password' className={s.link}>
             Восстановить пароль
           </Link> 
         </p>

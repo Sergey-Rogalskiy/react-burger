@@ -42,17 +42,35 @@ export default function ProfilePage() {
       <div className={s.container}>
         <div className={s.column}>
           <p className="text text_type_main-large">
-            Лента заказов
           </p>
         </div>
       </div>
 
       <div className={`${s.row}`}>
-        <div className={`${s.column} ${s.left} ${s.flex_column}`}>
-          <Link to='/profile'>Профиль</Link>
-          <Link to='/profile/orders'>История Заказов</Link>
-          <Link to='/login'>Выход</Link>
-          <p className={s.caption}>В этом разделе вы можете изменить свои персональные данные</p>
+        <div className={`${s.column} ${s.left} ${s.flex_column} ml-10`}>
+          
+          <Link 
+            to='/profile' 
+            className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}
+            activeClassName="text text_type_main-medium m-3">
+              Профиль
+          </Link>
+          <Link 
+            to='/profile/orders' 
+            className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}
+           activeClassName="text text_type_main-medium m-3">
+              История Заказов
+          </Link>
+          <Link 
+          to='/login' 
+          className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}
+           activeClassName="text text_type_main-medium m-3">
+            Выход
+          </Link>
+          <p 
+            className="text text_type_main-default text_color_inactive m-3">
+              В этом разделе вы можете изменить свои персональные данные
+          </p>
         </div>
 
         <div className={`${s.column} ${s.right}`}>

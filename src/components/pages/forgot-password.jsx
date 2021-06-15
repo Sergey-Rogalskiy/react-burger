@@ -68,7 +68,10 @@ const LoginPage = () => {
     <div className={s.container}>
       <div className = {`${s.registration}`}>
 
+      <p className="text text_type_main-medium m-3 mt-15">
         Восстановление пароля
+      </p>
+        
 
       <Input
         type={'email'}
@@ -92,9 +95,9 @@ const LoginPage = () => {
           Восстановить
       </Button>
 
-      <p>
+      <p className="text text_type_main-default text_color_inactive m-3 mt-15">
         Вспомнили пароль?
-        <Link to='/login'>
+        <Link to='/login'  className={s.link}>
           Войти
         </Link>
 

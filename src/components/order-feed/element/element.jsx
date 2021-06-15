@@ -21,7 +21,7 @@ export const Element = (props) => {
   return (
     <>
       <li key={props.key} 
-        className={s.card}>
+        className={`${s.card} m-1`}>
         <div className={s.flex_row}>
           <p className="text text_type_digits-default pt-3">#{props.data._id}</p>
           <p className="text text_type_main-default text_color_inactive pt-3">{props.data.time}</p>
@@ -33,9 +33,9 @@ export const Element = (props) => {
               {
                 props.data.ingridients.map((item, index) => (
                   <>
-                  <div className={s.round}>
+                  <li className={`${s.round}`}>
                     <img className={s.img} src={item.image} alt="-" />
-                  </div></>
+                  </li></>
                 ))
               }
             </div>

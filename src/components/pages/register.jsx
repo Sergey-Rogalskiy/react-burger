@@ -38,7 +38,9 @@ function LoginPage(props) {
     <div className={s.container}>
       <div className = {`${s.registration}`}>
 
+      <p className="text text_type_main-medium m-3 mt-15">
         Регистрация
+        </p>
 
       <Input
         type={'text'}
@@ -71,9 +73,9 @@ function LoginPage(props) {
       <Button type="primary" size="large" onClick={onRegisterClick}>
         Зарегистрироваться
       </Button>
-    <p>
+    <p className="text text_type_main-default text_color_inactive m-3 mt-15">
       Уже зарегистрированы? 
-      <Link to='/login'>
+      <Link to='/login' className={s.link}>
          Войти
       </Link>
     </p>

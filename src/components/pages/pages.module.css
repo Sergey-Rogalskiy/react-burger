@@ -78,7 +78,7 @@ a {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
 }
 
@@ -98,4 +98,17 @@ a {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.link {
+  color: #4C4CFF;
+  margin-left: 5px
+}
+
+
+.sidebar__link {
+  transition: color .1s linear;
+}
+.sidebar__link:hover {
+  color: #F2F2F3;
 }

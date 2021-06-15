@@ -11,11 +11,11 @@ function AppHeader() {
         <nav className={s.nav}>
             <NavLink className={s.nav__link} activeClassName={s.active} to="." exact>
               <BurgerIcon type={(pathname === "/") ? "primary" : "secondary"} />
-              <span>Конструктор</span>
+              <span className='p-2'>Конструктор</span>
             </NavLink>
             <NavLink className={s.nav__link} activeClassName={s.active} to="/feed">
               <ListIcon type={(pathname === "/feed") ? "primary" : "secondary"}  />
-              <span>Лента заказов</span>
+              <span className='p-2'>Лента заказов</span>
             </NavLink>
         </nav>
 
@@ -26,7 +26,7 @@ function AppHeader() {
           <nav className={s.nav}>
               <NavLink className={s.nav__link} activeClassName={s.active} to="/profile">
                   <ProfileIcon type={(pathname === "/profile") ?  "primary" : "secondary"}  />
-                  <span>
+                  <span className='p-2'>
                     Личный кабинет
                   </span>
               </NavLink>
