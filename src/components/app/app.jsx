@@ -92,7 +92,6 @@ function App() {
     </Modal>
   );
 
-
   // if (ingridientData.loading) {
   //   return (
   //     <Loader />
