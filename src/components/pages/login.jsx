@@ -1,10 +1,5 @@
 import React from 'react'
 import {
-  Logo, 
-  BurgerIcon, 
-  ListIcon,
-  ProfileIcon,
-  EmailInput,
   Input,
   PasswordInput,
   Button

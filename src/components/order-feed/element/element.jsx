@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
+
 import {
-  Tab,
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types';
-
-import { useSelector, useDispatch  } from 'react-redux'
 
 import s from '../order-feed.module.css'
 
@@ -20,7 +16,7 @@ export const Element = (props) => {
 
   return (
     <>
-      <li key={props.key} 
+      <li 
         className={`${s.card} m-1`}>
         <div className={s.flex_row}>
           <p className="text text_type_digits-default pt-3">#{props.data._id}</p>
@@ -29,16 +25,15 @@ export const Element = (props) => {
         <p className="text text_type_main-medium pt-3">{props.data.name}</p>
         
         <div className={s.flex_row}>
-            <div className={s.images}>
+            <ul className={s.images}>
               {
                 props.data.ingridients.map((item, index) => (
-                  <>
-                  <li className={`${s.round}`}>
+                  <li  key={index} className={`${s.round}`}>
                     <img className={s.img} src={item.image} alt="-" />
-                  </li></>
+                  </li>
                 ))
               }
-            </div>
+            </ul>
             <div className={s.flex_center}>
               <span className="text text_type_main-medium p-2">
                 {props.data.price}

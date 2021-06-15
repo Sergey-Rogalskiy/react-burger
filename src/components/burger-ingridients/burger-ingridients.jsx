@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch  } from 'react-redux'
 import {getItems} from "../../services/actions/ingridients"
-import {OrderFeed} from '../order-feed/order-feed'
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 

@@ -1,5 +1,4 @@
-import { useSelector, useDispatch  } from 'react-redux'
-import {getItems} from "../../services/actions/ingridients"
+import { useSelector  } from 'react-redux'
 
 import s from './order-feed.module.css'
 
@@ -9,7 +8,6 @@ export const CookingDoneBoard = (props) => {
 	const cookingOrders = useSelector(state => state.feed.cookingOrders)
   const totalOrders = useSelector(state => state.feed.totalOrders)
   const todayOrders = useSelector(state => state.feed.todayOrders)
-  const dispatch = useDispatch()
 
   // useEffect(() => {
   //   dispatch(getItems())
@@ -22,8 +20,8 @@ export const CookingDoneBoard = (props) => {
 			<h3 className="text text_type_main-medium mb-6">Готовы:</h3>
 			<ul>
 				{
-					doneOrders.map((item)=>(
-						<li className={`${s.done_clr} text text_type_digits-default mb-2`}>{item}</li>
+					doneOrders.map((item, index)=>(
+						<li key={index} className={`${s.done_clr} text text_type_digits-default mb-2`}>{item}</li>
 					))
 				}
 			</ul>
@@ -32,8 +30,8 @@ export const CookingDoneBoard = (props) => {
 			<h3 className="text text_type_main-medium mb-6">В работе:</h3>
 			<ul>
 				{
-					cookingOrders.map((item)=>(
-						<li className="text text_type_digits-default mb-2">{item}</li>
+					cookingOrders.map((item, index)=>(
+						<li key={index} className="text text_type_digits-default mb-2">{item}</li>
 					))
 				}
 			</ul>

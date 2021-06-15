@@ -1,9 +1,6 @@
 import React from 'react'
 import AppHeader from '../app-header/app-header'
 
-
-import s from './app.module.css';
-
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
@@ -26,8 +23,6 @@ import {
   FeedPage,
   FeedIdPage,
   ProfilePage,
-  ProfileOrdersPage,
-  ProfileOrdersIdPage,
   IngridientsIdPage,
   MainPage,
 } from '../pages'
@@ -49,7 +44,6 @@ function App() {
         let data11 = {
           ingredients: dataIds
         }
-        console.log()
         dispatch(getOrder(data11))
       }
       
@@ -100,7 +94,6 @@ function App() {
   // if (ingridientData.error) {
   //   return (
   //     <>
-  //       {console.log(ingridientData.error)}
   //       <ErrorIndicator />
   //     </>
   //   )

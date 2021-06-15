@@ -17,10 +17,6 @@ export default function ResetPage() {
   const resetPasswordRequest = useSelector(state => state.registration.resetPasswordRequest)
   const resetPasswordFailed = useSelector(state => state.registration.resetPasswordFailed)
   
-  console.log(resetPasswordData)
-  console.log(resetPasswordRequest)
-  console.log(resetPasswordFailed)
-  
   const [value, setValue] = React.useState({token: '', password: '', })
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})

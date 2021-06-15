@@ -1,22 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Input,
-  PasswordInput,
-  Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { useSelector, useDispatch  } from 'react-redux'
-import {getItems} from "../../services/actions/ingridients"
+import { useSelector  } from 'react-redux'
 
-import {useHistory} from 'react-router-dom'
 
-import s from './profile.module.css'
 
 export const ProdileEdit = () => {
-  const history = useHistory();
-  console.log(history)
-  const dispatch = useDispatch()
-  const feedData = useSelector(state => state.feed.feedData)
 
   const data = useSelector(state => state.registration.user)
   
@@ -25,9 +16,6 @@ export const ProdileEdit = () => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
-  const onClick = () => {
-
-  }
   // useEffect(() => {
   //   dispatch(getItems())
   // }, [dispatch])
@@ -42,7 +30,6 @@ export const ProdileEdit = () => {
       value={value.name}
       name={'name'}
       error={false}
-      onIconClick={e=>{console.log(e)} }
       errorText={'Ошибка'}
       size={'default'} />
 
@@ -54,7 +41,6 @@ export const ProdileEdit = () => {
       value={value.email}
       name={'email'}
       error={false}
-      onIconClick={e=>{console.log(e)} }
       errorText={'Ошибка'}
       size={'default'} />
 
@@ -66,7 +52,6 @@ export const ProdileEdit = () => {
       value={value.password}
       name={'password'}
       error={false}
-      onIconClick={e=>{console.log(e)} }
       errorText={'Ошибка'}
       size={'default'} />
     </>

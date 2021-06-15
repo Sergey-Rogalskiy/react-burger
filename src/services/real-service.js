@@ -1,8 +1,39 @@
 
 
+import { getCookie } from './utils';
+
 const _apiBase = 'https://norma.nomoreparties.space/api'
 // _imageBase = 'https://norma.nomoreparties.space/static/pics/';
 
+
+export const loginRequest = async form => {
+  return await fetch('https://norma.nomoreparties.space/login', {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(form)
+  });
+};
+
+export const getUserRequest = async () =>
+  await fetch('https://norma.nomoreparties.space/user', {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + getCookie('token')
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer'
+  });
 
 
 
@@ -54,8 +85,6 @@ const postResourceRaw = async (url, data={}) => {
     `${_apiBase}${url}`, 
     addData
   )
-  console.log(data)
-  console.log(res)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` +
       `, received ${res.status}`)

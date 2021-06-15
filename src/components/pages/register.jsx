@@ -11,11 +11,9 @@ import {getRegister} from '../../services/actions/registration'
 
 import s from './pages.module.css'
 
-function LoginPage(props) {
+function LoginPage() {
   const dispatch = useDispatch()
-  const registerdData = useSelector(state => state.registration.registerdData)
   const registerRequest = useSelector(state => state.registration.registerRequest)
-  const registerError = useSelector(state => state.registration.registerError)
 
   
   const [value, setValue] = React.useState({name: '', email: '', password: '', })

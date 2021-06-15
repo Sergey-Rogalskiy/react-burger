@@ -1,41 +1,17 @@
-import React from 'react'
-import {
-  Input,
-  PasswordInput,
-  Button
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
 
-import {useDispatch, useSelector} from 'react-redux'
-import {getRegister} from '../../services/actions/registration'
-
-import {useHistory, useLocation} from 'react-router-dom'
 
 import {
   OrderFeed,
-  CookingDoneBoard
 } from '../order-feed/index'
 
 import {ProdileEdit} from '../profile'
 
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {  Switch, Route,NavLink  } from 'react-router-dom';
 
 import s from './pages.module.css'
 
 export default function ProfilePage() {
-  const history = useHistory();
-  // console.log(history)
-  const lcoation = useLocation();
-  console.log(lcoation)
-
-  const dispatch = useDispatch()
-  const data = useSelector(state => state.registration.user)
-  
-  const [value, setValue] = React.useState(data)
-  const onChange = e => {
-    setValue({...value, [e.target.name]: e.target.value})
-  }
   
   return (
     <>
@@ -49,24 +25,24 @@ export default function ProfilePage() {
       <div className={`${s.row}`}>
         <div className={`${s.column} ${s.left} ${s.flex_column} ml-10`}>
           
-          <Link 
+          <NavLink  exact
             to='/profile' 
             className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}
-            activeClassName="text text_type_main-medium m-3">
+            activeClassName={s.active}>
               Профиль
-          </Link>
-          <Link 
+          </NavLink >
+          <NavLink  
             to='/profile/orders' 
             className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}
-           activeClassName="text text_type_main-medium m-3">
+            activeClassName={s.active}>
               История Заказов
-          </Link>
-          <Link 
+          </NavLink >
+          <NavLink  
           to='/login' 
           className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}
-           activeClassName="text text_type_main-medium m-3">
+           activeClassName={s.active}>
             Выход
-          </Link>
+          </NavLink >
           <p 
             className="text text_type_main-default text_color_inactive m-3">
               В этом разделе вы можете изменить свои персональные данные

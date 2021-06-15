@@ -1,33 +1,21 @@
-import React from 'react'
 import {
-  Input,
-  PasswordInput,
-  Button,
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
 
-import {useDispatch, useSelector} from 'react-redux'
-import {getRegister} from '../../services/actions/registration'
+import {useSelector} from 'react-redux'
 
-import {useHistory, useLocation, useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 
-import {
-  OrderFeed,
-  CookingDoneBoard
-} from '../order-feed/index'
 
 import s from './pages.module.css'
 
 export default function FeedIdPage() {
-  const history = useHistory();
-  // console.log(history)
-  const location = useLocation();
-  // console.log(location)
   const param = useParams();
 
-  const dispatch = useDispatch()
   const data = useSelector(state => state.feed.feedData)[param.id-1]
+  if (!data && data === undefined) {
+    return <Redirect to='/404' />
+  }
   
   return (
     <>
@@ -44,7 +32,7 @@ export default function FeedIdPage() {
             
             {
               data.ingridients.map((item, index) => (
-                <li className={s.flex_row}>
+                <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>
                     <img className={s.img} src={item.image} alt="-" />
                     <span className='p-3'>{item.name}</span>

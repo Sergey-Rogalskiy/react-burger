@@ -112,3 +112,7 @@ a {
 .sidebar__link:hover {
   color: #F2F2F3;
 }
+
+.active {
+  color: #F2F2F3;
+}
