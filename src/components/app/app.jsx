@@ -1,9 +1,8 @@
 import React from 'react'
 import AppHeader from '../app-header/app-header'
-import MainPage from '../pages/main-page'
 
 
-import appStyles from './app.module.css';
+import s from './app.module.css';
 
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
@@ -15,19 +14,28 @@ import {
 } from '../../services/actions/constructor'
 import {
   setCurrentItemToView,
-  
 } from '../../services/actions/ingridients'
 
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  Error404,
+  LoginPage,
+  RegisterPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+  FeedPage,
+  FeedIdPage,
+  ProfilePage,
+  ProfileOrdersPage,
+  ProfileOrdersIdPage,
+  IngridientsIdPage,
+  MainPage,
+} from '../pages'
 
 function App() {
   const [visible, setVisible] = React.useState(false)
 
   const dispatch = useDispatch()
-
-
-
-
-
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
@@ -99,13 +107,49 @@ function App() {
   //   )
   // }
   return (
-    <main className={appStyles.app}>
+    <>
+      <Router>
       <AppHeader/>
-      <MainPage 
-        modal = {{visible, openModal, closeModal}}/>
+        <Switch>
+          <Route path="/" exact>
+            <MainPage 
+              modal = {{visible, openModal, closeModal}}/>
+          </Route>
+          <Route path="/login" exact>
+            <LoginPage />
+          </Route>
+          <Route path="/register" exact>
+            <RegisterPage />
+          </Route>
+          <Route path="/forgot-password" exact>
+            <ForgotPasswordPage />
+          </Route>
+          <Route path="/reset-password" exact>
+            <ResetPasswordPage />
+          </Route>
+          <Route path="/feed" exact>
+            <FeedPage />
+          </Route>
+          <Route path="/feed/:id" exact>
+            <FeedIdPage />
+          </Route>
+          <Route path="/profile/orders/:id" exact>
+            <FeedIdPage />
+          </Route>
+          <Route path="/profile" >
+            <ProfilePage />
+          </Route>
+          <Route path="/ingredients/:id" exact>
+            <IngridientsIdPage />
+          </Route>
+          <Route>
+            <Error404 />
+          </Route>
+        </Switch>
+      </Router>
       {visible && modal}
   
-    </main>
+    </>
   );
 }
 

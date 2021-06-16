@@ -1,9 +1,7 @@
-import React from 'react'
-
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import BurgerIngridients from '../burger-ingridients/burger-ingridients'
 
-import mainPageStyles from './main-page.module.css'
+import s from './pages.module.css'
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -12,8 +10,8 @@ function MainPage(props) {
   
   return (
     <>
-      <div className={mainPageStyles.row}>
-        <div className={mainPageStyles.column}>
+      <div className={s.container}>
+        <div className={s.column}>
           <p className="text text_type_main-large">
             Соберите бургер
           </p>
@@ -21,12 +19,12 @@ function MainPage(props) {
       </div>
       
       <DndProvider backend={HTML5Backend}>
-        <div className={`${mainPageStyles.row}`}>
-          <div className={`${mainPageStyles.column} ${mainPageStyles.left}`}>
+        <div className={`${s.row}`}>
+          <div className={`${s.column} ${s.left}`}>
             <BurgerIngridients
               modal={props.modal}/>
           </div>
-          <div className={`${mainPageStyles.column} ${mainPageStyles.right}`}>
+          <div className={`${s.column} ${s.right}`}>
             <BurgerConstructor 
               modal={props.modal}/>
           </div>

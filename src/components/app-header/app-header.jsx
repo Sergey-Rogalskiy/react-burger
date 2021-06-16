@@ -1,45 +1,37 @@
-import {
-  Logo, 
-  BurgerIcon, 
-  ListIcon,
-  ProfileIcon
-} from '@ya.praktikum/react-developer-burger-ui-components'
-
-import appHeaderStyles from './app-header.module.css'
+import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import { NavLink, useLocation, useRouteMatch, useHistory, useParams } from "react-router-dom"
+import s from './app-header.module.css'
 
 function AppHeader() {
+  const {pathname} = useLocation()
+  console.log(pathname)
   return (
-    <header className={appHeaderStyles.header}>
-      <div className={`${appHeaderStyles.button}`} >
-        <BurgerIcon type="primary"/>
-        <span>
-          Конструктор
-        </span>
-      </div>
+    <header className={s.header}>
+      <div className={s.header__inner}>
+        <nav className={s.nav}>
+            <NavLink className={s.nav__link} activeClassName={s.active} to="." exact>
+              <BurgerIcon type={(pathname === "/") ? "primary" : "secondary"} />
+              <span className='p-2'>Конструктор</span>
+            </NavLink>
+            <NavLink className={s.nav__link} activeClassName={s.active} to="/feed">
+              <ListIcon type={(pathname === "/feed") ? "primary" : "secondary"}  />
+              <span className='p-2'>Лента заказов</span>
+            </NavLink>
+        </nav>
 
-      <div className={appHeaderStyles.button}>
-        <ListIcon type="primary" />
-        <span>
-          Лента заказов
-        </span>
-      </div>
+        <div className={s.header__logo}>
+          <Logo />
+        </div>
 
-    <div className={appHeaderStyles.button}>
-      <Logo />
+          <nav className={s.nav}>
+              <NavLink className={s.nav__link} activeClassName={s.active} to="/profile">
+                  <ProfileIcon type={(pathname === "/profile") ?  "primary" : "secondary"}  />
+                  <span className='p-2'>
+                    Личный кабинет
+                  </span>
+              </NavLink>
+          </nav>
     </div>
-    
-    <div className={appHeaderStyles.button}>
-      <span>
-      </span>
-    </div>
-    
-      <div className={appHeaderStyles.button}>
-          <ProfileIcon type="primary" />
-        <span>
-          Личный кабинет
-        </span>
-      </div>
-
     </header>
   );
 }

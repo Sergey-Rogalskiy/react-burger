@@ -1,16 +1,16 @@
-li {
+.card {
     /* background-color: rgb(20, 220, 220); */
     width: 190px;
     margin: 5px;
     display: flex;
   }
   
-li img {
+.card .img {
     /* background-color: rgb(20, 220, 47); */
     width: 270px;
   }
   
-li p {
+.card p {
     /* background-color: rgb(220, 20, 20); */
     text-align: center;
   }
