@@ -4,26 +4,66 @@ import {
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
+import {getLogin} from '../../services/actions/registration'
+import {useDispatch, useSelector} from 'react-redux'
 
 import s from './pages.module.css'
 
 function LoginPage() {
+  const dispatch = useDispatch()
+  const loginFailed = useSelector(state => state.registration.loginFailed)
+  const loginRequest = useSelector(state => state.registration.loginRequest)
+  const user = useSelector(state => state.registration.user)
   
   const [value, setValue] = React.useState({email: '', password: '', })
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
-  const inputRef = React.useRef(null)
-  const onEnterClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
-    alert('Icon Click Callback')
+  const enterClick = () => {
+    dispatch(getLogin(value))
+  }
+
+  if (user) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+          <Redirect to='/profile'/>
+         </p>
+        </div>
+      </div>
+    )
+  }
+
+  
+  if (loginRequest) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+          LOADING
+         </p>
+        </div>
+      </div>
+    )
+  }
+
+  if (loginFailed) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+         {(loginFailed.message)}
+         </p>
+        </div>
+      </div>
+    )
   }
   
   
   return (
-    <>
     <div className = {`${s.container} `}>
       <div className = {`${s.registration}`}>
 
@@ -34,11 +74,10 @@ function LoginPage() {
         <Input
           type={'text'}
           placeholder={'E-mail'}
-          onChange={e => setValue(e.target.value)}
+          onChange={onChange}
           value={value.name}
           name={'email'}
           error={false}
-          ref={inputRef}
           errorText={'Ошибка'}
           size={'default'}
         />
@@ -51,7 +90,7 @@ function LoginPage() {
         <Button 
           type="primary" 
           size="large" 
-          onCLick={onEnterClick}>
+          onClick={enterClick}>
             Войти
         </Button>
 
@@ -69,8 +108,7 @@ function LoginPage() {
           </Link> 
         </p>
       </div>
-      </div>
-    </>
+    </div>
   );
 }
 

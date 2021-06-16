@@ -4,7 +4,7 @@ import {
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getRegister} from '../../services/actions/registration'
@@ -14,6 +14,8 @@ import s from './pages.module.css'
 function LoginPage() {
   const dispatch = useDispatch()
   const registerRequest = useSelector(state => state.registration.registerRequest)
+  const registerFailed = useSelector(state => state.registration.registerFailed)
+  const user = useSelector(state => state.registration.user)
 
   
   const [value, setValue] = React.useState({name: '', email: '', password: '', })
@@ -23,12 +25,43 @@ function LoginPage() {
   
   const inputRef = React.useRef(null)
   const onRegisterClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
     dispatch(getRegister(value))
+  }
+
+  if (user) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+          <Redirect to='/profile'/>
+         </p>
+        </div>
+      </div>
+    )
   }
   
   if (registerRequest) {
-    return <p>LOADING</p>
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+         LOADING
+         </p>
+        </div>
+      </div>
+    )
+  }
+
+  if (registerFailed) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+         {(registerFailed.message)}
+         </p>
+        </div>
+      </div>
+    )
   }
   
   return (

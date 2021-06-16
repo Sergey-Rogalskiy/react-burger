@@ -111,6 +111,7 @@ a {
 }
 .sidebar__link:hover {
   color: #F2F2F3;
+  cursor: pointer;
 }
 
 .active {

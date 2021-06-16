@@ -35,8 +35,7 @@ export const getUserRequest = async () =>
     referrerPolicy: 'no-referrer'
   });
 
-
-
+  
 export const getIngridientsRequest = async (token) => {
   const res = await getResource(`/ingredients`, token);
   return res;
@@ -59,6 +58,16 @@ export const getRegisterService = async (data) => {
   return res;
 };
 
+export const getLoginService = async (data) => {
+  const res = await postResourceRaw(`/auth/login`, data);
+  return res;
+};
+
+export const getLogoutService = async (token) => {
+  const res = await postResource(`/auth/logout`, token);
+  return res;
+};
+
 const getResource = async (url, token) => {
   const res = await fetch(`${_apiBase}${url}`, {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.,
@@ -74,17 +83,24 @@ const getResource = async (url, token) => {
 
 
 const postResourceRaw = async (url, data={}) => {
-  const addData = {
-    method:'POST',
+  const addData =  {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json'
     },
-    body:JSON.stringify(data)
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(data)
   }
   const res = await fetch(
     `${_apiBase}${url}`, 
     addData
   )
+  console.log(data)
+  console.log(res)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` +
       `, received ${res.status}`)
@@ -98,7 +114,7 @@ const postResource = async (url, token, data={}) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body:JSON.stringify(data)
+    body:JSON.stringify({token: `${token}`})
   }
   const res = await fetch(
     `${_apiBase}${url}`, 

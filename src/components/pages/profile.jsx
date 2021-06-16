@@ -7,19 +7,31 @@ import {
 import {ProdileEdit} from '../profile'
 
 
-import {  Switch, Route,NavLink  } from 'react-router-dom';
+import {  Switch, Route,NavLink, Redirect  } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {useHistory } from 'react-router-dom'
+import {getLogout} from '../../services/actions/registration'
 
 import s from './pages.module.css'
 
 export default function ProfilePage() {
+  const user = useSelector(state => state.registration.user)
+  const refreshToken = useSelector(state => state.registration.refreshToken)
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const exit = (e) => {
+    e.preventDefault()
+    // history.replace({pathname: '/'})
+    dispatch(getLogout(refreshToken))
+  }
   
+  if (!user) {
+    return <Redirect to='/login'/>
+  }
   return (
     <>
       <div className={s.container}>
-        <div className={s.column}>
-          <p className="text text_type_main-large">
-          </p>
-        </div>
       </div>
 
       <div className={`${s.row}`}>
@@ -37,12 +49,11 @@ export default function ProfilePage() {
             activeClassName={s.active}>
               История Заказов
           </NavLink >
-          <NavLink  
-          to='/login' 
-          className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}
-           activeClassName={s.active}>
+          <div  
+            onClick={exit} 
+            className={`${s.sidebar__link} text text_type_main-medium text_color_inactive m-3`}>
             Выход
-          </NavLink >
+          </div >
           <p 
             className="text text_type_main-default text_color_inactive m-3">
               В этом разделе вы можете изменить свои персональные данные

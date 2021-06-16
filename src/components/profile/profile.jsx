@@ -4,6 +4,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 import { useSelector  } from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 
 
@@ -19,7 +20,9 @@ export const ProdileEdit = () => {
   // useEffect(() => {
   //   dispatch(getItems())
   // }, [dispatch])
-
+  if (!data) {
+    return <Redirect to='/login' />
+  }
   return (
     <>
     <Input
