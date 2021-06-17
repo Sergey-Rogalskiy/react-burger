@@ -4,7 +4,9 @@ import {
     getResetPasswordService,
     getLoginService,
     getLogoutService,
-    getTokenService
+    getTokenService,
+    getUserService,
+    patchUserService
   } from '../real-service';
     
 
@@ -26,6 +28,12 @@ import {
   export const GET_TOKEN_REQUEST = 'GET_TOKEN_REQUEST';
   export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS';
   export const GET_TOKEN_FAILED = 'GET_TOKEN_FAILED';
+  export const GET_USER_REQUEST = 'GET_USER_REQUEST';
+  export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+  export const GET_USER_FAILED = 'GET_USER_FAILED';
+  export const PATCH_USER_REQUEST = 'PATCH_USER_REQUEST';
+  export const PATCH_USER_SUCCESS = 'PATCH_USER_SUCCESS';
+  export const PATCH_USER_FAILED = 'PATCH_USER_FAILED';
 
   
 export function getRegister(data) {
@@ -134,6 +142,62 @@ export function getToken(token) {
     .catch(err => {
         dispatch({
           type: GET_TOKEN_FAILED,
+          payload: err
+        });
+    })
+  };
+}
+
+export function getUser(token) {
+  return function(dispatch) {
+    dispatch({
+      type: GET_USER_REQUEST
+    });
+    getUserService(token)
+    .then(res => {
+      if (res && res.success) {
+        dispatch({
+          type: GET_USER_SUCCESS,
+          payload: res
+        });
+      } else {
+        dispatch({
+          type: GET_USER_FAILED,
+          payload: res
+        });
+      }
+    })
+    .catch(err => {
+        dispatch({
+          type: GET_USER_FAILED,
+          payload: err
+        });
+    })
+  };
+}
+
+export function patchUser(token) {
+  return function(dispatch) {
+    dispatch({
+      type: PATCH_USER_REQUEST
+    });
+    patchUserService(token)
+    .then(res => {
+      if (res && res.success) {
+        dispatch({
+          type: PATCH_USER_SUCCESS,
+          payload: res
+        });
+      } else {
+        dispatch({
+          type: PATCH_USER_FAILED,
+          payload: res
+        });
+      }
+    })
+    .catch(err => {
+        dispatch({
+          type: PATCH_USER_FAILED,
           payload: err
         });
     })

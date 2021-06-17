@@ -1,20 +1,30 @@
 import React from 'react';
 import {
   Input,
+  Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { useSelector  } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {patchUser} from '../../services/actions/registration'
 import {Redirect} from 'react-router-dom'
 
 
 
 export const ProdileEdit = () => {
+  const dispatch = useDispatch()
 
   const data = useSelector(state => state.registration.user)
   
   const [value, setValue] = React.useState(data)
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})
+  }
+  const cancel = e => {
+    console.log('cancel')
+  }
+  const save = e => {
+    console.log('save')
+    dispatch(patchUser(value))
   }
   
   // useEffect(() => {
@@ -57,6 +67,9 @@ export const ProdileEdit = () => {
       error={false}
       errorText={'Ошибка'}
       size={'default'} />
+
+    <Button type="secondary" onClick={cancel}>Отмена</Button>
+    <Button onClick={save}>Сохранить</Button>
     </>
   );
 }

@@ -17,6 +17,12 @@ import {
   GET_TOKEN_REQUEST,
   GET_TOKEN_SUCCESS,
   GET_TOKEN_FAILED,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
+  PATCH_USER_REQUEST,
+  PATCH_USER_SUCCESS,
+  PATCH_USER_FAILED,
   } from '../actions/registration';
 
   import { setCookie, deleteCookie } from '../utils';
@@ -44,13 +50,61 @@ import {
     tokenRequest: false,
     tokenFailed: false,
 
+    userRequest: false,
+    userFailed: false,
+    // user: null, 
+    user: {username: 'lala', email:'lala'}, 
+
     accessToken: null, 
     refreshToken: null, 
-    user: null, 
   };
   
   export const registrationReducer = (state = initialState, action) => {
     switch (action.type) {
+      case GET_USER_REQUEST: {
+        return {
+          ...state,
+          userRequest: true
+        };
+      }
+      case GET_USER_SUCCESS: {
+        return { 
+          ...state, 
+          userFailed: false, 
+          user: action.payload.user, 
+          userRequest: false 
+        };
+      }
+      case GET_USER_FAILED: {
+        return { 
+          ...state, 
+          userFailed: action, 
+          userRequest: false,
+          user: null,
+        };
+      }
+      case PATCH_USER_REQUEST: {
+        return {
+          ...state,
+          userRequest: true
+        };
+      }
+      case PATCH_USER_SUCCESS: {
+        return { 
+          ...state, 
+          userFailed: false, 
+          user: action.payload.user, 
+          userRequest: false 
+        };
+      }
+      case PATCH_USER_FAILED: {
+        return { 
+          ...state, 
+          userFailed: action, 
+          userRequest: false,
+          user: null,
+        };
+      }
       case GET_REGISTER_REQUEST: {
         return {
           ...state,

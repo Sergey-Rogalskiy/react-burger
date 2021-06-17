@@ -73,12 +73,30 @@ export const getTokenService = async (token) => {
   return res;
 };
 
+export const getUserService = async (token) => {
+  const res = await getResource(`/auth/user`, token);
+  return res;
+};
+
+export const patchUserService = async (token) => {
+  const res = await patchResource(`/auth/user`, token);
+  return res;
+};
+
 const getResource = async (url, token) => {
   const res = await fetch(`${_apiBase}${url}`, {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.,
     headers: {
-      'X-Access-Token': token
-    },
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    }
   });
   if (!res.ok) {
     throw new Error(`Could not fetch '${url}', received '${res.status}'`)
@@ -120,6 +138,32 @@ const postResource = async (url, token, data={}) => {
       'Content-Type': 'application/json'
     },
     body:JSON.stringify({token: `${token}`})
+  }
+  const res = await fetch(
+    `${_apiBase}${url}`, 
+    addData
+  )
+  if (!res.ok) {
+    throw new Error(`Could not fetch ${url}` +
+      `, received ${res.status}`)
+  }
+  return await res.json();
+};
+
+
+const patchResource = async (url, token, data={}) => {
+  const addData = {
+    method:'PATCH',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(data)
   }
   const res = await fetch(
     `${_apiBase}${url}`, 
