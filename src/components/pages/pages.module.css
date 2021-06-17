@@ -117,3 +117,7 @@ a {
 .active {
   color: #F2F2F3;
 }
+
+.text_color_error {
+	color: var(--colors-interface-error);
+}

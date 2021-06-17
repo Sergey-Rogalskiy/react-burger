@@ -30,7 +30,7 @@ function LoginPage() {
       <div className = {`${s.container} `}>
         <div className = {`${s.registration}`}>
          <p className="text text_type_main-medium m-3 mt-15">
-          <Redirect to='/profile'/>
+          <Redirect to='/'/>
          </p>
         </div>
       </div>
@@ -50,17 +50,6 @@ function LoginPage() {
     )
   }
 
-  if (loginFailed) {
-    return (
-      <div className = {`${s.container} `}>
-        <div className = {`${s.registration}`}>
-         <p className="text text_type_main-medium m-3 mt-15">
-         {(loginFailed.message)}
-         </p>
-        </div>
-      </div>
-    )
-  }
   
   
   return (
@@ -70,6 +59,17 @@ function LoginPage() {
        <p className="text text_type_main-medium m-3 mt-15">
         Вход
        </p>
+        {
+          (loginFailed) ? (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+              {(loginFailed.message)}
+            </p>
+          ) : (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+              {(loginFailed.message)}
+            </p>
+          )
+        }
 
         <Input
           type={'text'}
@@ -107,6 +107,7 @@ function LoginPage() {
             Восстановить пароль
           </Link> 
         </p>
+        
       </div>
     </div>
   );

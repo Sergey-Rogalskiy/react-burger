@@ -68,6 +68,11 @@ export const getLogoutService = async (token) => {
   return res;
 };
 
+export const getTokenService = async (token) => {
+  const res = await postResource(`/auth/token`, token);
+  return res;
+};
+
 const getResource = async (url, token) => {
   const res = await fetch(`${_apiBase}${url}`, {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.,

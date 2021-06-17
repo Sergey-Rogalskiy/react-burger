@@ -51,18 +51,6 @@ function LoginPage() {
       </div>
     )
   }
-
-  if (registerFailed) {
-    return (
-      <div className = {`${s.container} `}>
-        <div className = {`${s.registration}`}>
-         <p className="text text_type_main-medium m-3 mt-15">
-         {(registerFailed.message)}
-         </p>
-        </div>
-      </div>
-    )
-  }
   
   return (
     <>
@@ -72,6 +60,17 @@ function LoginPage() {
       <p className="text text_type_main-medium m-3 mt-15">
         Регистрация
         </p>
+        {
+          (registerFailed) ? (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+            Error: {(registerFailed.message ? registerFailed.message: 'TBC')}
+            </p>
+          ) : (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+               
+            </p>
+          )
+        }
 
       <Input
         type={'text'}

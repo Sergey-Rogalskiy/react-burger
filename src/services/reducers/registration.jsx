@@ -14,6 +14,9 @@ import {
   GET_LOGOUT_REQUEST,
   GET_LOGOUT_SUCCESS,
   GET_LOGOUT_FAILED,
+  GET_TOKEN_REQUEST,
+  GET_TOKEN_SUCCESS,
+  GET_TOKEN_FAILED,
   } from '../actions/registration';
 
   import { setCookie, deleteCookie } from '../utils';
@@ -37,6 +40,9 @@ import {
 
     logoutRequest: false,
     logoutFailed: false,
+
+    tokenRequest: false,
+    tokenFailed: false,
 
     accessToken: null, 
     refreshToken: null, 
@@ -125,6 +131,31 @@ import {
           ...state, 
           logoutFailed: action.payload, 
           logoutRequest: false , 
+        };
+      }
+      case GET_TOKEN_REQUEST: {
+        return {
+          ...state,
+          tokenRequest: true
+        };
+      }
+      case GET_TOKEN_SUCCESS: {
+        setCookie('accessToken', action.payload.accessToken.split('Bearer ')[1])
+        setCookie('refreshToken', action.payload.refreshToken)
+        return { 
+          ...state, 
+          tokenFailed: false, 
+          accessToken: action.payload.accessToken.split('Bearer ')[1], 
+          refreshToken: action.payload.refreshToken, 
+          tokenRequest: false 
+        };
+      }
+      case GET_TOKEN_FAILED: {
+        return { 
+          ...state, 
+          tokenFailed: action.payload, 
+          tokenRequest: false , 
+          accessToken: null, 
         };
       }
       case GET_FORGOT_PASSWORD_REQUEST: {

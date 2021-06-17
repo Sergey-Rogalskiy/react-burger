@@ -3,7 +3,8 @@ import {
     getForgotPasswordService,
     getResetPasswordService,
     getLoginService,
-    getLogoutService
+    getLogoutService,
+    getTokenService
   } from '../real-service';
     
 
@@ -22,10 +23,12 @@ import {
   export const GET_LOGOUT_REQUEST = 'GET_LOGOUT_REQUEST';
   export const GET_LOGOUT_SUCCESS = 'GET_LOGOUT_SUCCESS';
   export const GET_LOGOUT_FAILED = 'GET_LOGOUT_FAILED';
+  export const GET_TOKEN_REQUEST = 'GET_TOKEN_REQUEST';
+  export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS';
+  export const GET_TOKEN_FAILED = 'GET_TOKEN_FAILED';
 
   
 export function getRegister(data) {
-
   return function(dispatch) {
     dispatch({
       type: GET_REGISTER_REQUEST
@@ -108,7 +111,35 @@ export function getLogout(token) {
     })
   };
 }
-  
+
+export function getToken(token) {
+  return function(dispatch) {
+    dispatch({
+      type: GET_TOKEN_REQUEST
+    });
+    getTokenService(token)
+    .then(res => {
+      if (res && res.success) {
+        dispatch({
+          type: GET_TOKEN_SUCCESS,
+          payload: res
+        });
+      } else {
+        dispatch({
+          type: GET_TOKEN_FAILED,
+          payload: res
+        });
+      }
+    })
+    .catch(err => {
+        dispatch({
+          type: GET_TOKEN_FAILED,
+          payload: err
+        });
+    })
+  };
+}
+ 
 
 export function getForgotPassword(data) {
   const token = 'lala'
