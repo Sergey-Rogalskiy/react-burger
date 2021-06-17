@@ -78,8 +78,8 @@ export const getUserService = async (token) => {
   return res;
 };
 
-export const patchUserService = async (token) => {
-  const res = await patchResource(`/auth/user`, token);
+export const patchUserService = async (token, data) => {
+  const res = await patchResource(`/auth/user`, token, data);
   return res;
 };
 

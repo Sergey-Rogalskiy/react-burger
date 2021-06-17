@@ -8,7 +8,7 @@ import {
     getUserService,
     patchUserService
   } from '../real-service';
-    
+  import { getCookie } from '../utils';
 
   export const GET_FORGOT_PASSWORD_REQUEST = 'GET_FORGOT_PASSWORD_REQUEST';
   export const GET_FORGOT_PASSWORD_SUCCESS = 'GET_FORGOT_PASSWORD_SUCCESS';
@@ -176,12 +176,13 @@ export function getUser(token) {
   };
 }
 
-export function patchUser(token) {
+export function patchUser(data) {
+  const token = getCookie('refreshToken')
   return function(dispatch) {
     dispatch({
       type: PATCH_USER_REQUEST
     });
-    patchUserService(token)
+    patchUserService(token, data)
     .then(res => {
       if (res && res.success) {
         dispatch({
