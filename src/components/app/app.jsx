@@ -26,6 +26,9 @@ import {
   IngridientsIdPage,
   MainPage,
 } from '../pages'
+import { getToken, getUser } from '../../services/actions/registration'
+
+import { ProtectedRoute, AuthProtectedRoute } from '../utils'
 
 function App() {
   const [visible, setVisible] = React.useState(false)
@@ -86,6 +89,15 @@ function App() {
     </Modal>
   );
 
+  React.useEffect(() => {
+    if (localStorage.getItem('refreshToken'))
+      dispatch(getToken(localStorage.getItem('refreshToken')))
+  }, [])
+  React.useEffect(() => {
+    if (localStorage.getItem('refreshToken')) dispatch(getUser())
+  }, [])
+
+
   // if (ingridientData.loading) {
   //   return (
   //     <Loader />
@@ -107,30 +119,30 @@ function App() {
             <MainPage 
               modal = {{visible, openModal, closeModal}}/>
           </Route>
-          <Route path="/login" exact>
+          <AuthProtectedRoute path="/login" exact>
             <LoginPage />
-          </Route>
-          <Route path="/register" exact>
+          </AuthProtectedRoute>
+          <AuthProtectedRoute path="/register" exact>
             <RegisterPage />
-          </Route>
-          <Route path="/forgot-password" exact>
+          </AuthProtectedRoute>
+          <AuthProtectedRoute path="/forgot-password" exact>
             <ForgotPasswordPage />
-          </Route>
-          <Route path="/reset-password" exact>
+          </AuthProtectedRoute>
+          <AuthProtectedRoute path="/reset-password" exact>
             <ResetPasswordPage />
-          </Route>
+          </AuthProtectedRoute>
           <Route path="/feed" exact>
             <FeedPage />
           </Route>
           <Route path="/feed/:id" exact>
             <FeedIdPage />
           </Route>
-          <Route path="/profile/orders/:id" exact>
+          <ProtectedRoute path="/profile/orders/:id" exact>
             <FeedIdPage />
-          </Route>
-          <Route path="/profile" >
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile" >
             <ProfilePage />
-          </Route>
+          </ProtectedRoute>
           <Route path="/ingredients/:id" exact>
             <IngridientsIdPage />
           </Route>

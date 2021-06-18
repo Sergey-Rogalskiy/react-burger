@@ -13,8 +13,8 @@ import {Redirect} from 'react-router-dom'
 export const ProdileEdit = () => {
   const dispatch = useDispatch()
 
-  const data = useSelector(state => state.registration.user)
-  
+  const user = useSelector(state => state.registration.user)
+  let data = {...user, password: ''}
   const [value, setValue] = React.useState(data)
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})
@@ -23,7 +23,6 @@ export const ProdileEdit = () => {
     console.log('cancel')
   }
   const save = e => {
-    console.log('save')
     dispatch(patchUser(value))
   }
   
@@ -40,7 +39,7 @@ export const ProdileEdit = () => {
       placeholder={'Имя'}
       onChange={e => onChange(e)}
       icon={'EditIcon'}
-      value={value.name}
+      value={value?.name}
       name={'name'}
       error={false}
       errorText={'Ошибка'}
@@ -51,7 +50,7 @@ export const ProdileEdit = () => {
       placeholder={'E-mail'}
       onChange={e => onChange(e)}
       icon={'EditIcon'}
-      value={value.email}
+      value={value?.email}
       name={'email'}
       error={false}
       errorText={'Ошибка'}

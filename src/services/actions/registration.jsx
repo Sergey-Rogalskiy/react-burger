@@ -177,7 +177,7 @@ export function getUser(token) {
 }
 
 export function patchUser(data) {
-  const token = getCookie('refreshToken')
+  const token = getCookie('accessToken')
   return function(dispatch) {
     dispatch({
       type: PATCH_USER_REQUEST

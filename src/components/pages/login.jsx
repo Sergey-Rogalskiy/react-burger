@@ -75,7 +75,7 @@ function LoginPage() {
           type={'text'}
           placeholder={'E-mail'}
           onChange={onChange}
-          value={value.name}
+          value={value.email}
           name={'email'}
           error={false}
           errorText={'Ошибка'}
@@ -84,7 +84,7 @@ function LoginPage() {
 
         <PasswordInput 
           onChange={onChange} 
-          value={value.value} 
+          value={value.password} 
           name={'password'} />
         
         <Button 

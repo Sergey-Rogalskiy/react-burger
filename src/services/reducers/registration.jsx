@@ -52,8 +52,8 @@ import {
 
     userRequest: false,
     userFailed: false,
-    // user: null, 
-    user: {username: 'lala', email:'lala'}, 
+    user: null, 
+    // user: {username: 'lala', email:'lala'}, 
 
     accessToken: null, 
     refreshToken: null, 
@@ -102,7 +102,6 @@ import {
           ...state, 
           userFailed: action, 
           userRequest: false,
-          user: null,
         };
       }
       case GET_REGISTER_REQUEST: {
@@ -113,12 +112,10 @@ import {
       }
       case GET_REGISTER_SUCCESS: {
         setCookie('accessToken', action.payload.accessToken.split('Bearer ')[1])
-        setCookie('refreshToken', action.payload.refreshToken)
-
+        localStorage.setItem('refreshToken', action.payload.refreshToken)
         return { 
           ...state, 
           registerFailed: false, 
-          accessToken: action.payload.accessToken.split('Bearer ')[1], 
           refreshToken: action.payload.refreshToken, 
           user: action.payload.user, 
           registerRequest: false 
@@ -142,11 +139,10 @@ import {
       }
       case GET_LOGIN_SUCCESS: {
         setCookie('accessToken', action.payload.accessToken.split('Bearer ')[1])
-        setCookie('refreshToken', action.payload.refreshToken)
+        localStorage.setItem('refreshToken', action.payload.refreshToken)
         return { 
           ...state, 
           loginFailed: false, 
-          accessToken: action.payload.accessToken.split('Bearer ')[1], 
           refreshToken: action.payload.refreshToken, 
           user: action.payload.user, 
           loginRequest: false 
@@ -169,8 +165,8 @@ import {
         };
       }
       case GET_LOGOUT_SUCCESS: {
-        deleteCookie('accessToken')
         deleteCookie('refreshToken')
+        deleteCookie('accessToken')
         return { 
           ...state, 
           logoutFailed: false, 

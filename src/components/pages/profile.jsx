@@ -11,24 +11,19 @@ import {  Switch, Route,NavLink, Redirect  } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {useHistory } from 'react-router-dom'
 import {getLogout} from '../../services/actions/registration'
+import { ProtectedRoute } from '../utils/protected-route';
 
 import s from './pages.module.css'
 
 export default function ProfilePage() {
-  const user = useSelector(state => state.registration.user)
-  const refreshToken = useSelector(state => state.registration.refreshToken)
-  const history = useHistory();
+  const refreshToken = localStorage.getItem('refreshToken')
   const dispatch = useDispatch();
 
   const exit = (e) => {
     e.preventDefault()
-    // history.replace({pathname: '/'})
     dispatch(getLogout(refreshToken))
   }
   
-  if (!user) {
-    return <Redirect to='/login'/>
-  }
   return (
     <>
       <div className={s.container}>
@@ -63,15 +58,15 @@ export default function ProfilePage() {
         <div className={`${s.column} ${s.right}`}>
           
             <Switch>
-              <Route path="/profile" exact>
+              <ProtectedRoute path="/profile" exact>
                 <ProdileEdit />
-              </Route>
-              <Route path="/profile/orders" exact>
+              </ProtectedRoute>
+              <ProtectedRoute path="/profile/orders" exact>
                <OrderFeed listType='profile'/>  
-              </Route>
-              <Route>
+              </ProtectedRoute>
+              <ProtectedRoute>
                 Watt?
-              </Route>
+              </ProtectedRoute>
             </Switch>
         </div>
       </div>

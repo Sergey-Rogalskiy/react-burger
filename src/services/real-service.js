@@ -79,6 +79,8 @@ export const getUserService = async (token) => {
 };
 
 export const patchUserService = async (token, data) => {
+  console.log(token)
+  console.log(data)
   const res = await patchResource(`/auth/user`, token, data);
   return res;
 };
@@ -86,17 +88,17 @@ export const patchUserService = async (token, data) => {
 const getResource = async (url, token) => {
   const res = await fetch(`${_apiBase}${url}`, {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.,
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
     headers: {
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-    }
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    // body: JSON.stringify({ token: token })
+    
   });
   if (!res.ok) {
     throw new Error(`Could not fetch '${url}', received '${res.status}'`)
@@ -122,8 +124,6 @@ const postResourceRaw = async (url, data={}) => {
     `${_apiBase}${url}`, 
     addData
   )
-  console.log(data)
-  console.log(res)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` +
       `, received ${res.status}`)
@@ -159,7 +159,7 @@ const patchResource = async (url, token, data={}) => {
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token
+      Authorization: `Bearer ${token}`,
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
@@ -169,6 +169,7 @@ const patchResource = async (url, token, data={}) => {
     `${_apiBase}${url}`, 
     addData
   )
+  console.log(res)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` +
       `, received ${res.status}`)
