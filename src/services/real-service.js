@@ -6,21 +6,6 @@ const _apiBase = 'https://norma.nomoreparties.space/api'
 // _imageBase = 'https://norma.nomoreparties.space/static/pics/';
 
 
-export const loginRequest = async form => {
-  return await fetch('https://norma.nomoreparties.space/login', {
-    method: 'POST',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    body: JSON.stringify(form)
-  });
-};
-
 export const getUserRequest = async () =>
   await fetch('https://norma.nomoreparties.space/user', {
     method: 'GET',
@@ -34,13 +19,10 @@ export const getUserRequest = async () =>
     redirect: 'follow',
     referrerPolicy: 'no-referrer'
   });
-
-  
 export const getIngridientsRequest = async (token) => {
   const res = await getResource(`/ingredients`, token);
   return res;
 };
-
 export const getOrderRequest = async (token='alla', data) => {
   const res = await postResource(`/orders`, token, data);
   return res;
@@ -57,27 +39,22 @@ export const getRegisterService = async (data) => {
   const res = await postResourceRaw(`/auth/register`, data);
   return res;
 };
-
 export const getLoginService = async (data) => {
   const res = await postResourceRaw(`/auth/login`, data);
   return res;
 };
-
-export const getLogoutService = async (token) => {
-  const res = await postResource(`/auth/logout`, token);
+export const getLogoutService = async (token, data=null) => {
+  const res = await postResource(`/auth/logout`, token, data);
   return res;
 };
-
 export const getTokenService = async (token) => {
   const res = await postResource(`/auth/token`, token);
   return res;
 };
-
 export const getUserService = async (token) => {
   const res = await getResource(`/auth/user`, token);
   return res;
 };
-
 export const patchUserService = async (token, data) => {
   console.log(token)
   console.log(data)
@@ -105,8 +82,6 @@ const getResource = async (url, token) => {
   }
   return await res.json();
 };
-
-
 const postResourceRaw = async (url, data={}) => {
   const addData =  {
     method: 'POST',
@@ -130,16 +105,25 @@ const postResourceRaw = async (url, data={}) => {
   }
   return await res.json();
 };
+const postResource = async (url, token, data=null) => {
+  let addData
+  if (data) {
+    addData = {
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data)
+    }
+  } else {
+    addData = {
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify({token:token})
+    }
 
-const postResource = async (url, token, data={}) => {
-  console.log(data)
-  const addData = {
-    method:'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body:JSON.stringify(data)
   }
   const res = await fetch(
     `${_apiBase}${url}`, 
@@ -152,8 +136,6 @@ const postResource = async (url, token, data={}) => {
   }
   return await res.json();
 };
-
-
 const patchResource = async (url, token, data={}) => {
   const addData = {
     method:'PATCH',
