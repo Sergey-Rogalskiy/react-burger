@@ -27,12 +27,12 @@ export function AuthProtectedRoute({ children, ...rest }) {
       {...rest}
       render={({ location }) =>
         user ? (
-          <Redirect
-            to={{
-              pathname: '/profile',
-              state: { from: location }
-            }}
-          />
+          <>
+            {console.log(location)}
+            <Redirect
+              to={location.state.from.pathname}
+            />
+          </>
         ) : (
           children
         )
