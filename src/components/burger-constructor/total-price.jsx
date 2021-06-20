@@ -16,9 +16,15 @@ const TotalPrice = (props) => {
   const history = useHistory()
   const location = useLocation()
 
+const realConfirm = () => {
+  props.modal.openModal();
+  history.push( {pathname: `/order_confirmation`,
+    state: { background: location }})
+}
+
   const confirmOrder = () => {
     user ? (
-      props.modal.openModal()
+      realConfirm()
     ) : (
       history.push({
         pathname: '/login',
