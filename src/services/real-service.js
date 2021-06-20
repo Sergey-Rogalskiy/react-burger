@@ -132,17 +132,20 @@ const postResourceRaw = async (url, data={}) => {
 };
 
 const postResource = async (url, token, data={}) => {
+  console.log(data)
   const addData = {
     method:'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
-    body:JSON.stringify({token: `${token}`})
+    body:JSON.stringify(data)
   }
   const res = await fetch(
     `${_apiBase}${url}`, 
     addData
   )
+  console.log(res)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` +
       `, received ${res.status}`)

@@ -30,6 +30,10 @@ import { getToken, getUser } from '../../services/actions/registration'
 
 import { ProtectedRoute, AuthProtectedRoute } from '../utils'
 
+import {
+  ORDER_RESET,
+} from '../../services/actions/constructor';
+
 function App() {
   
   const history = useHistory()
@@ -59,6 +63,7 @@ function App() {
   const closeModal = () => {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
+      dispatch({type: ORDER_RESET});
       history.push( {pathname: `/`})
   }
   React.useEffect(() => {

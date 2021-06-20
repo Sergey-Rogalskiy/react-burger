@@ -5,6 +5,7 @@ import {
     ADD_ITEM_TO_CONSTRUCTOR,
     DELETE_ITEM_FROM_CONSTRUCTOR,
     CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
+    ORDER_RESET,
   } from '../actions/constructor';
   
 
@@ -43,6 +44,14 @@ import {
           ...state, 
           orderFailed: true, 
           orderRequest: false 
+        };
+      }
+      case ORDER_RESET: {
+        return { 
+          ...state, 
+          orderFailed: false,
+          order: null, 
+          orderRequest: false
         };
       }
 
