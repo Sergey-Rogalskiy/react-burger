@@ -56,8 +56,6 @@ export const getUserService = async (token) => {
   return res;
 };
 export const patchUserService = async (token, data) => {
-  console.log(token)
-  console.log(data)
   const res = await patchResource(`/auth/user`, token, data);
   return res;
 };
@@ -129,7 +127,6 @@ const postResource = async (url, token, data=null) => {
     `${_apiBase}${url}`, 
     addData
   )
-  console.log(res)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` +
       `, received ${res.status}`)
@@ -154,7 +151,6 @@ const patchResource = async (url, token, data={}) => {
     `${_apiBase}${url}`, 
     addData
   )
-  console.log(res)
   if (!res.ok) {
     throw new Error(`Could not fetch ${url}` +
       `, received ${res.status}`)

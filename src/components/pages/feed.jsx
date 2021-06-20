@@ -1,3 +1,4 @@
+import { ProfileOrdersPage } from '.';
 import {
   OrderFeed,
   CookingDoneBoard
@@ -5,7 +6,7 @@ import {
 
 import s from './pages.module.css'
 
-export default function FeedPage() {
+export default function FeedPage(props) {
   return (
     <>
       <div className={s.container}>
@@ -18,7 +19,7 @@ export default function FeedPage() {
   
       <div className={`${s.row}`}>
         <div className={`${s.column} ${s.left}`}>
-          <OrderFeed/>  
+          <OrderFeed modal={props.modal}/>  
         </div>
         <div className={`${s.column} ${s.right}`}>
           <CookingDoneBoard />

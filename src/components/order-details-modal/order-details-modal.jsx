@@ -1,26 +1,25 @@
+import PropTypes from 'prop-types';
 import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import {useSelector} from 'react-redux'
+import s from './order-details-modal.module.css'
 
-import { useParams, Redirect } from 'react-router-dom'
-import Modal from '../modal/modal'
+import { useSelector  } from 'react-redux'
 
-import s from './pages.module.css'
 
-export default function FeedIdPage() {
-  const param = useParams();
 
-  const data = useSelector(state => state.feed.feedData)[param.id-1]
-  if (!data && data === undefined) {
-    return <Redirect to='/404' />
-  }
-  
+const OrderDetailsModal = () => {
+  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
+  const data = currentItemToView.item
   return (
     <>
-      <div className={s.container}>
-      <Modal header={"Детали заказа"}>
+      {
+        currentItemToView
+        ?
+        <>
+        <div className={s.modal}>
+          
         <p className={`${s.center} text text_type_digits-default mb-2`}>#{data._id}</p>
         <p className="text text_type_main-medium">{data.name}</p>
         {
@@ -57,8 +56,34 @@ export default function FeedIdPage() {
               <CurrencyIcon type="primary" />
             </div>
           </div>
-      </Modal>
-      </div>
+          
+        </div>
+        </>
+        :
+        <div>Дай подумать о мармышках</div>
+      }
     </>
   );
 }
+
+const ingridientPropTypes = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  image_mobile: PropTypes.string.isRequired,
+  image_large: PropTypes.string.isRequired,
+  __v: PropTypes.number.isRequired,
+});
+
+
+OrderDetailsModal.propTypes = {
+  data: ingridientPropTypes
+}; 
+export default OrderDetailsModal;
+

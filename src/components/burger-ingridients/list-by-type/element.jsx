@@ -19,10 +19,10 @@ const ListByType = (props) => {
   });
 
   const clickIngridient = (e) => {
-    props.onClick(e, item)
+    const order = { type: 'ingridient', item : item}
+    props.onClick(e, order)
     history.push( {pathname: `/ingredients/${item._id}`,
-    state: { background: location }})
-
+      state: { background: location }})
   }
 
   return (

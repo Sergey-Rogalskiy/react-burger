@@ -20,7 +20,7 @@ export const ProdileEdit = () => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   const cancel = e => {
-    console.log('cancel')
+    console.log('cancel - tbc')
   }
   const save = e => {
     dispatch(patchUser(value))

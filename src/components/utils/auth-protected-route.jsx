@@ -28,7 +28,6 @@ export function AuthProtectedRoute({ children, ...rest }) {
       render={({ location }) =>
         user ? (
           <>
-            {console.log(location)}
             <Redirect
               to={location.state.from.pathname}
             />

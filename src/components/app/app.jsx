@@ -4,6 +4,7 @@ import AppHeader from '../app-header/app-header'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
+import OrderDetailsModal from  '../order-details-modal/order-details-modal'
 
 import { useSelector, useDispatch  } from 'react-redux'
 import {
@@ -64,7 +65,7 @@ function App() {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
       dispatch({type: ORDER_RESET});
-      history.push( {pathname: `/`})
+      history.push(`${location.state.background.pathname}`)
   }
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
@@ -86,17 +87,34 @@ function App() {
   
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
  
-  const modal = (  
-    <Modal header={!currentItemToView?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
-    {
-      !currentItemToView 
-      ?
-      <OrderDetails/>
-      :
-      <IngridientDetails currentItemToView={currentItemToView}/>
-
-    }
-    </Modal>
+  const modal = (
+    <>
+      
+      <Modal header={ 
+          currentItemToView?.type === 'order' ? (
+            'Детали заказа'
+          ) : (
+            currentItemToView?.type === 'ingridient' ? (
+              'Детали ингридиента'
+            ) : (
+              'Детали заказа'
+            )
+          )
+        } 
+        onClose={closeModal}> 
+        {
+          !currentItemToView?.item
+          ?
+          <OrderDetails/>
+          :
+          currentItemToView?.type === 'ingridient'
+          ?
+          <IngridientDetails currentItemToView={currentItemToView}/>
+          :
+          <OrderDetailsModal currentItemToView={currentItemToView}/>
+        }
+      </Modal>
+    </>
   );
 
   React.useEffect(() => {
@@ -107,29 +125,14 @@ function App() {
     if (localStorage.getItem('refreshToken')) dispatch(getUser())
   }, [])
 
-
-  // if (ingridientData.loading) {
-  //   return (
-  //     <Loader />
-  //   )
-  // }
-  // if (ingridientData.error) {
-  //   return (
-  //     <>
-  //       <ErrorIndicator />
-  //     </>
-  //   )
-  // }
   const background = (history.action === "PUSH" || history.action === "REFRESH") && location?.state?.background
-
-  
   return (
     <>
       <AppHeader/>
         <Switch location={background|| location}>
           <Route path="/" exact>
             <MainPage 
-              modal = {{visible, openModal, closeModal}}/>
+              modal = {{openModal}}/>
           </Route>
           <AuthProtectedRoute path="/login" exact>
             <LoginPage />
@@ -144,30 +147,41 @@ function App() {
             <ResetPasswordPage />
           </AuthProtectedRoute>
           <Route path="/feed" exact>
-            <FeedPage />
+            <FeedPage 
+              modal = {{openModal}}/>
           </Route>
-          <Route path="/feed/:id" exact>
-            <FeedIdPage />
+          <Route path="/feed/:id" >
+            <FeedIdPage  />
           </Route>
           <ProtectedRoute path="/profile/orders/:id" exact>
-            <FeedIdPage />
+            <FeedIdPage 
+              modal = {{openModal}}/>
           </ProtectedRoute>
           <ProtectedRoute path="/profile" >
-            <ProfilePage />
+            <ProfilePage 
+              modal = {{openModal}}/>
           </ProtectedRoute>
           <Route path="/ingredients/:id" exact>
-            <IngridientsIdPage modal={modal}/>
+            <IngridientsIdPage />
           </Route>
           <Route>
             <Error404 />
           </Route>
         </Switch>
         {background && (
-          <>
             <Route path={'ingridients/:id'}>
               <IngridientsIdPage modal={false}/>
             </Route>
-          </>
+        )}
+        {background && (
+            <Route path='feed/:id' exact>
+              <FeedIdPage modal={false}/>
+            </Route>
+        )}
+        {background && (
+            <Route path='profile/orders/:id' exact>
+              <FeedIdPage modal={false}/>
+            </Route>
         )}
       {visible && modal}
   

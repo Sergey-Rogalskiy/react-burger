@@ -15,7 +15,7 @@ import { ProtectedRoute } from '../utils/protected-route';
 
 import s from './pages.module.css'
 
-export default function ProfilePage() {
+export default function ProfilePage(props) {
   const refreshToken = localStorage.getItem('refreshToken')
   const dispatch = useDispatch();
 
@@ -62,7 +62,7 @@ export default function ProfilePage() {
                 <ProdileEdit />
               </ProtectedRoute>
               <ProtectedRoute path="/profile/orders" exact>
-               <OrderFeed listType='profile'/>  
+               <OrderFeed  modal={props.modal}/>  
               </ProtectedRoute>
               <ProtectedRoute>
                 Watt?
