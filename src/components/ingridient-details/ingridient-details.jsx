@@ -2,12 +2,11 @@ import PropTypes from 'prop-types';
 
 import styles from './ingridient-details.module.css'
 
-import { useSelector  } from 'react-redux'
 
 
 
-const IngridientDetails = () => {
-  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
+const IngridientDetails = (props) => {
+  const {currentItemToView} = props
 
   return (
     <>

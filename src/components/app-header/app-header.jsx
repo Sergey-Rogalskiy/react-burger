@@ -8,7 +8,7 @@ function AppHeader() {
     <header className={s.header}>
       <div className={s.header__inner}>
         <nav className={s.nav}>
-            <NavLink className={s.nav__link} activeClassName={s.active} to="." exact>
+            <NavLink className={s.nav__link} activeClassName={s.active} to="/" exact>
               <BurgerIcon type={(pathname === "/") ? "primary" : "secondary"} />
               <span className='p-2'>Конструктор</span>
             </NavLink>

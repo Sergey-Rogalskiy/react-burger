@@ -4,12 +4,13 @@ import {
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link, Redirect } from "react-router-dom"
+import { Link, Redirect, useHistory } from "react-router-dom"
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getResetPassword} from '../../services/actions/registration'
 
 import s from './pages.module.css'
+import { useEffect } from 'react'
 
 export default function ResetPage() {
   const dispatch = useDispatch()
@@ -25,6 +26,17 @@ export default function ResetPage() {
   const onSaveClick = () => {
     dispatch(getResetPassword(value))
   }
+
+  const history = useHistory()
+  var isForgotEmail
+  React.useEffect(
+    () => {
+      isForgotEmail  = localStorage.getItem('isForgotEmail')
+      if (!isForgotEmail) {
+        history.replace({pathname: '/login'})
+      }
+    }, [isForgotEmail]
+  )
   
   if (resetPasswordRequest) {
     return (

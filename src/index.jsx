@@ -10,6 +10,7 @@ import thunk from 'redux-thunk';
 
 import { Provider } from 'react-redux';
 import { rootReducer } from './services/reducers';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 const composeEnhancers =
@@ -24,7 +25,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundry>
         <Provider store={store}>
-          <App />
+          <Router>
+            <App />
+          </Router>
         </Provider>
     </ErrorBoundry>
   </React.StrictMode>,

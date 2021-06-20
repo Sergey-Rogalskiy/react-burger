@@ -24,7 +24,6 @@ const LoginPage = () => {
   
   const inputRef = React.useRef(null)
   const onRestoreClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
     dispatch(getForgotPassword(
       {
         "email": value.email

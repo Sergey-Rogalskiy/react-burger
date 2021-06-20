@@ -189,6 +189,7 @@ export function patchUser(data) {
           type: PATCH_USER_SUCCESS,
           payload: res
         });
+        alert('User information was updated successfully')
       } else {
         dispatch({
           type: PATCH_USER_FAILED,
@@ -208,6 +209,7 @@ export function patchUser(data) {
 
 export function getForgotPassword(data) {
   const token = 'lala'
+  const isForgotEmail = localStorage.setItem('isForgotEmail', true)
     return function(dispatch) {
       dispatch({
         type: GET_FORGOT_PASSWORD_REQUEST

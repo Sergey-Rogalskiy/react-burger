@@ -13,7 +13,7 @@ import {
   setCurrentItemToView,
 } from '../../services/actions/ingridients'
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import {
   Error404,
   LoginPage,
@@ -31,6 +31,10 @@ import { getToken, getUser } from '../../services/actions/registration'
 import { ProtectedRoute, AuthProtectedRoute } from '../utils'
 
 function App() {
+  
+  const history = useHistory()
+  const location = useLocation()
+
   const [visible, setVisible] = React.useState(false)
 
   const dispatch = useDispatch()
@@ -55,6 +59,7 @@ function App() {
   const closeModal = () => {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
+      history.push( {pathname: `/`})
   }
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
@@ -83,7 +88,7 @@ function App() {
       ?
       <OrderDetails/>
       :
-      <IngridientDetails/>
+      <IngridientDetails currentItemToView={currentItemToView}/>
 
     }
     </Modal>
@@ -110,11 +115,13 @@ function App() {
   //     </>
   //   )
   // }
+  const background = (history.action === "PUSH" || history.action === "REFRESH") && location?.state?.background
+
+  
   return (
     <>
-      <Router>
       <AppHeader/>
-        <Switch>
+        <Switch location={background|| location}>
           <Route path="/" exact>
             <MainPage 
               modal = {{visible, openModal, closeModal}}/>
@@ -144,13 +151,19 @@ function App() {
             <ProfilePage />
           </ProtectedRoute>
           <Route path="/ingredients/:id" exact>
-            <IngridientsIdPage />
+            <IngridientsIdPage modal={modal}/>
           </Route>
           <Route>
             <Error404 />
           </Route>
         </Switch>
-      </Router>
+        {background && (
+          <>
+            <Route path={'ingridients/:id'}>
+              <IngridientsIdPage modal={false}/>
+            </Route>
+          </>
+        )}
       {visible && modal}
   
     </>
