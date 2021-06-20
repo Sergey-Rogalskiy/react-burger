@@ -1,4 +1,3 @@
-import { ProfileOrdersPage } from '.';
 import {
   OrderFeed,
   CookingDoneBoard

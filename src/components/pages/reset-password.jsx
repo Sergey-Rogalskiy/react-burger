@@ -10,7 +10,6 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getResetPassword} from '../../services/actions/registration'
 
 import s from './pages.module.css'
-import { useEffect } from 'react'
 
 export default function ResetPage() {
   const dispatch = useDispatch()
@@ -33,7 +32,7 @@ export default function ResetPage() {
     () => {
       isForgotEmail  = localStorage.getItem('isForgotEmail')
       if (!isForgotEmail) {
-        history.replace({pathname: '/login'})
+        history.replace({pathname: '/login', state: {from: '/'}})
       }
     }, [isForgotEmail]
   )

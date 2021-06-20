@@ -8,7 +8,6 @@ import styles from './order-details.module.css'
 
 const OrderDetails = () => {
   const order = useSelector(state => state.burgerConstructor.order)
-  console.log(order)
   return (
     <>
     {

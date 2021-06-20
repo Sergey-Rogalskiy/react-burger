@@ -7,9 +7,8 @@ import {
 import {ProdileEdit} from '../profile'
 
 
-import {  Switch, Route,NavLink, Redirect  } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import {useHistory } from 'react-router-dom'
+import {  Switch, NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {getLogout} from '../../services/actions/registration'
 import { ProtectedRoute } from '../utils/protected-route';
 

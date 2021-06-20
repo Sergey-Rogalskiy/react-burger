@@ -209,7 +209,7 @@ export function patchUser(data) {
 
 export function getForgotPassword(data) {
   const token = 'lala'
-  const isForgotEmail = localStorage.setItem('isForgotEmail', true)
+  localStorage.setItem('isForgotEmail', true)
     return function(dispatch) {
       dispatch({
         type: GET_FORGOT_PASSWORD_REQUEST

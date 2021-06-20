@@ -15,7 +15,6 @@ function LoginPage(props) {
     type: 'ingridient',
     item: temp
   }
-  console.log(currentItemToView)
   const dispatch = useDispatch()
 
   React.useEffect(() => {

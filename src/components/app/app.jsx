@@ -14,7 +14,7 @@ import {
   setCurrentItemToView,
 } from '../../services/actions/ingridients'
 
-import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import {
   Error404,
   LoginPage,
@@ -120,20 +120,16 @@ function App() {
   React.useEffect(() => {
     if (localStorage.getItem('refreshToken'))
       dispatch(getToken(localStorage.getItem('refreshToken')))
-  }, [])
+  }, [dispatch])
   React.useEffect(() => {
     if (localStorage.getItem('refreshToken')) dispatch(getUser())
-  }, [])
+  }, [dispatch])
 
   const background = (history.action === "PUSH" || history.action === "REFRESH") && location?.state?.background
   return (
     <>
       <AppHeader/>
         <Switch location={background|| location}>
-          <Route path="/" exact>
-            <MainPage 
-              modal = {{openModal}}/>
-          </Route>
           <AuthProtectedRoute path="/login" exact>
             <LoginPage />
           </AuthProtectedRoute>
@@ -163,6 +159,10 @@ function App() {
           </ProtectedRoute>
           <Route path="/ingredients/:id" exact>
             <IngridientsIdPage />
+          </Route>
+          <Route path="/" exact>
+            <MainPage 
+              modal = {{openModal}}/>
           </Route>
           <Route>
             <Error404 />
