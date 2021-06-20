@@ -7,7 +7,7 @@ import {
     CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
     ORDER_RESET,
   } from '../actions/constructor';
-  
+  import { constructorReducer } from './constructor';
 
   const initialState = {
 
@@ -21,98 +21,159 @@ import {
     totalPrice: 0,
     totalPriceBuns: 0
   };
+
   
-  export const constructorReducer = (state = initialState, action) => {
-    switch (action.type) {
 
-      case GET_ORDER_REQUEST: {
-        return {
-          ...state,
-          orderRequest: true
-        };
-      }
-      case GET_ORDER_SUCCESS: {
-        return { 
-          ...state, 
-          orderFailed: false,
-          order: action.order, 
-          orderRequest: false
-        };
-      }
-      case GET_ORDER_FAILED: {
-        return { 
-          ...state, 
-          orderFailed: true, 
-          orderRequest: false 
-        };
-      }
-      case ORDER_RESET: {
-        return { 
-          ...state, 
-          orderFailed: false,
-          order: null, 
-          orderRequest: false
-        };
-      }
+describe("constructorReducer", () => {
+  it("should return the initial state", () => {
+    expect(constructorReducer(undefined, {})).toEqual(
+      initialState
+    );
+  })
 
-      case ADD_ITEM_TO_CONSTRUCTOR: {
-        if (action.item.type === "bun") {
-          let priceItems = 0
-          if (state.chosenItems[0]) {
-            priceItems = state.chosenItems.reduce((a, b) => a + b.price, 0)
+  it("should set orderRequest (GET_ORDER_REQUEST)", () => {
+    expect(
+      constructorReducer(initialState, {
+        type: GET_ORDER_REQUEST,
+      })
+    ).toEqual(
+      expect.objectContaining({
+        orderRequest: true,
+      })
+    );
+  });
+
+  it("should set order data (GET_ORDER_SUCCESS)", () => {
+    expect(
+      constructorReducer(initialState, {
+        type: GET_ORDER_SUCCESS,
+        order: {order: 1}
+      })
+    ).toEqual(
+      expect.objectContaining({
+        orderFailed: false,
+        order: {order: 1}, 
+        orderRequest: false
+      })
+    );
+  });
+
+  it("should set orderFailed (GET_ORDER_FAILED)", () => {
+    expect(
+      constructorReducer(initialState, {
+        type: GET_ORDER_FAILED
+      })
+    ).toEqual(
+      expect.objectContaining({
+        orderFailed: true, 
+        orderRequest: false 
+      })
+    );
+  });
+
+  it("should set order to null (ORDER_RESET)", () => {
+    expect(
+      constructorReducer(initialState, {
+        type: ORDER_RESET
+      })
+    ).toEqual(
+      expect.objectContaining({
+        orderFailed: false,
+        order: null, 
+        orderRequest: false
+      })
+    );
+  });
+
+  it("should add bun to constructor (ADD_ITEM_TO_CONSTRUCTOR)", () => {
+    expect(
+      constructorReducer(initialState, {
+        type: ADD_ITEM_TO_CONSTRUCTOR,
+        item: {type: 'bun', price: 50}
+      })
+    ).toEqual(
+      expect.objectContaining({
+        chosenBuns: {type: 'bun', price: 50},
+        totalPrice: 100
+      })
+    );
+  });
+
+  it("should add not bun to constructor (ADD_ITEM_TO_CONSTRUCTOR)", () => {
+    expect(
+      constructorReducer(initialState, {
+        type: ADD_ITEM_TO_CONSTRUCTOR,
+        item: {type: 'not bun', price: 200}
+      })
+    ).toEqual(
+      expect.objectContaining({
+        chosenItems: [{type: 'not bun', price: 200}],
+        totalPrice: NaN
+      })
+    );
+  });
+
+  const initialStateForDeletingAndChange = {
+    chosenBuns: {price: 50},
+    chosenItems: [
+      {
+        id: 1,
+        name: 'la mela',
+        price: 25
+      },
+      {
+        id: 2,
+        name: 'il pane',
+        price: 75
+      }
+    ],
+    totalPrice: 100
+  }
+  it("should delete item from constructor (DELETE_ITEM_FROM_CONSTRUCTOR)", () => {
+    expect(
+      constructorReducer(initialStateForDeletingAndChange, {
+        type: DELETE_ITEM_FROM_CONSTRUCTOR,
+        index: 0
+      })
+    ).toEqual(
+      expect.objectContaining({
+        chosenBuns: {price: 50},
+        chosenItems: [
+          {
+            id: 2,
+            name: 'il pane',
+            price: 75
           }
-          const totalPrice = action.item.price * 2 +priceItems
-          return { 
-            ...state, 
-            chosenBuns: action.item,
-            totalPrice
-          };
-        }
+        ],
+        totalPrice: 175
+      })
+    );
+  });
+  it("should change items in constructor (CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR)", () => {
+    expect(
+      constructorReducer(initialStateForDeletingAndChange, {
+        type: CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
+        dragIndex: 0,
+        hoverIndex: 1
+      })
+    ).toEqual(
+      expect.objectContaining({
+        chosenBuns: {price: 50},
+        chosenItems: [
+          {
+            id: 2,
+            name: 'il pane',
+            price: 75
+          },
+          {
+            id: 1,
+            name: 'la mela',
+            price: 25
+          }
+        ],
+        totalPrice: 100
+      })
+    );
+  });
 
-        let priceBuns = 0
-        if (state.chosenBuns) {
-          priceBuns = state.chosenBuns.price *2
-        }
-        const newItems = [...state.chosenItems, action.item]
-        const priceItems = newItems.reduce((a, b) => a + b.price, 0)
-        const totalPrice = priceBuns+priceItems
-        return { 
-          ...state, 
-          chosenItems: newItems,
-          totalPrice
-        }
-      }
-      case DELETE_ITEM_FROM_CONSTRUCTOR: {
-        var chosenItems = [...state.chosenItems]
-        chosenItems.splice(action.index, 1)
-        
-        const priceForNewItems = chosenItems.reduce((a, b) => a + b.price, 0)
-        const priceBuns =  state.chosenBuns.price * 2
-        let totalPrice = priceBuns+priceForNewItems
-
-        return { ...state, 
-          chosenItems: chosenItems,
-          totalPrice
-         };
-      }
-      case CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR: {
-        const dragCard = state.chosenItems[action.dragIndex];
-        if (dragCard){
-          const newArray = [
-            ...state.chosenItems,
-          ]
-          newArray.splice(action.dragIndex, 1)
-          newArray.splice(action.hoverIndex, 0, dragCard)
-
-          return { 
-            ...state, 
-            chosenItems: newArray
-          };
-        }
-      }
-      default: {
-        return state;
-      }
-    }
-  };
-  
+});
