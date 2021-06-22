@@ -85,7 +85,7 @@ const ingridientPropTypes = PropTypes.shape({
 OrderDetailsModal.propTypes = {
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  isDone: PropTypes.boolean.isRequired,
+  isDone: PropTypes.bool.isRequired,
   ingridients: ingridientPropTypes.isRequired,
   time: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
