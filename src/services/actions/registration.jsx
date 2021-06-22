@@ -222,17 +222,19 @@ export function getForgotPassword(data) {
         if (res && res.success) {
           dispatch({
             type: GET_FORGOT_PASSWORD_SUCCESS,
-            response: res
+            payload: res
           });
         } else {
           dispatch({
-            type: GET_FORGOT_PASSWORD_FAILED
+            type: GET_FORGOT_PASSWORD_FAILED,
+            payload: res
           });
         }
       })
       .catch(err => {
           dispatch({
-            type: GET_FORGOT_PASSWORD_FAILED
+            type: GET_FORGOT_PASSWORD_FAILED,
+            payload: err
           });
       })
     };
@@ -249,17 +251,19 @@ export function getResetPassword(data) {
         if (res && res.success) {
           dispatch({
             type: GET_RESET_PASSWORD_SUCCESS,
-            response: res
+            payload: res
           });
         } else {
           dispatch({
-            type: GET_RESET_PASSWORD_FAILED
+            type: GET_RESET_PASSWORD_FAILED,
+            payload: res
           });
         }
       })
       .catch(err => {
           dispatch({
-            type: GET_RESET_PASSWORD_FAILED
+            type: GET_RESET_PASSWORD_FAILED,
+            payload: err
           });
       })
     };

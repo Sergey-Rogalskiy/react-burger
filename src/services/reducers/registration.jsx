@@ -219,6 +219,7 @@ import {
         };
       }
       case GET_RESET_PASSWORD_SUCCESS: {
+        localStorage.removeItem('isForgotEmail')
         return { 
           ...state, 
           resetPasswordFailed: false, 
