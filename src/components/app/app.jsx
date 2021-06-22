@@ -29,7 +29,7 @@ import {
 } from '../pages'
 import { getToken, getUser } from '../../services/actions/registration'
 
-import { ProtectedRoute, AuthProtectedRoute } from '../utils'
+import { ProtectedRoute, AuthProtectedRoute } from '../protected-route'
 
 import {
   ORDER_RESET,
