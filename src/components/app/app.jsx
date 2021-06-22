@@ -53,7 +53,7 @@ function App() {
         const dataIds = chosenItems.map(item => item._id)
         dataIds.push(chosenBuns._id)
         dataIds.splice(1, 0, chosenBuns._id)
-        let data11 = {
+        const data11 = {
           ingredients: dataIds
         }
         dispatch(getOrder(data11))
