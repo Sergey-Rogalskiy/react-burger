@@ -11,7 +11,7 @@ import {getRegister} from '../../services/actions/registration'
 
 import s from './pages.module.css'
 
-function LoginPage() {
+function RegisterPage() {
   const dispatch = useDispatch()
   const registerRequest = useSelector(state => state.registration.registerRequest)
   const registerFailed = useSelector(state => state.registration.registerFailed)
@@ -118,4 +118,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

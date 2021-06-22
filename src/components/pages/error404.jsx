@@ -1,6 +1,6 @@
 import s from './pages.module.css'
 
-function LoginPage(props) {
+function Error404(props) {
   
   return (
     <>
@@ -11,4 +11,4 @@ function LoginPage(props) {
   );
 }
 
-export default LoginPage;
+export default Error404;

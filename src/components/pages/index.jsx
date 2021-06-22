@@ -7,7 +7,6 @@ import FeedPage from './feed'
 import FeedIdPage from './feed-id'
 import ProfilePage from './profile'
 import ProfileOrdersPage from './profile-orders'
-import ProfileOrdersIdPage from './profile-orders-id'
 import IngridientsIdPage from './ingredients-id'
 import MainPage from './main'
 
@@ -21,7 +20,6 @@ export {
     FeedIdPage,
     ProfilePage,
     ProfileOrdersPage,
-    ProfileOrdersIdPage,
     IngridientsIdPage,
     MainPage,
 }

@@ -10,7 +10,7 @@ import {getForgotPassword} from '../../services/actions/registration'
 
 import s from './pages.module.css'
 
-const LoginPage = () => {
+const ForgotPaswordPage = () => {
   const dispatch = useDispatch()
   const forgotPasswordData = useSelector(state => state.registration.forgotPasswordData)
   const forgotPasswordRequest = useSelector(state => state.registration.forgotPasswordRequest)
@@ -109,4 +109,4 @@ const LoginPage = () => {
   );
 }
 
-export default LoginPage;
+export default ForgotPaswordPage;
