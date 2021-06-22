@@ -6,7 +6,7 @@ import {getItems} from "../../services/actions/ingridients"
 import IngridientDetails from '../ingridient-details/ingridient-details'
 import Modal from '../modal/modal'
 
-function LoginPage(props) {
+function IngridientsIdPage(props) {
 
   const items = useSelector(state => state.ingridients.items)
   const {id} = useParams()
@@ -25,12 +25,10 @@ function LoginPage(props) {
   return (
     <>
      <div className={s.container}>
-      <Modal header={"Детали ингридиента"}> 
           <IngridientDetails currentItemToView={currentItemToView}/>
-      </Modal>
       </div>
     </>
   );
 }
 
-export default LoginPage;
+export default IngridientsIdPage;
