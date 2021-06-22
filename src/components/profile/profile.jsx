@@ -34,7 +34,7 @@ export const ProdileEdit = () => {
     return <Redirect to='/login' />
   }
   return (
-    <form> onSubmit={(e) => save(e)}
+    <form onSubmit={(e) => save(e)}>
     <Input
       type={'text'}
       placeholder={'Имя'}

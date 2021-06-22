@@ -42,7 +42,7 @@ const ForgotPaswordPage = () => {
     )
   }
 
-  if (forgotPasswordData) {
+  if (localStorage.getItem('isForgotEmail')) {
     return (
       
     <div className={s.container}>

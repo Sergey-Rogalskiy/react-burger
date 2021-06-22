@@ -101,10 +101,10 @@ function RegisterPage() {
         onChange={onChange} 
         value={value.password} 
         name={'password'} />
-      </form>
       <Button type="primary" size="large">
         Зарегистрироваться
       </Button>
+      </form>
     <p className="text text_type_main-default text_color_inactive m-3 mt-15">
       Уже зарегистрированы? 
       <Link to='/login' className={s.link}>
