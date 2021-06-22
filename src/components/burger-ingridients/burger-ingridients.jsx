@@ -125,7 +125,7 @@ const ingridientPropTypes = PropTypes.shape({
 });
 
 BurgerIngridients.propTypes = {
-  data: PropTypes.arrayOf(ingridientPropTypes.isRequired)
+  data: PropTypes.arrayOf(ingridientPropTypes)
 }; 
 
 export default BurgerIngridients;

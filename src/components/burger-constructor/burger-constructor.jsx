@@ -40,13 +40,13 @@ const BurgerConstructor = (props) => {
 }
 
 const modalType = PropTypes.shape({
-  visible: PropTypes.boolean,
-  openModal: PropTypes.function,
-  closeModal: PropTypes.function,
+  visible: PropTypes.bool,
+  openModal: PropTypes.func,
+  closeModal: PropTypes.func,
 });
 
 BurgerConstructor.propTypes = {
-  modal: modalType
+  modal: modalType.isRequired
 }; 
 
 export default BurgerConstructor;

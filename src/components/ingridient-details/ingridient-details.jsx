@@ -50,7 +50,7 @@ const ingridientPropTypes = PropTypes.shape({
 
 
 IngridientDetails.propTypes = {
-  data: ingridientPropTypes
+  data: ingridientPropTypes.isRequired
 }; 
 export default IngridientDetails;
 
