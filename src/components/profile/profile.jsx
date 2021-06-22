@@ -23,6 +23,7 @@ export const ProdileEdit = () => {
     console.log('cancel - tbc')
   }
   const save = e => {
+    e.preventDefault()
     dispatch(patchUser(value))
   }
   
@@ -33,7 +34,7 @@ export const ProdileEdit = () => {
     return <Redirect to='/login' />
   }
   return (
-    <>
+    <form> onSubmit={(e) => save(e)}
     <Input
       type={'text'}
       placeholder={'Имя'}
@@ -68,8 +69,8 @@ export const ProdileEdit = () => {
       size={'default'} />
 
     <Button type="secondary" onClick={cancel}>Отмена</Button>
-    <Button onClick={save}>Сохранить</Button>
-    </>
+    <Button>Сохранить</Button>
+    </form>
   );
 }
 

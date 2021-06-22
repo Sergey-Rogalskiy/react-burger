@@ -21,7 +21,8 @@ function LoginPage() {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
-  const enterClick = () => {
+  const enterClick = (e) => {
+    e.preventDefault()
     dispatch(getLogin(value))
   }
 
@@ -71,6 +72,7 @@ function LoginPage() {
           )
         }
 
+  <form onSubmit={(e) => enterClick(e)}>
         <Input
           type={'text'}
           placeholder={'E-mail'}
@@ -89,11 +91,10 @@ function LoginPage() {
         
         <Button 
           type="primary" 
-          size="large" 
-          onClick={enterClick}>
+          size="large" >
             Войти
         </Button>
-
+        </form>
         <p className="text text_type_main-default text_color_inactive m-3 mt-15">
           Вы — новый пользователь? 
           <Link to='/register' className={s.link}>

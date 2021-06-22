@@ -24,7 +24,8 @@ function LoginPage() {
   }
   
   const inputRef = React.useRef(null)
-  const onRegisterClick = () => {
+  const onRegisterClick = (e) => {
+    e.preventDefault()
     dispatch(getRegister(value))
   }
 
@@ -72,6 +73,7 @@ function LoginPage() {
           )
         }
 
+<form onSubmit={(e) => onRegisterClick(e)}>
       <Input
         type={'text'}
         placeholder={'Имя'}
@@ -99,8 +101,8 @@ function LoginPage() {
         onChange={onChange} 
         value={value.password} 
         name={'password'} />
-      
-      <Button type="primary" size="large" onClick={onRegisterClick}>
+      </form>
+      <Button type="primary" size="large">
         Зарегистрироваться
       </Button>
     <p className="text text_type_main-default text_color_inactive m-3 mt-15">

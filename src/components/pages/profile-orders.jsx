@@ -37,39 +37,40 @@ export default function ProfilePage() {
         </div>
 
         <div className={`${s.column} ${s.right}`}>
-        <Input
-          type={'text'}
-          placeholder={'Имя'}
-          onChange={e => onChange(e)}
-          icon={'EditIcon'}
-          value={value.name}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'} />
+          <form>
+            <Input
+              type={'text'}
+              placeholder={'Имя'}
+              onChange={e => onChange(e)}
+              icon={'EditIcon'}
+              value={value.name}
+              name={'name'}
+              error={false}
+              errorText={'Ошибка'}
+              size={'default'} />
 
-        <Input
-          type={'text'}
-          placeholder={'E-mail'}
-          onChange={e => onChange('click name')}
-          icon={'EditIcon'}
-          value={value.email}
-          name={'email'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'} />
+            <Input
+              type={'text'}
+              placeholder={'E-mail'}
+              onChange={e => onChange('click name')}
+              icon={'EditIcon'}
+              value={value.email}
+              name={'email'}
+              error={false}
+              errorText={'Ошибка'}
+              size={'default'} />
 
-        <Input
-          type={'text'}
-          placeholder={'Пароль'}
-          onChange={e => onChange(e)}
-          icon={'EditIcon'}
-          value={value.password}
-          name={'password'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'} />
-
+            <Input
+              type={'text'}
+              placeholder={'Пароль'}
+              onChange={e => onChange(e)}
+              icon={'EditIcon'}
+              value={value.password}
+              name={'password'}
+              error={false}
+              errorText={'Ошибка'}
+              size={'default'} />
+          </form>
         </div>
       </div>
     </>
