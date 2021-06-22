@@ -65,7 +65,9 @@ function App() {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
       dispatch({type: ORDER_RESET});
-      history.push(`${location.state.background.pathname}`)
+      if (location?.state?.background?.pathname) {
+        history.push(`${location.state.background.pathname}`)
+      }
   }
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
@@ -78,7 +80,6 @@ function App() {
       27: () => {
         e.preventDefault();
         closeModal();
-        window.removeEventListener('keyup', handleKeyUp, false);
       },
     };
     if (keys[e.keyCode]) { keys[e.keyCode](); }
