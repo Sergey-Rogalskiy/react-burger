@@ -29,11 +29,6 @@ const OrderDetails = () => {
   );
 }
 
-OrderDetails.propTypes = {
-  data: PropTypes.shape({
-    order_id: PropTypes.number,
-  })
-}; 
 
 
 export default OrderDetails;

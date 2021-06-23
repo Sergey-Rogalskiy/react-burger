@@ -87,7 +87,7 @@ function App() {
 
   
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
- 
+
   const modal = (
     <>
       

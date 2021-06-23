@@ -14,7 +14,6 @@ const IngridientCard = (props) => {
   const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   var counter = 0
-
   if ( props.data.type === 'bun'){
     if (chosenBuns) {
     counter = chosenBuns._id === props.data._id ? 1 : 0
@@ -53,7 +52,21 @@ const IngridientCard = (props) => {
 }
 
 IngridientCard.propTypes = {
-  item: PropTypes.string
+  item: PropTypes.shape({
+    calories: PropTypes.number.isRequired,
+    carbohydrates: PropTypes.number.isRequired,
+    fat: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    image_large: PropTypes.string.isRequired,
+    image_mobile: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    proteins: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+  })
 }; 
+
+
 
 export default IngridientCard
