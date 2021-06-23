@@ -23,6 +23,10 @@ After that all the dependicies will be installed and the local web will be avail
 * Jest and Cypress
 
 # Interface
+<img width=49%src='https://user-images.githubusercontent.com/72499342/122996275-5db9da80-d3b3-11eb-940b-6f853541aada.png'>
+<img width=49%src='https://user-images.githubusercontent.com/72499342/122996339-70341400-d3b3-11eb-9960-0d92e04c0eb0.png'>
+
+
 ![image](https://user-images.githubusercontent.com/72499342/122996275-5db9da80-d3b3-11eb-940b-6f853541aada.png)
 ![image](https://user-images.githubusercontent.com/72499342/122996339-70341400-d3b3-11eb-9960-0d92e04c0eb0.png)
 ![image](https://user-images.githubusercontent.com/72499342/122996385-7b873f80-d3b3-11eb-8843-9aaf1d66d833.png)
