@@ -6,7 +6,6 @@ import ResetPasswordPage from './reset-password'
 import FeedPage from './feed'
 import FeedIdPage from './feed-id'
 import ProfilePage from './profile'
-import ProfileOrdersPage from './profile-orders'
 import IngridientsIdPage from './ingredients-id'
 import MainPage from './main'
 
@@ -19,7 +18,6 @@ export {
     FeedPage,
     FeedIdPage,
     ProfilePage,
-    ProfileOrdersPage,
     IngridientsIdPage,
     MainPage,
 }
