@@ -16,7 +16,7 @@ const Modal = (props) => {
     (
       <>
         <ModalOverlay onClose={onClose}/>
-        <div className={modalStyles.modal}>
+        <div className={modalStyles.modal} id="modal">
           <h1 className={modalStyles.header}>
             {header}
             <CloseIcon type="primary" onClick={onClose}/>
