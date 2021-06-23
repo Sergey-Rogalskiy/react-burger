@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom'
 import {getItems} from "../../services/actions/ingridients"
 import IngridientDetails from '../ingridient-details/ingridient-details'
-import Modal from '../modal/modal'
 
 function IngridientsIdPage(props) {
 

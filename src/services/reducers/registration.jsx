@@ -24,8 +24,6 @@ import {
   PATCH_USER_SUCCESS,
   PATCH_USER_FAILED,
   } from '../actions/registration';
-
-  import { setCookie, deleteCookie } from '../utils';
   
   const initialState = {
     forgotPasswordData: null,
@@ -156,7 +154,6 @@ import {
       }
       case GET_LOGOUT_SUCCESS: {
         localStorage.removeItem('refreshToken')
-        deleteCookie('accessToken')
         return { 
           ...state, 
           logoutFailed: false, 

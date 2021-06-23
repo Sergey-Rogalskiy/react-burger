@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import orderDoneImg from '../../images/order-done.svg';
 
 import { useSelector  } from 'react-redux'

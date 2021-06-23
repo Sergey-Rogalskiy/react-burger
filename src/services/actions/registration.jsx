@@ -102,6 +102,7 @@ export function getLogout(token) {
     getLogoutService(token)
     .then(res => {
       if (res && res.success) {
+        deleteCookie('accessToken')
         dispatch({
           type: GET_LOGOUT_SUCCESS,
           payload: res

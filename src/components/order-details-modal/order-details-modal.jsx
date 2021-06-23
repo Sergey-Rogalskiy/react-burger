@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
