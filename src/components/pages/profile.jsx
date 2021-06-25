@@ -10,7 +10,7 @@ import {ProdileEdit} from '../profile'
 import {  Switch, NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {getLogout} from '../../services/actions/registration'
-import { ProtectedRoute } from '../utils/protected-route';
+import { ProtectedRoute } from '../protected-route/protected-route';
 
 import s from './pages.module.css'
 

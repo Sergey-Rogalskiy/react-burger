@@ -10,7 +10,7 @@ import {getForgotPassword} from '../../services/actions/registration'
 
 import s from './pages.module.css'
 
-const LoginPage = () => {
+const ForgotPaswordPage = () => {
   const dispatch = useDispatch()
   const forgotPasswordData = useSelector(state => state.registration.forgotPasswordData)
   const forgotPasswordRequest = useSelector(state => state.registration.forgotPasswordRequest)
@@ -23,7 +23,8 @@ const LoginPage = () => {
   }
   
   const inputRef = React.useRef(null)
-  const onRestoreClick = () => {
+  const onRestoreClick = (e) => {
+    e.preventDefault()
     dispatch(getForgotPassword(
       {
         "email": value.email
@@ -41,7 +42,7 @@ const LoginPage = () => {
     )
   }
 
-  if (forgotPasswordData) {
+  if (localStorage.getItem('isForgotEmail')) {
     return (
       
     <div className={s.container}>
@@ -71,7 +72,7 @@ const LoginPage = () => {
         Восстановление пароля
       </p>
         
-
+    <form onSubmit={(e) => onRestoreClick(e)}>
       <Input
         type={'email'}
         placeholder={'Укажите e-mail'}
@@ -90,10 +91,10 @@ const LoginPage = () => {
             </p>
           : ''
           }
-      <Button type="primary" size="large" onClick={onRestoreClick}>
+      <Button type="primary" size="large">
           Восстановить
       </Button>
-
+      </form>
       <p className="text text_type_main-default text_color_inactive m-3 mt-15">
         Вспомнили пароль?
         <Link to='/login'  className={s.link}>
@@ -108,4 +109,4 @@ const LoginPage = () => {
   );
 }
 
-export default LoginPage;
+export default ForgotPaswordPage;

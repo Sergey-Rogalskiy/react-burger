@@ -11,7 +11,7 @@ import {getRegister} from '../../services/actions/registration'
 
 import s from './pages.module.css'
 
-function LoginPage() {
+function RegisterPage() {
   const dispatch = useDispatch()
   const registerRequest = useSelector(state => state.registration.registerRequest)
   const registerFailed = useSelector(state => state.registration.registerFailed)
@@ -24,7 +24,8 @@ function LoginPage() {
   }
   
   const inputRef = React.useRef(null)
-  const onRegisterClick = () => {
+  const onRegisterClick = (e) => {
+    e.preventDefault()
     dispatch(getRegister(value))
   }
 
@@ -72,6 +73,7 @@ function LoginPage() {
           )
         }
 
+<form onSubmit={(e) => onRegisterClick(e)}>
       <Input
         type={'text'}
         placeholder={'Имя'}
@@ -99,10 +101,10 @@ function LoginPage() {
         onChange={onChange} 
         value={value.password} 
         name={'password'} />
-      
-      <Button type="primary" size="large" onClick={onRegisterClick}>
+      <Button type="primary" size="large">
         Зарегистрироваться
       </Button>
+      </form>
     <p className="text text_type_main-default text_color_inactive m-3 mt-15">
       Уже зарегистрированы? 
       <Link to='/login' className={s.link}>
@@ -116,4 +118,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

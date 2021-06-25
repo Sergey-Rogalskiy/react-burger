@@ -24,7 +24,7 @@ function MainPage(props) {
             <BurgerIngridients
               modal={props.modal}/>
           </div>
-          <div className={`${s.column} ${s.right}`}>
+          <div className={`${s.column} ${s.right}`} id='burger_constructor'>
             <BurgerConstructor 
               modal={props.modal}/>
           </div>

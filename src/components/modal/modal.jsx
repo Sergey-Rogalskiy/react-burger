@@ -16,7 +16,7 @@ const Modal = (props) => {
     (
       <>
         <ModalOverlay onClose={onClose}/>
-        <div className={modalStyles.modal}>
+        <div className={modalStyles.modal} id="modal">
           <h1 className={modalStyles.header}>
             {header}
             <CloseIcon type="primary" onClick={onClose}/>
@@ -31,9 +31,9 @@ const Modal = (props) => {
 
 
 Modal.propTypes = {
-  children: PropTypes.node,
-  header: PropTypes.string,
-  onClose: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  header: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 }; 
 
 export default Modal;

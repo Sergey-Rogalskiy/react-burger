@@ -24,8 +24,6 @@ import {
   PATCH_USER_SUCCESS,
   PATCH_USER_FAILED,
   } from '../actions/registration';
-
-  import { setCookie, deleteCookie } from '../utils';
   
   const initialState = {
     forgotPasswordData: null,
@@ -53,10 +51,7 @@ import {
     userRequest: false,
     userFailed: false,
     user: null, 
-    // user: {username: 'lala', email:'lala'}, 
 
-    accessToken: null, 
-    refreshToken: null, 
   };
   
   export const registrationReducer = (state = initialState, action) => {
@@ -112,12 +107,10 @@ import {
         };
       }
       case GET_REGISTER_SUCCESS: {
-        setCookie('accessToken', action.payload.accessToken.split('Bearer ')[1])
         localStorage.setItem('refreshToken', action.payload.refreshToken)
         return { 
           ...state, 
           registerFailed: false, 
-          refreshToken: action.payload.refreshToken, 
           user: action.payload.user, 
           registerRequest: false 
         };
@@ -127,8 +120,6 @@ import {
           ...state, 
           registerFailed: action, 
           registerRequest: false,
-          accessToken: null, 
-          refreshToken: null, 
           user: null,
         };
       }
@@ -139,12 +130,10 @@ import {
         };
       }
       case GET_LOGIN_SUCCESS: {
-        setCookie('accessToken', action.payload.accessToken.split('Bearer ')[1])
         localStorage.setItem('refreshToken', action.payload.refreshToken)
         return { 
           ...state, 
           loginFailed: false, 
-          refreshToken: action.payload.refreshToken, 
           user: action.payload.user, 
           loginRequest: false 
         };
@@ -152,10 +141,8 @@ import {
       case GET_LOGIN_FAILED: {
         return { 
           ...state, 
-          loginFailed: action.payload, 
+          loginFailed: action, 
           loginRequest: false , 
-          accessToken: null, 
-          refreshToken: null, 
           user: null,
         };
       }
@@ -167,12 +154,9 @@ import {
       }
       case GET_LOGOUT_SUCCESS: {
         localStorage.removeItem('refreshToken')
-        deleteCookie('accessToken')
         return { 
           ...state, 
           logoutFailed: false, 
-          accessToken: null, 
-          refreshToken: null, 
           user: null,
           logoutRequest: false 
         };
@@ -180,7 +164,7 @@ import {
       case GET_LOGOUT_FAILED: {
         return { 
           ...state, 
-          logoutFailed: action.payload, 
+          logoutFailed: action, 
           logoutRequest: false , 
         };
       }
@@ -191,20 +175,17 @@ import {
         };
       }
       case GET_TOKEN_SUCCESS: {
-        setCookie('accessToken', action.payload.accessToken.split('Bearer ')[1])
         return { 
           ...state, 
           tokenFailed: false, 
-          refreshToken: action.payload.refreshToken, 
           tokenRequest: false 
         };
       }
       case GET_TOKEN_FAILED: {
         return { 
           ...state, 
-          tokenFailed: action.payload, 
+          tokenFailed: action, 
           tokenRequest: false , 
-          accessToken: null, 
         };
       }
       case GET_FORGOT_PASSWORD_REQUEST: {
@@ -217,7 +198,7 @@ import {
         return { 
           ...state, 
           forgotPasswordFailed: false, 
-          forgotPasswordData: action, 
+          forgotPasswordData: action.payload, 
           forgotPasswordRequest: false 
         };
       }
@@ -235,10 +216,11 @@ import {
         };
       }
       case GET_RESET_PASSWORD_SUCCESS: {
+        localStorage.removeItem('isForgotEmail')
         return { 
           ...state, 
           resetPasswordFailed: false, 
-          resetPasswordData: action, 
+          resetPasswordData: action.payload, 
           resetPasswordRequest: false 
         };
       }

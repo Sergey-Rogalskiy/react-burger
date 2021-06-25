@@ -29,7 +29,7 @@ import {
 } from '../pages'
 import { getToken, getUser } from '../../services/actions/registration'
 
-import { ProtectedRoute, AuthProtectedRoute } from '../utils'
+import { ProtectedRoute, AuthProtectedRoute } from '../protected-route'
 
 import {
   ORDER_RESET,
@@ -53,7 +53,7 @@ function App() {
         const dataIds = chosenItems.map(item => item._id)
         dataIds.push(chosenBuns._id)
         dataIds.splice(1, 0, chosenBuns._id)
-        let data11 = {
+        const data11 = {
           ingredients: dataIds
         }
         dispatch(getOrder(data11))
@@ -65,7 +65,9 @@ function App() {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
       dispatch({type: ORDER_RESET});
-      history.push(`${location.state.background.pathname}`)
+      if (location?.state?.background?.pathname) {
+        history.push(`${location.state.background.pathname}`)
+      }
   }
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
@@ -78,7 +80,6 @@ function App() {
       27: () => {
         e.preventDefault();
         closeModal();
-        window.removeEventListener('keyup', handleKeyUp, false);
       },
     };
     if (keys[e.keyCode]) { keys[e.keyCode](); }
@@ -86,7 +87,7 @@ function App() {
 
   
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
- 
+
   const modal = (
     <>
       

@@ -22,7 +22,8 @@ export default function ResetPage() {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
-  const onSaveClick = () => {
+  const onSaveClick = (e) => {
+    e.preventDefault()
     dispatch(getResetPassword(value))
   }
 
@@ -79,7 +80,7 @@ export default function ResetPage() {
         onChange={onChange} 
         value={value.password} 
         name={'password'} />
-
+    <form onSubmit={(e) => onSaveClick(e)}>
       <Input
         type={'text'}
         placeholder={'Введите код из письма'}
@@ -91,9 +92,10 @@ export default function ResetPage() {
         size={'default'}
       />
 
-      <Button type="primary" size="large" onClick={onSaveClick}>
+      <Button type="primary" size="large" >
           Сохранить
       </Button>
+    </form>
 
     <p>
       Вспомнили пароль?

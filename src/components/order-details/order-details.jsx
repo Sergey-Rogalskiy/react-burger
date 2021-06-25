@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import orderDoneImg from '../../images/order-done.svg';
 
 import { useSelector  } from 'react-redux'
@@ -29,11 +28,6 @@ const OrderDetails = () => {
   );
 }
 
-OrderDetails.propTypes = {
-  data: PropTypes.shape({
-    order_id: PropTypes.number,
-  })
-}; 
 
 
 export default OrderDetails;

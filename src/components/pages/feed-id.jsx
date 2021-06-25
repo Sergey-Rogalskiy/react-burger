@@ -5,7 +5,6 @@ import {
 import {useSelector} from 'react-redux'
 
 import { useParams, Redirect } from 'react-router-dom'
-import Modal from '../modal/modal'
 
 import s from './pages.module.css'
 
@@ -20,7 +19,6 @@ export default function FeedIdPage() {
   return (
     <>
       <div className={s.container}>
-      <Modal header={"Детали заказа"}>
         <p className={`${s.center} text text_type_digits-default mb-2`}>#{data._id}</p>
         <p className="text text_type_main-medium">{data.name}</p>
         {
@@ -57,7 +55,6 @@ export default function FeedIdPage() {
               <CurrencyIcon type="primary" />
             </div>
           </div>
-      </Modal>
       </div>
     </>
   );

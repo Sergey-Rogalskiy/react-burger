@@ -8,7 +8,7 @@ import {
     getUserService,
     patchUserService
   } from '../real-service';
-  import { getCookie } from '../utils';
+  import { getCookie, setCookie, deleteCookie} from '../utils';
 
   export const GET_FORGOT_PASSWORD_REQUEST = 'GET_FORGOT_PASSWORD_REQUEST';
   export const GET_FORGOT_PASSWORD_SUCCESS = 'GET_FORGOT_PASSWORD_SUCCESS';
@@ -44,6 +44,7 @@ export function getRegister(data) {
     getRegisterService(data)
     .then(res => {
       if (res && res.success) {
+        setCookie('accessToken', res.accessToken.split('Bearer ')[1])
         dispatch({
           type: GET_REGISTER_SUCCESS,
           payload: res
@@ -72,6 +73,7 @@ export function getLogin(data) {
     getLoginService(data)
     .then(res => {
       if (res && res.success) {
+        setCookie('accessToken', res.accessToken.split('Bearer ')[1])
         dispatch({
           type: GET_LOGIN_SUCCESS,
           payload: res
@@ -100,6 +102,7 @@ export function getLogout(token) {
     getLogoutService(token)
     .then(res => {
       if (res && res.success) {
+        deleteCookie('accessToken')
         dispatch({
           type: GET_LOGOUT_SUCCESS,
           payload: res
@@ -128,6 +131,7 @@ export function getToken(token) {
     getTokenService(token)
     .then(res => {
       if (res && res.success) {
+        setCookie('accessToken', res.accessToken.split('Bearer ')[1])
         dispatch({
           type: GET_TOKEN_SUCCESS,
           payload: res
@@ -219,17 +223,19 @@ export function getForgotPassword(data) {
         if (res && res.success) {
           dispatch({
             type: GET_FORGOT_PASSWORD_SUCCESS,
-            response: res
+            payload: res
           });
         } else {
           dispatch({
-            type: GET_FORGOT_PASSWORD_FAILED
+            type: GET_FORGOT_PASSWORD_FAILED,
+            payload: res
           });
         }
       })
       .catch(err => {
           dispatch({
-            type: GET_FORGOT_PASSWORD_FAILED
+            type: GET_FORGOT_PASSWORD_FAILED,
+            payload: err
           });
       })
     };
@@ -246,17 +252,19 @@ export function getResetPassword(data) {
         if (res && res.success) {
           dispatch({
             type: GET_RESET_PASSWORD_SUCCESS,
-            response: res
+            payload: res
           });
         } else {
           dispatch({
-            type: GET_RESET_PASSWORD_FAILED
+            type: GET_RESET_PASSWORD_FAILED,
+            payload: res
           });
         }
       })
       .catch(err => {
           dispatch({
-            type: GET_RESET_PASSWORD_FAILED
+            type: GET_RESET_PASSWORD_FAILED,
+            payload: err
           });
       })
     };

@@ -108,6 +108,8 @@ import {
             ...state, 
             chosenItems: newArray
           };
+        } else {
+          return state;
         }
       }
       default: {

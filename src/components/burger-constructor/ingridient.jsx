@@ -69,6 +69,7 @@ const Ingridient = (props) => {
         key={index} 
         className={` ${burgerConstructorStyles.center}  pb-2`}
         style={{ ...style, opacity }}
+        шв
       >
         <DragIcon type="primary" />
         <ConstructorElement
