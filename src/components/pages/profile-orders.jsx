@@ -1,30 +1,16 @@
 import React from 'react'
 import {
   Input,
-  PasswordInput,
-  Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from "react-router-dom"
 
-import {useDispatch, useSelector} from 'react-redux'
-import {getRegister} from '../../services/actions/registration'
+import { useSelector} from 'react-redux'
 
-import {useHistory, useLocation} from 'react-router-dom'
-
-import {
-  OrderFeed,
-  CookingDoneBoard
-} from '../order-feed/index'
 
 import s from './pages.module.css'
 
 export default function ProfilePage() {
-  const history = useHistory();
-  // console.log(history)
-  const lcoation = useLocation();
-  console.log(lcoation)
 
-  const dispatch = useDispatch()
   const data = useSelector(state => state.registration.user)
   
   const [value, setValue] = React.useState(data)
@@ -59,19 +45,17 @@ export default function ProfilePage() {
           value={value.name}
           name={'name'}
           error={false}
-          onIconClick={e=>{console.log(e)} }
           errorText={'Ошибка'}
           size={'default'} />
 
         <Input
           type={'text'}
           placeholder={'E-mail'}
-          onChange={e => onChange(e)}
+          onChange={e => onChange('click name')}
           icon={'EditIcon'}
           value={value.email}
           name={'email'}
           error={false}
-          onIconClick={e=>{console.log(e)} }
           errorText={'Ошибка'}
           size={'default'} />
 
@@ -83,7 +67,6 @@ export default function ProfilePage() {
           value={value.password}
           name={'password'}
           error={false}
-          onIconClick={e=>{console.log(e)} }
           errorText={'Ошибка'}
           size={'default'} />
 

@@ -1,12 +1,10 @@
 import React from 'react'
 import AppHeader from '../app-header/app-header'
 
-
-import s from './app.module.css';
-
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
+import OrderDetailsModal from  '../order-details-modal/order-details-modal'
 
 import { useSelector, useDispatch  } from 'react-redux'
 import {
@@ -16,7 +14,7 @@ import {
   setCurrentItemToView,
 } from '../../services/actions/ingridients'
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import {
   Error404,
   LoginPage,
@@ -26,13 +24,22 @@ import {
   FeedPage,
   FeedIdPage,
   ProfilePage,
-  ProfileOrdersPage,
-  ProfileOrdersIdPage,
   IngridientsIdPage,
   MainPage,
 } from '../pages'
+import { getToken, getUser } from '../../services/actions/registration'
+
+import { ProtectedRoute, AuthProtectedRoute } from '../utils'
+
+import {
+  ORDER_RESET,
+} from '../../services/actions/constructor';
 
 function App() {
+  
+  const history = useHistory()
+  const location = useLocation()
+
   const [visible, setVisible] = React.useState(false)
 
   const dispatch = useDispatch()
@@ -49,7 +56,6 @@ function App() {
         let data11 = {
           ingredients: dataIds
         }
-        console.log()
         dispatch(getOrder(data11))
       }
       
@@ -58,6 +64,8 @@ function App() {
   const closeModal = () => {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
+      dispatch({type: ORDER_RESET});
+      history.push(`${location.state.background.pathname}`)
   }
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
@@ -79,74 +87,102 @@ function App() {
   
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
  
-  const modal = (  
-    <Modal header={!currentItemToView?"Ваш заказ": "Детали ингридента"} onClose={closeModal}> 
-    {
-      !currentItemToView 
-      ?
-      <OrderDetails/>
-      :
-      <IngridientDetails/>
-
-    }
-    </Modal>
+  const modal = (
+    <>
+      
+      <Modal header={ 
+          currentItemToView?.type === 'order' ? (
+            'Детали заказа'
+          ) : (
+            currentItemToView?.type === 'ingridient' ? (
+              'Детали ингридиента'
+            ) : (
+              'Детали заказа'
+            )
+          )
+        } 
+        onClose={closeModal}> 
+        {
+          !currentItemToView?.item
+          ?
+          <OrderDetails/>
+          :
+          currentItemToView?.type === 'ingridient'
+          ?
+          <IngridientDetails currentItemToView={currentItemToView}/>
+          :
+          <OrderDetailsModal currentItemToView={currentItemToView}/>
+        }
+      </Modal>
+    </>
   );
 
+  React.useEffect(() => {
+    if (localStorage.getItem('refreshToken'))
+      dispatch(getToken(localStorage.getItem('refreshToken')))
+  }, [dispatch])
+  React.useEffect(() => {
+    if (localStorage.getItem('refreshToken')) dispatch(getUser())
+  }, [dispatch])
 
-  // if (ingridientData.loading) {
-  //   return (
-  //     <Loader />
-  //   )
-  // }
-  // if (ingridientData.error) {
-  //   return (
-  //     <>
-  //       {console.log(ingridientData.error)}
-  //       <ErrorIndicator />
-  //     </>
-  //   )
-  // }
+  const background = (history.action === "PUSH" || history.action === "REFRESH") && location?.state?.background
   return (
     <>
-      <Router>
       <AppHeader/>
-        <Switch>
-          <Route path="/" exact>
-            <MainPage 
-              modal = {{visible, openModal, closeModal}}/>
-          </Route>
-          <Route path="/login" exact>
+        <Switch location={background|| location}>
+          <AuthProtectedRoute path="/login" exact>
             <LoginPage />
-          </Route>
-          <Route path="/register" exact>
+          </AuthProtectedRoute>
+          <AuthProtectedRoute path="/register" exact>
             <RegisterPage />
-          </Route>
-          <Route path="/forgot-password" exact>
+          </AuthProtectedRoute>
+          <AuthProtectedRoute path="/forgot-password" exact>
             <ForgotPasswordPage />
-          </Route>
-          <Route path="/reset-password" exact>
+          </AuthProtectedRoute>
+          <AuthProtectedRoute path="/reset-password" exact>
             <ResetPasswordPage />
-          </Route>
+          </AuthProtectedRoute>
           <Route path="/feed" exact>
-            <FeedPage />
+            <FeedPage 
+              modal = {{openModal}}/>
           </Route>
-          <Route path="/feed/:id" exact>
-            <FeedIdPage />
+          <Route path="/feed/:id" >
+            <FeedIdPage  />
           </Route>
-          <Route path="/profile/orders/:id" exact>
-            <FeedIdPage />
-          </Route>
-          <Route path="/profile" >
-            <ProfilePage />
-          </Route>
+          <ProtectedRoute path="/profile/orders/:id" exact>
+            <FeedIdPage 
+              modal = {{openModal}}/>
+          </ProtectedRoute>
+          <ProtectedRoute path="/profile" >
+            <ProfilePage 
+              modal = {{openModal}}/>
+          </ProtectedRoute>
           <Route path="/ingredients/:id" exact>
             <IngridientsIdPage />
+          </Route>
+          <Route path="/" exact>
+            <MainPage 
+              modal = {{openModal}}/>
           </Route>
           <Route>
             <Error404 />
           </Route>
         </Switch>
-      </Router>
+        {background && (
+            <Route path={'ingridients/:id'}>
+              <IngridientsIdPage modal={false}/>
+            </Route>
+        )}
+        {background && (
+            <Route path='feed/:id' exact>
+              <FeedIdPage modal={false}/>
+            </Route>
+        )}
+        {background && (
+            <Route path='profile/orders/:id' exact>
+              <FeedIdPage modal={false}/>
+            </Route>
+        )}
       {visible && modal}
   
     </>

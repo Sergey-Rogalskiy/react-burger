@@ -1,62 +1,96 @@
 import React from 'react'
 import {
-  Logo, 
-  BurgerIcon, 
-  ListIcon,
-  ProfileIcon,
-  EmailInput,
   Input,
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
+import {getLogin} from '../../services/actions/registration'
+import {useDispatch, useSelector} from 'react-redux'
 
 import s from './pages.module.css'
 
 function LoginPage() {
+  const dispatch = useDispatch()
+  const loginFailed = useSelector(state => state.registration.loginFailed)
+  const loginRequest = useSelector(state => state.registration.loginRequest)
+  const user = useSelector(state => state.registration.user)
   
   const [value, setValue] = React.useState({email: '', password: '', })
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
-  const inputRef = React.useRef(null)
-  const onEnterClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
-    alert('Icon Click Callback')
+  const enterClick = () => {
+    dispatch(getLogin(value))
   }
+
+  if (user) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+          <Redirect to='/'/>
+         </p>
+        </div>
+      </div>
+    )
+  }
+
+  
+  if (loginRequest) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+          LOADING
+         </p>
+        </div>
+      </div>
+    )
+  }
+
   
   
   return (
-    <>
     <div className = {`${s.container} `}>
       <div className = {`${s.registration}`}>
 
        <p className="text text_type_main-medium m-3 mt-15">
         Вход
        </p>
+        {
+          (loginFailed) ? (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+              {(loginFailed.message)}
+            </p>
+          ) : (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+              {(loginFailed.message)}
+            </p>
+          )
+        }
 
         <Input
           type={'text'}
           placeholder={'E-mail'}
-          onChange={e => setValue(e.target.value)}
-          value={value.name}
+          onChange={onChange}
+          value={value.email}
           name={'email'}
           error={false}
-          ref={inputRef}
           errorText={'Ошибка'}
           size={'default'}
         />
 
         <PasswordInput 
           onChange={onChange} 
-          value={value.value} 
+          value={value.password} 
           name={'password'} />
         
         <Button 
           type="primary" 
           size="large" 
-          onCLick={onEnterClick}>
+          onClick={enterClick}>
             Войти
         </Button>
 
@@ -73,9 +107,9 @@ function LoginPage() {
             Восстановить пароль
           </Link> 
         </p>
+        
       </div>
-      </div>
-    </>
+    </div>
   );
 }
 

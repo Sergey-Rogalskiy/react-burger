@@ -1,15 +1,14 @@
 import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
-import { NavLink, useLocation, useRouteMatch, useHistory, useParams } from "react-router-dom"
+import { NavLink, useLocation, } from "react-router-dom"
 import s from './app-header.module.css'
 
 function AppHeader() {
   const {pathname} = useLocation()
-  console.log(pathname)
   return (
     <header className={s.header}>
       <div className={s.header__inner}>
         <nav className={s.nav}>
-            <NavLink className={s.nav__link} activeClassName={s.active} to="." exact>
+            <NavLink className={s.nav__link} activeClassName={s.active} to="/" exact>
               <BurgerIcon type={(pathname === "/") ? "primary" : "secondary"} />
               <span className='p-2'>Конструктор</span>
             </NavLink>

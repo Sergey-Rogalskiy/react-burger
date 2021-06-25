@@ -1,37 +1,37 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Input,
-  PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { useSelector, useDispatch  } from 'react-redux'
-import {getItems} from "../../services/actions/ingridients"
+import {useDispatch, useSelector} from 'react-redux'
+import {patchUser} from '../../services/actions/registration'
+import {Redirect} from 'react-router-dom'
 
-import {useHistory} from 'react-router-dom'
 
-import s from './profile.module.css'
 
 export const ProdileEdit = () => {
-  const history = useHistory();
-  console.log(history)
   const dispatch = useDispatch()
-  const feedData = useSelector(state => state.feed.feedData)
 
-  const data = useSelector(state => state.registration.user)
-  
+  const user = useSelector(state => state.registration.user)
+  let data = {...user, password: ''}
   const [value, setValue] = React.useState(data)
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})
   }
-  
-  const onClick = () => {
-
+  const cancel = e => {
+    console.log('cancel - tbc')
   }
+  const save = e => {
+    dispatch(patchUser(value))
+  }
+  
   // useEffect(() => {
   //   dispatch(getItems())
   // }, [dispatch])
-
+  if (!data) {
+    return <Redirect to='/login' />
+  }
   return (
     <>
     <Input
@@ -39,10 +39,9 @@ export const ProdileEdit = () => {
       placeholder={'Имя'}
       onChange={e => onChange(e)}
       icon={'EditIcon'}
-      value={value.name}
+      value={value?.name}
       name={'name'}
       error={false}
-      onIconClick={e=>{console.log(e)} }
       errorText={'Ошибка'}
       size={'default'} />
 
@@ -51,10 +50,9 @@ export const ProdileEdit = () => {
       placeholder={'E-mail'}
       onChange={e => onChange(e)}
       icon={'EditIcon'}
-      value={value.email}
+      value={value?.email}
       name={'email'}
       error={false}
-      onIconClick={e=>{console.log(e)} }
       errorText={'Ошибка'}
       size={'default'} />
 
@@ -66,9 +64,11 @@ export const ProdileEdit = () => {
       value={value.password}
       name={'password'}
       error={false}
-      onIconClick={e=>{console.log(e)} }
       errorText={'Ошибка'}
       size={'default'} />
+
+    <Button type="secondary" onClick={cancel}>Отмена</Button>
+    <Button onClick={save}>Сохранить</Button>
     </>
   );
 }

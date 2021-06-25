@@ -1,14 +1,3 @@
-import React from 'react'
-import {
-  Input,
-  PasswordInput,
-  Button
-} from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
-
-import {useDispatch, useSelector} from 'react-redux'
-import {getRegister} from '../../services/actions/registration'
-
 import {
   OrderFeed,
   CookingDoneBoard
@@ -16,8 +5,7 @@ import {
 
 import s from './pages.module.css'
 
-export default function FeedPage() {
-  const dispatch = useDispatch()
+export default function FeedPage(props) {
   return (
     <>
       <div className={s.container}>
@@ -30,7 +18,7 @@ export default function FeedPage() {
   
       <div className={`${s.row}`}>
         <div className={`${s.column} ${s.left}`}>
-          <OrderFeed/>  
+          <OrderFeed modal={props.modal}/>  
         </div>
         <div className={`${s.column} ${s.right}`}>
           <CookingDoneBoard />

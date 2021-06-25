@@ -3,8 +3,6 @@ import listByTypeStyles from './list-by-type.module.css'
 import Element from './element'
 
 const ListByType = (props) => {
-console.log(props.data)
-
   return (
     <>
       <ul className={listByTypeStyles.list_by_type}>

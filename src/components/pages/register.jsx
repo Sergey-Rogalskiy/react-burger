@@ -4,18 +4,18 @@ import {
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getRegister} from '../../services/actions/registration'
 
 import s from './pages.module.css'
 
-function LoginPage(props) {
+function LoginPage() {
   const dispatch = useDispatch()
-  const registerdData = useSelector(state => state.registration.registerdData)
   const registerRequest = useSelector(state => state.registration.registerRequest)
-  const registerError = useSelector(state => state.registration.registerError)
+  const registerFailed = useSelector(state => state.registration.registerFailed)
+  const user = useSelector(state => state.registration.user)
 
   
   const [value, setValue] = React.useState({name: '', email: '', password: '', })
@@ -25,12 +25,31 @@ function LoginPage(props) {
   
   const inputRef = React.useRef(null)
   const onRegisterClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
     dispatch(getRegister(value))
+  }
+
+  if (user) {
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+          <Redirect to='/profile'/>
+         </p>
+        </div>
+      </div>
+    )
   }
   
   if (registerRequest) {
-    return <p>LOADING</p>
+    return (
+      <div className = {`${s.container} `}>
+        <div className = {`${s.registration}`}>
+         <p className="text text_type_main-medium m-3 mt-15">
+         LOADING
+         </p>
+        </div>
+      </div>
+    )
   }
   
   return (
@@ -41,6 +60,17 @@ function LoginPage(props) {
       <p className="text text_type_main-medium m-3 mt-15">
         Регистрация
         </p>
+        {
+          (registerFailed) ? (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+            Error: {(registerFailed.message ? registerFailed.message: 'TBC')}
+            </p>
+          ) : (
+            <p className={`${s.text_color_error} text text_type_main-default m-3 colors-interface-error`}>
+               
+            </p>
+          )
+        }
 
       <Input
         type={'text'}

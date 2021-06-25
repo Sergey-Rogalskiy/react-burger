@@ -4,7 +4,7 @@ import {
   PasswordInput,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { Link, Redirect } from "react-router-dom"
+import { Link, Redirect, useHistory } from "react-router-dom"
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getResetPassword} from '../../services/actions/registration'
@@ -17,10 +17,6 @@ export default function ResetPage() {
   const resetPasswordRequest = useSelector(state => state.registration.resetPasswordRequest)
   const resetPasswordFailed = useSelector(state => state.registration.resetPasswordFailed)
   
-  console.log(resetPasswordData)
-  console.log(resetPasswordRequest)
-  console.log(resetPasswordFailed)
-  
   const [value, setValue] = React.useState({token: '', password: '', })
   const onChange = e => {
     setValue({...value, [e.target.name]: e.target.value})
@@ -29,6 +25,17 @@ export default function ResetPage() {
   const onSaveClick = () => {
     dispatch(getResetPassword(value))
   }
+
+  const history = useHistory()
+  var isForgotEmail
+  React.useEffect(
+    () => {
+      isForgotEmail  = localStorage.getItem('isForgotEmail')
+      if (!isForgotEmail) {
+        history.replace({pathname: '/login', state: {from: '/'}})
+      }
+    }, [isForgotEmail]
+  )
   
   if (resetPasswordRequest) {
     return (
