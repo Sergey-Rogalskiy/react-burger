@@ -6,18 +6,12 @@ import ListByType from './list-by-type/list-by-type'
 import PropTypes from 'prop-types';
 
 import { useSelector, useDispatch  } from 'react-redux'
-import {getItems} from "../../services/actions/ingridients"
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 
 const BurgerIngridients = (props) => {
 
   const items = useSelector(state => state.ingridients.items)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getItems())
-  }, [dispatch])
 
   const [current, setCurrent] = React.useState('one')
   let data_buns = items.filter(obj1 => obj1.type === "bun");

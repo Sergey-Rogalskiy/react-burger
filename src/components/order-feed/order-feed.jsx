@@ -11,8 +11,10 @@ export const OrderFeed = (props) => {
   const {path} = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
-  const feedData = useSelector(state => state.feed.feedData)
   const feedRequest = useSelector(state => state.feed.feedRequest)
+  const wsFeedData = props.orders
+
+
   
   if (feedRequest) {
     return <p>LOADING</p>
@@ -29,7 +31,8 @@ export const OrderFeed = (props) => {
       <div className={s.overflow} >
         <ul >
             {
-            feedData.map((item, index) => (
+            wsFeedData 
+            ? wsFeedData.map((item, index) => (
               <div 
                 key={index}  
                 onClick={(e) => {clickOrder(e, item)}}>
@@ -37,6 +40,8 @@ export const OrderFeed = (props) => {
                   data={item}/>
               </div>
             ))
+            :
+            <div>Loading...</div>
             }
         </ul>
       </div>

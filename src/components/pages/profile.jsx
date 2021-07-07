@@ -1,4 +1,6 @@
-
+import { useEffect } from 'react';
+import { wsInitAuth } from '../../services/actions/feed';
+import { useSelector  } from 'react-redux'
 
 import {
   OrderFeed,
@@ -17,11 +19,18 @@ import s from './pages.module.css'
 export default function ProfilePage(props) {
   const refreshToken = localStorage.getItem('refreshToken')
   const dispatch = useDispatch();
+  const wsFeedDataAuth = useSelector(state => state.feed.wsFeedDataAuth?.orders)
 
   const exit = (e) => {
     e.preventDefault()
     dispatch(getLogout(refreshToken))
   }
+  
+  useEffect(
+    () => {
+        dispatch(wsInitAuth())
+    }, [] 
+  );
   
   return (
     <>
@@ -61,7 +70,7 @@ export default function ProfilePage(props) {
                 <ProdileEdit />
               </ProtectedRoute>
               <ProtectedRoute path="/profile/orders" exact>
-               <OrderFeed  modal={props.modal}/>  
+               <OrderFeed  modal={props.modal} orders={wsFeedDataAuth}/>  
               </ProtectedRoute>
               <ProtectedRoute>
                 Watt?

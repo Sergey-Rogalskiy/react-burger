@@ -59,6 +59,12 @@ export const patchUserService = async (token, data) => {
   const res = await patchResource(`/auth/user`, token, data);
   return res;
 };
+export const getFeedRequest = async () => {
+  const res = await getResource(`/feed`);
+  return res;
+};
+
+
 
 const getResource = async (url, token) => {
   const res = await fetch(`${_apiBase}${url}`, {
@@ -110,14 +116,15 @@ const postResource = async (url, token, data=null) => {
       method:'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
-      body:JSON.stringify(data)
+      body:JSON.stringify({...data, token:token})
     }
   } else {
     addData = {
       method:'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body:JSON.stringify({token:token})
     }
