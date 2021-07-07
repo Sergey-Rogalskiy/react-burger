@@ -81,11 +81,21 @@ export const CookingDoneBoard = (props) => {
 			</div>
 			<div>
 				<h3 className="text text_type_main-medium">Выполнено за все время:</h3>
-				<p className={`${s.shinny_clr} text text_type_digits-large`}>{totalOrders}</p>
+				{
+					totalOrders 
+					? <p className={`${s.shinny_clr} text text_type_digits-large`}>{totalOrders}</p>
+					: <p>Loading</p>
+				}
+				
 			</div>
 			<div>
 				<h3 className="text text_type_main-medium">Выполнено за сегодня:</h3>
-				<p className={`${s.shinny_clr} text text_type_digits-large`}>{todayOrders}</p>
+				{
+					todayOrders 
+					? <p className={`${s.shinny_clr} text text_type_digits-large`}>{todayOrders}</p>
+					: <p>Loading</p>
+				}
+				
 			</div>
 		</div>
 	);

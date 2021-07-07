@@ -10,12 +10,15 @@ export const Element = (props) => {
 
   const testData = props.data
   const ingredients = useSelector(state => state.ingridients.items)
-  const allIngridientsData = testData.ingredients.map(item => {
-    return {
-      image: ingredients.filter(ingredient => ingredient._id === item)[0].image,
-      price: ingredients.filter(ingredient => ingredient._id === item)[0].price
-    }
-  }).slice(0, 5)
+  let allIngridientsData
+  if (testData) {
+    allIngridientsData = testData.ingredients.map(item => {
+      return {
+        image: ingredients.filter(ingredient => ingredient._id === item)[0].image,
+        price: ingredients.filter(ingredient => ingredient._id === item)[0].price
+      }
+    }).slice(0, 5)
+  }
   const ingredientsImages = allIngridientsData.slice(0, 5)
   const totalPrice = allIngridientsData.reduce((acc, item) => acc+item.price, 0)
   
@@ -28,7 +31,14 @@ export const Element = (props) => {
           <p className="text text_type_main-default text_color_inactive pt-3">{props.data.createdAt}</p>
         </div>
         <p className="text text_type_main-small pt-3">{props.data.name}</p>
-        <p className="text text_type_main-small pb-3">{props.data.status}</p>
+        
+        {
+          (props.data.status === 'done') 
+          ? <p className={`${s.done_clr} mb-10`}>Выполнен</p>
+          : (props.data.status === 'pending') 
+          ? <p className={`mb-10`}>Готовится</p> 
+          : <p className={`mb-10`}>Создан</p> 
+        }
         
         <div className={s.flex_row}>
             <ul className={s.images}>

@@ -11,7 +11,10 @@ import s from './pages.module.css'
 export default function FeedIdPage() {
   const param = useParams();
 
-  const data = useSelector(state => state.feed.feedData)[param.id-1]
+  const orders = useSelector(state => state.feed.wsFeedData.orders)
+  console.log(orders)
+  const data = orders.filter(item => item._id === param.id)[0]
+  console.log(data)
   if (!data && data === undefined) {
     return <Redirect to='/404' />
   }
@@ -30,7 +33,7 @@ export default function FeedIdPage() {
         <ul>
             
             {
-              data.ingridients.map((item, index) => (
+              data.ingredients.map((item, index) => (
                 <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>
                     <img className={s.img} src={item.image} alt="-" />
