@@ -36,22 +36,39 @@ import {
   ORDER_RESET,
 } from '../../services/actions/constructor';
 
-function App() {
+type TLocationItem = {
+  hash: string
+  key: string
+  pathname: string
+  search: string
+  state: null
+}
+type TLocation = {
+  hash: string
+  key: string
+  pathname: string
+  search: string
+  state: { background: TLocationItem } | null
+  background: TLocationItem
+}
+
+const App: React.FC = () => {
   const dispatch = useDispatch()
   
   const history = useHistory()
-  const location = useLocation()
+  
+  const location = useLocation<TLocation>()
 
   const [visible, setVisible] = React.useState(false)
 
-  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
-  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector((state:any) => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector((state:any) => state.burgerConstructor.chosenItems)
 
-  const openModal = (event, item) => {
+  const openModal = (event: any, item: any) => {
       if (item !== undefined) {
         dispatch(setCurrentItemToView(item))
       } else {
-        const dataIds = chosenItems.map(item => item._id)
+        const dataIds = chosenItems.map((item: any) => item._id)
         dataIds.push(chosenBuns._id)
         dataIds.splice(1, 0, chosenBuns._id)
         const data11 = {
@@ -81,18 +98,21 @@ function App() {
       document.removeEventListener("keyup", handleKeyUp);
     }
   });
-  const handleKeyUp = (e) => {
-    const keys = {
-      27: () => {
-        e.preventDefault();
-        closeModal();
-      },
-    };
-    if (keys[e.keyCode]) { keys[e.keyCode](); }
+  const handleKeyUp = (e: any) => {
+    // const keys = {
+    //   27: ():void => {
+    //     e.preventDefault();
+    //     closeModal();
+    //   },
+    // };
+    if (e.keyCode == 27) { 
+      e.preventDefault();
+      closeModal();; 
+    }
   }
 
   
-  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
+  const currentItemToView = useSelector((state: any) => state.ingridients.currentItemToView)
 
   const modal = (
     <>
@@ -118,7 +138,7 @@ function App() {
           ?
           <IngridientDetails currentItemToView={currentItemToView}/>
           :
-          <OrderDetailsModal currentItemToView={currentItemToView}/>
+          <OrderDetailsModal/>
         }
       </Modal>
     </>
@@ -132,7 +152,10 @@ function App() {
     if (localStorage.getItem('refreshToken')) dispatch(getUser())
   }, [dispatch])
 
-  const background = (history.action === "PUSH" || history.action === "REFRESH") && location?.state?.background
+  const background = (history.action === "PUSH" ||  history.action === "POP") && location?.state?.background
+  // const background = (history.action === "PUSH" ||  history.action === "REFRESH") && location?.state?.background
+  
+
   return (
     <>
       <AppHeader/>
@@ -157,8 +180,7 @@ function App() {
             <FeedIdPage  />
           </Route>
           <ProtectedRoute path="/profile/orders/:id" exact>
-            <FeedIdPage 
-              modal = {{openModal}}/>
+            <FeedIdPage />
           </ProtectedRoute>
           <ProtectedRoute path="/profile" >
             <ProfilePage 
@@ -182,12 +204,12 @@ function App() {
         )}
         {background && (
             <Route path='feed/:id' exact>
-              <FeedIdPage modal={false}/>
+              <FeedIdPage/>
             </Route>
         )}
         {background && (
             <Route path='profile/orders/:id' exact>
-              <FeedIdPage modal={false}/>
+              <FeedIdPage/>
             </Route>
         )}
       {visible && modal}
