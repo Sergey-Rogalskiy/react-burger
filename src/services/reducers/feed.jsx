@@ -9,6 +9,9 @@ import {
   WS_CONNECTION_AUTH_ERROR,
   WS_CONNECTION_AUTH_CLOSED,
   WS_GET_MESSAGE_AUTH,
+  ORDER_ID_FAILED,
+  ORDER_ID_REQUEST,
+  ORDER_ID_SUCCESS
 } from '../actions/feed';
 
   const initialState = {
@@ -366,6 +369,27 @@ import {
           ...state,
           wsAuthError: null,
           wsFeedDataAuth: action.payload
+        };
+      }
+      case ORDER_ID_REQUEST: {
+        return {
+          ...state,
+          orderIdRequest: true
+        };
+      }
+      case ORDER_ID_SUCCESS: {
+        return { 
+          ...state, 
+          orderIdFailed: false,
+          orderId: action.payload.orders[0], 
+          orderIdRequest: false
+        };
+      }
+      case ORDER_ID_FAILED: {
+        return { 
+          ...state, 
+          orderIdFailed: true, 
+          orderIdRequest: false 
         };
       }
       default: {

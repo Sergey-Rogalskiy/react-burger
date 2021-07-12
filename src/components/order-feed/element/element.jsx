@@ -11,8 +11,6 @@ export const Element = (props) => {
   const testData = props.data
   const ingredients = useSelector(state => state.ingridients.items)
   let allIngridientsData
-
-  console.log(ingredients.length != 0);
   let ingredientsImages = []
   let totalPrice
   if (ingredients.length != 0) {

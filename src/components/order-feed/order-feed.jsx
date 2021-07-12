@@ -22,7 +22,7 @@ export const OrderFeed = (props) => {
   const clickOrder = (e, item) => {
     const order = { type: 'order', item : item}
     props.modal.openModal(e, order)
-    history.push( {pathname: `${path}/${item._id}`,
+    history.push( {pathname: `${path}/${item.number}`,
       state: { background: location }})
   }
 
