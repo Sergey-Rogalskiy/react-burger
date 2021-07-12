@@ -20,7 +20,7 @@ const OrderDetails = () => {
         <p className="text text_type_main-default">Дождитесь готовности на орбитальной станции</p>
       </div>
       :
-      <div>Дай подумать над названием</div>
+      <div>Подождите, ожидаем номер заказа...</div>
     }
 
       
