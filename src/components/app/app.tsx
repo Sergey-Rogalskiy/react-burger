@@ -138,9 +138,7 @@ const App: React.FC = () => {
     if (localStorage.getItem('refreshToken')) dispatch(getUser())
   }, [dispatch])
 
-  // const background = (history.action === "PUSH" ||  history.action === "REFRESH") && location?.state?.background
-  const background = (history.action === "PUSH" ||  history.action === "POP") && location?.state?.background
-  
+  const background = (history.action === "PUSH" ||  history.action === "REPLACE")  && location.state && location.state.background
 
   return (
     <>
