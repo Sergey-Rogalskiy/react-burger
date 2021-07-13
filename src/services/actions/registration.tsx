@@ -35,9 +35,8 @@ import {
   export const PATCH_USER_SUCCESS:'PATCH_USER_SUCCESS' = 'PATCH_USER_SUCCESS';
   export const PATCH_USER_FAILED:'PATCH_USER_FAILED' = 'PATCH_USER_FAILED';
 
-  
-export function getRegister(data) {
-  return function(dispatch) {
+export function getRegister(data: any) {
+  return function(dispatch: any) {
     dispatch({
       type: GET_REGISTER_REQUEST
     });
@@ -65,8 +64,8 @@ export function getRegister(data) {
   };
 }
 
-export function getLogin(data) {
-  return function(dispatch) {
+export function getLogin(data: any) {
+  return function(dispatch: any) {
     dispatch({
       type: GET_LOGIN_REQUEST
     });
@@ -94,8 +93,8 @@ export function getLogin(data) {
   };
 }
 
-export function getLogout(token) {
-  return function(dispatch) {
+export function getLogout(token: any) {
+  return function(dispatch: any) {
     dispatch({
       type: GET_LOGOUT_REQUEST
     });
@@ -123,8 +122,8 @@ export function getLogout(token) {
   };
 }
 
-export function getToken(token) {
-  return function(dispatch) {
+export function getToken(token: any) {
+  return function(dispatch: any) {
     dispatch({
       type: GET_TOKEN_REQUEST
     });
@@ -152,8 +151,8 @@ export function getToken(token) {
   };
 }
 
-export function getUser(token) {
-  return function(dispatch) {
+export function getUser(token: any) {
+  return function(dispatch: any) {
     dispatch({
       type: GET_USER_REQUEST
     });
@@ -180,9 +179,9 @@ export function getUser(token) {
   };
 }
 
-export function patchUser(data) {
+export function patchUser(data: any) {
   const token = getCookie('accessToken')
-  return function(dispatch) {
+  return function(dispatch: any) {
     dispatch({
       type: PATCH_USER_REQUEST
     });
@@ -209,12 +208,16 @@ export function patchUser(data) {
     })
   };
 }
- 
+interface IStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+  removeItem(key: string): void;
+}
 
-export function getForgotPassword(data) {
+export function getForgotPassword(data: any) {
   const token = 'lala'
-  localStorage.setItem('isForgotEmail', true)
-    return function(dispatch) {
+  localStorage.setItem('isForgotEmail', true.toString())
+    return function(dispatch: any) {
       dispatch({
         type: GET_FORGOT_PASSWORD_REQUEST
       });
@@ -241,9 +244,9 @@ export function getForgotPassword(data) {
     };
   }
   
-export function getResetPassword(data) {
+export function getResetPassword(data: any) {
 
-    return function(dispatch) {
+    return function(dispatch: any) {
       dispatch({
         type: GET_RESET_PASSWORD_REQUEST
       });

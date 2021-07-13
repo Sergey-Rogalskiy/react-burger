@@ -23,14 +23,14 @@ export const ORDER_ID_FAILED:'ORDER_ID_FAILED' = 'ORDER_ID_FAILED';
 
 
 export function wsInit() {
-    return function(dispatch) {
+    return function(dispatch: any) {
       dispatch({
         type: WS_CONNECTION_START
       })
     }
   }
 export function wsInitAuth() {
-    return function(dispatch) {
+    return function(dispatch: any) {
       dispatch({
         type: WS_CONNECTION_AUTH_START
       })
@@ -38,8 +38,8 @@ export function wsInitAuth() {
   }
   
 
-export function getOrderById(data) {
-    return function(dispatch) {
+export function getOrderById(data: any) {
+    return function(dispatch: any) {
       dispatch({
         type: ORDER_ID_REQUEST
       });

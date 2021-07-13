@@ -135,7 +135,7 @@ const App: React.FC = () => {
       dispatch(getToken(localStorage.getItem('refreshToken')))
   }, [dispatch])
   React.useEffect(() => {
-    if (localStorage.getItem('refreshToken')) dispatch(getUser())
+    if (localStorage.getItem('refreshToken')) dispatch(getUser(localStorage.getItem('refreshToken')))
   }, [dispatch])
 
   const background = (history.action === "PUSH" ||  history.action === "REPLACE")  && location.state && location.state.background

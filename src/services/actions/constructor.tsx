@@ -14,29 +14,58 @@ export const CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR:'CHANGE_ORDER_OF_ITEMS_IN_CONS
 
 export const ORDER_RESET:'ORDER_RESET' = 'ORDER_RESET';
 
-export function getOrder(data) {
+export interface IGetOrderAction {
+  readonly type: typeof GET_ORDER_REQUEST;
+}
+
+export interface IGetOrderFailedAction {
+  readonly type: typeof GET_ORDER_FAILED;
+}
+
+export interface IGetOrderSuccessAction {
+  readonly type: typeof GET_ORDER_SUCCESS;
+  readonly order: TOrder;
+}
+
+export type TConstructorActions = 
+IGetOrderAction |
+IGetOrderFailedAction |
+IGetOrderSuccessAction;
+
+export type TOrder = {
+  readonly id: number;
+  readonly password: string;
+  readonly email: string;
+  readonly name: string;
+};
+
+export const getOrderAction = (): IGetOrderAction => ({
+  type: GET_ORDER_REQUEST
+});
+
+export const getOrderFailedAction = (): IGetOrderFailedAction => ({
+  type: GET_ORDER_FAILED
+});
+
+export const getOrderSuccessAction = (res:any): IGetOrderSuccessAction => ({
+  type: GET_ORDER_SUCCESS,
+  order: res
+});
+
+export function getOrder(data: any) {
   const accessToken = getCookie('accessToken')
-    return function(dispatch) {
-      dispatch({
-        type: GET_ORDER_REQUEST
-      });
+    return function(dispatch: any) {
+      dispatch(getOrderAction());
       getOrderRequest(accessToken, data)
       .then(res => {
         if (res && res.success) {
-          dispatch({
-            type: GET_ORDER_SUCCESS,
-            order: res
-          });
+          dispatch(getOrderSuccessAction(res));
         } else {
-          dispatch({
-            type: GET_ORDER_FAILED
-          });
+          dispatch(getOrderFailedAction());
         }
       })
       .catch(err => {
-          dispatch({
-            type: GET_ORDER_FAILED
-          });
+          dispatch(getOrderFailedAction());
       })
     };
   }
