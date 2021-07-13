@@ -16,7 +16,6 @@ type TProps = {
 }
 
 const MainPage = (props: TProps) => {
-  console.log(props);
   
   
   return (
