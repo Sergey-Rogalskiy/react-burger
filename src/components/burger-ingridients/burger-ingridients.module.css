@@ -1,7 +1,7 @@
 
 .overflow {
   overflow: auto;
-  height: 700px;
+  max-height: 645px;
   display: block;
 }
 
