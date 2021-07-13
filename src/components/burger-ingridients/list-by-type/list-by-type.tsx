@@ -6,7 +6,6 @@ import { TIngredient } from '../../../types';
 type TProps = {
   data: TIngredient[];
   // onClick: {openModal: (e: any, item: any) => void}
-  
   onClick: any;
 }
 
@@ -18,7 +17,7 @@ const ListByType = (props: TProps) => {
           props.data.map((item, index) => (
             <Element 
               item={item} 
-              key={ index} 
+              key={index} 
               onClick={props.onClick}/>
           ))
           }

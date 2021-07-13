@@ -7,7 +7,6 @@ import {
 import ModalOverlay from '../modal-overlay/modal-overlay'
 
 import modalStyles from './modal.module.css'
-import { AnyMxRecord } from 'dns';
 
 const modalRoot = document.getElementById("react-modals");
 

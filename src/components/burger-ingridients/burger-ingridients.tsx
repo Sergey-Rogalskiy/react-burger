@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
-import { useSelector, useDispatch  } from 'react-redux'
+import { useSelector  } from 'react-redux'
 import { TIngredient } from '../../types';
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'

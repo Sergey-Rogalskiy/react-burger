@@ -1,9 +1,9 @@
 import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch  } from 'react-redux'
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getOrderById } from '../../services/actions/feed';
 import { TIngredient } from '../../types';
 
@@ -15,7 +15,7 @@ export default function FeedIdPage() {
 
   React.useEffect(() => {
     dispatch(getOrderById(param.id))
-  }, [dispatch])
+  }, [dispatch, param.id])
 
 
   const orderId = useSelector((state: any) => state.feed.orderId)
@@ -28,7 +28,7 @@ export default function FeedIdPage() {
   let allIngridientsData
   let ingredientsImages = []
   let totalPrice
-  if (data && ingredients.length != 0) {
+  if (data && ingredients.length !== 0) {
     allIngridientsData = data.ingredients.map((item:string) => {
       const ingredient = ingredients.filter((ingredient:TIngredient) => ingredient._id === item)
       let image

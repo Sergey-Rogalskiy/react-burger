@@ -7,14 +7,13 @@ import {
 import s from '../order-feed.module.css'
 
 export const Element = (props: any) => {
-  console.log(props);
   
   const testData = props.data
   const ingredients = useSelector((state:any) => state.ingridients.items)
   let allIngridientsData
   let ingredientsImages = []
   let totalPrice
-  if (ingredients.length != 0) {
+  if (ingredients.length !== 0) {
     allIngridientsData = testData.ingredients.map((item:any) => {
       const ingredient = ingredients.filter((ingredient:any) => ingredient._id === item)
       let image

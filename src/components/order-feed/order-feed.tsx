@@ -1,7 +1,3 @@
-
-
-import { useSelector  } from 'react-redux'
-
 import {Element} from "./element/element"
 import {useHistory, useRouteMatch, useLocation } from 'react-router-dom'
 import { TOrder } from '../../types'
@@ -17,7 +13,6 @@ export const OrderFeed = (props: TProps) => {
   const {path} = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
-  const feedRequest = useSelector((state:any) => state.feed.feedRequest)
   const wsFeedData = props.orders
 
   const clickOrder = (e: any, item: TOrder) => {

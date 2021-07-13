@@ -91,7 +91,7 @@ const App: React.FC = () => {
     //     closeModal();
     //   },
     // };
-    if (e.keyCode == 27) { 
+    if (e.keyCode === 27) { 
       e.preventDefault();
       closeModal();; 
     }
