@@ -47,7 +47,7 @@ export const getOrderFailedAction = (): IGetOrderFailedAction => ({
   type: GET_ORDER_FAILED
 });
 
-export const getOrderSuccessAction = (res:any): IGetOrderSuccessAction => ({
+export const getOrderSuccessAction = (res:TOrder): IGetOrderSuccessAction => ({
   type: GET_ORDER_SUCCESS,
   order: res
 });

@@ -22,44 +22,86 @@ export const ORDER_ID_SUCCESS:'ORDER_ID_SUCCESS' = 'ORDER_ID_SUCCESS';
 export const ORDER_ID_FAILED:'ORDER_ID_FAILED' = 'ORDER_ID_FAILED';
 
 
+export interface IGetOrderByIdAction {
+  readonly type: typeof ORDER_ID_REQUEST;
+}
+
+export interface IGetOrderByIdFailedAction {
+  readonly type: typeof ORDER_ID_FAILED;
+}
+
+export interface IGetOrderByIdSuccessAction {
+  readonly type: typeof ORDER_ID_SUCCESS;
+  readonly order: TOrder;
+}
+
+export interface IWsInitAction {
+  readonly type: typeof WS_CONNECTION_START;
+}
+
+export interface IWsInitAuthAction {
+  readonly type: typeof WS_CONNECTION_AUTH_START;
+}
+
+export type TFeedActions = 
+IGetOrderByIdAction |
+IGetOrderByIdFailedAction |
+IGetOrderByIdSuccessAction|
+IWsInitAction |
+IWsInitAuthAction;
+
+export type TOrder = {
+  readonly id: number;
+  readonly password: string;
+  readonly email: string;
+  readonly name: string;
+};
+
+export const wsInitAction = (): IWsInitAction => ({
+  type: WS_CONNECTION_START
+});
+
+export const wsInitAuthAction = (): IWsInitAuthAction => ({
+  type: WS_CONNECTION_AUTH_START
+}); 
+
+export const getOrderByIdAction = (): IGetOrderByIdAction => ({
+  type: ORDER_ID_REQUEST
+});
+
+export const getOrderByIdtOrderFailedAction = (): IGetOrderByIdFailedAction => ({
+  type: ORDER_ID_FAILED
+});
+
+export const getOrderByIdSuccessAction = (res:any): IGetOrderByIdSuccessAction => ({
+  type: ORDER_ID_SUCCESS,
+  order: res
+});
+
+export function getOrderById(data: any) {
+  return function(dispatch: any) {
+    dispatch(getOrderByIdAction());
+    getOrderByIdRequest(data)
+    .then(res => {
+      if (res && res.success) {
+        dispatch(getOrderByIdSuccessAction(res));
+      } else {
+        dispatch(getOrderByIdtOrderFailedAction());
+      }
+    })
+    .catch(err => {
+        dispatch(getOrderByIdtOrderFailedAction());
+    })
+  };
+}
+
 export function wsInit() {
     return function(dispatch: any) {
-      dispatch({
-        type: WS_CONNECTION_START
-      })
+      dispatch(wsInitAction())
     }
   }
 export function wsInitAuth() {
     return function(dispatch: any) {
-      dispatch({
-        type: WS_CONNECTION_AUTH_START
-      })
+      dispatch(wsInitAuthAction())
     }
-  }
-  
-
-export function getOrderById(data: any) {
-    return function(dispatch: any) {
-      dispatch({
-        type: ORDER_ID_REQUEST
-      });
-      getOrderByIdRequest(data)
-      .then(res => {
-        if (res && res.success) {
-          dispatch({
-            type: ORDER_ID_SUCCESS,
-            payload: res
-          });
-        } else {
-          dispatch({
-            type: ORDER_ID_FAILED
-          });
-        }
-      })
-      .catch(err => {
-          dispatch({
-            type: ORDER_ID_FAILED
-          });
-      })
-    };
   }
