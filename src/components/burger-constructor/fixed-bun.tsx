@@ -2,13 +2,18 @@
 import {
   ConstructorElement, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
-
+import { TIngredient } from '../../types'
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
-const FixedBun = (props) => {
-  const data = props
+type TProps = {
+  buns: TIngredient;
+  type: "top" | 'bottom' | undefined
+}
 
+const FixedBun = (props: TProps) => {
+  const data = props
+  
   return (
     <>
       {

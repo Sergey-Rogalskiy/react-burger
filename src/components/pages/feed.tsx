@@ -9,9 +9,13 @@ import { useSelector  } from 'react-redux'
 
 import s from './pages.module.css'
 
-export default function FeedPage(props) {
+type TProps = {
+  modal: any
+}
+
+export default function FeedPage(props: TProps) {
   const dispatch = useDispatch()
-  const wsFeedData = useSelector(state => state.feed.wsFeedData.orders)
+  const wsFeedData = useSelector((state:any) => state.feed.wsFeedData.orders)
 
   useEffect(
     () => {

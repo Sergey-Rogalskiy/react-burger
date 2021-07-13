@@ -3,25 +3,30 @@ import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
-import PropTypes from 'prop-types';
-
 import { useSelector, useDispatch  } from 'react-redux'
+import { TIngredient } from '../../types';
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 
-const BurgerIngridients = (props) => {
-
-  const items = useSelector(state => state.ingridients.items)
-
-  const [current, setCurrent] = React.useState('one')
-  let data_buns = items.filter(obj1 => obj1.type === "bun");
-  let data_sauces = items.filter(obj1 => obj1.type === "sauce");
-  let data_mains = items.filter(obj1 => obj1.type === "main");
+type TProps = {
+  // modal: {openModal: (e: any, item: any) => void}
   
-  const myRefScrollBuns = React.useRef(null)
-  const myRefScrollSauces = React.useRef(null)
-  const myRefScrollMains = React.useRef(null)
-  const myRefScrollContainer = React.useRef(null)
+  modal: any;
+}
+
+const BurgerIngridients = (props: TProps) => {
+
+  const items = useSelector((state: any) => state.ingridients.items)
+  
+  const [current, setCurrent] = React.useState('one')
+  let data_buns = items.filter((obj1: TIngredient)=> obj1.type === "bun");
+  let data_sauces = items.filter((obj1: TIngredient) => obj1.type === "sauce");
+  let data_mains = items.filter((obj1: TIngredient) => obj1.type === "main");
+  
+  const myRefScrollBuns: any = React.useRef<HTMLDivElement>(null)
+  const myRefScrollSauces: any = React.useRef<HTMLDivElement>(null)
+  const myRefScrollMains: any = React.useRef<HTMLDivElement>(null)
+  const myRefScrollContainer: any = React.useRef<HTMLDivElement>(null)
   
   const executeScrollBuns = () => {
     myRefScrollBuns.current.scrollIntoView()
@@ -78,7 +83,7 @@ const BurgerIngridients = (props) => {
             Булки
           </p>
           <ListByType data={data_buns}
-            onClick={props.modal.openModal}/>
+            onClick={props.modal}/>
         </div>
         <div >
           <p ref={myRefScrollSauces}
@@ -87,7 +92,7 @@ const BurgerIngridients = (props) => {
           </p>
           
           <ListByType data={data_sauces}
-            onClick={props.modal.openModal}/>
+            onClick={props.modal}/>
         </div>
         <div >
           <p ref={myRefScrollMains}
@@ -96,21 +101,12 @@ const BurgerIngridients = (props) => {
           </p>
           
           <ListByType data={data_mains}
-            onClick={props.modal.openModal}/>
+            onClick={props.modal}/>
         </div>
       </div>
     </>
   );
 }
 
-const modalType = PropTypes.shape({
-  visible: PropTypes.bool,
-  openModal: PropTypes.func,
-  closeModal: PropTypes.func,
-});
-
-BurgerIngridients.propTypes = {
-  modal: modalType.isRequired
-}; 
 
 export default BurgerIngridients;

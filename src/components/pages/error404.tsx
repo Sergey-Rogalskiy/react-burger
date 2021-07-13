@@ -6,7 +6,6 @@ function Error404() {
   let types: boolean| number | bigint| string | symbol | null | undefined | object| 
     { pages: number } | number[] | [number, number] | unknown | void | 'literly'
   types = 'literly1'
-  console.log(0 == 0)
   enum Currency {
     RUB = 10,
     USD,

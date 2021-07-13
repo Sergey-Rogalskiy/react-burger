@@ -8,23 +8,24 @@ import { Link, Redirect } from "react-router-dom"
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getRegister} from '../../services/actions/registration'
+import Spinner from '../utils/loader'
 
 import s from './pages.module.css'
 
 function RegisterPage() {
   const dispatch = useDispatch()
-  const registerRequest = useSelector(state => state.registration.registerRequest)
-  const registerFailed = useSelector(state => state.registration.registerFailed)
-  const user = useSelector(state => state.registration.user)
+  const registerRequest = useSelector((state:any) => state.registration.registerRequest)
+  const registerFailed = useSelector((state:any) => state.registration.registerFailed)
+  const user = useSelector((state:any) => state.registration.user)
 
   
   const [value, setValue] = React.useState({name: '', email: '', password: '', })
-  const onChange = e => {
+  const onChange =(e:any) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
   const inputRef = React.useRef(null)
-  const onRegisterClick = (e) => {
+  const onRegisterClick = (e:any) => {
     e.preventDefault()
     dispatch(getRegister(value))
   }
@@ -45,8 +46,8 @@ function RegisterPage() {
     return (
       <div className = {`${s.container} `}>
         <div className = {`${s.registration}`}>
-         <p className="text text_type_main-medium m-3 mt-15">
-         LOADING
+         <p className="m-3 mt-15">
+         <Spinner/>
          </p>
         </div>
       </div>

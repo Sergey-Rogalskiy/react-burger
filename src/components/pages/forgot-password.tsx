@@ -7,23 +7,24 @@ import { Link, Redirect  } from "react-router-dom"
 
 import {useDispatch, useSelector} from 'react-redux'
 import {getForgotPassword} from '../../services/actions/registration'
+import Spinner from '../utils/loader'
 
 import s from './pages.module.css'
 
 const ForgotPaswordPage = () => {
   const dispatch = useDispatch()
-  const forgotPasswordData = useSelector(state => state.registration.forgotPasswordData)
-  const forgotPasswordRequest = useSelector(state => state.registration.forgotPasswordRequest)
-  const forgotPasswordError = useSelector(state => state.registration.forgotPasswordError)
+  const forgotPasswordData = useSelector((state:any) => state.registration.forgotPasswordData)
+  const forgotPasswordRequest = useSelector((state:any) => state.registration.forgotPasswordRequest)
+  const forgotPasswordError = useSelector((state:any) => state.registration.forgotPasswordError)
   
 
   const [value, setValue] = React.useState({email: '', password: '', })
-  const onChange = e => {
+  const onChange = (e:any) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
   const inputRef = React.useRef(null)
-  const onRestoreClick = (e) => {
+  const onRestoreClick = (e:any) => {
     e.preventDefault()
     dispatch(getForgotPassword(
       {
@@ -36,7 +37,7 @@ const ForgotPaswordPage = () => {
     return (
     <div className={s.container}>
     <div className = {`${s.registration}`}>
-      <p>Loading</p>
+    <Spinner/>
     </div>
   </div>
     )

@@ -16,12 +16,16 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 
 import s from './pages.module.css'
 
-export default function ProfilePage(props) {
+type TProps = {
+  modal: any
+}
+
+export default function ProfilePage(props:TProps) {
   const refreshToken = localStorage.getItem('refreshToken')
   const dispatch = useDispatch();
-  const wsFeedDataAuth = useSelector(state => state.feed.wsFeedDataAuth?.orders)
+  const wsFeedDataAuth = useSelector((state:any) => state.feed.wsFeedDataAuth?.orders)
 
-  const exit = (e) => {
+  const exit = (e:any) => {
     e.preventDefault()
     dispatch(getLogout(refreshToken))
   }

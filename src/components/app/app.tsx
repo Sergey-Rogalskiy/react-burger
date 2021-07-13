@@ -36,21 +36,7 @@ import {
   ORDER_RESET,
 } from '../../services/actions/constructor';
 
-type TLocationItem = {
-  hash: string
-  key: string
-  pathname: string
-  search: string
-  state: null
-}
-type TLocation = {
-  hash: string
-  key: string
-  pathname: string
-  search: string
-  state: { background: TLocationItem } | null
-  background: TLocationItem
-}
+import {TLocation} from '../../types'
 
 const App: React.FC = () => {
   const dispatch = useDispatch()
@@ -152,8 +138,8 @@ const App: React.FC = () => {
     if (localStorage.getItem('refreshToken')) dispatch(getUser())
   }, [dispatch])
 
-  const background = (history.action === "PUSH" ||  history.action === "POP") && location?.state?.background
   // const background = (history.action === "PUSH" ||  history.action === "REFRESH") && location?.state?.background
+  const background = (history.action === "PUSH" ||  history.action === "POP") && location?.state?.background
   
 
   return (
@@ -199,7 +185,7 @@ const App: React.FC = () => {
         </Switch>
         {background && (
             <Route path={'ingridients/:id'}>
-              <IngridientsIdPage modal={false}/>
+              <IngridientsIdPage/>
             </Route>
         )}
         {background && (

@@ -9,10 +9,16 @@ import {useHistory, useLocation} from 'react-router-dom'
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
-const TotalPrice = (props) => {
-  const totalPrice = useSelector(state => state.burgerConstructor.totalPrice)
-  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
-  const user = useSelector(state => state.registration.user)
+type TProps = {
+  // modal: {openModal: () => {}}
+  modal: any;
+}
+
+const TotalPrice = (props: TProps) => {
+  
+  const totalPrice = useSelector((state: any) => state.burgerConstructor.totalPrice)
+  const chosenBuns = useSelector((state: any) => state.burgerConstructor.chosenBuns)
+  const user = useSelector((state: any) => state.registration.user)
   const history = useHistory()
   const location = useLocation()
 

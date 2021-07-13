@@ -1,5 +1,5 @@
 
-import PropTypes from 'prop-types';
+
 import { useSelector, useDispatch  } from 'react-redux'
 import FixedBun from './fixed-bun'
 import Ingridients from './ingridients'
@@ -10,13 +10,19 @@ import {
   ADD_ITEM_TO_CONSTRUCTOR,
 } from "../../services/actions/constructor"
 
-const BurgerConstructor = (props) => {
+
+type TProps = {
+  // modal: {openModal: () => {}}
+  modal: any;
+}
+
+const BurgerConstructor = (props: TProps) => {
 
 //   const {constructorState} = React.useContext(CurrentIngridientsContext);
 //  const data =constructorState
   
-  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
-  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector((state: any) => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector((state: any) => state.burgerConstructor.chosenBuns)
  
   const dispatch = useDispatch();
   
@@ -39,14 +45,6 @@ const BurgerConstructor = (props) => {
   );
 }
 
-const modalType = PropTypes.shape({
-  visible: PropTypes.bool,
-  openModal: PropTypes.func,
-  closeModal: PropTypes.func,
-});
 
-BurgerConstructor.propTypes = {
-  modal: modalType.isRequired
-}; 
 
 export default BurgerConstructor;

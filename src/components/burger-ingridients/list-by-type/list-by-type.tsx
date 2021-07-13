@@ -1,8 +1,16 @@
 
 import listByTypeStyles from './list-by-type.module.css'
 import Element from './element'
+import { TIngredient } from '../../../types';
 
-const ListByType = (props) => {
+type TProps = {
+  data: TIngredient[];
+  // onClick: {openModal: (e: any, item: any) => void}
+  
+  onClick: any;
+}
+
+const ListByType = (props: TProps) => {
   return (
     <>
       <ul className={listByTypeStyles.list_by_type}>

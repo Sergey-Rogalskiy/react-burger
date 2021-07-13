@@ -7,10 +7,18 @@ import {
 import ModalOverlay from '../modal-overlay/modal-overlay'
 
 import modalStyles from './modal.module.css'
+import { AnyMxRecord } from 'dns';
 
 const modalRoot = document.getElementById("react-modals");
 
-const Modal = (props) => {
+type TProps = {
+  header: string;
+  children: any;
+  onClose: any;
+}
+
+const Modal = (props: TProps) => {
+  
   const { children, header, onClose } = props;
   return ReactDOM.createPortal(
     (
@@ -25,6 +33,7 @@ const Modal = (props) => {
         </div>
       </>
     ), 
+    // @ts-ignore: Unreachable code error
     modalRoot
   );
 } 

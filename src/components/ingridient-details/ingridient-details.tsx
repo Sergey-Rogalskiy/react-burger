@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import styles from './ingridient-details.module.css'
+import {TIngredient} from '../../types'
 
-const IngridientDetails = (props) => {
+type TProps = {
+  currentItemToView: {item?: TIngredient}
+}
+
+const IngridientDetails = (props: TProps) => {
   const currentItemToView = props.currentItemToView
 
   return (
@@ -33,27 +38,6 @@ const IngridientDetails = (props) => {
   );
 }
 
-const ingridientPropTypes = PropTypes.shape({
-  calories: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.number.isRequired,
-  fat: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  image_large: PropTypes.string.isRequired,
-  image_mobile: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  proteins: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  _id: PropTypes.string.isRequired,
-});
-
-
-IngridientDetails.propTypes = {
-  currentItemToView: PropTypes.shape({
-    item: ingridientPropTypes,
-    type: PropTypes.string.isRequired,
-  })
-}; 
 
 export default IngridientDetails;
 

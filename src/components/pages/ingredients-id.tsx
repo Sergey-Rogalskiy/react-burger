@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom'
 import {getItems} from "../../services/actions/ingridients"
 import IngridientDetails from '../ingridient-details/ingridient-details'
+import { TIngredient } from '../../types';
 
-function IngridientsIdPage(props) {
+function IngridientsIdPage() {
 
-  const items = useSelector(state => state.ingridients.items)
-  const {id} = useParams()
-  const temp = items.find(el => el._id === id)
+  const items = useSelector((state:any) => state.ingridients.items)
+  const {id}: any= useParams()
+  const temp = items.find((el:TIngredient) => el._id === id)
   const currentItemToView = {
     type: 'ingridient',
     item: temp
