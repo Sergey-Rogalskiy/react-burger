@@ -1,11 +1,12 @@
+import { FC } from 'react'
 import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import { NavLink, useLocation, } from "react-router-dom"
 import s from './app-header.module.css'
 import { useSelector } from 'react-redux'
 
-function AppHeader() {
+const AppHeader: FC = () => {
   const {pathname} = useLocation()
-  const user = useSelector(state => state.registration.user)
+  const user = useSelector((state:any) => state.registration.user)
   return (
     <header className={s.header}>
       <div className={s.header__inner}>

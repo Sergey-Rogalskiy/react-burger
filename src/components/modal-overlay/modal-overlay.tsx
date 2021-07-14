@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import modalStyles from './modal-overlay.module.css'
 
 
-const ModalOverlay = (props) => {
+const ModalOverlay = (props: {onClose:()=>{}}) => {
   return (
     <div 
       className={modalStyles.modal_overlay} 

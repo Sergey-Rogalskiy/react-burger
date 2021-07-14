@@ -7,6 +7,7 @@ import {
 import { Link, Redirect } from "react-router-dom"
 import {getLogin} from '../../services/actions/registration'
 import {useDispatch, useSelector} from 'react-redux'
+import Spinner from '../utils/loader'
 
 import s from './pages.module.css'
 
@@ -42,11 +43,7 @@ function LoginPage() {
   if (loginRequest) {
     return (
       <div className = {`${s.container} `}>
-        <div className = {`${s.registration}`}>
-         <p className="text text_type_main-medium m-3 mt-15">
-          LOADING
-         </p>
-        </div>
+          <Spinner/>
       </div>
     )
   }

@@ -1,35 +1,36 @@
 import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch  } from 'react-redux'
-import { useParams, Redirect } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getOrderById } from '../../services/actions/feed';
+import { TIngredient } from '../../types';
 
 import s from './pages.module.css'
 
 export default function FeedIdPage() {
-  const param = useParams();
+  const param: any = useParams();
   const dispatch = useDispatch()
 
   React.useEffect(() => {
     dispatch(getOrderById(param.id))
-  }, [dispatch])
+  }, [dispatch, param.id])
 
 
-  const orderId = useSelector(state => state.feed.orderId)
+  const orderId = useSelector((state: any) => state.feed.orderId)
   const data = orderId
   // if (!data && (data === undefined)) {
   //   return <Redirect to='/404' />
   // }
   
-  const ingredients = useSelector(state => state.ingridients.items)
+  const ingredients = useSelector((state: any) => state.ingridients.items)
   let allIngridientsData
   let ingredientsImages = []
   let totalPrice
-  if (data && ingredients.length != 0) {
-    allIngridientsData = data.ingredients.map(item => {
-      const ingredient = ingredients.filter(ingredient => ingredient._id === item)
+  if (data && ingredients.length !== 0) {
+    allIngridientsData = data.ingredients.map((item:string) => {
+      const ingredient = ingredients.filter((ingredient:TIngredient) => ingredient._id === item)
       let image
       let price
       let name
@@ -45,7 +46,7 @@ export default function FeedIdPage() {
       }
     })
   ingredientsImages = allIngridientsData
-  totalPrice = allIngridientsData.reduce((acc, item) => acc+item.price, 0)
+  totalPrice = allIngridientsData.reduce((acc:number, item: TIngredient) => acc+item.price, 0)
   }
 
   if (!data) {
@@ -66,7 +67,7 @@ export default function FeedIdPage() {
         <ul>
             
             {
-              ingredientsImages.map((item, index) => (
+              ingredientsImages.map((item: TIngredient, index: number) => (
                 
                 <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>

@@ -1,24 +1,25 @@
 import { useSelector  } from 'react-redux'
-
+import { TOrder } from '../../types'
 import s from './order-feed.module.css'
+import Spinner from '../utils/loader'
 
-export const CookingDoneBoard = (props) => {
-	const allOrders = useSelector(state => state.feed.wsFeedData.orders)
-	let doneOrders = ''
-	let doneOrders2 = ''
+export const CookingDoneBoard = () => {
+	const allOrders = useSelector((state:any) => state.feed.wsFeedData.orders)
+	let doneOrders: TOrder[]|null = null
+	let doneOrders2: TOrder[]|null = null
 	if (allOrders) {
-		doneOrders = allOrders.filter(item => item.status === 'done').slice(0,10)
-		doneOrders2 = allOrders.filter(item => item.status === 'done').slice(10,20)
+		doneOrders = allOrders.filter((item:TOrder) => item.status === 'done').slice(0,10)
+		doneOrders2 = allOrders.filter((item:TOrder) => item.status === 'done').slice(10,20)
 	}
-	let cookingOrders = ''
-	let cookingOrders2 = ''
+	let cookingOrders: TOrder[]|null = null
+	let cookingOrders2: TOrder[]|null = null
 	if (allOrders) {
-		cookingOrders = allOrders.filter(item => item.status === 'pending').slice(0,10)
-		cookingOrders2 = allOrders.filter(item => item.status === 'pending').slice(10,20)
+		cookingOrders = allOrders.filter((item:TOrder) => item.status === 'pending').slice(0,10)
+		cookingOrders2 = allOrders.filter((item:TOrder) => item.status === 'pending').slice(10,20)
 	}
 	
-	const totalOrders = useSelector(state => state.feed.wsFeedData.total)
-	const todayOrders = useSelector(state => state.feed.wsFeedData.totalToday)
+	const totalOrders = useSelector((state:any) => state.feed.wsFeedData.total)
+	const todayOrders = useSelector((state:any)  => state.feed.wsFeedData.totalToday)
 
 
 	return (
@@ -35,7 +36,7 @@ export const CookingDoneBoard = (props) => {
 										{item.number}
 									</li>
 								)) :
-								<li>Loading</li>
+								<Spinner/>
 							}
 						</ul>
 						<ul>
@@ -46,7 +47,7 @@ export const CookingDoneBoard = (props) => {
 										{item.number}
 									</li>
 								)) :
-								<li>Loading</li>
+								<Spinner/>
 							}
 						</ul>
 					</div>
@@ -62,7 +63,7 @@ export const CookingDoneBoard = (props) => {
 										{item.number}
 									</li>
 								)):
-								<li>Loading</li>
+								<Spinner/>
 							}
 						</ul>
 						<ul>
@@ -73,7 +74,7 @@ export const CookingDoneBoard = (props) => {
 										{item.number}
 									</li>
 								)):
-								<li>Loadin</li>
+								<Spinner/>
 							}
 						</ul>
 					</div>
@@ -84,7 +85,7 @@ export const CookingDoneBoard = (props) => {
 				{
 					totalOrders 
 					? <p className={`${s.shinny_clr} text text_type_digits-large`}>{totalOrders}</p>
-					: <p>Loading</p>
+					: <Spinner/>
 				}
 				
 			</div>
@@ -93,7 +94,7 @@ export const CookingDoneBoard = (props) => {
 				{
 					todayOrders 
 					? <p className={`${s.shinny_clr} text text_type_digits-large`}>{todayOrders}</p>
-					: <p>Loading</p>
+					: <Spinner/>
 				}
 				
 			</div>

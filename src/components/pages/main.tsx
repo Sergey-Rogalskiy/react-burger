@@ -6,7 +6,17 @@ import s from './pages.module.css'
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-function MainPage(props) {
+type TProps = {
+  // modal: {openModal: () => {};}
+  // modal: {openModal: (e: any, order: any) => {}}
+  // modal:{openModal: (e: any, order: any) => {}};
+  
+  // modal: (e: any, item: any) => void;
+  modal: any;
+}
+
+const MainPage = (props: TProps) => {
+  
   
   return (
     <>

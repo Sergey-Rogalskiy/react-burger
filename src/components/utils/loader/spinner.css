@@ -6,9 +6,9 @@
   border-top-color:#09f;
   box-sizing:border-box;
   height:20vmin;
-  left:calc(50% - 10vmin);
-  position:fixed;
-  top:calc(50% - 10vmin);
+  /* left:calc(50% - 10vmin); */
+  /* position:fixed; */
+  /* top:calc(50% - 10vmin); */
   width:20vmin;
   z-index:1;
   &:before {

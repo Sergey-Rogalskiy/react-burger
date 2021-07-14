@@ -1,8 +1,13 @@
 import Ingridient from './ingridient' 
+import { TIngredient } from '../../types'
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
-const Ingridients = (props) => {
+type TProps = {
+  items: TIngredient[]
+}
+
+const Ingridients = (props: TProps) => {
   const data = props
   
 
@@ -14,7 +19,7 @@ const Ingridients = (props) => {
         {
           data.items[0]
           ?
-          data.items.map((item, index) => 
+          data.items.map((item: TIngredient, index: number) => 
             <Ingridient 
             item={item} 
             key={index}

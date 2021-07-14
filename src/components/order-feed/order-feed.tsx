@@ -1,25 +1,21 @@
-
-
-import { useSelector  } from 'react-redux'
-
 import {Element} from "./element/element"
 import {useHistory, useRouteMatch, useLocation } from 'react-router-dom'
+import { TOrder } from '../../types'
+import Spinner from '../utils/loader'
 
 import s from './order-feed.module.css'
 
-export const OrderFeed = (props) => {
+type TProps = {
+  orders: TOrder[]|null;
+  modal: any
+}
+export const OrderFeed = (props: TProps) => {
   const {path} = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
-  const feedRequest = useSelector(state => state.feed.feedRequest)
   const wsFeedData = props.orders
 
-
-  
-  if (feedRequest) {
-    return <p>LOADING</p>
-  }
-  const clickOrder = (e, item) => {
+  const clickOrder = (e: any, item: TOrder) => {
     const order = { type: 'order', item : item}
     props.modal.openModal(e, order)
     history.push( {pathname: `${path}/${item.number}`,
@@ -41,7 +37,9 @@ export const OrderFeed = (props) => {
               </div>
             ))
             :
-            <div>Loading...</div>
+            <div>
+              <Spinner/>
+            </div>
             }
         </ul>
       </div>

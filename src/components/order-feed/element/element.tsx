@@ -6,16 +6,16 @@ import {
 
 import s from '../order-feed.module.css'
 
-export const Element = (props) => {
-  console.log("====================RENDER================");
+export const Element = (props: any) => {
+  
   const testData = props.data
-  const ingredients = useSelector(state => state.ingridients.items)
+  const ingredients = useSelector((state:any) => state.ingridients.items)
   let allIngridientsData
   let ingredientsImages = []
   let totalPrice
-  if (ingredients.length != 0) {
-    allIngridientsData = testData.ingredients.map(item => {
-      const ingredient = ingredients.filter(ingredient => ingredient._id === item)
+  if (ingredients.length !== 0) {
+    allIngridientsData = testData.ingredients.map((item:any) => {
+      const ingredient = ingredients.filter((ingredient:any) => ingredient._id === item)
       let image
       let price
       if (ingredient[0]){
@@ -28,7 +28,7 @@ export const Element = (props) => {
       }
     }).slice(0, 5)
   ingredientsImages = allIngridientsData.slice(0, 5)
-  totalPrice = allIngridientsData.reduce((acc, item) => acc+item.price, 0)
+  totalPrice = allIngridientsData.reduce((acc:number, item:any) => acc+item.price, 0)
   }
   return (
     <>
@@ -51,7 +51,7 @@ export const Element = (props) => {
         <div className={s.flex_row}>
             <ul className={s.images}>
               {
-                ingredientsImages.map((item, index) => (
+                ingredientsImages.map((item:any, index:number) => (
                   <li  key={index} className={`${s.round}`}>
                     <img className={s.img} src={item.image} alt="-" />
                   </li>

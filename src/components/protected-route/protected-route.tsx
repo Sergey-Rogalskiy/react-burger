@@ -1,11 +1,11 @@
-import { Redirect, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { useEffect, FC } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { getUser } from '../../services/actions/registration';
 import { getCookie } from '../../services/utils';
 
-export function ProtectedRoute({ children, ...rest }) {
-  const user = useSelector(state => state.registration.user)
+export const ProtectedRoute: FC<RouteProps> = ({ children, ...rest }) => {
+  const user = useSelector((state:any) => state.registration.user)
   const dispatch = useDispatch()
 
   const init = async () => {

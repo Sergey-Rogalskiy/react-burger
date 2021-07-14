@@ -13,16 +13,17 @@ import {Redirect} from 'react-router-dom'
 export const ProdileEdit = () => {
   const dispatch = useDispatch()
 
-  const user = useSelector(state => state.registration.user)
+  const user = useSelector((state:any) => state.registration.user)
   let data = {...user, password: ''}
   const [value, setValue] = React.useState(data)
-  const onChange = e => {
+  const onChange = (e:any) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
-  const cancel = e => {
+  const cancel = () => {
     console.log('cancel - tbc')
+    
   }
-  const save = e => {
+  const save = (e:any) => {
     e.preventDefault()
     dispatch(patchUser(value))
   }
@@ -68,7 +69,7 @@ export const ProdileEdit = () => {
       errorText={'Ошибка'}
       size={'default'} />
 
-    <Button type="secondary" onClick={cancel}>Отмена</Button>
+    <Button type="secondary" onClick={() => cancel()}>Отмена</Button>
     <Button>Сохранить</Button>
     </form>
   );

@@ -1,27 +1,26 @@
 import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useSelector  } from 'react-redux'
+import { TIngredient } from '../../types'
 
 import s from './order-details-modal.module.css'
 
-import { useSelector  } from 'react-redux'
 
 
 
 const OrderDetailsModal = () => {
-  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
+  const currentItemToView = useSelector((state: any) => state.ingridients.currentItemToView)
   const data = currentItemToView.item
-  const ingredients = useSelector(state => state.ingridients.items)
-  const allIngridientsData = data.ingredients.map(item => {
+  const ingredients = useSelector((state: any) => state.ingridients.items)
+  const allIngridientsData = data.ingredients.map((item:string) => {
     return {
-      image: ingredients.filter(ingredient => ingredient._id === item)[0].image,
-      price: ingredients.filter(ingredient => ingredient._id === item)[0].price,
-      name: ingredients.filter(ingredient => ingredient._id === item)[0].name
+      image: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].image,
+      price: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].price,
+      name: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].name
     }
   }).slice(0, 5)
-  const totalPrice = allIngridientsData.reduce((acc, item) => acc+item.price, 0)
-  console.log(allIngridientsData)
-  
+  const totalPrice = allIngridientsData.reduce((acc: number, item: TIngredient) => acc+item.price, 0)
 
   return (
     <>
@@ -43,7 +42,7 @@ const OrderDetailsModal = () => {
         <ul>
             
             {
-              allIngridientsData.map((item, index) => (
+              allIngridientsData.map((item:TIngredient, index:number) => (
                 <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>
                     <img className={s.img} src={item.image} alt="-" />
