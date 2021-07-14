@@ -1,7 +1,7 @@
 import { 
     getIngridientsRequest, 
 } from '../real-service';
-import { TIngredient } from '../../types';
+import { TIngredient, AppThunk, AppDispatch } from '../../types';
 export const GET_ITEMS_REQUEST:'GET_ITEMS_REQUEST' = 'GET_ITEMS_REQUEST';
 export const GET_ITEMS_SUCCESS:'GET_ITEMS_SUCCESS' = 'GET_ITEMS_SUCCESS';
 export const GET_ITEMS_FAILED:'GET_ITEMS_FAILED' = 'GET_ITEMS_FAILED';
@@ -71,28 +71,26 @@ export function setCurrentItemToView(currentItemToView: any) {
   }
 }
 
-export function getItems() {
-  return function(dispatch: any) {
-    dispatch({
-      type: GET_ITEMS_REQUEST
-    });
-    getIngridientsRequest()
-    .then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: GET_ITEMS_SUCCESS,
-          items: res.data
-        });
-      } else {
-        dispatch({
-          type: GET_ITEMS_FAILED
-        });
-      }
-    })
-    .catch(err => {
-        dispatch({
-          type: GET_ITEMS_FAILED
-        });
-    })
-  };
+export const getItems: AppThunk = () => (dispatch: AppDispatch) => {
+  dispatch({
+    type: GET_ITEMS_REQUEST
+  });
+  getIngridientsRequest()
+  .then(res => {
+    if (res && res.success) {
+      dispatch({
+        type: GET_ITEMS_SUCCESS,
+        items: res.data
+      });
+    } else {
+      dispatch({
+        type: GET_ITEMS_FAILED
+      });
+    }
+  })
+  .catch(err => {
+      dispatch({
+        type: GET_ITEMS_FAILED
+      });
+  })
 }

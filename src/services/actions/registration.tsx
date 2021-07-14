@@ -9,6 +9,7 @@ import {
     patchUserService
   } from '../real-service';
   import { getCookie, setCookie, deleteCookie} from '../utils';
+  import { AppThunk, AppDispatch } from '../../types';
 
   export const GET_FORGOT_PASSWORD_REQUEST:'GET_FORGOT_PASSWORD_REQUEST' = 'GET_FORGOT_PASSWORD_REQUEST';
   export const GET_FORGOT_PASSWORD_SUCCESS:'GET_FORGOT_PASSWORD_SUCCESS' = 'GET_FORGOT_PASSWORD_SUCCESS';
@@ -224,37 +225,35 @@ import {
     type: PATCH_USER_SUCCESS,
     payload: res
   });
-export function getRegister(data: any) {
-  return function(dispatch: any) {
-    dispatch({
-      type: GET_REGISTER_REQUEST
-    });
-    getRegisterService(data)
-    .then(res => {
-      if (res && res.success) {
-        setCookie('accessToken', res.accessToken.split('Bearer ')[1])
-        dispatch({
-          type: GET_REGISTER_SUCCESS,
-          payload: res
-        });
-      } else {
-        dispatch({
-          type: GET_REGISTER_FAILED,
-          payload: res
-        });
-      }
-    })
-    .catch(err => {
-        dispatch({
-          type: GET_REGISTER_FAILED,
-          payload: err
-        });
-    })
-  };
+  
+export const getRegister: AppThunk = (data: any) => (dispatch: AppDispatch) => {
+  dispatch({
+    type: GET_REGISTER_REQUEST
+  });
+  getRegisterService(data)
+  .then(res => {
+    if (res && res.success) {
+      setCookie('accessToken', res.accessToken.split('Bearer ')[1])
+      dispatch({
+        type: GET_REGISTER_SUCCESS,
+        payload: res
+      });
+    } else {
+      dispatch({
+        type: GET_REGISTER_FAILED,
+        payload: res
+      });
+    }
+  })
+  .catch(err => {
+      dispatch({
+        type: GET_REGISTER_FAILED,
+        payload: err
+      });
+  })
 }
 
-export function getLogin(data: any) {
-  return function(dispatch: any) {
+export const getLogin: AppThunk = (data: any) => (dispatch: AppDispatch) => {
     dispatch({
       type: GET_LOGIN_REQUEST
     });
@@ -279,11 +278,9 @@ export function getLogin(data: any) {
           payload: err
         });
     })
-  };
 }
 
-export function getLogout(token: any) {
-  return function(dispatch: any) {
+export const getLogout: AppThunk = (token: any) => (dispatch: AppDispatch) => {
     dispatch({
       type: GET_LOGOUT_REQUEST
     });
@@ -308,11 +305,9 @@ export function getLogout(token: any) {
           payload: err
         });
     })
-  };
 }
 
-export function getToken(token: any) {
-  return function(dispatch: any) {
+export const getToken: AppThunk = (token: any) => (dispatch: AppDispatch) => {
     dispatch({
       type: GET_TOKEN_REQUEST
     });
@@ -337,11 +332,9 @@ export function getToken(token: any) {
           payload: err
         });
     })
-  };
 }
 
-export function getUser(token: any) {
-  return function(dispatch: any) {
+export const getUser: AppThunk = (token: any) => (dispatch: AppDispatch) => {
     dispatch({
       type: GET_USER_REQUEST
     });
@@ -365,99 +358,93 @@ export function getUser(token: any) {
           payload: err
         });
     })
-  };
 }
 
-export function patchUser(data: any) {
+export const patchUser: AppThunk = (data: any) => (dispatch: AppDispatch) => {
   const token = getCookie('accessToken')
-  return function(dispatch: any) {
-    dispatch({
-      type: PATCH_USER_REQUEST
-    });
-    patchUserService(token, data)
-    .then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: PATCH_USER_SUCCESS,
-          payload: res
-        });
-        alert('User information was updated successfully')
-      } else {
-        dispatch({
-          type: PATCH_USER_FAILED,
-          payload: res
-        });
-      }
-    })
-    .catch(err => {
-        dispatch({
-          type: PATCH_USER_FAILED,
-          payload: err
-        });
-    })
-  };
+  dispatch({
+    type: PATCH_USER_REQUEST
+  });
+  patchUserService(token, data)
+  .then(res => {
+    if (res && res.success) {
+      dispatch({
+        type: PATCH_USER_SUCCESS,
+        payload: res
+      });
+      alert('User information was updated successfully')
+    } else {
+      dispatch({
+        type: PATCH_USER_FAILED,
+        payload: res
+      });
+    }
+  })
+  .catch(err => {
+      dispatch({
+        type: PATCH_USER_FAILED,
+        payload: err
+      });
+  })
 }
+
 interface IStorage {
   getItem(key: string): string | null;
   setItem(key: string, value: string): void;
   removeItem(key: string): void;
 }
 
-export function getForgotPassword(data: any) {
+export const getForgotPassword: AppThunk = (data: any) => (dispatch: AppDispatch) => {
+
   const token = 'lala'
   localStorage.setItem('isForgotEmail', true.toString())
-    return function(dispatch: any) {
+  dispatch({
+    type: GET_FORGOT_PASSWORD_REQUEST
+  });
+  getForgotPasswordService(token, data)
+  .then(res => {
+    if (res && res.success) {
       dispatch({
-        type: GET_FORGOT_PASSWORD_REQUEST
+        type: GET_FORGOT_PASSWORD_SUCCESS,
+        payload: res
       });
-      getForgotPasswordService(token, data)
-      .then(res => {
-        if (res && res.success) {
-          dispatch({
-            type: GET_FORGOT_PASSWORD_SUCCESS,
-            payload: res
-          });
-        } else {
-          dispatch({
-            type: GET_FORGOT_PASSWORD_FAILED,
-            payload: res
-          });
-        }
-      })
-      .catch(err => {
-          dispatch({
-            type: GET_FORGOT_PASSWORD_FAILED,
-            payload: err
-          });
-      })
-    };
+    } else {
+      dispatch({
+        type: GET_FORGOT_PASSWORD_FAILED,
+        payload: res
+      });
+    }
+  })
+  .catch(err => {
+      dispatch({
+        type: GET_FORGOT_PASSWORD_FAILED,
+        payload: err
+      });
+  })
   }
   
-export function getResetPassword(data: any) {
-
-    return function(dispatch: any) {
-      dispatch({
-        type: GET_RESET_PASSWORD_REQUEST
-      });
-      getResetPasswordService(data)
-      .then(res => {
-        if (res && res.success) {
-          dispatch({
-            type: GET_RESET_PASSWORD_SUCCESS,
-            payload: res
-          });
-        } else {
-          dispatch({
-            type: GET_RESET_PASSWORD_FAILED,
-            payload: res
-          });
-        }
-      })
-      .catch(err => {
-          dispatch({
-            type: GET_RESET_PASSWORD_FAILED,
-            payload: err
-          });
-      })
-    };
+export const getResetPassword: AppThunk = (data: any) => (dispatch: AppDispatch) => {
+    dispatch({
+      type: GET_RESET_PASSWORD_REQUEST
+    });
+    getResetPasswordService(data)
+    .then(res => {
+      if (res && res.success) {
+        dispatch({
+          type: GET_RESET_PASSWORD_SUCCESS,
+          payload: res
+        });
+      } else {
+        dispatch({
+          type: GET_RESET_PASSWORD_FAILED,
+          payload: res
+        });
+      }
+    })
+    .catch(err => {
+        dispatch({
+          type: GET_RESET_PASSWORD_FAILED,
+          payload: err
+        });
+    })
   }

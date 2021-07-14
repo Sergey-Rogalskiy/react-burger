@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { wsInitAuth } from '../../services/actions/feed';
+import { wsInitAuthAction } from '../../services/actions/feed';
 import { useSelector  } from 'react-redux'
 
 import {
@@ -32,7 +32,7 @@ export default function ProfilePage(props:TProps) {
   
   useEffect(
     () => {
-        dispatch(wsInitAuth())
+        dispatch(wsInitAuthAction())
     }, [] 
   );
   

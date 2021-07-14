@@ -2,7 +2,7 @@ import {
     getOrderRequest, 
   } from '../real-service';
 import { getCookie } from '../utils';
-import { TOrder, TIngredient } from '../../types';
+import { TOrder, TIngredient, AppThunk, AppDispatch } from '../../types';
 
 export const GET_ORDER_REQUEST:'GET_ORDER_REQUEST' = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS:'GET_ORDER_SUCCESS' = 'GET_ORDER_SUCCESS';
@@ -87,9 +87,8 @@ export const changeOrderItemsInConstructorAction = (dragIndex:number,hoverIndex:
   hoverIndex:hoverIndex,
 });
 
-export function getOrder(data: any) {
+export const getOrder: AppThunk = (data: any) => (dispatch: AppDispatch) => {
   const accessToken = getCookie('accessToken')
-    return function(dispatch: any) {
       dispatch(getOrderAction());
       getOrderRequest(accessToken, data)
       .then(res => {
@@ -102,5 +101,4 @@ export function getOrder(data: any) {
       .catch(err => {
           dispatch(getOrderFailedAction());
       })
-    };
   }

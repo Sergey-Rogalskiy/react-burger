@@ -2,6 +2,7 @@
 import { 
   getOrderByIdRequest, 
 } from '../real-service';
+import { TOrder, AppThunk, AppDispatch } from '../../types';
 
 export const WS_CONNECTION_START:'WS_CONNECTION_START' = 'WS_CONNECTION_START';
 export const WS_CONNECTION_SUCCESS:'WS_CONNECTION_SUCCESS' = 'WS_CONNECTION_SUCCESS';
@@ -104,13 +105,6 @@ IWsGetMessageAuthAction |
 IWsSendMessageAuthAction |
 IWsConnectionAuthClosedAction;
 
-export type TOrder = {
-  readonly id: number;
-  readonly password: string;
-  readonly email: string;
-  readonly name: string;
-};
-
 export const wsInitAction = (): IWsInitAction => ({
   type: WS_CONNECTION_START
 });
@@ -176,30 +170,17 @@ export const getOrderByIdSuccessAction = (res:any): IGetOrderByIdSuccessAction =
   payload: res
 });
 
-export function getOrderById(data: any) {
-  return function(dispatch: any) {
-    dispatch(getOrderByIdAction());
-    getOrderByIdRequest(data)
-    .then(res => {
-      if (res && res.success) {
-        dispatch(getOrderByIdSuccessAction(res));
-      } else {
-        dispatch(getOrderByIdtOrderFailedAction());
-      }
-    })
-    .catch(err => {
-        dispatch(getOrderByIdtOrderFailedAction());
-    })
-  };
+export const getOrderById: AppThunk = (data: any) => (dispatch: AppDispatch) => {
+  dispatch(getOrderByIdAction());
+  getOrderByIdRequest(data)
+  .then(res => {
+    if (res && res.success) {
+      dispatch(getOrderByIdSuccessAction(res));
+    } else {
+      dispatch(getOrderByIdtOrderFailedAction());
+    }
+  })
+  .catch(err => {
+      dispatch(getOrderByIdtOrderFailedAction());
+  })
 }
-
-export function wsInit() {
-    return function(dispatch: any) {
-      dispatch(wsInitAction())
-    }
-  }
-export function wsInitAuth() {
-    return function(dispatch: any) {
-      dispatch(wsInitAuthAction())
-    }
-  }

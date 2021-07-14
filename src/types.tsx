@@ -1,7 +1,23 @@
+import { TFeedActions} from './services/actions/feed';
+import { TConstructorActions } from './services/actions/constructor';
+import { TRegistrationActions } from './services/actions/registration';
+import { TIngredientActions } from './services/actions/ingridients';
+import { store } from './store';
+import { ThunkAction } from 'redux-thunk';
+import { Action, ActionCreator } from 'redux';
 
- import { store } from './store';
+export type RootState = ReturnType<typeof store.getState>;
+ 
+export type TAppActions = 
+TFeedActions |
+TConstructorActions |
+TRegistrationActions|
+TIngredientActions;
 
- export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<TReturn = void> = ActionCreator<
+  ThunkAction<TReturn, Action, RootState, TAppActions>
+>; 
+export type AppDispatch = typeof store.dispatch; 
   
  export type TIngredient = {
     calories: number

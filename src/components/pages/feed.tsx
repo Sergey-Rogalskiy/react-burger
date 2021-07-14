@@ -3,7 +3,7 @@ import {
   OrderFeed,
   CookingDoneBoard
 } from '../order-feed/index'
-import { wsInit } from '../../services/actions/feed';
+import { wsInitAction } from '../../services/actions/feed';
 import { useDispatch } from 'react-redux';
 import { useSelector  } from 'react-redux'
 
@@ -19,7 +19,7 @@ export default function FeedPage(props: TProps) {
 
   useEffect(
     () => {
-        dispatch(wsInit())
+        dispatch(wsInitAction())
     }, [] 
   );
   
