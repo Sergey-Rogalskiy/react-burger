@@ -34,6 +34,5 @@ After that all the dependicies will be installed and the local web will be avail
 <br>
 
 # Plans and status
-Completed 3 of 4 sprints.
-I will finish it by around July 12th. 
-TS and WebSockets remain
+I am waiting for a review on TS.
+Finally, my first completely ever finished pet project!
