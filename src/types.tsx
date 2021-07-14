@@ -1,4 +1,9 @@
-export type TIngredient = {
+
+ import { store } from './store';
+
+ export type RootState = ReturnType<typeof store.getState>;
+  
+ export type TIngredient = {
     calories: number
     carbohydrates?: number
     fat:number
@@ -22,6 +27,7 @@ export type TOrder = {
     ingredients: Array<string>
     name: string
     createdAt: string
+    price:number
   }
 
 export  type TLocationItem = {

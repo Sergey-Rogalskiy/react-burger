@@ -35,6 +35,210 @@ import {
   export const PATCH_USER_SUCCESS:'PATCH_USER_SUCCESS' = 'PATCH_USER_SUCCESS';
   export const PATCH_USER_FAILED:'PATCH_USER_FAILED' = 'PATCH_USER_FAILED';
 
+  export interface IgetforgotpasswordrequestAction {
+    readonly type: typeof GET_FORGOT_PASSWORD_REQUEST;
+  }
+    export const getforgotpasswordrequestAction = (): IgetforgotpasswordrequestAction => ({
+      type: GET_FORGOT_PASSWORD_REQUEST,
+  });
+    export interface IgetforgotpasswordsuccessAction {
+    readonly type: typeof GET_FORGOT_PASSWORD_SUCCESS;
+    payload: any;
+  }
+    export const getforgotpasswordsuccessAction = (payload: any): IgetforgotpasswordsuccessAction => ({
+      type: GET_FORGOT_PASSWORD_SUCCESS,
+      payload: payload,
+  });
+    export interface IgetforgotpasswordfailedAction {
+    readonly type: typeof GET_FORGOT_PASSWORD_FAILED;
+  }
+    export const getforgotpasswordfailedAction = (): IgetforgotpasswordfailedAction => ({
+      type: GET_FORGOT_PASSWORD_FAILED,
+  });
+    export interface IgetregisterrequestAction {
+    readonly type: typeof GET_REGISTER_REQUEST;
+  }
+    export const getregisterrequestAction = (): IgetregisterrequestAction => ({
+      type: GET_REGISTER_REQUEST,
+  });
+    export interface IgetregistersuccessAction {
+    readonly type: typeof GET_REGISTER_SUCCESS;
+    readonly payload: any;
+
+  }
+    export const getregistersuccessAction = (payload: any): IgetregistersuccessAction => ({
+      type: GET_REGISTER_SUCCESS,
+      payload: payload
+  });
+    export interface IgetregisterfailedAction {
+    readonly type: typeof GET_REGISTER_FAILED;
+  }
+    export const getregisterfailedAction = (): IgetregisterfailedAction => ({
+      type: GET_REGISTER_FAILED,
+  });
+    export interface IgetresetpasswordrequestAction {
+    readonly type: typeof GET_RESET_PASSWORD_REQUEST;
+  }
+    export const getresetpasswordrequestAction = (): IgetresetpasswordrequestAction => ({
+      type: GET_RESET_PASSWORD_REQUEST,
+  });
+    export interface IgetresetpasswordsuccessAction {
+    readonly type: typeof GET_RESET_PASSWORD_SUCCESS;
+    payload: any;
+  }
+    export const getresetpasswordsuccessAction = (payload:any): IgetresetpasswordsuccessAction => ({
+      type: GET_RESET_PASSWORD_SUCCESS,
+      payload: payload
+  });
+    export interface IgetresetpasswordfailedAction {
+    readonly type: typeof GET_RESET_PASSWORD_FAILED;
+  }
+    export const getresetpasswordfailedAction = (): IgetresetpasswordfailedAction => ({
+      type: GET_RESET_PASSWORD_FAILED,
+  });
+    export interface IgetloginrequestAction {
+    readonly type: typeof GET_LOGIN_REQUEST;
+  }
+    export const getloginrequestAction = (): IgetloginrequestAction => ({
+      type: GET_LOGIN_REQUEST,
+  });
+    export interface IgetloginsuccessAction {
+    readonly type: typeof GET_LOGIN_SUCCESS;
+    readonly payload: any;
+  }
+    export const getloginsuccessAction = (payload: any): IgetloginsuccessAction => ({
+      type: GET_LOGIN_SUCCESS,
+      payload: payload,
+  });
+    export interface IgetloginfailedAction {
+    readonly type: typeof GET_LOGIN_FAILED;
+  }
+    export const getloginfailedAction = (): IgetloginfailedAction => ({
+      type: GET_LOGIN_FAILED,
+  });
+    export interface IgetlogoutrequestAction {
+    readonly type: typeof GET_LOGOUT_REQUEST;
+  }
+    export const getlogoutrequestAction = (): IgetlogoutrequestAction => ({
+      type: GET_LOGOUT_REQUEST,
+  });
+    export interface IgetlogoutsuccessAction {
+    readonly type: typeof GET_LOGOUT_SUCCESS;
+  }
+    export const getlogoutsuccessAction = (): IgetlogoutsuccessAction => ({
+      type: GET_LOGOUT_SUCCESS,
+  });
+    export interface IgetlogoutfailedAction {
+    readonly type: typeof GET_LOGOUT_FAILED;
+  }
+    export const getlogoutfailedAction = (): IgetlogoutfailedAction => ({
+      type: GET_LOGOUT_FAILED,
+  });
+    export interface IgettokenrequestAction {
+    readonly type: typeof GET_TOKEN_REQUEST;
+  }
+    export const gettokenrequestAction = (): IgettokenrequestAction => ({
+      type: GET_TOKEN_REQUEST,
+  });
+    export interface IgettokensuccessAction {
+    readonly type: typeof GET_TOKEN_SUCCESS;
+  }
+    export const gettokensuccessAction = (): IgettokensuccessAction => ({
+      type: GET_TOKEN_SUCCESS,
+  });
+    export interface IgettokenfailedAction {
+    readonly type: typeof GET_TOKEN_FAILED;
+  }
+    export const gettokenfailedAction = (): IgettokenfailedAction => ({
+      type: GET_TOKEN_FAILED,
+  });
+    export interface IgetuserrequestAction {
+    readonly type: typeof GET_USER_REQUEST;
+  }
+    export const getuserrequestAction = (): IgetuserrequestAction => ({
+      type: GET_USER_REQUEST,
+  });
+    export interface IgetusersuccessAction {
+    readonly type: typeof GET_USER_SUCCESS;
+    payload: any;
+  }
+    export const getusersuccessAction = (payload: any): IgetusersuccessAction => ({
+      type: GET_USER_SUCCESS,
+      payload,
+  });
+    export interface IgetuserfailedAction {
+    readonly type: typeof GET_USER_FAILED;
+  }
+    export const getuserfailedAction = (): IgetuserfailedAction => ({
+      type: GET_USER_FAILED,
+  });
+    export interface IpatchuserrequestAction {
+    readonly type: typeof PATCH_USER_REQUEST;
+  }
+    export const patchuserrequestAction = (): IpatchuserrequestAction => ({
+      type: PATCH_USER_REQUEST,
+  });
+
+    export interface IpatchuserfailedAction {
+    readonly type: typeof PATCH_USER_FAILED;
+  }
+    export const patchuserfailedAction = (): IpatchuserfailedAction => ({
+      type: PATCH_USER_FAILED,
+  });
+  
+  export type TRegistrationActions = 
+  IgetforgotpasswordrequestAction |
+  IgetforgotpasswordsuccessAction |
+  IgetforgotpasswordfailedAction |
+  IgetregisterrequestAction |
+  IgetregistersuccessAction |
+  IgetregisterfailedAction |
+  IgetresetpasswordrequestAction |
+  IgetresetpasswordsuccessAction |
+  IgetresetpasswordfailedAction |
+  IgetloginrequestAction |
+  IgetloginsuccessAction |
+  IgetloginfailedAction |
+  IgetlogoutrequestAction |
+  IgetlogoutsuccessAction |
+  IgetlogoutfailedAction |
+  IgettokenrequestAction |
+  IgettokensuccessAction |
+  IgettokenfailedAction |
+  IgetuserrequestAction |
+  IgetusersuccessAction |
+  IgetuserfailedAction |
+  IpatchuserrequestAction |
+  IpatchuserfailedAction |
+  IPatchUserAction |
+  IPatchUserFailedAction | 
+  IPatchUserSuccessAction;
+  
+  export interface IPatchUserAction {
+    readonly type: typeof PATCH_USER_REQUEST;
+  }
+
+  export const patchUserAction = (): IPatchUserAction => ({
+    type: PATCH_USER_REQUEST
+  });
+  
+  
+  export interface IPatchUserFailedAction {
+    readonly type: typeof PATCH_USER_FAILED ;
+  }
+  export const patchUserFailedAction = ():IPatchUserFailedAction => ({
+    type: PATCH_USER_FAILED
+  });
+  
+  export interface IPatchUserSuccessAction {
+    readonly type: typeof PATCH_USER_SUCCESS;
+    readonly payload: any;
+  }
+  
+  export const patchUserSuccessAction = (res:any): IPatchUserSuccessAction => ({
+    type: PATCH_USER_SUCCESS,
+    payload: res
+  });
 export function getRegister(data: any) {
   return function(dispatch: any) {
     dispatch({

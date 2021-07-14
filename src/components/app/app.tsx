@@ -33,7 +33,7 @@ import { ProtectedRoute, AuthProtectedRoute } from '../protected-route'
 import {getItems} from "../../services/actions/ingridients"
 
 import {
-  ORDER_RESET,
+  orderResetAction,
 } from '../../services/actions/constructor';
 
 import {TLocation} from '../../types'
@@ -68,7 +68,7 @@ const App: React.FC = () => {
   const closeModal = () => {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
-      dispatch({type: ORDER_RESET});
+      dispatch(orderResetAction());
       if (location?.state?.background?.pathname) {
         history.push(`${location.state.background.pathname}`)
       }

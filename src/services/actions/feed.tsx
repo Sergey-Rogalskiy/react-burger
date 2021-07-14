@@ -32,15 +32,59 @@ export interface IGetOrderByIdFailedAction {
 
 export interface IGetOrderByIdSuccessAction {
   readonly type: typeof ORDER_ID_SUCCESS;
-  readonly order: TOrder;
+  readonly payload: {orders: TOrder[]};
 }
 
 export interface IWsInitAction {
   readonly type: typeof WS_CONNECTION_START;
 }
 
+export interface IWsConnectionSuccessAction {
+  readonly type: typeof WS_CONNECTION_SUCCESS;
+}
+
+export interface IWsConnectionFailedAction {
+  readonly type: typeof WS_CONNECTION_ERROR;
+  readonly payload: any;
+}
+
+export interface IWsGetMessageAction {
+  readonly type: typeof WS_GET_MESSAGE;
+  readonly payload: any;
+}
+
+export interface IWsSendMessageAction {
+  readonly type: typeof WS_SEND_MESSAGE;
+}
+
+export interface IWsConnectionClosedAction {
+  readonly type: typeof WS_CONNECTION_CLOSED;
+}
+
 export interface IWsInitAuthAction {
   readonly type: typeof WS_CONNECTION_AUTH_START;
+}
+
+export interface IWsConnectionAuthSuccessAction {
+  readonly type: typeof WS_CONNECTION_AUTH_SUCCESS;
+}
+
+export interface IWsConnectionAuthFailedAction {
+  readonly type: typeof WS_CONNECTION_AUTH_ERROR;
+  readonly payload: any;
+}
+
+export interface IWsGetMessageAuthAction {
+  readonly type: typeof WS_GET_MESSAGE_AUTH;
+  readonly payload: any;
+}
+
+export interface IWsSendMessageAuthAction {
+  readonly type: typeof WS_SEND_MESSAGE_AUTH;
+}
+
+export interface IWsConnectionAuthClosedAction {
+  readonly type: typeof WS_CONNECTION_AUTH_CLOSED;
 }
 
 export type TFeedActions = 
@@ -48,7 +92,17 @@ IGetOrderByIdAction |
 IGetOrderByIdFailedAction |
 IGetOrderByIdSuccessAction|
 IWsInitAction |
-IWsInitAuthAction;
+IWsConnectionSuccessAction |
+IWsConnectionFailedAction |
+IWsGetMessageAction |
+IWsSendMessageAction |
+IWsConnectionClosedAction |
+IWsInitAuthAction |
+IWsConnectionAuthSuccessAction |
+IWsConnectionAuthFailedAction |
+IWsGetMessageAuthAction |
+IWsSendMessageAuthAction |
+IWsConnectionAuthClosedAction;
 
 export type TOrder = {
   readonly id: number;
@@ -61,9 +115,53 @@ export const wsInitAction = (): IWsInitAction => ({
   type: WS_CONNECTION_START
 });
 
+export const wsConnectionSuccessAction = (): IWsConnectionSuccessAction => ({
+  type: WS_CONNECTION_SUCCESS
+});
+
+export const wsConnectionFailedAction = (payload:any): IWsConnectionFailedAction => ({
+  type: WS_CONNECTION_ERROR,
+  payload: payload
+});
+
+export const wsGetMessageAction = (payload:any): IWsGetMessageAction => ({
+  type: WS_GET_MESSAGE,
+  payload: payload
+});
+
+export const wsSendMessageAction = (): IWsSendMessageAction => ({
+  type: WS_SEND_MESSAGE
+});
+
+export const wsConnectionClosedAction = (): IWsConnectionClosedAction => ({
+  type: WS_CONNECTION_CLOSED
+});
+
 export const wsInitAuthAction = (): IWsInitAuthAction => ({
   type: WS_CONNECTION_AUTH_START
 }); 
+
+export const wsConnectionAuthSuccessAction = (): IWsConnectionAuthSuccessAction => ({
+  type: WS_CONNECTION_AUTH_SUCCESS
+});
+
+export const wsConnectionAuthFailedAction = (payload:any): IWsConnectionAuthFailedAction => ({
+  type: WS_CONNECTION_AUTH_ERROR,
+  payload: payload
+});
+
+export const wsGetMessageAuthAction = (payload:any): IWsGetMessageAuthAction => ({
+  type: WS_GET_MESSAGE_AUTH,
+  payload: payload
+});
+
+export const wsSendMessageAuthAction = (): IWsSendMessageAuthAction => ({
+  type: WS_SEND_MESSAGE_AUTH
+});
+
+export const wsConnectionAuthClosedAction = (): IWsConnectionAuthClosedAction => ({
+  type: WS_CONNECTION_AUTH_CLOSED
+});
 
 export const getOrderByIdAction = (): IGetOrderByIdAction => ({
   type: ORDER_ID_REQUEST
@@ -75,7 +173,7 @@ export const getOrderByIdtOrderFailedAction = (): IGetOrderByIdFailedAction => (
 
 export const getOrderByIdSuccessAction = (res:any): IGetOrderByIdSuccessAction => ({
   type: ORDER_ID_SUCCESS,
-  order: res
+  payload: res
 });
 
 export function getOrderById(data: any) {

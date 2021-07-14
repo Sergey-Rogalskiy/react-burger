@@ -11,8 +11,24 @@ import {
   ORDER_ID_REQUEST,
   ORDER_ID_SUCCESS
 } from '../actions/feed';
+import {TOrder} from '../../types'
+import {TFeedActions} from '../actions/feed'
 
-  const initialState = {
+  type TInitialState = {
+    wsConnected: boolean,
+    wsError: any,
+    wsFeedData: TOrder[],
+
+    wsAuthConnected: boolean,
+    wsAuthError: null | boolean,
+    wsFeedDataAuth: null| boolean,
+
+    orderIdRequest: boolean,
+    orderIdFailed: boolean,
+    orderId: any,
+  }
+
+  const initialState:TInitialState = {
 
     wsConnected: false,
     wsError: null,
@@ -21,9 +37,13 @@ import {
     wsAuthConnected: false,
     wsAuthError: null,
     wsFeedDataAuth: null,
+
+    orderIdRequest: false,
+    orderIdFailed: false,
+    orderId: null
   };
   
-  export const feedReducer = (state = initialState, action) => {
+  export const feedReducer = (state = initialState, action:TFeedActions):TInitialState => {
     switch (action.type) {
       case WS_CONNECTION_SUCCESS: {
         return {

@@ -1,19 +1,13 @@
 import { 
     getIngridientsRequest, 
 } from '../real-service';
-
+import { TIngredient } from '../../types';
 export const GET_ITEMS_REQUEST:'GET_ITEMS_REQUEST' = 'GET_ITEMS_REQUEST';
 export const GET_ITEMS_SUCCESS:'GET_ITEMS_SUCCESS' = 'GET_ITEMS_SUCCESS';
 export const GET_ITEMS_FAILED:'GET_ITEMS_FAILED' = 'GET_ITEMS_FAILED';
 export const TAB_SWITCH:'TAB_SWITCH' = 'TAB_SWITCH';
 export const SET_CURRENT_ITEM_TO_VIEW:'SET_CURRENT_ITEM_TO_VIEW' = 'SET_CURRENT_ITEM_TO_VIEW';
 
-export type TIngredient = {
-  readonly id: number;
-  readonly password: string;
-  readonly email: string;
-  readonly name: string;
-};
 
 export interface IGetItemsAction {
   readonly type: typeof GET_ITEMS_REQUEST;
@@ -25,12 +19,12 @@ export interface IGetItemsFailedAction {
 
 export interface IGetItemsSuccessAction {
   readonly type: typeof GET_ITEMS_SUCCESS;
-  readonly items: ReadonlyArray<TIngredient>;
+  readonly items: Array<TIngredient>;
 }
 
 export interface ITabSwitchAction {
   readonly type: typeof TAB_SWITCH;
-  items: any
+  payload: any
 }
 
 export interface ISetCurrentItemsToViewAction {
@@ -38,7 +32,7 @@ export interface ISetCurrentItemsToViewAction {
   currentItemToView: any
 }
 
-export type TFeedActions = 
+export type TIngredientActions = 
 IGetItemsAction |
 IGetItemsFailedAction |
 IGetItemsSuccessAction|
@@ -60,7 +54,7 @@ export const getItemsSuccessAction = (res:any): IGetItemsSuccessAction => ({
 
 export const tabSwitchAction = (res:any): ITabSwitchAction => ({
   type: TAB_SWITCH,
-  items: res
+  payload: res
 });
 
 export const setCurrentItemsToViewAction = (res:any): ISetCurrentItemsToViewAction => ({

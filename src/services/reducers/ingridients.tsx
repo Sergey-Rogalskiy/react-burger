@@ -5,8 +5,20 @@ import {
     TAB_SWITCH,
     SET_CURRENT_ITEM_TO_VIEW
   } from '../actions/ingridients';
+  import {TIngredient, TOrder} from '../../types'
+  import {TIngredientActions} from '../actions/ingridients'
   
-  const initialState = {
+    type TInitialState = {
+      items: TIngredient[],
+      itemsRequest: boolean,
+      itemsFailed: boolean,
+  
+      currentItemToView: TIngredient | TOrder | null,
+    
+      currentTab: 'buns' | 'sauces' | 'mains',
+    }
+  
+  const initialState: TInitialState = {
     items: [],
     itemsRequest: false,
     itemsFailed: false,
@@ -16,7 +28,7 @@ import {
     currentTab: 'buns',
   };
   
-  export const ingridientsReducer = (state = initialState, action) => {
+  export const ingridientsReducer = (state = initialState, action:TIngredientActions): TInitialState => {
     switch (action.type) {
       case GET_ITEMS_REQUEST: {
         return {
