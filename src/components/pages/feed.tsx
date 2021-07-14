@@ -15,7 +15,6 @@ type TProps = {
 export const FeedPage: FC<TProps> = (props) => {
   const dispatch = useDispatch()
   const wsFeedData = useSelector(state => state.feed.wsFeedData.orders)
-  console.log(wsFeedData);
 
   useEffect(
     () => {

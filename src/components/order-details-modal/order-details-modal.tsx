@@ -12,17 +12,19 @@ import s from './order-details-modal.module.css'
 const OrderDetailsModal = () => {
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
   
-    const data = currentItemToView?.item
-  const allIngridientsData = data?.ingredients.map((item:string) => {
+    // @ts-ignore: Unreachable code error
+  const data = currentItemToView.item
+  const ingredients = useSelector(state => state.ingridients.items)
+  
+    // @ts-ignore: Unreachable code error
+  const allIngridientsData = data.ingredients.map((item:string) => {
     return {
       image: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].image,
       price: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].price,
       name: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].name
     }
   }).slice(0, 5)
-  const ingredients = useSelector(state => state.ingridients.items)
-  //ts
-    // @ts-ignore: Unreachable code error
+  // @ts-ignore: Unreachable code error
   const totalPrice = allIngridientsData.reduce((acc: number, item: TIngredient) => acc+item.price, 0)
 
   return (
@@ -33,15 +35,16 @@ const OrderDetailsModal = () => {
         <>
         <div className={s.modal}>
           
-    
-        <p className={`${s.center} text text_type_digits-default mb-2`}>#
-        {// @ts-ignore: Unreachable code error
-          data?.number
-        }</p>
-        
-        <p className="text text_type_main-medium">{data?.name}</p>
+        <p className={`${s.center} text text_type_digits-default mb-2`}>#{
+          // @ts-ignore: Unreachable code error
+          data.number}
+        </p>
+        <p className="text text_type_main-medium">{
+          // @ts-ignore: Unreachable code error
+          data.name}
+        </p>
         {
-    // @ts-ignore: Unreachable code error
+        // @ts-ignore: Unreachable code error
           (data.status === 'done') 
           ? <p className={`${s.done_clr} mb-10`}>Выполнен</p>
           : <p className={`mb-10`}>Готовится</p>
@@ -68,11 +71,10 @@ const OrderDetailsModal = () => {
         </ul>
         
         <div className={s.flex_row}>
-          {/* // @ts-ignore: Unreachable code error */}
-            <p className="text text_type_main-default text_color_inactive pt-3">
-              {// @ts-ignore: Unreachable code error
+            <p className="text text_type_main-default text_color_inactive pt-3">{
+              // @ts-ignore: Unreachable code error
               data.time}
-            </p>
+              </p>
             
             <div className={s.flex_center}>
               <span className="text text_type_main-medium p-2">

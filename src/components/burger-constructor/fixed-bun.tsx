@@ -13,8 +13,6 @@ type TProps = {
 
 const FixedBun: FC<TProps> = (props) => {
   const data = props
-  console.log(data);
-  
   
   return (
     <>
