@@ -3,8 +3,7 @@ import {
   Input,
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector } from '../../types'
-import {useDispatch} from 'react-redux'
+import { useSelector, useDispatch} from '../../types'
 import {patchUser} from '../../services/actions/registration'
 import {Redirect} from 'react-router-dom'
 
@@ -13,7 +12,7 @@ import {Redirect} from 'react-router-dom'
 export const ProdileEdit = () => {
   const dispatch = useDispatch()
 
-  const user = useSelector((state:any) => state.registration.user)
+  const user = useSelector(state => state.registration.user)
   let data = {...user, password: ''}
   const [value, setValue] = React.useState(data)
   const onChange = (e:any) => {

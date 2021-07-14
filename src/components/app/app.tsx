@@ -6,8 +6,7 @@ import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
 import OrderDetailsModal from  '../order-details-modal/order-details-modal'
 
-import { useDispatch  } from 'react-redux'
-import { useSelector } from '../../types'
+import { useSelector, useDispatch } from '../../types'
 import {
   getOrder
 } from '../../services/actions/constructor'
@@ -48,8 +47,8 @@ const App: React.FC = () => {
 
   const [visible, setVisible] = React.useState(false)
 
-  const chosenBuns = useSelector((state:any) => state.burgerConstructor.chosenBuns)
-  const chosenItems = useSelector((state:any) => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
   const openModal = (event: any, item: any) => {
       if (item !== undefined) {

@@ -7,10 +7,12 @@ import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
 import {
   TypedUseSelectorHook,
-  useSelector as selectorHook
+  useSelector as selectorHook,
+  useDispatch as dispatchHook,
 } from 'react-redux';
 
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook; 
+export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>(); 
 
 export type RootState = ReturnType<typeof store.getState>;
  

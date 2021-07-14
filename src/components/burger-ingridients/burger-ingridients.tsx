@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -14,7 +14,7 @@ type TProps = {
   modal: any;
 }
 
-const BurgerIngridients = (props: TProps) => {
+const BurgerIngridients: FC<TProps> = (props) => {
 
   const items = useSelector(state => state.ingridients.items)
   

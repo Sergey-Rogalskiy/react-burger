@@ -17,11 +17,11 @@ import {TFeedActions} from '../actions/feed'
   type TInitialState = {
     wsConnected: boolean,
     wsError: any,
-    wsFeedData: TOrder[],
+    wsFeedData: {orders: TOrder[], total: number, totalToday: number},
 
     wsAuthConnected: boolean,
     wsAuthError: null | boolean,
-    wsFeedDataAuth: null| boolean,
+    wsFeedDataAuth: {orders: TOrder[]},
 
     orderIdRequest: boolean,
     orderIdFailed: boolean,
@@ -32,11 +32,11 @@ import {TFeedActions} from '../actions/feed'
 
     wsConnected: false,
     wsError: null,
-    wsFeedData: [],
+    wsFeedData: {orders: [], total: 0, totalToday: 0},
 
     wsAuthConnected: false,
     wsAuthError: null,
-    wsFeedDataAuth: null,
+    wsFeedDataAuth: {orders: []},
 
     orderIdRequest: false,
     orderIdFailed: false,

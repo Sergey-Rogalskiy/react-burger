@@ -1,7 +1,6 @@
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 import { useEffect, FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../../types'
+import { useSelector, useDispatch} from '../../types'
 import { getUser } from '../../services/actions/registration';
 import { getCookie } from '../../services/utils';
 

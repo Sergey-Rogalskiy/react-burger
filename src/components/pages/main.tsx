@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import BurgerIngridients from '../burger-ingridients/burger-ingridients'
 
@@ -15,7 +16,7 @@ type TProps = {
   modal: any;
 }
 
-const MainPage = (props: TProps) => {
+const MainPage: FC<TProps> = (props) => {
   
   
   return (

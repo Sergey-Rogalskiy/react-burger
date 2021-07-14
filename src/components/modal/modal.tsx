@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 import ReactDOM from 'react-dom';
 import {
   CloseIcon
@@ -16,7 +16,7 @@ type TProps = {
   onClose: any;
 }
 
-const Modal = (props: TProps) => {
+const Modal:FC<TProps> = (props) => {
   
   const { children, header, onClose } = props;
   return ReactDOM.createPortal(
@@ -37,11 +37,5 @@ const Modal = (props: TProps) => {
   );
 } 
 
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  header: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-}; 
 
 export default Modal;

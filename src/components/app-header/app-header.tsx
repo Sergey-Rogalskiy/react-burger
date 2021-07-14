@@ -6,7 +6,7 @@ import { useSelector } from '../../types'
 
 const AppHeader: FC = () => {
   const {pathname} = useLocation()
-  const user = useSelector((state:any) => state.registration.user)
+  const user = useSelector(state => state.registration.user)
   return (
     <header className={s.header}>
       <div className={s.header__inner}>

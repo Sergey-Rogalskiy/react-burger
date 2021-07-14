@@ -1,9 +1,10 @@
+import { FC } from 'react'
 import {useRef} from 'react';
 import {
   ConstructorElement, 
   DragIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch  } from 'react-redux'
+import { useDispatch } from '../../types'
 import { useDrop, useDrag } from "react-dnd";
 import {
   DELETE_ITEM_FROM_CONSTRUCTOR,
@@ -18,7 +19,7 @@ type TProps = {
   index: number
 }
 
-const Ingridient = (props: TProps) => {
+const Ingridient: FC<TProps> = (props) => {
   
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     dispatch({

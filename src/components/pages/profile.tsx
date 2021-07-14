@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { wsInitAuthAction } from '../../services/actions/feed';
 import { useSelector } from '../../types'
 
@@ -7,10 +7,8 @@ import {
 } from '../order-feed/index'
 
 import {ProdileEdit} from '../profile'
-
-
 import {  Switch, NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../types'
 import {getLogout} from '../../services/actions/registration'
 import { ProtectedRoute } from '../protected-route/protected-route';
 
@@ -19,11 +17,10 @@ import s from './pages.module.css'
 type TProps = {
   modal: any
 }
-
-export default function ProfilePage(props:TProps) {
+const ProfilePage: FC<TProps> = (props)  => {
   const refreshToken = localStorage.getItem('refreshToken')
   const dispatch = useDispatch();
-  const wsFeedDataAuth = useSelector((state:any) => state.feed.wsFeedDataAuth?.orders)
+  const wsFeedDataAuth = useSelector(state => state.feed.wsFeedDataAuth?.orders)
 
   const exit = (e:any) => {
     e.preventDefault()
@@ -85,3 +82,5 @@ export default function ProfilePage(props:TProps) {
     </>
   );
 }
+
+export default ProfilePage

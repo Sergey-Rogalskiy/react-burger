@@ -1,9 +1,12 @@
+import { FC } from 'react';
 import PropTypes from 'prop-types';
 
 import modalStyles from './modal-overlay.module.css'
 
-
-const ModalOverlay = (props: {onClose:()=>{}}) => {
+type TProps = {
+  onClose:()=>{}
+}
+const ModalOverlay: FC<TProps> = (props) => {
   return (
     <div 
       className={modalStyles.modal_overlay} 

@@ -1,7 +1,5 @@
-
-
-import { useDispatch  } from 'react-redux'
-import { useSelector } from '../../types'
+import { FC } from 'react'
+import { useSelector, useDispatch } from '../../types'
 import FixedBun from './fixed-bun'
 import Ingridients from './ingridients'
 import TotalPrice from './total-price'
@@ -17,7 +15,7 @@ type TProps = {
   modal: any;
 }
 
-const BurgerConstructor = (props: TProps) => {
+const BurgerConstructor: FC<TProps> = (props) => {
 
 //   const {constructorState} = React.useContext(CurrentIngridientsContext);
 //  const data =constructorState

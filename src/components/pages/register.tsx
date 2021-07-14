@@ -5,8 +5,7 @@ import {
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Redirect } from "react-router-dom"
-import { useSelector } from '../../types'
-import {useDispatch} from 'react-redux'
+import { useSelector, useDispatch} from '../../types'
 import {getRegister} from '../../services/actions/registration'
 import Spinner from '../utils/loader'
 
@@ -14,9 +13,9 @@ import s from './pages.module.css'
 
 function RegisterPage() {
   const dispatch = useDispatch()
-  const registerRequest = useSelector((state:any) => state.registration.registerRequest)
-  const registerFailed = useSelector((state:any) => state.registration.registerFailed)
-  const user = useSelector((state:any) => state.registration.user)
+  const registerRequest = useSelector(state => state.registration.registerRequest)
+  const registerFailed = useSelector(state => state.registration.registerFailed)
+  const user = useSelector(state => state.registration.user)
 
   
   const [value, setValue] = React.useState({name: '', email: '', password: '', })

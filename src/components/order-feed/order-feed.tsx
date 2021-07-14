@@ -1,3 +1,4 @@
+import { FC } from "react"
 import {Element} from "./element/element"
 import {useHistory, useRouteMatch, useLocation } from 'react-router-dom'
 import { TOrder } from '../../types'
@@ -9,7 +10,7 @@ type TProps = {
   orders: TOrder[]|null;
   modal: any
 }
-export const OrderFeed = (props: TProps) => {
+export const OrderFeed: FC<TProps> = (props) => {
   const {path} = useRouteMatch();
   const history = useHistory();
   const location = useLocation();

@@ -2,8 +2,7 @@ import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react';
-import { useDispatch  } from 'react-redux'
-import { useSelector } from '../../types'
+import { useSelector, useDispatch } from '../../types'
 import { useParams } from 'react-router-dom'
 import { getOrderById } from '../../services/actions/feed';
 import { TIngredient } from '../../types';

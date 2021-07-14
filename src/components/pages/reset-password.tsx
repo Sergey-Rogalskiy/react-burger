@@ -5,8 +5,7 @@ import {
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Redirect, useHistory } from "react-router-dom"
-import { useSelector } from '../../types'
-import {useDispatch} from 'react-redux'
+import { useSelector, useDispatch} from '../../types'
 import {getResetPassword} from '../../services/actions/registration'
 import Spinner from '../utils/loader'
 
@@ -14,9 +13,9 @@ import s from './pages.module.css'
 
 export default function ResetPage() {
   const dispatch = useDispatch()
-  const resetPasswordData = useSelector((state:any) => state.registration.resetPasswordData)
-  const resetPasswordRequest = useSelector((state:any) => state.registration.resetPasswordRequest)
-  const resetPasswordFailed = useSelector((state:any) => state.registration.resetPasswordFailed)
+  const resetPasswordData = useSelector(state => state.registration.resetPasswordData)
+  const resetPasswordRequest = useSelector(state => state.registration.resetPasswordRequest)
+  const resetPasswordFailed = useSelector(state => state.registration.resetPasswordFailed)
   
   const [value, setValue] = React.useState({token: '', password: '', email: ''})
   const onChange = (e:any) => {

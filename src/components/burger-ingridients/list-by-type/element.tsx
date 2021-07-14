@@ -1,4 +1,4 @@
-
+import { FC } from 'react';
 import IngridientCard from '../ingridient-card/ingridient-card'
 import listByTypeStyles from './list-by-type.module.css'
 import { useDrag } from "react-dnd";
@@ -9,10 +9,9 @@ type TProps = {
   item: TIngredient;
   // onClick: {openModal: (e: any, item: any) => void};
   onClick: any;
-  key: number;
 }
 
-const ListByType = (props: TProps) => {
+const ListByType: FC<TProps> = (props) => {
   
   const history = useHistory()
   const location = useLocation()
@@ -35,7 +34,7 @@ const ListByType = (props: TProps) => {
   }
 
   return (
-    <li key={props.key} 
+    <li
     className={listByTypeStyles.card}
     // onClick={(e) => props.onClick(e, item)}
     onClick={clickIngridient}

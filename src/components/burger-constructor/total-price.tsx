@@ -1,4 +1,4 @@
-
+import { FC } from 'react'
 import {
   Button,
   CurrencyIcon, 
@@ -14,7 +14,7 @@ type TProps = {
   modal: any;
 }
 
-const TotalPrice = (props: TProps) => {
+const TotalPrice: FC<TProps> = (props) => {
   
   const totalPrice = useSelector(state => state.burgerConstructor.totalPrice)
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)

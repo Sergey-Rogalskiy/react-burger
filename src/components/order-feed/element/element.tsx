@@ -1,4 +1,5 @@
 import { useSelector } from '../../../types'
+import { FC } from 'react'
 
 import {
   CurrencyIcon
@@ -6,10 +7,10 @@ import {
 
 import s from '../order-feed.module.css'
 
-export const Element = (props: any) => {
+export const Element: FC<any> = (props) => {
   
   const testData = props.data
-  const ingredients = useSelector((state:any) => state.ingridients.items)
+  const ingredients = useSelector(state => state.ingridients.items)
   let allIngridientsData
   let ingredientsImages = []
   let totalPrice

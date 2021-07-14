@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import {
   OrderFeed,
   CookingDoneBoard
 } from '../order-feed/index'
 import { wsInitAction } from '../../services/actions/feed';
-import { useDispatch } from 'react-redux';
-import { useSelector } from '../../types'
+import { useSelector, useDispatch } from '../../types'
 
 import s from './pages.module.css'
 
@@ -13,9 +12,10 @@ type TProps = {
   modal: any
 }
 
-export default function FeedPage(props: TProps) {
+export const FeedPage: FC<TProps> = (props) => {
   const dispatch = useDispatch()
-  const wsFeedData = useSelector((state:any) => state.feed.wsFeedData.orders)
+  const wsFeedData = useSelector(state => state.feed.wsFeedData.orders)
+  console.log(wsFeedData);
 
   useEffect(
     () => {
@@ -46,3 +46,4 @@ export default function FeedPage(props: TProps) {
     </>
   );
 }
+export default FeedPage

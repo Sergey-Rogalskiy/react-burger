@@ -1,4 +1,4 @@
-
+import { FC } from 'react'
 import {
   ConstructorElement, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -11,7 +11,7 @@ type TProps = {
   type: "top" | 'bottom' | undefined
 }
 
-const FixedBun = (props: TProps) => {
+const FixedBun: FC<TProps> = (props) => {
   const data = props
   console.log(data);
   

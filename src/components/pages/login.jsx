@@ -6,8 +6,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Redirect } from "react-router-dom"
 import {getLogin} from '../../services/actions/registration'
-import {useDispatch} from 'react-redux'
-import { useSelector } from '../../types'
+import { useSelector, useDispatch} from '../../types'
 import Spinner from '../utils/loader'
 
 import s from './pages.module.css'
