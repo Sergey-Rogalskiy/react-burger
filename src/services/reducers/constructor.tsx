@@ -7,7 +7,7 @@ import {
     CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
   } from '../actions/constructor';
   
-import {TIngredient, TOrder} from '../../types'
+import {TIngredient, TOrder, TChosenBuns} from '../../types'
 import {TConstructorActions} from '../actions/constructor'
 
   type TInitialState = {
@@ -16,7 +16,7 @@ import {TConstructorActions} from '../actions/constructor'
     orderFailed: boolean,
   
     chosenItems: TIngredient[],
-    chosenBuns: TIngredient | {price:number},
+    chosenBuns: TIngredient | TChosenBuns,
 
     totalPrice: number,
     totalPriceBuns: number
@@ -29,7 +29,7 @@ import {TConstructorActions} from '../actions/constructor'
     orderFailed: false,
   
     chosenItems: [],
-    chosenBuns: {price: 0},
+    chosenBuns: {price: 0, name:'name',image:'image', _id:'_id'},
 
     totalPrice: 0,
     totalPriceBuns: 0

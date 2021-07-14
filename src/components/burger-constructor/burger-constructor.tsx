@@ -1,6 +1,7 @@
 
 
-import { useSelector, useDispatch  } from 'react-redux'
+import { useDispatch  } from 'react-redux'
+import { useSelector } from '../../types'
 import FixedBun from './fixed-bun'
 import Ingridients from './ingridients'
 import TotalPrice from './total-price'
@@ -21,8 +22,8 @@ const BurgerConstructor = (props: TProps) => {
 //   const {constructorState} = React.useContext(CurrentIngridientsContext);
 //  const data =constructorState
   
-  const chosenItems = useSelector((state: any) => state.burgerConstructor.chosenItems)
-  const chosenBuns = useSelector((state: any) => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
  
   const dispatch = useDispatch();
   

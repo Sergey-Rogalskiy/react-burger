@@ -5,9 +5,27 @@ import { TIngredientActions } from './services/actions/ingridients';
 import { store } from './store';
 import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
+import {
+  TypedUseSelectorHook,
+  useSelector as selectorHook
+} from 'react-redux';
+
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook; 
 
 export type RootState = ReturnType<typeof store.getState>;
  
+export type TCurrentItemToView = {
+  type: 'order' | 'ingridient',
+  item: TIngredient | TOrder | null | undefined
+}
+
+export type TChosenBuns = {
+  price: number; 
+  name:string;
+  image:string
+  _id:string
+}
+
 export type TAppActions = 
 TFeedActions |
 TConstructorActions |
@@ -33,6 +51,7 @@ export type AppDispatch = typeof store.dispatch;
     __v:number
     _id: string
     key?: number
+    ingredients: Array<string>
   }
 
 export type TOrder = {
@@ -44,6 +63,11 @@ export type TOrder = {
     name: string
     createdAt: string
     price:number
+    image:string
+    calories: number
+    proteins:number
+    fat:number
+    carbohydrates?: number
   }
 
 export  type TLocationItem = {

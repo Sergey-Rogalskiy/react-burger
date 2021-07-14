@@ -1,4 +1,4 @@
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../types'
 import { TOrder } from '../../types'
 import s from './order-feed.module.css'
 import Spinner from '../utils/loader'

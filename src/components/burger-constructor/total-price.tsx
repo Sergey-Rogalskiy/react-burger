@@ -4,7 +4,7 @@ import {
   CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../types'
 import {useHistory, useLocation} from 'react-router-dom'
 
 import burgerConstructorStyles from './burger-constructor.module.css'
@@ -16,9 +16,9 @@ type TProps = {
 
 const TotalPrice = (props: TProps) => {
   
-  const totalPrice = useSelector((state: any) => state.burgerConstructor.totalPrice)
-  const chosenBuns = useSelector((state: any) => state.burgerConstructor.chosenBuns)
-  const user = useSelector((state: any) => state.registration.user)
+  const totalPrice = useSelector(state => state.burgerConstructor.totalPrice)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const user = useSelector(state => state.registration.user)
   const history = useHistory()
   const location = useLocation()
 

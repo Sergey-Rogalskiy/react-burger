@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { wsInitAuthAction } from '../../services/actions/feed';
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../types'
 
 import {
   OrderFeed,

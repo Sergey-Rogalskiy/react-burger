@@ -6,7 +6,8 @@ import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
 import OrderDetailsModal from  '../order-details-modal/order-details-modal'
 
-import { useSelector, useDispatch  } from 'react-redux'
+import { useDispatch  } from 'react-redux'
+import { useSelector } from '../../types'
 import {
   getOrder
 } from '../../services/actions/constructor'
@@ -98,7 +99,7 @@ const App: React.FC = () => {
   }
 
   
-  const currentItemToView = useSelector((state: any) => state.ingridients.currentItemToView)
+  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
 
   const modal = (
     <>

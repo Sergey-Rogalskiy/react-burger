@@ -7,13 +7,14 @@ import {
   } from '../actions/ingridients';
   import {TIngredient, TOrder} from '../../types'
   import {TIngredientActions} from '../actions/ingridients'
+  import {TCurrentItemToView} from '../../types'
   
     type TInitialState = {
       items: TIngredient[],
       itemsRequest: boolean,
       itemsFailed: boolean,
   
-      currentItemToView: TIngredient | TOrder | null,
+      currentItemToView: TCurrentItemToView | null,
     
       currentTab: 'buns' | 'sauces' | 'mains',
     }

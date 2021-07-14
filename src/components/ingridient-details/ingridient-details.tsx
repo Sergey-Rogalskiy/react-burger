@@ -1,8 +1,8 @@
 import styles from './ingridient-details.module.css'
-import {TIngredient} from '../../types'
+import {TCurrentItemToView} from '../../types'
 
 type TProps = {
-  currentItemToView: {item?: TIngredient}
+  currentItemToView: TCurrentItemToView
 }
 
 const IngridientDetails = (props: TProps) => {

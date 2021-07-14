@@ -5,7 +5,7 @@ import {
 } from '../order-feed/index'
 import { wsInitAction } from '../../services/actions/feed';
 import { useDispatch } from 'react-redux';
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../types'
 
 import s from './pages.module.css'
 

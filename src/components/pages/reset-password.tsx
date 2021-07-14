@@ -5,8 +5,8 @@ import {
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Redirect, useHistory } from "react-router-dom"
-
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector } from '../../types'
+import {useDispatch} from 'react-redux'
 import {getResetPassword} from '../../services/actions/registration'
 import Spinner from '../utils/loader'
 

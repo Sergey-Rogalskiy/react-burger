@@ -7,17 +7,19 @@ import { TIngredient } from '../../types'
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 type TProps = {
-  buns: TIngredient;
+  buns: TIngredient | { price: number; name:string;image:string};
   type: "top" | 'bottom' | undefined
 }
 
 const FixedBun = (props: TProps) => {
   const data = props
+  console.log(data);
+  
   
   return (
     <>
       {
-      (data.buns.name) 
+      (data.buns.name !== 'name') 
       ?
       <div className={burgerConstructorStyles.flex}>
         <div className={`${burgerConstructorStyles.center} pb-2`}>

@@ -2,7 +2,8 @@ import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react';
-import { useSelector, useDispatch  } from 'react-redux'
+import { useDispatch  } from 'react-redux'
+import { useSelector } from '../../types'
 import { useParams } from 'react-router-dom'
 import { getOrderById } from '../../services/actions/feed';
 import { TIngredient } from '../../types';
@@ -18,13 +19,13 @@ export default function FeedIdPage() {
   }, [dispatch, param.id])
 
 
-  const orderId = useSelector((state: any) => state.feed.orderId)
+  const orderId = useSelector(state => state.feed.orderId)
   const data = orderId
   // if (!data && (data === undefined)) {
   //   return <Redirect to='/404' />
   // }
   
-  const ingredients = useSelector((state: any) => state.ingridients.items)
+  const ingredients = useSelector(state => state.ingridients.items)
   let allIngridientsData
   let ingredientsImages = []
   let totalPrice

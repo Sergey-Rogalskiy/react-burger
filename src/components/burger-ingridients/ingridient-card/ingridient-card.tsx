@@ -3,7 +3,7 @@ import {
   Counter, 
   CurrencyIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../../types'
 import { TIngredient } from '../../../types';
 
 import ingridientCardStyles from './ingridient-card.module.css'
@@ -15,8 +15,8 @@ type TProps = {
 
 const IngridientCard = (props: TProps) => {
 
-  const chosenItems = useSelector((state: any) => state.burgerConstructor.chosenItems)
-  const chosenBuns = useSelector((state: any) => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   var counter = 0
   if ( props.data.type === 'bun'){
     if (chosenBuns) {

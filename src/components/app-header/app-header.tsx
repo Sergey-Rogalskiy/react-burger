@@ -2,7 +2,7 @@ import { FC } from 'react'
 import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import { NavLink, useLocation, } from "react-router-dom"
 import s from './app-header.module.css'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../types'
 
 const AppHeader: FC = () => {
   const {pathname} = useLocation()

@@ -3,7 +3,7 @@ import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../types'
 import { TIngredient } from '../../types';
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
@@ -16,7 +16,7 @@ type TProps = {
 
 const BurgerIngridients = (props: TProps) => {
 
-  const items = useSelector((state: any) => state.ingridients.items)
+  const items = useSelector(state => state.ingridients.items)
   
   const [current, setCurrent] = React.useState('one')
   let data_buns = items.filter((obj1: TIngredient)=> obj1.type === "bun");
