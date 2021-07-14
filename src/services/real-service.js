@@ -59,6 +59,34 @@ export const patchUserService = async (token, data) => {
   const res = await patchResource(`/auth/user`, token, data);
   return res;
 };
+export const getFeedRequest = async () => {
+  const res = await getResource(`/feed`);
+  return res;
+};
+export const getOrderByIdRequest = async (_id) => {
+  const res = await getResourceRaw(`/orders/${_id}`);
+  return res;
+};
+
+
+const getResourceRaw = async (url, token) => {
+  const res = await fetch(`${_apiBase}${url}`, {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.,
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    // body: JSON.stringify({ token: token })
+  });
+  if (!res.ok) {
+    throw new Error(`Could not fetch '${url}', received '${res.status}'`)
+  }
+  return await res.json();
+};
 
 const getResource = async (url, token) => {
   const res = await fetch(`${_apiBase}${url}`, {
@@ -73,13 +101,13 @@ const getResource = async (url, token) => {
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
     // body: JSON.stringify({ token: token })
-    
   });
   if (!res.ok) {
     throw new Error(`Could not fetch '${url}', received '${res.status}'`)
   }
   return await res.json();
 };
+
 const postResourceRaw = async (url, data={}) => {
   const addData =  {
     method: 'POST',
@@ -110,14 +138,15 @@ const postResource = async (url, token, data=null) => {
       method:'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
-      body:JSON.stringify(data)
+      body:JSON.stringify({...data, token:token})
     }
   } else {
     addData = {
       method:'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body:JSON.stringify({token:token})
     }

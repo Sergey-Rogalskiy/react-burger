@@ -1,7 +1,7 @@
 
 .overflow {
-  overflow-y: scroll;
-  height: 80%;
+  overflow-y: auto;
+  height: 95%;
   max-height: 80vh;
 }
 
@@ -118,4 +118,12 @@
 
 .shinny_clr {
   text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}
+
+.list_inner {
+  display: flex;
+}
+
+.list_inner ul {
+  width: 50%
 }

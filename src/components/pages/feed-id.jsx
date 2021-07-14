@@ -1,28 +1,64 @@
 import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
-
-import {useSelector} from 'react-redux'
-
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch  } from 'react-redux'
 import { useParams, Redirect } from 'react-router-dom'
+import { getOrderById } from '../../services/actions/feed';
 
 import s from './pages.module.css'
 
 export default function FeedIdPage() {
   const param = useParams();
+  const dispatch = useDispatch()
 
-  const data = useSelector(state => state.feed.feedData)[param.id-1]
-  if (!data && data === undefined) {
-    return <Redirect to='/404' />
-  }
+  React.useEffect(() => {
+    dispatch(getOrderById(param.id))
+  }, [dispatch])
+
+
+  const orderId = useSelector(state => state.feed.orderId)
+  const data = orderId
+  // if (!data && (data === undefined)) {
+  //   return <Redirect to='/404' />
+  // }
   
+  const ingredients = useSelector(state => state.ingridients.items)
+  let allIngridientsData
+  let ingredientsImages = []
+  let totalPrice
+  if (data && ingredients.length != 0) {
+    allIngridientsData = data.ingredients.map(item => {
+      const ingredient = ingredients.filter(ingredient => ingredient._id === item)
+      let image
+      let price
+      let name
+      if (ingredient[0]){
+        image = ingredient[0].image
+        price = ingredient[0].price
+        name = ingredient[0].name
+      }
+      return {
+        image,
+        price,
+        name
+      }
+    })
+  ingredientsImages = allIngridientsData
+  totalPrice = allIngridientsData.reduce((acc, item) => acc+item.price, 0)
+  }
+
+  if (!data) {
+    return <div>lalala</div>
+  }
+
   return (
     <>
       <div className={s.container}>
-        <p className={`${s.center} text text_type_digits-default mb-2`}>#{data._id}</p>
+        <p className={`${s.center} text text_type_digits-default mb-2`}>#{data.number}</p>
         <p className="text text_type_main-medium">{data.name}</p>
         {
-          data.idDone 
+          data.status 
           ? <p className={`${s.done_clr} mb-10`}>Выполнен</p>
           : <p className={`mb-10`}>Готовится</p>}
         
@@ -30,7 +66,8 @@ export default function FeedIdPage() {
         <ul>
             
             {
-              data.ingridients.map((item, index) => (
+              ingredientsImages.map((item, index) => (
+                
                 <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>
                     <img className={s.img} src={item.image} alt="-" />
@@ -46,11 +83,11 @@ export default function FeedIdPage() {
         </ul>
         
         <div className={s.flex_row}>
-            <p className="text text_type_main-default text_color_inactive pt-3">{data.time}</p>
+            <p className="text text_type_main-default text_color_inactive pt-3">{data.createdAt}</p>
             
             <div className={s.flex_center}>
               <span className="text text_type_main-medium p-2">
-                {data.price}
+                {totalPrice}
               </span> 
               <CurrencyIcon type="primary" />
             </div>

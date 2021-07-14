@@ -11,6 +11,18 @@ import { useSelector  } from 'react-redux'
 const OrderDetailsModal = () => {
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
   const data = currentItemToView.item
+  const ingredients = useSelector(state => state.ingridients.items)
+  const allIngridientsData = data.ingredients.map(item => {
+    return {
+      image: ingredients.filter(ingredient => ingredient._id === item)[0].image,
+      price: ingredients.filter(ingredient => ingredient._id === item)[0].price,
+      name: ingredients.filter(ingredient => ingredient._id === item)[0].name
+    }
+  }).slice(0, 5)
+  const totalPrice = allIngridientsData.reduce((acc, item) => acc+item.price, 0)
+  console.log(allIngridientsData)
+  
+
   return (
     <>
       {
@@ -19,18 +31,19 @@ const OrderDetailsModal = () => {
         <>
         <div className={s.modal}>
           
-        <p className={`${s.center} text text_type_digits-default mb-2`}>#{data._id}</p>
+        <p className={`${s.center} text text_type_digits-default mb-2`}>#{data.number}</p>
         <p className="text text_type_main-medium">{data.name}</p>
         {
-          data.idDone 
+          (data.status === 'done') 
           ? <p className={`${s.done_clr} mb-10`}>Выполнен</p>
-          : <p className={`mb-10`}>Готовится</p>}
+          : <p className={`mb-10`}>Готовится</p>
+        }
         
         <p className="text text_type_main-medium mb-6">Состав:</p>
         <ul>
             
             {
-              data.ingridients.map((item, index) => (
+              allIngridientsData.map((item, index) => (
                 <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>
                     <img className={s.img} src={item.image} alt="-" />
@@ -50,7 +63,7 @@ const OrderDetailsModal = () => {
             
             <div className={s.flex_center}>
               <span className="text text_type_main-medium p-2">
-                {data.price}
+                {totalPrice}
               </span> 
               <CurrencyIcon type="primary" />
             </div>

@@ -30,19 +30,20 @@ import {
 import { getToken, getUser } from '../../services/actions/registration'
 
 import { ProtectedRoute, AuthProtectedRoute } from '../protected-route'
+import {getItems} from "../../services/actions/ingridients"
 
 import {
   ORDER_RESET,
 } from '../../services/actions/constructor';
 
 function App() {
+  const dispatch = useDispatch()
   
   const history = useHistory()
   const location = useLocation()
 
   const [visible, setVisible] = React.useState(false)
 
-  const dispatch = useDispatch()
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
@@ -69,6 +70,11 @@ function App() {
         history.push(`${location.state.background.pathname}`)
       }
   }
+  
+  React.useEffect(() => {
+    dispatch(getItems())
+  }, [dispatch])
+  
   React.useEffect(() => {
     document.addEventListener("keyup", handleKeyUp);
     return () => {
