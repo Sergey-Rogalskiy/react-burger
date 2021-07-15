@@ -6,7 +6,7 @@ import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
 import OrderDetailsModal from  '../order-details-modal/order-details-modal'
 
-import { useSelector, useDispatch } from '../../types'
+import { useSelector, useDispatch, TIngredient } from '../../types'
 import {
   getOrder
 } from '../../services/actions/constructor'
@@ -50,11 +50,11 @@ const App: React.FC = () => {
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
-  const openModal = (event: any, item: any) => {
+  const openModal = (event: any, item: TIngredient) => {
       if (item !== undefined) {
         dispatch(setCurrentItemToView(item))
       } else {
-        const dataIds = chosenItems.map((item: any) => item._id)
+        const dataIds = chosenItems.map((item) => item._id)
         dataIds.push(chosenBuns._id)
         dataIds.splice(1, 0, chosenBuns._id)
         const data11 = {
@@ -110,7 +110,7 @@ const App: React.FC = () => {
             currentItemToView?.type === 'ingridient' ? (
               'Детали ингридиента'
             ) : (
-              'Детали заказа'
+              'Заказ'
             )
           )
         } 
