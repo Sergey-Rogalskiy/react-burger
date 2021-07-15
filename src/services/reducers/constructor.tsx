@@ -7,11 +7,11 @@ import {
     CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
   } from '../actions/constructor';
   
-import {TIngredient, TOrder, TChosenBuns} from '../../types'
+import {TIngredient, TOrder, TChosenBuns, TOrderResponse} from '../../types'
 import {TConstructorActions} from '../actions/constructor'
 
   type TInitialState = {
-    order: TOrder | null,
+    order: TOrderResponse | null,
     orderRequest: boolean,
     orderFailed: boolean,
   

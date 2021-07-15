@@ -15,7 +15,31 @@ export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
 export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>(); 
 
 export type RootState = ReturnType<typeof store.getState>;
- 
+
+type TOwner = {
+  name:string,
+  email:string,
+  createdAt:string,
+  updatedAt:string,
+}
+
+type TOrderRequest = {
+  _id:string,
+  owner:TOwner,
+  status:string,
+  name:string,
+  createdAt:string,
+  updatedAt:string,
+  number:number,
+  price:number
+}
+
+export type TOrderResponse = {
+  success:true,
+  name: string,
+  order: TOrderRequest
+}
+
 export type TCurrentItemToView = {
   type: 'order' | 'ingridient',
   item: TIngredient | TOrder | null | undefined

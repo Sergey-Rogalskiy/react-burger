@@ -2,7 +2,7 @@ import {
     getOrderRequest, 
   } from '../real-service';
 import { getCookie } from '../utils';
-import { TOrder, TIngredient, AppThunk, AppDispatch } from '../../types';
+import { TOrder, TIngredient, AppThunk, AppDispatch, TOrderResponse } from '../../types';
 
 export const GET_ORDER_REQUEST:'GET_ORDER_REQUEST' = 'GET_ORDER_REQUEST';
 export const GET_ORDER_SUCCESS:'GET_ORDER_SUCCESS' = 'GET_ORDER_SUCCESS';
@@ -24,7 +24,7 @@ export interface IGetOrderFailedAction {
 
 export interface IGetOrderSuccessAction {
   readonly type: typeof GET_ORDER_SUCCESS;
-  readonly order: TOrder|null;
+  readonly order: TOrderResponse|null;
 }
 
 export interface IOrderResetAction {
@@ -65,7 +65,7 @@ export const getOrderFailedAction = (): IGetOrderFailedAction => ({
   type: GET_ORDER_FAILED
 });
 
-export const getOrderSuccessAction = (res:TOrder): IGetOrderSuccessAction => ({
+export const getOrderSuccessAction = (res:TOrderResponse): IGetOrderSuccessAction => ({
   type: GET_ORDER_SUCCESS,
   order: res
 });

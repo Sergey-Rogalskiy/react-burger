@@ -12,9 +12,9 @@ const OrderDetails = () => {
       order
       ?
       <div className={styles.main}>
-        <p className={`${styles.wrapped} text text_type_digits-large`}>{
-        // {/* // @ts-ignore: Unreachable code error */}
-        order.number}</p>
+        <p className={`${styles.wrapped} text text_type_digits-large`}>
+          {order.order.number}
+        </p>
         <p className="text text_type_main-medium">идентификатор заказа</p>
         <img className={styles.image} src={orderDoneImg} alt="Done!"/>
         <p className="text text_type_main-default">Ваш заказ начали готовить</p>
