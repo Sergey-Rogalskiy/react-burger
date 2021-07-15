@@ -21,10 +21,12 @@ const Ingridients: FC<TProps> = (props) => {
           data.items[0]
           ?
           data.items.map((item: TIngredient, index: number) => 
+          <div key={index}>
             <Ingridient 
               item={item} 
               index={index}
-          />
+            />
+          </div>
           )
           :
           

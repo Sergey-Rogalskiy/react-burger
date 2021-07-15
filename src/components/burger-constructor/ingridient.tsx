@@ -69,7 +69,6 @@ const Ingridient: FC<TProps> = (props) => {
   return (
       <div 
         ref={ref} 
-        key={index} 
         className={` ${burgerConstructorStyles.center}  pb-2`}
         style={{ ...style, opacity }}
       >
