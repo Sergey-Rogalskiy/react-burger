@@ -2,7 +2,7 @@
 import { 
   getOrderByIdRequest, 
 } from '../real-service';
-import { TOrder, AppThunk, AppDispatch } from '../../types';
+import { TOrder, AppThunk, AppDispatch, TWsGetMessage,TOrderByID } from '../../types';
 
 export const WS_CONNECTION_START:'WS_CONNECTION_START' = 'WS_CONNECTION_START';
 export const WS_CONNECTION_SUCCESS:'WS_CONNECTION_SUCCESS' = 'WS_CONNECTION_SUCCESS';
@@ -33,7 +33,7 @@ export interface IGetOrderByIdFailedAction {
 
 export interface IGetOrderByIdSuccessAction {
   readonly type: typeof ORDER_ID_SUCCESS;
-  readonly payload: {orders: TOrder[]};
+  readonly payload: TOrderByID;
 }
 
 export interface IWsInitAction {
@@ -113,12 +113,12 @@ export const wsConnectionSuccessAction = (): IWsConnectionSuccessAction => ({
   type: WS_CONNECTION_SUCCESS
 });
 
-export const wsConnectionFailedAction = (payload:any): IWsConnectionFailedAction => ({
+export const wsConnectionFailedAction = (payload:TWsGetMessage): IWsConnectionFailedAction => ({
   type: WS_CONNECTION_ERROR,
   payload: payload
 });
 
-export const wsGetMessageAction = (payload:any): IWsGetMessageAction => ({
+export const wsGetMessageAction = (payload:TWsGetMessage): IWsGetMessageAction => ({
   type: WS_GET_MESSAGE,
   payload: payload
 });
@@ -139,12 +139,12 @@ export const wsConnectionAuthSuccessAction = (): IWsConnectionAuthSuccessAction 
   type: WS_CONNECTION_AUTH_SUCCESS
 });
 
-export const wsConnectionAuthFailedAction = (payload:any): IWsConnectionAuthFailedAction => ({
+export const wsConnectionAuthFailedAction = (payload:TWsGetMessage): IWsConnectionAuthFailedAction => ({
   type: WS_CONNECTION_AUTH_ERROR,
   payload: payload
 });
 
-export const wsGetMessageAuthAction = (payload:any): IWsGetMessageAuthAction => ({
+export const wsGetMessageAuthAction = (payload:TWsGetMessage): IWsGetMessageAuthAction => ({
   type: WS_GET_MESSAGE_AUTH,
   payload: payload
 });
@@ -165,7 +165,7 @@ export const getOrderByIdtOrderFailedAction = (): IGetOrderByIdFailedAction => (
   type: ORDER_ID_FAILED
 });
 
-export const getOrderByIdSuccessAction = (res:any): IGetOrderByIdSuccessAction => ({
+export const getOrderByIdSuccessAction = (res:TOrderByID): IGetOrderByIdSuccessAction => ({
   type: ORDER_ID_SUCCESS,
   payload: res
 });

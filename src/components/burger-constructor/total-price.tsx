@@ -40,7 +40,7 @@ const realConfirm = () => {
   return (
     <>
       {
-        (chosenBuns.name )
+        (chosenBuns.name !== 'name' )
         ?<div className={`${burgerConstructorStyles.flex} ${burgerConstructorStyles.confirm_block}`}>
         <div className={burgerConstructorStyles.total}>
           <span className="text text_type_main-large">

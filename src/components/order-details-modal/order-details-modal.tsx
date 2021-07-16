@@ -12,20 +12,17 @@ import s from './order-details-modal.module.css'
 const OrderDetailsModal = () => {
   const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
   
-    // @ts-ignore: Unreachable code error
-  const data = currentItemToView.item
+  const data = currentItemToView && currentItemToView.item
   const ingredients = useSelector(state => state.ingridients.items)
   
-    // @ts-ignore: Unreachable code error
-  const allIngridientsData = data.ingredients.map((item:string) => {
+  const allIngridientsData =  data && data.ingredients.map((item:string) => {
     return {
       image: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].image,
       price: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].price,
       name: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].name
     }
   }).slice(0, 5)
-  // @ts-ignore: Unreachable code error
-  const totalPrice = allIngridientsData.reduce((acc: number, item: TIngredient) => acc+item.price, 0)
+  const totalPrice = allIngridientsData && allIngridientsData.reduce((acc: number, item: any) => acc+item.price, 0)
 
   return (
     <>
@@ -36,8 +33,9 @@ const OrderDetailsModal = () => {
         <div className={s.modal}>
           
         <p className={`${s.center} text text_type_digits-default mb-2`}>#{
+          
           // @ts-ignore: Unreachable code error
-          data.number}
+          data && data.number}
         </p>
         <p className="text text_type_main-medium">{
           // @ts-ignore: Unreachable code error
@@ -54,8 +52,7 @@ const OrderDetailsModal = () => {
         <ul>
             
             {
-    // @ts-ignore: Unreachable code error
-              allIngridientsData.map((item:TIngredient, index:number) => (
+              allIngridientsData && allIngridientsData.map((item:any, index:number) => (
                 <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>
                     <img className={s.img} src={item.image} alt="-" />

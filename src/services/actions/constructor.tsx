@@ -73,7 +73,7 @@ export const getOrderSuccessAction = (res:TOrderResponse): IGetOrderSuccessActio
 export const orderResetAction = (): IOrderResetAction => ({
   type: ORDER_RESET,
 });
-export const addItemToConstructorAction = (item:any): IAddItemToConstructorAction => ({
+export const addItemToConstructorAction = (item:TIngredient): IAddItemToConstructorAction => ({
   type: ADD_ITEM_TO_CONSTRUCTOR,
   item: item
 });

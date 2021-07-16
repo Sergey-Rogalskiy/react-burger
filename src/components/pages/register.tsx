@@ -19,7 +19,7 @@ function RegisterPage() {
 
   
   const [value, setValue] = React.useState({name: '', email: '', password: '', })
-  const onChange =(e:any) => {
+  const onChange =(e:React.ChangeEvent<HTMLInputElement>) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   

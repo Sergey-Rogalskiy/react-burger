@@ -20,7 +20,7 @@ export const ProdileEdit = () => {
     data = {name:'',email:'',password:'',}
   }
   const [value, setValue] = React.useState(data)
-  const onChange = (e:any) => {
+  const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   const cancel = () => {

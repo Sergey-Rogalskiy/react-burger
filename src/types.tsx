@@ -16,6 +16,16 @@ export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>();
 
 export type RootState = ReturnType<typeof store.getState>;
 
+export type TOrderByID = {
+  success: boolean,
+  orders:TOrder[],
+}
+
+export type TWsGetMessage = {
+  orders: TOrder[],
+  total:number,
+  totalToday:number
+}
 export type TLoginResponse = {
   accessToken: string,
   refreshToken: string,
@@ -77,7 +87,6 @@ export type TOrderResponse = {
   name: string,
   order: TOrderRequest
 }
-
 export type TCurrentItemToView = {
   type: 'order' | 'ingridient',
   item: TIngredient | TOrder | null | undefined

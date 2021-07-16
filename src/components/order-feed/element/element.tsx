@@ -15,8 +15,8 @@ export const Element: FC<any> = (props) => {
   let ingredientsImages = []
   let totalPrice
   if (ingredients.length !== 0) {
-    allIngridientsData = testData.ingredients.map((item:TIngredient) => {
-      const ingredient = ingredients.filter((ingredient:any) => ingredient._id === item)
+    allIngridientsData = testData.ingredients.map((item:string) => {
+      const ingredient = ingredients.filter((ingredient:TIngredient) => ingredient._id === item)
       let image
       let price
       if (ingredient[0]){
@@ -52,7 +52,7 @@ export const Element: FC<any> = (props) => {
         <div className={s.flex_row}>
             <ul className={s.images}>
               {
-                ingredientsImages.map((item:any, index:number) => (
+                ingredientsImages.map((item:TIngredient, index:number) => (
                   <li  key={index} className={`${s.round}`}>
                     <img className={s.img} src={item.image} alt="-" />
                   </li>

@@ -32,8 +32,7 @@ const Modal:FC<TProps> = (props) => {
         </div>
       </>
     ), 
-    // @ts-ignore: Unreachable code error
-    modalRoot
+    modalRoot as any
   );
 } 
 

@@ -46,8 +46,7 @@ export default function FeedIdPage() {
       }
     })
   ingredientsImages = allIngridientsData
-  // @ts-ignore: Unreachable code error
-  totalPrice = allIngridientsData.reduce((acc:number, item: TIngredient) => acc+item.price, 0)
+  totalPrice = allIngridientsData.reduce((acc:number, item: any) => acc+item.price, 0)
   }
 
   if (!data) {

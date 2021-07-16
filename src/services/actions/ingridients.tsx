@@ -47,7 +47,7 @@ export const getItemsFailedAction = (): IGetItemsFailedAction => ({
   type: GET_ITEMS_FAILED
 });
 
-export const getItemsSuccessAction = (res:any): IGetItemsSuccessAction => ({
+export const getItemsSuccessAction = (res:Array<TIngredient>): IGetItemsSuccessAction => ({
   type: GET_ITEMS_SUCCESS,
   items: res
 });

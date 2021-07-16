@@ -19,7 +19,7 @@ const ForgotPaswordPage = () => {
   
 
   const [value, setValue] = React.useState({email: '', password: '', })
-  const onChange = (e:any) => {
+  const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
