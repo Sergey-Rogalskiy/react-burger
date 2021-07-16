@@ -5,8 +5,7 @@ import { TIngredient } from '../../../types';
 
 type TProps = {
   data: TIngredient[];
-  // onClick: {openModal: (e: any, item: any) => void}
-  onClick: any;
+  onClick: {openModal: () => void}
 }
 
 const ListByType: FC<TProps> = (props) => {

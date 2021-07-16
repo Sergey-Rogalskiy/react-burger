@@ -9,9 +9,6 @@ import ErrorBoundry from './components/utils/error-boundry';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-// declare global {
-//   interface Window { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any; }
-// }
  import { store } from './store';
 
 

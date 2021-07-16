@@ -16,6 +16,44 @@ export const useDispatch = () => dispatchHook<AppDispatch | AppThunk>();
 
 export type RootState = ReturnType<typeof store.getState>;
 
+export type TLoginResponse = {
+  accessToken: string,
+  refreshToken: string,
+  success: boolean,
+  user: TUser
+}
+export type TPatchUserResponse = {
+  success: boolean,
+  user: TUser
+}
+
+export type TForgotPasswordData = {
+  success: boolean,
+  message: string
+}
+export type TUser = {
+  name: string, 
+  email: string,
+  password?: string
+}
+
+export type TUserLogin = {
+  email: string,
+  password: string
+}
+export type TOrderlementModal = {
+  item:TOrder,
+  type:string,
+}
+export type TElementModal = {
+  item:TIngredient,
+  type:string,
+}
+export type TDropIngredient = {
+  item:TIngredient,
+  index:number,
+}
+
 type TOwner = {
   name:string,
   email:string,

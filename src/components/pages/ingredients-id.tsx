@@ -10,7 +10,7 @@ import { TCurrentItemToView } from '../../types';
 function IngridientsIdPage() {
 
   const items = useSelector(state => state.ingridients.items)
-  const {id}: any= useParams()
+  const {id} = useParams<{id:string}>()
   const temp = items.find((el:TIngredient) => el._id === id)
   const currentItemToView: TCurrentItemToView = {
     type: 'ingridient',

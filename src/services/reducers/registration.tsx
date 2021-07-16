@@ -25,33 +25,33 @@ import {
   PATCH_USER_FAILED,
   } from '../actions/registration';
   import {TRegistrationActions} from '../actions/registration'
+  import {TUser, TForgotPasswordData} from '../../types' 
   
     type TInitialState = {
-      forgotPasswordData: any,
+      forgotPasswordData: TForgotPasswordData | null,
       forgotPasswordRequest: boolean,
-      forgotPasswordFailed: boolean,
+      forgotPasswordFailed:  object | boolean,
   
       resetPasswordData: any,
       resetPasswordRequest: boolean,
-      resetPasswordFailed: boolean,
+      resetPasswordFailed:  object | boolean,
   
       registerData: any,
       registerRequest: boolean,
-      registerFailed: any,
+      registerFailed:  any,
   
-      loginData: any,
       loginRequest: boolean,
-      loginFailed: any,
+      loginFailed:  object | boolean,
   
       logoutRequest: boolean,
-      logoutFailed: any,
+      logoutFailed:  object | boolean,
   
       tokenRequest: boolean,
-      tokenFailed: any,
+      tokenFailed:  object | boolean,
   
       userRequest: boolean,
-      userFailed: any,
-      user: any, 
+      userFailed: object | boolean,
+      user: TUser | null, 
     }
   
   const initialState: TInitialState = {
@@ -67,7 +67,6 @@ import {
     registerRequest: false,
     registerFailed: false,
 
-    loginData: null,
     loginRequest: false,
     loginFailed: false,
 

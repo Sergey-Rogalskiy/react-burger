@@ -18,7 +18,7 @@ export default function ResetPage() {
   const resetPasswordFailed = useSelector(state => state.registration.resetPasswordFailed)
   
   const [value, setValue] = React.useState({token: '', password: '', email: ''})
-  const onChange = (e:any) => {
+  const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
@@ -86,7 +86,7 @@ export default function ResetPage() {
         placeholder={'Введите код из письма'}
         onChange={onChange}
         value={value.email}
-        name={'token'}
+        name={'email'}
         error={false}
         errorText={'Ошибка'}
         size={'default'}

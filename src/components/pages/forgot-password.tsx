@@ -86,9 +86,9 @@ const ForgotPaswordPage = () => {
         size={'default'}
       />
 
-      {(forgotPasswordData?.response?.message)
+      {(forgotPasswordData?.message)
           ? <p>
-              {forgotPasswordData.response.message}
+              {forgotPasswordData.message}
             </p>
           : ''
           }

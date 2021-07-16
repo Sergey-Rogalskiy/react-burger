@@ -64,7 +64,7 @@ import {TConstructorActions} from '../actions/constructor'
         if (action.item.type === "bun") {
           let priceItems = 0
           if (state.chosenItems[0]) {
-            priceItems = state.chosenItems.reduce((a:any, b:any) => a + b.price, 0)
+            priceItems = state.chosenItems.reduce((a, b) => a + b.price, 0)
           }
           const totalPrice = action.item.price * 2 +priceItems
           return { 

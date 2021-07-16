@@ -3,72 +3,84 @@ import {
   Tab
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import ListByType from './list-by-type/list-by-type'
-import { useSelector } from '../../types'
+import { useSelector, useDispatch } from '../../types'
 import { TIngredient } from '../../types';
+import {tabSwitchAction} from '../../services/actions/ingridients'
 
 import burgerIngridientsStyles from './burger-ingridients.module.css'
 
 type TProps = {
-  // modal: {openModal: (e: any, item: any) => void}
-  
-  modal: any;
+  modal: {openModal: () => void}
 }
 
 const BurgerIngridients: FC<TProps> = (props) => {
-
+  const dispatch = useDispatch()
   const items = useSelector(state => state.ingridients.items)
+  const current = useSelector(state => state.ingridients.currentTab)
   
-  const [current, setCurrent] = React.useState('one')
   let data_buns = items.filter((obj1: TIngredient)=> obj1.type === "bun");
   let data_sauces = items.filter((obj1: TIngredient) => obj1.type === "sauce");
   let data_mains = items.filter((obj1: TIngredient) => obj1.type === "main");
   
-  const myRefScrollBuns: any = React.useRef<HTMLDivElement>(null)
-  const myRefScrollSauces: any = React.useRef<HTMLDivElement>(null)
-  const myRefScrollMains: any = React.useRef<HTMLDivElement>(null)
-  const myRefScrollContainer: any = React.useRef<HTMLDivElement>(null)
+  const myRefScrollBuns = React.useRef<HTMLDivElement>(null)
+  const myRefScrollSauces = React.useRef<HTMLDivElement>(null)
+  const myRefScrollMains = React.useRef<HTMLDivElement>(null)
+  const myRefScrollContainer = React.useRef<HTMLDivElement>(null)
   
   const executeScrollBuns = () => {
-    myRefScrollBuns.current.scrollIntoView()
-    setCurrent("one")
-  }    
+    if (myRefScrollBuns.current ) {
+      myRefScrollBuns.current.scrollIntoView()
+      dispatch(tabSwitchAction("buns"))
+    }
+  }      
 
   const executeScrollSauces = () => {
-    myRefScrollSauces.current.scrollIntoView()
-    setCurrent("two")
+    if (myRefScrollSauces.current ) {
+      myRefScrollSauces.current.scrollIntoView()
+      dispatch(tabSwitchAction("sauces"))
+    }
   }    
 
   const executeScrollMains = () => {
-    myRefScrollMains.current.scrollIntoView()
-    setCurrent('three')
+    if (myRefScrollMains.current ) {
+      myRefScrollMains.current.scrollIntoView()
+      dispatch(tabSwitchAction("mains"))
+    }
   }    
 
 
   const handleScrollIngredients = () => {
-    const bunsDis = myRefScrollBuns.current.getBoundingClientRect().top - myRefScrollContainer.current.getBoundingClientRect().top
-    const saucesDis = myRefScrollSauces.current.getBoundingClientRect().top - myRefScrollContainer.current.getBoundingClientRect().top
-
-    if (bunsDis>=-210) {
-      setCurrent("one")
+    let bunsDis
+    let saucesDis
+    if (myRefScrollBuns.current && myRefScrollContainer.current) {
+      bunsDis = myRefScrollBuns.current.getBoundingClientRect().top - myRefScrollContainer.current.getBoundingClientRect().top
+    
+    }
+    if (myRefScrollSauces.current && myRefScrollContainer.current) {
+      saucesDis = myRefScrollSauces.current.getBoundingClientRect().top - myRefScrollContainer.current.getBoundingClientRect().top
+    
+    }
+    if (bunsDis && bunsDis>=-210) {
+      dispatch(tabSwitchAction("buns"))
       return
     }
-    if (saucesDis>=-485) {
-      setCurrent("two")
+    if (saucesDis && saucesDis>=-485) {
+      dispatch(tabSwitchAction("sauces"))
     } else {
-      setCurrent('three')
+      dispatch(tabSwitchAction("mains"))
     }
   }
 
   return (
     <>
       <div style={{ display: 'flex' }} >
-        <Tab value="one" active={current === 'one'} onClick={executeScrollBuns}>
+        <Tab value="one" active={current === 'buns'} onClick={executeScrollBuns}>
           Булки
         </Tab>
-        <Tab value="two" active={current === 'two'} onClick={executeScrollSauces}>
+        <Tab value="two" active={current === 'sauces'} onClick={executeScrollSauces}>
           Соусы
         </Tab>
-        <Tab value="three" active={current === 'three'} onClick={executeScrollMains}>
+        <Tab value="three" active={current === 'mains'} onClick={executeScrollMains}>
           Начинки
         </Tab>
       </div>

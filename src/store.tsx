@@ -4,9 +4,12 @@ import { rootReducer } from './services/reducers';
 import { socketMiddleware } from './services/socket-midleware' 
 import { socketMiddlewareAuth } from './services/socket-midleware-auth';
 
+declare global {
+  interface Window { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any; }
+}
 const composeEnhancers =
-  typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose; 
     
 const enhancer = composeEnhancers(applyMiddleware(socketMiddleware(), socketMiddlewareAuth(), thunk));

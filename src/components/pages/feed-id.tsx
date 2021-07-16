@@ -10,7 +10,7 @@ import { TIngredient } from '../../types';
 import s from './pages.module.css'
 
 export default function FeedIdPage() {
-  const param: any = useParams();
+  const param = useParams<{id:string}>();
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -26,7 +26,7 @@ export default function FeedIdPage() {
   
   const ingredients = useSelector(state => state.ingridients.items)
   let allIngridientsData
-  let ingredientsImages = []
+  let ingredientsImages: any = []
   let totalPrice
   if (data && ingredients.length !== 0) {
     allIngridientsData = data.ingredients.map((item:string) => {
@@ -46,6 +46,7 @@ export default function FeedIdPage() {
       }
     })
   ingredientsImages = allIngridientsData
+  // @ts-ignore: Unreachable code error
   totalPrice = allIngridientsData.reduce((acc:number, item: TIngredient) => acc+item.price, 0)
   }
 

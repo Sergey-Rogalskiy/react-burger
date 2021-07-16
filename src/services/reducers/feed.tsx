@@ -16,16 +16,16 @@ import {TFeedActions} from '../actions/feed'
 
   type TInitialState = {
     wsConnected: boolean,
-    wsError: any,
+    wsError: {isTrusted:boolean} | null,
     wsFeedData: {orders: TOrder[], total: number, totalToday: number},
 
     wsAuthConnected: boolean,
-    wsAuthError: null | boolean,
+    wsAuthError: {isTrusted:boolean} | null,
     wsFeedDataAuth: {orders: TOrder[]},
 
     orderIdRequest: boolean,
     orderIdFailed: boolean,
-    orderId: any,
+    orderId: TOrder | null,
   }
 
   const initialState:TInitialState = {

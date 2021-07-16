@@ -3,16 +3,14 @@ import IngridientCard from '../ingridient-card/ingridient-card'
 import listByTypeStyles from './list-by-type.module.css'
 import { useDrag } from "react-dnd";
 import { useLocation, useHistory } from 'react-router-dom'
-import {TIngredient } from '../../../types'
+import {TIngredient, TElementModal } from '../../../types'
 
 type TProps = {
   item: TIngredient;
-  // onClick: {openModal: (e: any, item: any) => void};
-  onClick: any;
+  onClick: {openModal: (e:React.MouseEvent, order:TElementModal) => void};
 }
 
 const ListByType: FC<TProps> = (props) => {
-  
   const history = useHistory()
   const location = useLocation()
   const item = props.item
@@ -26,8 +24,8 @@ const ListByType: FC<TProps> = (props) => {
       })
   });
 
-  const clickIngridient = (e: any) => {
-    const order = { type: 'ingridient', item : item}
+  const clickIngridient = (e: React.MouseEvent) => {
+    const order: TElementModal = { type: 'ingridient', item : item}
     props.onClick.openModal(e, order)
     history.push( {pathname: `/ingredients/${item._id}`,
       state: { background: location }})

@@ -11,14 +11,10 @@ import {
 
 
 type TProps = {
-  // modal: {openModal: () => {}}
-  modal: any;
+  modal: {openModal: () => void}
 }
 
 const BurgerConstructor: FC<TProps> = (props) => {
-
-//   const {constructorState} = React.useContext(CurrentIngridientsContext);
-//  const data =constructorState
   
   const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)

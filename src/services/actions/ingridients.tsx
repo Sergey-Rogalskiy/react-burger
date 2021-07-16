@@ -1,7 +1,7 @@
 import { 
     getIngridientsRequest, 
 } from '../real-service';
-import { TIngredient, AppThunk, AppDispatch } from '../../types';
+import { TIngredient, AppThunk, AppDispatch, TCurrentItemToView } from '../../types';
 export const GET_ITEMS_REQUEST:'GET_ITEMS_REQUEST' = 'GET_ITEMS_REQUEST';
 export const GET_ITEMS_SUCCESS:'GET_ITEMS_SUCCESS' = 'GET_ITEMS_SUCCESS';
 export const GET_ITEMS_FAILED:'GET_ITEMS_FAILED' = 'GET_ITEMS_FAILED';
@@ -24,7 +24,7 @@ export interface IGetItemsSuccessAction {
 
 export interface ITabSwitchAction {
   readonly type: typeof TAB_SWITCH;
-  payload: any
+  payload: 'buns' | 'sauces' | 'mains'
 }
 
 export interface ISetCurrentItemsToViewAction {
@@ -52,7 +52,7 @@ export const getItemsSuccessAction = (res:any): IGetItemsSuccessAction => ({
   items: res
 });
 
-export const tabSwitchAction = (res:any): ITabSwitchAction => ({
+export const tabSwitchAction = (res:'buns' | 'sauces' | 'mains'): ITabSwitchAction => ({
   type: TAB_SWITCH,
   payload: res
 });
@@ -63,11 +63,8 @@ export const setCurrentItemsToViewAction = (res:any): ISetCurrentItemsToViewActi
 });
 
 export function setCurrentItemToView(currentItemToView: any) {
-  return function(dispatch: any) {
-    dispatch({
-      type: SET_CURRENT_ITEM_TO_VIEW,
-      currentItemToView: currentItemToView
-    })
+  return function(dispatch: AppDispatch) {
+    dispatch(setCurrentItemsToViewAction(currentItemToView))
   }
 }
 

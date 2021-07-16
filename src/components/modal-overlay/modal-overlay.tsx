@@ -3,7 +3,7 @@ import { FC } from 'react';
 import modalStyles from './modal-overlay.module.css'
 
 type TProps = {
-  onClose:()=>{}
+  onClose:()=>void
 }
 const ModalOverlay: FC<TProps> = (props) => {
   return (

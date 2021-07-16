@@ -13,7 +13,12 @@ export const ProdileEdit = () => {
   const dispatch = useDispatch()
 
   const user = useSelector(state => state.registration.user)
-  let data = {...user, password: ''}
+  let data 
+  if (user) {
+    data = {...user, password: ''}
+  } else {
+    data = {name:'',email:'',password:'',}
+  }
   const [value, setValue] = React.useState(data)
   const onChange = (e:any) => {
     setValue({...value, [e.target.name]: e.target.value})

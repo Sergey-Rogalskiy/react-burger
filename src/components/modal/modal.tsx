@@ -12,8 +12,8 @@ const modalRoot = document.getElementById("react-modals");
 
 type TProps = {
   header: string;
-  children: any;
-  onClose: any;
+  children: JSX.Element;
+  onClose: () =>void;
 }
 
 const Modal:FC<TProps> = (props) => {

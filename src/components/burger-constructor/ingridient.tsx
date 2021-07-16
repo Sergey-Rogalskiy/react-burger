@@ -10,7 +10,7 @@ import {
   DELETE_ITEM_FROM_CONSTRUCTOR,
   CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
 } from "../../services/actions/constructor"
-import { TIngredient } from '../../types';
+import { TIngredient, TDropIngredient } from '../../types';
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
@@ -37,7 +37,7 @@ const Ingridient: FC<TProps> = (props) => {
 
   const [, dropRef] = useDrop({
     accept: "choosen",
-    drop(item: any) {
+    drop(item: TDropIngredient) {      
       if (!ref.current) {
           return;
       }

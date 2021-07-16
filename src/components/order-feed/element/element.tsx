@@ -1,4 +1,4 @@
-import { useSelector } from '../../../types'
+import { TIngredient, useSelector } from '../../../types'
 import { FC } from 'react'
 
 import {
@@ -15,7 +15,7 @@ export const Element: FC<any> = (props) => {
   let ingredientsImages = []
   let totalPrice
   if (ingredients.length !== 0) {
-    allIngridientsData = testData.ingredients.map((item:any) => {
+    allIngridientsData = testData.ingredients.map((item:TIngredient) => {
       const ingredient = ingredients.filter((ingredient:any) => ingredient._id === item)
       let image
       let price
@@ -29,7 +29,7 @@ export const Element: FC<any> = (props) => {
       }
     }).slice(0, 5)
   ingredientsImages = allIngridientsData.slice(0, 5)
-  totalPrice = allIngridientsData.reduce((acc:number, item:any) => acc+item.price, 0)
+  totalPrice = allIngridientsData.reduce((acc:number, item:TIngredient) => acc+item.price, 0)
   }
   return (
     <>
@@ -43,7 +43,7 @@ export const Element: FC<any> = (props) => {
         
         {
           (props.data.status === 'done') 
-          ? <p className={`${s.done_clr} mb-10`}>Выполнен</p>
+          ? <p className={`${s.done_clr} mb-10s`}>Выполнен</p>
           : (props.data.status === 'pending') 
           ? <p className={`mb-10`}>Готовится</p> 
           : <p className={`mb-10`}>Создан</p> 

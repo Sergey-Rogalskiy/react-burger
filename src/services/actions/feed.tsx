@@ -170,7 +170,8 @@ export const getOrderByIdSuccessAction = (res:any): IGetOrderByIdSuccessAction =
   payload: res
 });
 
-export const getOrderById: AppThunk = (data: any) => (dispatch: AppDispatch) => {
+export const getOrderById: AppThunk = (data: string) => (dispatch: AppDispatch) => {
+  
   dispatch(getOrderByIdAction());
   getOrderByIdRequest(data)
   .then(res => {

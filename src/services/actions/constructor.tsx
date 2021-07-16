@@ -87,8 +87,10 @@ export const changeOrderItemsInConstructorAction = (dragIndex:number,hoverIndex:
   hoverIndex:hoverIndex,
 });
 
-export const getOrder: AppThunk = (data: any) => (dispatch: AppDispatch) => {
+export const getOrder: AppThunk = (data: {ingredients: string[]}) => (dispatch: AppDispatch) => {
   const accessToken = getCookie('accessToken')
+  console.log(data);
+  
       dispatch(getOrderAction());
       getOrderRequest(accessToken, data)
       .then(res => {

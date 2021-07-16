@@ -50,7 +50,7 @@ const App: React.FC = () => {
   const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
   const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
-  const openModal = (event: any, item: TIngredient) => {
+  const openModal = (event: KeyboardEvent, item: TIngredient) => {
       if (item !== undefined) {
         dispatch(setCurrentItemToView(item))
       } else {
@@ -84,7 +84,7 @@ const App: React.FC = () => {
       document.removeEventListener("keyup", handleKeyUp);
     }
   });
-  const handleKeyUp = (e: any) => {
+  const handleKeyUp = (e: KeyboardEvent) => {
     // const keys = {
     //   27: ():void => {
     //     e.preventDefault();
@@ -102,7 +102,6 @@ const App: React.FC = () => {
 
   const modal = (
     <>
-      
       <Modal header={ 
           currentItemToView?.type === 'order' ? (
             'Детали заказа'
