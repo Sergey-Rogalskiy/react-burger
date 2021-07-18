@@ -10,7 +10,7 @@ After that all the dependicies will be installed and the local web will be avail
 * Configure your own burger using Drag'n'Drop interface
 * Check your orders on your personal page
 * Monitor activity of all orders in a stack
-* Check details of ingridients and orders in cozzy interface
+* Check details of ingredients and orders in cozzy interface
 
 # Tech Stack
 * HTML5, CSS3, JavaScript

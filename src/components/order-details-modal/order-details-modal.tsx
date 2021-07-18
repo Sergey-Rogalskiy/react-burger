@@ -1,7 +1,7 @@
 import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../types'
 import { TIngredient } from '../../types'
 
 import s from './order-details-modal.module.css'
@@ -10,17 +10,19 @@ import s from './order-details-modal.module.css'
 
 
 const OrderDetailsModal = () => {
-  const currentItemToView = useSelector((state: any) => state.ingridients.currentItemToView)
-  const data = currentItemToView.item
-  const ingredients = useSelector((state: any) => state.ingridients.items)
-  const allIngridientsData = data.ingredients.map((item:string) => {
+  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
+  
+  const data = currentItemToView && currentItemToView.item
+  const ingredients = useSelector(state => state.ingridients.items)
+  
+  const allIngridientsData =  data && data.ingredients.map((item:string) => {
     return {
       image: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].image,
       price: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].price,
       name: ingredients.filter((ingredient:TIngredient) => ingredient._id === item)[0].name
     }
   }).slice(0, 5)
-  const totalPrice = allIngridientsData.reduce((acc: number, item: TIngredient) => acc+item.price, 0)
+  const totalPrice = allIngridientsData && allIngridientsData.reduce((acc: number, item: any) => acc+item.price, 0)
 
   return (
     <>
@@ -30,9 +32,17 @@ const OrderDetailsModal = () => {
         <>
         <div className={s.modal}>
           
-        <p className={`${s.center} text text_type_digits-default mb-2`}>#{data.number}</p>
-        <p className="text text_type_main-medium">{data.name}</p>
+        <p className={`${s.center} text text_type_digits-default mb-2`}>#{
+          
+          // @ts-ignore: Unreachable code error
+          data && data.number}
+        </p>
+        <p className="text text_type_main-medium">{
+          // @ts-ignore: Unreachable code error
+          data.name}
+        </p>
         {
+        // @ts-ignore: Unreachable code error
           (data.status === 'done') 
           ? <p className={`${s.done_clr} mb-10`}>Выполнен</p>
           : <p className={`mb-10`}>Готовится</p>
@@ -42,7 +52,7 @@ const OrderDetailsModal = () => {
         <ul>
             
             {
-              allIngridientsData.map((item:TIngredient, index:number) => (
+              allIngridientsData && allIngridientsData.map((item:any, index:number) => (
                 <li  key={index} className={s.flex_row}>
                   <div className={s.flex_center}>
                     <img className={s.img} src={item.image} alt="-" />
@@ -58,7 +68,10 @@ const OrderDetailsModal = () => {
         </ul>
         
         <div className={s.flex_row}>
-            <p className="text text_type_main-default text_color_inactive pt-3">{data.time}</p>
+            <p className="text text_type_main-default text_color_inactive pt-3">{
+              // @ts-ignore: Unreachable code error
+              data.time}
+              </p>
             
             <div className={s.flex_center}>
               <span className="text text_type_main-medium p-2">

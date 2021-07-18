@@ -3,8 +3,8 @@ import {
     WS_CONNECTION_SUCCESS,
     WS_CONNECTION_ERROR,
     WS_CONNECTION_CLOSED,
-    WS_GET_MESSAGE,
     WS_SEND_MESSAGE,
+    wsGetMessageAction
 } from "./actions/feed"
 
 export const socketMiddleware = () => {
@@ -32,7 +32,7 @@ export const socketMiddleware = () => {
                 const parsedData = JSON.parse(data);
                 const { success, ...restParsedData } = parsedData;
 
-                dispatch({ type: WS_GET_MESSAGE, payload: restParsedData });
+                dispatch(wsGetMessageAction(restParsedData));
             };
 
             socket.onclose = event => {

@@ -41,7 +41,6 @@ import {
     registerRequest: false,
     registerFailed: false,
 
-    loginData: null,
     loginRequest: false,
     loginFailed: false,
 

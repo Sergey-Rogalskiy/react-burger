@@ -1,4 +1,4 @@
-
+import { FC } from 'react'
 import {
   ConstructorElement, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -7,17 +7,17 @@ import { TIngredient } from '../../types'
 import burgerConstructorStyles from './burger-constructor.module.css'
 
 type TProps = {
-  buns: TIngredient;
+  buns: TIngredient | { price: number; name:string;image:string};
   type: "top" | 'bottom' | undefined
 }
 
-const FixedBun = (props: TProps) => {
+const FixedBun: FC<TProps> = (props) => {
   const data = props
   
   return (
     <>
       {
-      (data.buns.name) 
+      (data.buns.name !== 'name') 
       ?
       <div className={burgerConstructorStyles.flex}>
         <div className={`${burgerConstructorStyles.center} pb-2`}>

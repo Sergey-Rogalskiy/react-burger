@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 import ReactDOM from 'react-dom';
 import {
   CloseIcon
@@ -12,11 +12,11 @@ const modalRoot = document.getElementById("react-modals");
 
 type TProps = {
   header: string;
-  children: any;
-  onClose: any;
+  children: JSX.Element;
+  onClose: () =>void;
 }
 
-const Modal = (props: TProps) => {
+const Modal:FC<TProps> = (props) => {
   
   const { children, header, onClose } = props;
   return ReactDOM.createPortal(
@@ -32,16 +32,9 @@ const Modal = (props: TProps) => {
         </div>
       </>
     ), 
-    // @ts-ignore: Unreachable code error
-    modalRoot
+    modalRoot as any
   );
 } 
 
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  header: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-}; 
 
 export default Modal;

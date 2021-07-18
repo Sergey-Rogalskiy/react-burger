@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import BurgerIngridients from '../burger-ingridients/burger-ingridients'
 
@@ -7,15 +8,12 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 type TProps = {
-  // modal: {openModal: () => {};}
-  // modal: {openModal: (e: any, order: any) => {}}
-  // modal:{openModal: (e: any, order: any) => {}};
-  
-  // modal: (e: any, item: any) => void;
   modal: any;
+  // modal: {openModal: (e: React.MouseEvent, order:TOrderlementModal)=>void;}
+
 }
 
-const MainPage = (props: TProps) => {
+const MainPage: FC<TProps> = (props) => {
   
   
   return (

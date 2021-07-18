@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import Ingridient from './ingridient' 
 import { TIngredient } from '../../types'
 
@@ -7,7 +8,7 @@ type TProps = {
   items: TIngredient[]
 }
 
-const Ingridients = (props: TProps) => {
+const Ingridients: FC<TProps> = (props) => {
   const data = props
   
 
@@ -20,11 +21,12 @@ const Ingridients = (props: TProps) => {
           data.items[0]
           ?
           data.items.map((item: TIngredient, index: number) => 
+          <div key={index}>
             <Ingridient 
-            item={item} 
-            key={index}
-            index={index}
-          />
+              item={item} 
+              index={index}
+            />
+          </div>
           )
           :
           

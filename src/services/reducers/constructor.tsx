@@ -5,24 +5,37 @@ import {
     ADD_ITEM_TO_CONSTRUCTOR,
     DELETE_ITEM_FROM_CONSTRUCTOR,
     CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR,
-    ORDER_RESET,
   } from '../actions/constructor';
   
+import {TIngredient, TOrder, TChosenBuns, TOrderResponse} from '../../types'
+import {TConstructorActions} from '../actions/constructor'
 
-  const initialState = {
+  type TInitialState = {
+    order: TOrderResponse | null,
+    orderRequest: boolean,
+    orderFailed: boolean,
+  
+    chosenItems: TIngredient[],
+    chosenBuns: TIngredient | TChosenBuns,
+
+    totalPrice: number,
+    totalPriceBuns: number
+  }
+
+  const initialState: TInitialState = {
 
     order: null,
     orderRequest: false,
     orderFailed: false,
   
     chosenItems: [],
-    chosenBuns: {},
+    chosenBuns: {price: 0, name:'name',image:'image', _id:'_id'},
 
     totalPrice: 0,
     totalPriceBuns: 0
   };
   
-  export const constructorReducer = (state = initialState, action) => {
+  export const constructorReducer = (state = initialState, action: TConstructorActions):TInitialState  => {
     switch (action.type) {
 
       case GET_ORDER_REQUEST: {
@@ -46,14 +59,6 @@ import {
           orderRequest: false 
         };
       }
-      case ORDER_RESET: {
-        return { 
-          ...state, 
-          orderFailed: false,
-          order: null, 
-          orderRequest: false
-        };
-      }
 
       case ADD_ITEM_TO_CONSTRUCTOR: {
         if (action.item.type === "bun") {
@@ -71,7 +76,7 @@ import {
 
         let priceBuns = 0
         if (state.chosenBuns) {
-          priceBuns = state.chosenBuns.price *2
+          priceBuns = state.chosenBuns.price * 2
         }
         const newItems = [...state.chosenItems, action.item]
         const priceItems = newItems.reduce((a, b) => a + b.price, 0)

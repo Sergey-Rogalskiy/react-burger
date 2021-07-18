@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux'
+import { TIngredient, useSelector } from '../../../types'
+import { FC } from 'react'
 
 import {
   CurrencyIcon
@@ -6,16 +7,16 @@ import {
 
 import s from '../order-feed.module.css'
 
-export const Element = (props: any) => {
+export const Element: FC<any> = (props) => {
   
   const testData = props.data
-  const ingredients = useSelector((state:any) => state.ingridients.items)
+  const ingredients = useSelector(state => state.ingridients.items)
   let allIngridientsData
   let ingredientsImages = []
   let totalPrice
   if (ingredients.length !== 0) {
-    allIngridientsData = testData.ingredients.map((item:any) => {
-      const ingredient = ingredients.filter((ingredient:any) => ingredient._id === item)
+    allIngridientsData = testData.ingredients.map((item:string) => {
+      const ingredient = ingredients.filter((ingredient:TIngredient) => ingredient._id === item)
       let image
       let price
       if (ingredient[0]){
@@ -28,7 +29,7 @@ export const Element = (props: any) => {
       }
     }).slice(0, 5)
   ingredientsImages = allIngridientsData.slice(0, 5)
-  totalPrice = allIngridientsData.reduce((acc:number, item:any) => acc+item.price, 0)
+  totalPrice = allIngridientsData.reduce((acc:number, item:TIngredient) => acc+item.price, 0)
   }
   return (
     <>
@@ -42,7 +43,7 @@ export const Element = (props: any) => {
         
         {
           (props.data.status === 'done') 
-          ? <p className={`${s.done_clr} mb-10`}>Выполнен</p>
+          ? <p className={`${s.done_clr} mb-10s`}>Выполнен</p>
           : (props.data.status === 'pending') 
           ? <p className={`mb-10`}>Готовится</p> 
           : <p className={`mb-10`}>Создан</p> 
@@ -51,7 +52,7 @@ export const Element = (props: any) => {
         <div className={s.flex_row}>
             <ul className={s.images}>
               {
-                ingredientsImages.map((item:any, index:number) => (
+                ingredientsImages.map((item:TIngredient, index:number) => (
                   <li  key={index} className={`${s.round}`}>
                     <img className={s.img} src={item.image} alt="-" />
                   </li>

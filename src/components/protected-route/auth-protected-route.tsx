@@ -1,15 +1,14 @@
 import { Redirect, Route } from 'react-router-dom';
 import { useEffect, FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch} from '../../types'
 import { getUser } from '../../services/actions/registration';
 import { getCookie } from '../../services/utils';
 import {useLocation, RouteProps } from 'react-router-dom' 
 import { TLocation } from '../../types';
-import Spinner from '../utils/loader';
 
 export const AuthProtectedRoute: FC<RouteProps> = ({ children, ...rest }) => {
-  const user = useSelector((state:any) => state.registration.user)
-  const userRequest = useSelector((state:any) => state.registration.userRequest)
+  const user = useSelector(state => state.registration.user)
+  const userRequest = useSelector(state => state.registration.userRequest)
   const dispatch = useDispatch()
   const location = useLocation<TLocation>()
 

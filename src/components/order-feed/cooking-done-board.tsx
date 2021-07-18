@@ -1,10 +1,10 @@
-import { useSelector  } from 'react-redux'
+import { useSelector } from '../../types'
 import { TOrder } from '../../types'
 import s from './order-feed.module.css'
 import Spinner from '../utils/loader'
 
 export const CookingDoneBoard = () => {
-	const allOrders = useSelector((state:any) => state.feed.wsFeedData.orders)
+	const allOrders = useSelector(state => state.feed.wsFeedData.orders)
 	let doneOrders: TOrder[]|null = null
 	let doneOrders2: TOrder[]|null = null
 	if (allOrders) {
@@ -18,8 +18,8 @@ export const CookingDoneBoard = () => {
 		cookingOrders2 = allOrders.filter((item:TOrder) => item.status === 'pending').slice(10,20)
 	}
 	
-	const totalOrders = useSelector((state:any) => state.feed.wsFeedData.total)
-	const todayOrders = useSelector((state:any)  => state.feed.wsFeedData.totalToday)
+	const totalOrders = useSelector(state => state.feed.wsFeedData.total)
+	const todayOrders = useSelector(state  => state.feed.wsFeedData.totalToday)
 
 
 	return (

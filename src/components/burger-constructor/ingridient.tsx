@@ -1,15 +1,16 @@
+import { FC } from 'react'
 import {useRef} from 'react';
 import {
   ConstructorElement, 
   DragIcon, 
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch  } from 'react-redux'
+import { useDispatch } from '../../types'
 import { useDrop, useDrag } from "react-dnd";
 import {
   DELETE_ITEM_FROM_CONSTRUCTOR,
   CHANGE_ORDER_OF_ITEMS_IN_CONSTRUCTOR
 } from "../../services/actions/constructor"
-import { TIngredient } from '../../types';
+import { TIngredient, TDropIngredient } from '../../types';
 
 import burgerConstructorStyles from './burger-constructor.module.css'
 
@@ -18,7 +19,7 @@ type TProps = {
   index: number
 }
 
-const Ingridient = (props: TProps) => {
+const Ingridient: FC<TProps> = (props) => {
   
   const moveCard = (dragIndex: number, hoverIndex: number) => {
     dispatch({
@@ -36,7 +37,7 @@ const Ingridient = (props: TProps) => {
 
   const [, dropRef] = useDrop({
     accept: "choosen",
-    drop(item: any) {
+    drop(item: TDropIngredient) {      
       if (!ref.current) {
           return;
       }
@@ -68,7 +69,6 @@ const Ingridient = (props: TProps) => {
   return (
       <div 
         ref={ref} 
-        key={index} 
         className={` ${burgerConstructorStyles.center}  pb-2`}
         style={{ ...style, opacity }}
       >

@@ -24,8 +24,37 @@ import {
   PATCH_USER_SUCCESS,
   PATCH_USER_FAILED,
   } from '../actions/registration';
+  import {TRegistrationActions} from '../actions/registration'
+  import {TUser, TForgotPasswordData} from '../../types' 
   
-  const initialState = {
+    type TInitialState = {
+      forgotPasswordData: TForgotPasswordData | null,
+      forgotPasswordRequest: boolean,
+      forgotPasswordFailed:  object | boolean,
+  
+      resetPasswordData: any,
+      resetPasswordRequest: boolean,
+      resetPasswordFailed:  object | boolean,
+  
+      registerData: any,
+      registerRequest: boolean,
+      registerFailed:  any,
+  
+      loginRequest: boolean,
+      loginFailed:  object | boolean,
+  
+      logoutRequest: boolean,
+      logoutFailed:  object | boolean,
+  
+      tokenRequest: boolean,
+      tokenFailed:  object | boolean,
+  
+      userRequest: boolean,
+      userFailed: object | boolean,
+      user: TUser | null, 
+    }
+  
+  const initialState: TInitialState = {
     forgotPasswordData: null,
     forgotPasswordRequest: false,
     forgotPasswordFailed: false,
@@ -38,7 +67,6 @@ import {
     registerRequest: false,
     registerFailed: false,
 
-    loginData: null,
     loginRequest: false,
     loginFailed: false,
 
@@ -54,7 +82,7 @@ import {
 
   };
   
-  export const registrationReducer = (state = initialState, action) => {
+  export const registrationReducer = (state = initialState, action: TRegistrationActions): TInitialState => {
     switch (action.type) {
       case GET_USER_REQUEST: {
         return {

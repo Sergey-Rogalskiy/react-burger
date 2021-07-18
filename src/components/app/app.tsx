@@ -6,7 +6,7 @@ import OrderDetails from '../order-details/order-details'
 import IngridientDetails from '../ingridient-details/ingridient-details'
 import OrderDetailsModal from  '../order-details-modal/order-details-modal'
 
-import { useSelector, useDispatch  } from 'react-redux'
+import { useSelector, useDispatch, TIngredient } from '../../types'
 import {
   getOrder
 } from '../../services/actions/constructor'
@@ -33,7 +33,7 @@ import { ProtectedRoute, AuthProtectedRoute } from '../protected-route'
 import {getItems} from "../../services/actions/ingridients"
 
 import {
-  ORDER_RESET,
+  orderResetAction,
 } from '../../services/actions/constructor';
 
 import {TLocation} from '../../types'
@@ -47,14 +47,14 @@ const App: React.FC = () => {
 
   const [visible, setVisible] = React.useState(false)
 
-  const chosenBuns = useSelector((state:any) => state.burgerConstructor.chosenBuns)
-  const chosenItems = useSelector((state:any) => state.burgerConstructor.chosenItems)
+  const chosenBuns = useSelector(state => state.burgerConstructor.chosenBuns)
+  const chosenItems = useSelector(state => state.burgerConstructor.chosenItems)
 
-  const openModal = (event: any, item: any) => {
+  const openModal = (event: KeyboardEvent, item: TIngredient) => {
       if (item !== undefined) {
         dispatch(setCurrentItemToView(item))
       } else {
-        const dataIds = chosenItems.map((item: any) => item._id)
+        const dataIds = chosenItems.map((item) => item._id)
         dataIds.push(chosenBuns._id)
         dataIds.splice(1, 0, chosenBuns._id)
         const data11 = {
@@ -68,7 +68,7 @@ const App: React.FC = () => {
   const closeModal = () => {
       dispatch(setCurrentItemToView(null))
       setVisible(false)
-      dispatch({type: ORDER_RESET});
+      dispatch(orderResetAction());
       if (location?.state?.background?.pathname) {
         history.push(`${location.state.background.pathname}`)
       }
@@ -84,7 +84,7 @@ const App: React.FC = () => {
       document.removeEventListener("keyup", handleKeyUp);
     }
   });
-  const handleKeyUp = (e: any) => {
+  const handleKeyUp = (e: KeyboardEvent) => {
     // const keys = {
     //   27: ():void => {
     //     e.preventDefault();
@@ -98,11 +98,10 @@ const App: React.FC = () => {
   }
 
   
-  const currentItemToView = useSelector((state: any) => state.ingridients.currentItemToView)
+  const currentItemToView = useSelector(state => state.ingridients.currentItemToView)
 
   const modal = (
     <>
-      
       <Modal header={ 
           currentItemToView?.type === 'order' ? (
             'Детали заказа'
@@ -110,7 +109,7 @@ const App: React.FC = () => {
             currentItemToView?.type === 'ingridient' ? (
               'Детали ингридиента'
             ) : (
-              'Детали заказа'
+              'Заказ'
             )
           )
         } 
@@ -135,7 +134,7 @@ const App: React.FC = () => {
       dispatch(getToken(localStorage.getItem('refreshToken')))
   }, [dispatch])
   React.useEffect(() => {
-    if (localStorage.getItem('refreshToken')) dispatch(getUser())
+    if (localStorage.getItem('refreshToken')) dispatch(getUser(localStorage.getItem('refreshToken')))
   }, [dispatch])
 
   const background = (history.action === "PUSH" ||  history.action === "REPLACE")  && location.state && location.state.background

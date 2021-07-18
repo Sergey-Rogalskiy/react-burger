@@ -4,8 +4,8 @@ import {
   Button
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, Redirect  } from "react-router-dom"
-
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector } from '../../types'
+import { useDispatch } from '../../types'
 import {getForgotPassword} from '../../services/actions/registration'
 import Spinner from '../utils/loader'
 
@@ -13,13 +13,13 @@ import s from './pages.module.css'
 
 const ForgotPaswordPage = () => {
   const dispatch = useDispatch()
-  const forgotPasswordData = useSelector((state:any) => state.registration.forgotPasswordData)
-  const forgotPasswordRequest = useSelector((state:any) => state.registration.forgotPasswordRequest)
-  const forgotPasswordError = useSelector((state:any) => state.registration.forgotPasswordError)
+  const forgotPasswordData = useSelector(state => state.registration.forgotPasswordData)
+  const forgotPasswordRequest = useSelector(state => state.registration.forgotPasswordRequest)
+  const forgotPasswordFailed = useSelector(state => state.registration.forgotPasswordFailed)
   
 
   const [value, setValue] = React.useState({email: '', password: '', })
-  const onChange = (e:any) => {
+  const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     setValue({...value, [e.target.name]: e.target.value})
   }
   
@@ -54,11 +54,11 @@ const ForgotPaswordPage = () => {
     )
   }
 
-  if (forgotPasswordError) {
+  if (forgotPasswordFailed) {
     return (
       <div className={s.container}>
         <div className = {`${s.registration}`}>
-          <p>alert error {forgotPasswordError}</p>
+          <p>alert error {forgotPasswordFailed}</p>
         </div>
       </div>
       )
@@ -86,9 +86,9 @@ const ForgotPaswordPage = () => {
         size={'default'}
       />
 
-      {(forgotPasswordData?.response?.message)
+      {(forgotPasswordData?.message)
           ? <p>
-              {forgotPasswordData.response.message}
+              {forgotPasswordData.message}
             </p>
           : ''
           }

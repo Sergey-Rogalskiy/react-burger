@@ -2,7 +2,7 @@ import {
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react';
-import { useSelector, useDispatch  } from 'react-redux'
+import { useSelector, useDispatch } from '../../types'
 import { useParams } from 'react-router-dom'
 import { getOrderById } from '../../services/actions/feed';
 import { TIngredient } from '../../types';
@@ -10,7 +10,7 @@ import { TIngredient } from '../../types';
 import s from './pages.module.css'
 
 export default function FeedIdPage() {
-  const param: any = useParams();
+  const param = useParams<{id:string}>();
   const dispatch = useDispatch()
 
   React.useEffect(() => {
@@ -18,15 +18,15 @@ export default function FeedIdPage() {
   }, [dispatch, param.id])
 
 
-  const orderId = useSelector((state: any) => state.feed.orderId)
+  const orderId = useSelector(state => state.feed.orderId)
   const data = orderId
   // if (!data && (data === undefined)) {
   //   return <Redirect to='/404' />
   // }
   
-  const ingredients = useSelector((state: any) => state.ingridients.items)
+  const ingredients = useSelector(state => state.ingridients.items)
   let allIngridientsData
-  let ingredientsImages = []
+  let ingredientsImages: any = []
   let totalPrice
   if (data && ingredients.length !== 0) {
     allIngridientsData = data.ingredients.map((item:string) => {
@@ -46,7 +46,7 @@ export default function FeedIdPage() {
       }
     })
   ingredientsImages = allIngridientsData
-  totalPrice = allIngridientsData.reduce((acc:number, item: TIngredient) => acc+item.price, 0)
+  totalPrice = allIngridientsData.reduce((acc:number, item: any) => acc+item.price, 0)
   }
 
   if (!data) {
